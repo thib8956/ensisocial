@@ -1,4 +1,5 @@
-<?php 
+<?php
+$title="Connection";
 include("header.php");
 ?>
 

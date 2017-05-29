@@ -1,27 +1,35 @@
 <?php
-	include("header.php");
-	
-	function text()
-	if(isset($_POST['envoi'])){
-		if(!empty($_POST["nom"])){
-			$nom=$_POST["nom"];
-			if(!empty($_POST["prenom"])){
-				$prenom=$_POST["prenom"];
-				if(!empty($_POST["mail"])){
-					$mail=$_POST["mail"];
-					if(!empty($_POST["filiere"])){
-						$ecoles=$_POST["ecoles"];
-						if(!empty($_POST["message"])){
-							$message=$_POST["message"];
-							echo "<p>".$prenom.' '.$nom.', merci de nous avoir contacté.</p>';
-							echo '<p> votre ecole:'.strtoupper($ecoles).'</p>';
-							echo  '<p> votre mail :'.$mail.'</p>';
-							echo '<p>Nous répondrons à votre message prochainement. Votrre message:'.$message.'</p>';
-							$insertion = $bdd->prepare('INSERT INTO contact VALUES(NULL,"'.$nom.'","'.$prenom.'","'.$mail.'","'.$ecoles.'","'.$message.'")');
-							$insertion->execute();
-							}
-					}
-				}
-			}
+include('header.php');
+
+if(isset($_POST['signin']) && $_POST['signin'] = 'signin'){
+	if (isset($_POST['username']) &&
+		isset($_POST['password'])){
+		if($_POST["password"] == $_POST["repassword"]){
+			echo '<p>Victoire !!</p>';
+			fillDatabase($db);
+			
+		}else{
+			echo "t'es beau, tu vas y arriver, persévères !";
 		}
+	}
+
+
+}
+
+function fillDatabase($connection) {
+	$req = $connection->prepare('INSERT INTO users VALUES ("'
+						.mysql_escape_string($_POST['username']).'","' 
+						.mysql_escape_string($_POST['firstname']).'","'
+						.mysql_escape_string($_POST['secondname']).'","'
+						.mysql_escape_string($_POST['lastname']).'","'
+						.mysql_escape_string($_POST['address']).'","'
+						.'NULL","' /* Code postal */
+						.'NULL","' /* Ville */
+						.mysql_escape_string($_POST['birth']).'","'
+						.mysql_escape_string($_POST['email']).'","'
+						.mysql_escape_string($_POST['phone']).'","'
+						.mysql_escape_string($_POST['password']).'");' /* Mot de passe en clair LOLZ */
+						);
+	$req->execute();
+}
 ?>
