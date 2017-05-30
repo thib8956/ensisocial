@@ -1,0 +1,101 @@
+
+
+footer {
+    background-color: #363636;
+    color: white;
+    text-align: center;
+    height: 50px;
+    /* hauteur : 50px */
+    position: fixed;
+    bottom: 0;
+    /* position fixe à 0px du bas de la page */
+}
+
+header,
+footer {
+    width: 100%;
+}
+* {
+    /* sélection * : sélectionne tous les éléments */
+    margin: 0;
+    /* marges externes nulles à tous les éléments */
+    padding: 0;
+    /* marges internes nulles à tous les éléments */
+    font-family: Helvetica, Arial;
+    /* choix de la police de caractères (la seconde est une police de remplacement) */
+}
+
+body {
+    /* sélection de la balise body (par héritage, cela s'applique à tout ce qu'elle contient) */
+    background-color:azure;
+    /* application de la couleur de fond : valeur nommée (red, blue, purple, green...) OU rgb(X,Y,Z) => valeur entre 0 et 255 OU #XXXXXX avec X entre 0 et 9 ou A et F */
+}
+
+
+
+nav {
+  background-color: yellow;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    /* mise en gras */
+    height: 50px;
+    margin-top: 20px;
+    /* marge uniquement en haut (existe aussi margin-bottom, margin-left, margin-right) */
+}
+
+footer {
+    background-color: LightBlue;
+    color: white;
+    text-align: center;
+    height: 50px;
+    /* hauteur : 50px */
+    position: fixed;
+    bottom: 0;
+    /* position fixe à 0px du bas de la page */
+}
+
+header,
+footer {
+    width: 100%;
+}
+* {
+    /* sélection * : sélectionne tous les éléments */
+    margin: 0;
+    /* marges externes nulles à tous les éléments */
+    padding: 0;
+    /* marges internes nulles à tous les éléments */
+    font-family: Helvetica, Arial;
+    /* choix de la police de caractères (la seconde est une police de remplacement) */
+}
+
+
+
+header {
+    background-color: lightgreen;
+}
+
+
+nav {
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+   
+    height: 50px;
+    margin-top: 20px;
+box-shadow:	
+		0pt 2px 5px rgba(105, 108, 109,  0.7),	
+		0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+    
+}
+
+body{
+  background-color:azure
+}
+.navbar-default {
+	background-color:lightblue;
+}
+.jumbotron{
+  background-color: white;
+}
+}

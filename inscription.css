@@ -1,0 +1,41 @@
+
+
+header,
+footer {
+    width: 100%;
+}
+* {
+    /* sélection * : sélectionne tous les éléments */
+    margin: 0;
+    /* marges externes nulles à tous les éléments */
+    padding: 0;
+    /* marges internes nulles à tous les éléments */
+    font-family: Helvetica, Arial;
+    /* choix de la police de caractères (la seconde est une police de remplacement) */
+}
+
+body {
+    /* sélection de la balise body (par héritage, cela s'applique à tout ce qu'elle contient) */
+    background-color:azure;
+    /* application de la couleur de fond : valeur nommée (red, blue, purple, green...) OU rgb(X,Y,Z) => valeur entre 0 et 255 OU #XXXXXX avec X entre 0 et 9 ou A et F */
+}
+
+
+
+nav {
+  background-color: yellow;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    /* mise en gras */
+    height: 50px;
+    margin-top: 20px;
+    /* marge uniquement en haut (existe aussi margin-bottom, margin-left, margin-right) */
+}
+
+footer {
+    background-color:LightBlue;
+    color: white;
+    text-align: center;
+    height: 50px;
+}
