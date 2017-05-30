@@ -22,10 +22,7 @@
 		<div class="jumbotron text-center">
 			<h1>EnsiSocial</h1>
 		</div>
-		<nav class="navbar navbar-default">
-			<ul class="nav navbar-nav">
-				<li><a href="inscription.php" title="inscrition">Inscription</a></li>
-				<li><a href="connection.php" title="connexion">Connexion</a></li>
-			</ul>
-		</nav>
+		<?php
+			include('navbar.php');
+		?>
 	</header>
