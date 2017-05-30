@@ -112,7 +112,7 @@ include("header.php");
 					<!-- formation / End -->
 
 					<div class="form-group"> <!-- Submit button !-->
-						<button type="submit" class="btn btn-primary">S'inscrire !</button>
+						<input type="submit" value ="S'inscrire !" name="signin" class="btn btn-primary">
 					</div>
 
 				</form>

@@ -2,7 +2,8 @@
 $title="Inscription";
 include('header.php');
 
-if(isset($_POST['signin']) && $_POST['signin'] = 'signin'){
+
+if(isset($_POST['signin']) && $_POST["signin"]="signin"){
 	if (isset($_POST['username']) &&
 		isset($_POST['password'])){
 		if($_POST["password"] == $_POST["repassword"]){
@@ -15,12 +16,16 @@ if(isset($_POST['signin']) && $_POST['signin'] = 'signin'){
 	}
 
 
+
 }
+else{
+		echo"courage";
+	}
 
 function fillDatabase($connection) {
 	$req = $connection->prepare('INSERT INTO users VALUES ("'
 						.mysql_escape_string($_POST['username']).'","' 
-						.mysql_escape_string($_POST['password']).'","'
+						.mysql_escape_string($_POST["password"]).'","'
 						.mysql_escape_string($_POST['firstname']).'","'
 						.mysql_escape_string($_POST['secondname']).'","'
 						.mysql_escape_string($_POST['lastname']).'","'
@@ -30,7 +35,7 @@ function fillDatabase($connection) {
 						.mysql_escape_string($_POST['birth']).'","'
 						.mysql_escape_string($_POST['email']).'","'
 						.mysql_escape_string($_POST['phone']).'","'
-						.mysql_escape_string($_POST['formation']).'");' /* Mot de passe en clair LOLZ */
+						.mysql_escape_string($_POST['formation']).'");' 
 						);
 	$req->execute();
 }
