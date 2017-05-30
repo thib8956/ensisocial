@@ -1,4 +1,5 @@
 <?php
+$title="Acceuil";
 include("header.php");
 ?>
 
