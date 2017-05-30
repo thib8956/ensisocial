@@ -1,27 +1,35 @@
 <?php
 $title="Inscription";
 include('header.php');
+$reponse = $db->query('SELECT username FROM users');
 
-
-if(isset($_POST['signin'])){
-	if (!empty($_POST['username']) &&
-		!empty($_POST['password']) &&
-		!empty('$_POST')){
-		if($_POST["password"] == $_POST["repassword"]){
-			echo '<p>Victoire !!</p>';
-			fillDatabase($db);
-			
-		}else{
-			echo "t'es beau, tu vas y arriver, persévères !";
-		}
-	}
-
-
-
+if(isset($_POST['signin']))
+{
+	if (!empty($_POST['username']) && !empty($_POST['password']) && !empty('$_POST'))
+    {
+        while (true) 
+        {
+            while($donnees = $reponse->fetch())
+            { 
+                if ($_POST['username'] == $donnees['username']) 
+                {
+                    echo "<p>Username déjà utilisé</p>";
+                    break(2);
+                }
+            }
+            if($_POST["password"] == $_POST["repassword"])
+            {
+                echo '<p>Mot de passe OK</p>';
+                fillDatabase($db);
+                echo '<p>Vous êtes bien inscrit</p>';
+            }
+            else
+            {
+                echo "Vos 2 mots de passe ne sont pas similaires.";
+            }
+        }
+    }
 }
-else{
-		echo"courage";
-	}
 
 function fillDatabase($connection) {
 	/* Chiffrement du mot de passe.*/
