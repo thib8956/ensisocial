@@ -73,7 +73,7 @@ include("header.php");
 
 	<!-- town -->
 	<div class="field clearfix">
-		<label for="town">code postal</label>
+		<label for="town">Ville</label>
 		<input type="text" name="town" id="town" placeholder="">
 		<span class="error-message"></span>
 	</div>
