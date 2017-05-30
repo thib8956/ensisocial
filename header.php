@@ -25,7 +25,7 @@
 		<nav class="navbar navbar-default">
 			<ul class="nav navbar-nav">
 				<li><a href="inscription.php" title="inscrition">Inscription</a></li>
-				<li><a href="connection.php" title="connection">Connection</a></li>
+				<li><a href="connection.php" title="connexion">Connexion</a></li>
 			</ul>
 		</nav>
 	</header>

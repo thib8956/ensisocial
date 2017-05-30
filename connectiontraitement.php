@@ -1,24 +1,17 @@
 <?php
-$title="Connection";
+$title = "Connection";
 include("header.php");
 
-$pass=$_POST["psw"];
-$req = $db-> prepare('Select username from users where username=:pseudo AND password = :password');
-$req->execute(array('pseudo'=> $_POST["username"],'password' =>$pass));
+$req = $db->prepare('SELECT username, password FROM users WHERE username = :pseudo');
+$req->execute(array('pseudo'=> $_POST["username"]));
+$row = $req->fetch();
 
-$resultat=$req->fetch();
-
-if(!$resultat){
-	echo'Mauvais identifiant ou mot de passe!';
-}
-else{
+/* Vérification du mot de passe.*/
+if (password_verify($_POST['pwd'], $row['password'])){
 	session_start();
 	$_SESSION['username'] = $_POST['username'];
-	$_SESSION['pwd'] = $_POST['pwd'];
-	header ('location: page_membre.php');
-
-	echo 'Vous êtes connecté!';
-	echo '<a href="deconnection.php"><input type="button" value="Déconnexion"></a>';
+	header ('Location: page_membre.php');
+} else {
+	echo '<p>Bad username or password</p>';
 }
-
 ?>

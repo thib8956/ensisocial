@@ -1,11 +1,12 @@
 <?php
+session_start();
+
 $title=$_SESSION['username'];
 include("header.php");
 
-
-
-if( isset($_SESSION['username']) && isset($_SESSION["pwd"])){
-	echo '<p>'.$_SESSION['username']."        ".$_SESSION["pwd"].'</p>'; 
+if (isset($_SESSION['username'])){
+	echo '<p>Bonjour, '.$_SESSION['username'].'</p>';
 }
-echo '<a href="deconnection.php">Déconnection</a>';
+
+echo '<a href="disconnection.php">Déconnexion</a>';
 ?>
