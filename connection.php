@@ -2,25 +2,23 @@
 $title="Connection";
 include("header.php");
 ?>
-<p> Veuillez vos identifiants
-<form action="connectiontraitement.php" method="post" accept-charset="utf-8">
+<p> Veuillez entrer vos identifiants</p>
+<form action="connectiontraitement.php" method="post" accept-charset="utf-8" class="form-inline">
 
-	<div class="">
-		<label for="username">nom d'utilisateur</label>
-		<input type="text" name="username">
-		<span class="error-message"></span>
+	<div class="form-group">
+		<label for="username" class="control-label">Nom d'utilisateur</label>
+		<input type="text" name="username" class="form-control">
 	</div>
-	<div class="">
-		<label for="psw">Votre mot de passe</label>
-		<input type="password" name="psw">
-		<span class="error-message"></span>
-	</div>
-	<div class="">
-		<input type="submit" name="connection" value="connection">
-	</div>
-	<<a href="lost_psw.php" >mot de passe oublié</a>
 
-</form>
+	<div class="form-group">
+		<label for="psw" class="control-label">Votre mot de passe</label>
+		<input type="password" name="psw" class="form-control">
+	</div>
+
+	<div class="form-group">
+		<button type="submit" name="connection" class="btn btn-primary">Connexion</button>
+	</div>
+	<a href="lost_psw.php" >Mot de passe oublié</a>
 
 <?php
 include("footer.php");
