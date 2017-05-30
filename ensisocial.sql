@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 29 Mai 2017 à 16:12
+-- Généré le :  Mar 30 Mai 2017 à 10:48
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -40,13 +40,6 @@ CREATE TABLE `users` (
   `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `formation` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `users`
---
-
-INSERT INTO `users` (`username`, `password`, `firstname`, `secondname`, `lastname`, `address`, `zipcode`, `town`, `birth`, `email`, `phone`, `formation`) VALUES
-('aa', '', '', '', '', '', 0, '', '0000-00-00', '', '', '');
 
 --
 -- Index pour les tables exportées
