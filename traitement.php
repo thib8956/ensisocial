@@ -7,13 +7,16 @@ if(isset($_POST['signin']))
 {
 	if (!empty($_POST['username']) && !empty($_POST['password']) && !empty('$_POST'))
     {
-        while (true)
+        $i = 0;
+        while ($i < 1)
         {
             while($donnees = $reponse->fetch())
             {
                 if ($_POST['username'] == $donnees['username'])
                 {
+                    echo '<div class="alert alert-danger">';
                     echo "<p>Username déjà utilisé</p>";
+                    echo '</div>';
                     break(2);
                 }
             }
@@ -25,8 +28,11 @@ if(isset($_POST['signin']))
             }
             else
             {
+                echo '<div class="alert alert-danger">';
                 echo "Vos 2 mots de passe ne sont pas similaires.";
+                echo '</div>';
             }
+            $i=$i+1;
         }
     }
 }
