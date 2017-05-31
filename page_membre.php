@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$title=$_SESSION['username'];
+$title=$_SESSION['firstname'];
 include("header.php");
 
-echo '<p>Bonjour, '.$_SESSION['username'].'</p>';
+echo '<p>Bonjour, '.$_SESSION['firstname'].' '.$_SESSION['lastname'].'</p>';
 ?>
 
 <div>

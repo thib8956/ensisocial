@@ -6,8 +6,8 @@ include("header.php");
 <form action="connectiontraitement.php" method="post" accept-charset="utf-8" class="form-inline">
 
 	<div class="form-group">
-		<label for="username" class="control-label">Nom d'utilisateur</label>
-		<input type="text" name="username" class="form-control">
+		<label for="email" class="control-label">Addresse mail</label>
+		<input type="text" name="email" class="form-control">
 	</div>
 
 	<div class="form-group">
