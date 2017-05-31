@@ -7,11 +7,11 @@ if(isset($_POST['signin']))
 {
 	if (!empty($_POST['username']) && !empty($_POST['password']) && !empty('$_POST'))
     {
-        while (true) 
+        while (true)
         {
             while($donnees = $reponse->fetch())
-            { 
-                if ($_POST['username'] == $donnees['username']) 
+            {
+                if ($_POST['username'] == $donnees['username'])
                 {
                     echo "<p>Username déjà utilisé</p>";
                     break(2);
@@ -38,20 +38,25 @@ function fillDatabase($connection) {
         ];
     $hash = password_hash($_POST['password'], PASSWORD_BCRYPT, $options);
 
-	$req = $connection->prepare('INSERT INTO users VALUES ("'
-						.mysql_escape_string($_POST['username']).'","' 
-						.mysql_escape_string($hash).'","' /* Mot de passe hashé avec bcrypt. */
-						.mysql_escape_string($_POST['firstname']).'","'
-						.mysql_escape_string($_POST['secondname']).'","'
-						.mysql_escape_string($_POST['lastname']).'","'
-						.mysql_escape_string($_POST['address']).'","'
-						.mysql_escape_string($_POST['zipcode']).'","' 
-						.mysql_escape_string($_POST['town']).'","'
-						.mysql_escape_string($_POST['birth']).'","'
-						.mysql_escape_string($_POST['email']).'","'
-						.mysql_escape_string($_POST['phone']).'","'
-						.mysql_escape_string($_POST['formation']).'");' 
-						);
-	$req->execute();
+    try {
+        $stmt = $connection->prepare('INSERT INTO users VALUES (:username, :password, :firstname, :secondname, :lastname, :address, :zipcode, :town, :birth, :email, :phone, :formation)');
+        $stmt->execute(array('username' => $_POST['username'],
+                    'password' => $hash, // Mot de passe hashé avec bcrypt
+                    'firstname' => $_POST['firstname'],
+                    'secondname' => $_POST['secondname'],
+                    'lastname' => $_POST['lastname'],
+                    'address' => $_POST['address'],
+                    'zipcode' => intval($_POST['zipcode']),
+                    'town' => $_POST['town'],
+                    'birth' => date('Y-m-d', strtotime($_POST['birth'])),
+                    'email' => $_POST['email'],
+                    'phone' => $_POST['phone'],
+                    'formation' => $_POST['formation']));
+    } catch (PDOException $e) {
+        echo '<div class="alert alert-danger">';
+        die('Error:'.$e->getMessage());
+        echo '</div>';
+    }
 }
+
 ?>
