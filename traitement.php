@@ -2,7 +2,7 @@
 $title="Inscription";
 include('header.php');
 $answer = $db->query('SELECT username FROM users');
-$start = 506;
+$start = 516;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string,$start);
 function get_include_contents($filename) {
