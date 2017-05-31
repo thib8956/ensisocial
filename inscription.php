@@ -25,6 +25,12 @@ $form=new Form($_POST,"signin");
     echo $form->inputsection("formation","string","formation",array("IR" => "Informatique et Réseaux","AS" =>"Automatique et Systèmes" ,"meca" => "Mécanique","textile"=>"Textile","FIP" => "Filière par alternance"));
 
     echo $form->submit("S'inscrire !");
-
+?>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
 include("footer.php");
 ?>
