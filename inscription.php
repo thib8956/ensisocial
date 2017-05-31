@@ -12,8 +12,8 @@ $form=new Form($_POST,"signin");
 				<form action="traitement.php" method="post">
 <?php
     echo $form->inputfield("username","string","Nom d'utilisateur",true);
-    echo $form->inputfield("password","string","Mot de passe",true);
-    echo $form->inputfield("repassword","string","Retapez votre mot de passe",true);
+    echo $form->inputfield("password","password","Mot de passe",true);
+    echo $form->inputfield("repassword","password","Retapez votre mot de passe",true);
     echo $form->inputfield("firstname","string","prénom");
     echo $form->inputfield("secondname","string","Deuxième prénom");
     echo $form->inputfield("lastname","string","Nom");
@@ -28,3 +28,4 @@ $form=new Form($_POST,"signin");
 
 include("footer.php");
 ?>
+</form>
