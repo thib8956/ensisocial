@@ -3,7 +3,9 @@
 		<?php if (!isset($_SESSION['username'])){
 			echo '<li><a href="inscription.php" title="inscription">Inscription</a></li>';
 			echo '<li><a href="connection.php" title="connexion">Connexion</a></li>';
-		} else {
+		} else { ?>
+            <p><a href="page_membre.php"><img href="photoprofil.jpg" alt="Votre photo" /></a></p>
+        <?php
 			echo '<li><a href="">Profil</a></li>';
             echo '<li><a href="">Actualités</a></li>';
             echo '<li><a href="">Groupes</a></li>';
