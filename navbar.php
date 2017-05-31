@@ -5,6 +5,9 @@
 			echo '<li><a href="connection.php" title="connexion">Connexion</a></li>';
 		} else {
 			echo '<li><a href="">Profil</a></li>';
+            echo '<li><a href="">Actualités</a></li>';
+            echo '<li><a href="">Groupes</a></li>';
+            echo '<li><a href="">Contacts récents</a></li>';
 			?>
 			<form class="navbar-form navbar-left" method="post" action="userSearch.php">
 				<div class="form-group">
