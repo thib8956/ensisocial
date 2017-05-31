@@ -16,5 +16,6 @@
 			echo '<li><a href="disconnection.php">Déconnexion</a></li>';
 		}
 		?>
+
 	</ul>
 </nav>
