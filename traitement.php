@@ -2,17 +2,16 @@
 $title="Inscription";
 include('header.php');
 $answer = $db->query('SELECT username FROM users');
-$failURL = '/ensisocial/inscription.php';
-
+$start = 506;
 $string = get_include_contents('inscription.php');
-string substr (string $string, int $start[, int $length ]);
+$utile = substr ($string,$start);
 function get_include_contents($filename) {
     if (is_file($filename)) {
         ob_start();
         include $filename;
         return ob_get_clean();
     }
-    return false;
+    return false;   
 }
 
 
@@ -24,12 +23,10 @@ if(isset($_POST['signin']))
         {
             if ($_POST['username'] == $data['username'])
             {
-                //header(sprintf("Location: %s", $failURL));
                 echo '<div class="alert alert-danger">';
                 echo "<p>Username déjà utilisé</p>";
                 echo '</div>';
-                echo $string;
-                include("inscription.php");
+                echo $utile;
                 exit;
             }
         }
@@ -45,8 +42,7 @@ if(isset($_POST['signin']))
             echo '<div class="alert alert-danger">';
             echo "Vos 2 mots de passe ne sont pas similaires.";
             echo '</div>';
-            sleep(3);
-            header(sprintf("Location: %s", $failURL));
+            echo $utile;
             exit;
         }
     }
