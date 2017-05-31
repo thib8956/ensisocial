@@ -1,8 +1,13 @@
 <?php
 $title="Inscription";
 include('header.php');
+<<<<<<< HEAD
 $answer = $db->query('SELECT email FROM users');
 $start = 506;
+=======
+$answer = $db->query('SELECT username FROM users');
+$start = 516;
+>>>>>>> c23c8d195b1bbb82d1e2151ad9ca64ea64ac189f
 $string = get_include_contents('inscription.php');
 $utile = substr ($string,$start);
 function get_include_contents($filename) {
