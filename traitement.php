@@ -56,8 +56,8 @@ function fillDatabase($connection) {
     $hash = password_hash($_POST['password'], PASSWORD_BCRYPT, $options);
 
     try {
-        $stmt = $connection->prepare('INSERT INTO users VALUES (:id, :email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, :connected)');
-        $stmt->execute(array('id' => 'NULL',
+        $stmt = $connection->prepare('INSERT INTO users VALUES (NULL, :email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, FALSE)');
+        $stmt->execute(array(
                     'email' => $_POST['email'],
                     'password' => $hash, // Mot de passe hashé avec bcrypt
                     'firstname' => $_POST['firstname'],
@@ -67,8 +67,8 @@ function fillDatabase($connection) {
                     'town' => $_POST['town'],
                     'birth' => date('Y-m-d', strtotime($_POST['birth'])),
                     'phone' => $_POST['phone'],
-                    'formation' => $_POST['formation'],
-                    'connected' => 'FALSE'));
+                    'formation' => $_POST['formation']
+                    ));
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">';
         die('Error:'.$e->getMessage());

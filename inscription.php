@@ -22,7 +22,8 @@ $form=new Form($_POST,"signin");
     echo $form->inputfield("town","string","Ville");
     echo $form->inputfield("birth","date","Date de naissance");
     echo $form->inputfield("phone","string","Téléphone");
-    echo $form->inputsection("formation","string","formation",array("IR" => "Informatique et réseau","AS" =>"Automatique et système" ,"meca" => "Mecanique","textile"=>"Textile","FIP" => "Filière par alternance"));
+    echo $form->inputsection("formation","string","formation",array("IR" => "Informatique et Réseaux","AS" =>"Automatique et Systèmes" ,"meca" => "Mécanique","textile"=>"Textile","FIP" => "Filière par alternance"));
+
     echo $form->submit("S'inscrire !");
 
 include("footer.php");
