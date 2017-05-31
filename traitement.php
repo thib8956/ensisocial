@@ -24,17 +24,33 @@ if(isset($_POST['signin']))
             if ($_POST['email'] == $data['email'])
             {
                 echo '<div class="alert alert-danger">';
-                echo "<p>email déjà utilisé</p>";
+                echo "<p>Adresse mail déjà utilisée.</p>";
                 echo '</div>';
                 echo $utile;
                 exit;
             }
         }
+        if (empty($_POST['firstname']))
+            {
+                echo '<div class="alert alert-danger">';
+                echo "<p>Veuillez insérer un prénom.</p>";
+                echo '</div>';
+                echo $utile;
+                exit;
+            }
+        if (empty($_POST['lastname']))
+            {
+                echo '<div class="alert alert-danger">';
+                echo "<p>Veuillez insérer un nom.</p>";
+                echo '</div>';
+                echo $utile;
+                exit;
+            }
         if($_POST["password"] == $_POST["repassword"])
         {
-            echo '<p>Mot de passe OK</p>';
+            echo '<p>Mot de passe OK.</p>';
             fillDatabase($db);
-            echo '<p>Vous êtes bien inscrit</p>';
+            echo '<p>Vous êtes bien inscrit.</p>';
             exit;
         }
         else
