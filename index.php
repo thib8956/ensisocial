@@ -1,6 +1,7 @@
 <?php
 $title="Accueil";
 include('inc/header.php');
+
 ?>
 
 

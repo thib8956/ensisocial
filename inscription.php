@@ -34,3 +34,4 @@ $form=new Form($_POST,"signin");
 <?php
 include('inc/footer.php');
 ?>
+</form>
