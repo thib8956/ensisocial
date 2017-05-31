@@ -1,7 +1,8 @@
 <?php
-
 $title="Inscription";
 include("header.php");
+?>
+<?php
 require "form.php";
 $form=new Form($_POST,"signin");
 ?>

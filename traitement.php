@@ -1,19 +1,32 @@
 <?php
 $title="Inscription";
 include('header.php');
-$reponse = $db->query('SELECT username FROM users');
+$answer = $db->query('SELECT username FROM users');
+$start = 506;
+$string = get_include_contents('inscription.php');
+$utile = substr ($string,$start);
+function get_include_contents($filename) {
+    if (is_file($filename)) {
+        ob_start();
+        include $filename;
+        return ob_get_clean();
+    }
+    return false;   
+}
+
 
 if(isset($_POST['signin']))
 {
 	if (!empty($_POST['username']) && !empty($_POST['password']) && !empty('$_POST'))
     {
-        while($donnees = $reponse->fetch())
+        while($data = $answer->fetch())
         {
-            if ($_POST['username'] == $donnees['username'])
+            if ($_POST['username'] == $data['username'])
             {
                 echo '<div class="alert alert-danger">';
                 echo "<p>Username déjà utilisé</p>";
                 echo '</div>';
+                echo $utile;
                 exit;
             }
         }
@@ -29,6 +42,7 @@ if(isset($_POST['signin']))
             echo '<div class="alert alert-danger">';
             echo "Vos 2 mots de passe ne sont pas similaires.";
             echo '</div>';
+            echo $utile;
             exit;
         }
     }
