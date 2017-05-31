@@ -17,6 +17,22 @@ function get_include_contents($filename) {
 
 if(isset($_POST['signin']))
 {
+    if (empty($_POST['firstname']))
+    {
+        echo '<div class="alert alert-danger">';
+        echo "<p>Veuillez insérer un prénom.</p>";
+        echo '</div>';
+        echo $utile;
+        exit;
+     }
+    if (empty($_POST['lastname']))
+    {
+        echo '<div class="alert alert-danger">';
+        echo "<p>Veuillez insérer un nom.</p>";
+        echo '</div>';
+        echo $utile;
+        exit;
+    }
 	if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname']))
     {
         while($data = $answer->fetch())
@@ -30,22 +46,6 @@ if(isset($_POST['signin']))
                 exit;
             }
         }
-        if (empty($_POST['firstname']))
-            {
-                echo '<div class="alert alert-danger">';
-                echo "<p>Veuillez insérer un prénom.</p>";
-                echo '</div>';
-                echo $utile;
-                exit;
-            }
-        if (empty($_POST['lastname']))
-            {
-                echo '<div class="alert alert-danger">';
-                echo "<p>Veuillez insérer un nom.</p>";
-                echo '</div>';
-                echo $utile;
-                exit;
-            }
         if($_POST["password"] == $_POST["repassword"])
         {
             echo '<p>Mot de passe OK.</p>';
