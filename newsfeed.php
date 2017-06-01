@@ -1,9 +1,11 @@
 <?php
+session_start();
 $title = "Actualités";
 include('header.php');
 
 $stmt = $db->query('SELECT * from newsfeed ORDER BY date DESC');
 $score = 42;
+$profil=$db->query('SELECT * from users ORDER BY'.$_SESSION["username"]);
 ?>
 <div class="container-fluid">
 	<?php

@@ -1,6 +1,3 @@
-
-
-
 header,
 footer {
     width: 100%;
@@ -59,13 +56,13 @@ nav {
     margin: auto;
     text-align: center;
     font-weight: bold;
-   
+
     height: 50px;
     margin-top: 20px;
-box-shadow:	
-		0pt 2px 5px rgba(105, 108, 109,  0.7),	
+box-shadow:
+		0pt 2px 5px rgba(105, 108, 109,  0.7),
 		0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
-  
+
    font-weight: bold;
 
     height: 50px;

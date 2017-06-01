@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default">
 	<ul class="nav navbar-nav">
-		<?php if (!isset($_SESSION['username'])){
+		<?php if (!isset($_SESSION['email'])){
 			echo '<li><a href="inscription.php" title="inscription">Inscription</a></li>';
 			echo '<li><a href="connection.php" title="connexion">Connexion</a></li>';
 		} else { ?>
