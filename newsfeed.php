@@ -25,9 +25,9 @@ $profil=$db->query('SELECT * from users ORDER BY'.$_SESSION["username"]);
 				?>
 			</div>
 		</div>
-		<?php
+	<?php
 	}
-	echo '</div>';
-	include('footer.php');
-	?>
+echo '</div>';
+include('footer.php');
+?>
 

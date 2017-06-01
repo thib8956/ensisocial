@@ -12,10 +12,10 @@ while($donne = $memberconnected->fetch()){
 	$firstname = htmlentities($donne['firstname']);
 	$lastname=htmlentities($donne['lastname']);
 	if( htmlentities($donne['connected'])){
-		echo '<p><span class="glyphicon glyphicon-record" style="color:green"></span> '.$firstname.' '.$lastname.' <br /></p>';
+		echo '<p><span class="glyphicon glyphicon-record" style="color:#58D68D"></span> '.$firstname.' '.$lastname.' <br /></p>';
 	}
 	else{
-		echo '<p><span class="glyphicon glyphicon-record" style="color:grey"></span> '.$firstname.' '.$lastname.' <br /></p>';
+		echo '<p><span class="glyphicon glyphicon-record" style="color:#D7DBDD"></span> '.$firstname.' '.$lastname.' <br /></p>';
 	}
 }
 ?>
