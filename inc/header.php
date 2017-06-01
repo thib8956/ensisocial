@@ -19,13 +19,7 @@
     
     <script src="js/jquery.js"></script>
     <script src="js/jquery-ui.js"></script>
-    <script>
-      $( function() {
-        $( "#searchBar" ).autocomplete({
-          source: 'userSearch.php'
-        });
-      } );
-    </script> 
+    <script src="js/autocomplete.js" ></script> 
     
 </head>
 

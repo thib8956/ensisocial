@@ -1,7 +1,7 @@
 <?php
+session_start();
 $title="Recherche";
 include('header.php');
-
 if(isset($_POST['search'])){
     if (!empty($_POST['searchBar'])) {
         $wordList = explode(" ", $_POST['searchBar'], PHP_INT_MAX);

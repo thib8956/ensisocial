@@ -15,7 +15,7 @@
 				<div class="form-group">
 					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Search" autocomplete="off">
 				</div>
-				<button type="submit" class="btn btn-default" name="search">Submit</button>
+				<button type="submit" id="search" class="btn btn-default" name="search">Submit</button>
 			</form>
 			<?php
 			echo '<li><a href="disconnection.php">Déconnexion</a></li>';
