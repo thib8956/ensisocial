@@ -2,28 +2,38 @@
 $title="Accueil";
 include('inc/header.php');
 
+require "form.php";
+$form=new Form($_POST,"login");
 ?>
 
-<form action="connectiontraitement.php" method="post" accept-charset="utf-8" class="form-inline">
-  <div class="imgcontainer">
-    <img src="img/ensisocial.jpg" alt="Avatar" class="avatar">
+<!-- Connection form -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <form action="connectiontraitement.php" method="post">
+        <?php
+        echo $form->inputfield('email', 'email', 'Votre email');
+        echo $form->inputfield('pwd', 'password', 'Mot de passe');
+        ?>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input">
+            Se rappeler de moi
+          </label>
+        </div>
+        <?php
+        echo $form->submit('Se connecter !');
+        ?>
+      </form>
+    </div>
   </div>
-
-  <div class="container">
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Entrer votre mail" name="email" required>
-
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Password" name="pwd" required>
-
-    <button type="submit">Login</button>
-    <input type="checkbox" checked="checked"> Remember me
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <p class="pwd"><a href="lost_pwd.php">Mot de passe oublié ?</a></p>
+    </div>
   </div>
-
-  <div class="container" style="background-color:LightBlue">
-    <span class="pwd">Forgot <a href="lost_pwd.php">password?</a></span>
-  </div>
-</form> 
+</div>
+<!-- /Connection form -->
 
 <?php
 include('inc/footer.php');
