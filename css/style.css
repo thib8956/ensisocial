@@ -1,0 +1,73 @@
+header,
+footer {
+    width: 100%;
+}
+* {
+     margin: 0;
+     padding: 0;
+    font-family: Helvetica, Arial;
+}
+
+body {
+    background-color:azure;
+}
+
+
+
+nav {
+    font-weight: bold;
+    height: 50px;
+    margin-top: 20px;
+}
+
+footer {
+    background-color: LightBlue;
+    color: white;
+    text-align: center;
+    height: 50px;
+    /* hauteur : 50px */
+    position: fixed;
+    bottom: 0;
+
+}
+
+header,
+footer {
+    width: 100%;
+}
+* {
+     margin: 0;
+    padding: 0;
+    font-family: Helvetica, Arial;
+}
+
+
+
+header {
+    background-color: lightgreen;
+}
+
+
+nav {
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+
+    height: 50px;
+    margin-top: 20px;
+box-shadow:
+		0pt 2px 5px rgba(105, 108, 109,  0.7),
+		0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+
+}
+
+body{
+  background-color:azure
+}
+.navbar-default {
+	background-color:lightblue;
+}
+.jumbotron{
+  background-color: white;
+}
+}

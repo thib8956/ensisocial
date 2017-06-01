@@ -1,6 +1,6 @@
 <?php
 $title="Mot de passe oublié";
-include("header.php");
+include('inc/header.php');
 ?>
 
 <form action="lost_pwd_traitement.php" method="post" accept-charset="utf-8" class="form-inline">
@@ -21,5 +21,5 @@ include("header.php");
 
 
 <?php
-include("footer.php");
+include('inc/footer.php');
 ?>

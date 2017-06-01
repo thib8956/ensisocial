@@ -2,7 +2,7 @@
 session_start();
 
 $title=$_SESSION['firstname'];
-include("header.php");
+include('inc/header.php');
 
 $stmt = $db->query('SELECT * from newsfeed join authornews on newsfeed.id=authornews.newsfeedid join users on users.id=authornews.authorid ORDER BY date DESC');
 $score = 42;
@@ -44,18 +44,13 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 			</div>
 		</div>
 	</div>
-	<script> 
+	<script>
 		javascript:ajax();
-	</script> 
+	</script>
 	<!-- <button onclick='javascript:ajax()'>Afficher</button> -->
 	<div id="ta_div" ></div>
 
-</div>	
-
-
-
-
-
+</div>
 
 <div class="col-sm-offset-2 col-md-10 ">
 	<?php
@@ -74,9 +69,10 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 			echo '<p class="text-right small">'.$res['date'].'</p>';
 			?>
 		</div>
-	
+
 	<?php
 }
 echo '</div>';
-include('footer.php');
+include('inc/footer.php');
 ?>
+

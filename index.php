@@ -1,14 +1,10 @@
 <?php
 $title="Accueil";
-include("header.php");
+include('inc/header.php');
+
 ?>
 
 
-
-
-
-
-
 <?php
-include("footer.php");
+include('inc/footer.php');
 ?>

@@ -1,22 +1,40 @@
 <?php
 $title="Inscription";
-include('header.php');
+include('inc/header.php');
+
 $answer = $db->query('SELECT email FROM users');
 $start = 506;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string,$start);
+
 function get_include_contents($filename) {
     if (is_file($filename)) {
         ob_start();
         include $filename;
         return ob_get_clean();
     }
-    return false;   
+    return false;
 }
 
 
 if(isset($_POST['signin']))
 {
+    if (empty($_POST['firstname']))
+    {
+        echo '<div class="alert alert-danger">';
+        echo "<p>Veuillez insérer un prénom.</p>";
+        echo '</div>';
+        echo $utile;
+        exit;
+     }
+    if (empty($_POST['lastname']))
+    {
+        echo '<div class="alert alert-danger">';
+        echo "<p>Veuillez insérer un nom.</p>";
+        echo '</div>';
+        echo $utile;
+        exit;
+    }
 	if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname']))
     {
         while($data = $answer->fetch())
@@ -24,7 +42,7 @@ if(isset($_POST['signin']))
             if ($_POST['email'] == $data['email'])
             {
                 echo '<div class="alert alert-danger">';
-                echo "<p>email déjà utilisé</p>";
+                echo "<p>Adresse mail déjà utilisée.</p>";
                 echo '</div>';
                 echo $utile;
                 exit;
@@ -32,9 +50,9 @@ if(isset($_POST['signin']))
         }
         if($_POST["password"] == $_POST["repassword"])
         {
-            echo '<p>Mot de passe OK</p>';
+            echo '<p>Mot de passe OK.</p>';
             fillDatabase($db);
-            echo '<p>Vous êtes bien inscrit</p>';
+            echo '<p>Vous êtes bien inscrit.</p>';
             exit;
         }
         else

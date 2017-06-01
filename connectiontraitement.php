@@ -1,7 +1,6 @@
 <?php
-$title = "Connection";
-include("header.php");
-echo $_POST['email'];
+$title = "Connexion";
+include('inc/header.php');
 
 $req = $db->prepare('SELECT * FROM users WHERE email = :email');
 $req->execute(array('email'=> $_POST["email"]));
