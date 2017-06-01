@@ -17,15 +17,13 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 			<h3><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'];?></h3>
 		</center>
 	</div>
-	
-	
+
 	<script>
 		javascript:ajax();
 	</script>
-	<div id="ta_div" ></div>
-	
 </div>
-<!-- pop up lorsque l'on clique sur l'image-->
+
+<!-- Pop up lorsque l'on clique sur l'image-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
 		<div class="modal-dialog" >
 			<div class="modal-content">

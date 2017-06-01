@@ -16,6 +16,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/jquery-ui.css"/>
+	<!-- Scripts -->
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<script src="js/autocomplete.js" ></script>
@@ -24,7 +25,6 @@
 </head>
 
 <body onload="javascript:ajax()">
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
 	<!-- wrap header content -->
 	<div class="wrap">
 		<header>
