@@ -11,9 +11,10 @@ $form=new Form($_POST,"connection");
 	echo $form->inputfield("email","email","Nom d'utilisateur");
 	echo $form->inputfield("pwd","password","Mot de Passe");
 	echo $form->submit('Connexion');
+    echo "
+<a href=\"lost_pwd.php\">Mot de passe oublié?</a>";
 ?>
 </form>
-
 <?php
 include('inc/footer.php');
 ?>

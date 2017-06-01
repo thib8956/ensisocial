@@ -5,7 +5,7 @@ include('inc/header.php');
 
 <div>Votre mot de passe a été envoyé à l'adresse mail</div>
 <?php
-     $to      = $_POST["mail"];
+     $to      = $_POST["email"];
      $subject = 'le sujet';
      $message = 'Bonjour !'; //rajouter le mdp ici
      $headers = 'From: ensisocial@noreply.com' . "\r\n" .
