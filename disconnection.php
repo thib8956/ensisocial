@@ -1,5 +1,5 @@
 <?php
-	include('header.php');
+	include('inc/header.php');
 	session_start();
 	$connected=$db->prepare("UPDATE `users` SET `connected` = 0 WHERE `users`.`id` =:id ;");
 	$connected->execute(array('id' => $_SESSION['id'] ));

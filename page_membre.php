@@ -73,6 +73,6 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 	<?php
 }
 echo '</div>';
-include('footer.php');
+include('inc/footer.php');
 ?>
 
