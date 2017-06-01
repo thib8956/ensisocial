@@ -11,15 +11,23 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 ?>
 
 
-<div class="col-sm-2 affix">
+<div class="container col-sm-2 affix">
 	<div class="span3 well">
 		<center>
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
 			<h3><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'];?></h3>
 		</center>
 	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
+	
+	
+	<script>
+		javascript:ajax();
+	</script>
+	<div id="ta_div" ></div>
+	
+</div>
+<!-- pop up lorsque l'on clique sur l'image-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
 		<div class="modal-dialog" >
 			<div class="modal-content">
 				<div class="modal-header">
@@ -33,7 +41,7 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 					<hr>
 					<center>
 						<p class="text-left"><strong>formation: </strong> <?php  echo $_SESSION['formation'] ?></p>
-						<p class="text-left"><strong>né le : </strong> <?php  date('d-m-Y', strtotime($_POST['birth'])) ?></p>
+						<p class="text-left"><strong>né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
 					</center>
 				</div>
 				<div class="modal-footer">
@@ -44,14 +52,6 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 			</div>
 		</div>
 	</div>
-	<script>
-		javascript:ajax();
-	</script>
-	<!-- <button onclick='javascript:ajax()'>Afficher</button> -->
-	<div id="ta_div" ></div>
-
-</div>
-
 <div class="col-sm-offset-2 col-md-10 ">
 	<?php
 	while ($res=$stmt->fetch()){
@@ -70,9 +70,9 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 			?>
 		</div>
 
-	<?php
-}
-echo '</div>';
-include('inc/footer.php');
-?>
+		<?php
+	}
+	echo '</div>';
+	include('inc/footer.php');
+	?>
 
