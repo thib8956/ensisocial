@@ -20,7 +20,7 @@ class form{
      * @param $html
      */
     private function surround($html){
-        return "<{$this->surround} >{$html}</{$this->surround}>";
+        return "<{$this->surround} class=\"form-group\" >{$html}</{$this->surround}>";
     }
 
     /**
