@@ -13,8 +13,9 @@
 	<title><?php echo $title; ?> - EnsiSocial</title>
 	<meta name="charset" content="utf8">
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
 </head>
-<body>
+<body onload="javascript:ajax()">
 	<header >
 		<div class="jumbotron text-center">
 			<h1>EnsiSocial</h1>
