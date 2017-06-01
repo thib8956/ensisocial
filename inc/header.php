@@ -15,7 +15,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-
+  <link rel="stylesheet" href="css/jquery-ui.css"/>
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/autocomplete.js" ></script> 
 </head>
 
 <body onload="javascript:ajax()">
