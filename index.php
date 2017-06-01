@@ -1,14 +1,9 @@
 <?php
-$title="Acceuil";
-include("header.php");
+$title="Accueil";
+include('inc/header.php');
 ?>
 
 
-
-
-
-
-
 <?php
-include("footer.php");
+include('inc/footer.php');
 ?>

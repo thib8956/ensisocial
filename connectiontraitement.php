@@ -1,6 +1,6 @@
 <?php
 $title = "Connection";
-include("header.php");
+include('inc/header.php');
 
 $req = $db->prepare('SELECT email, password, firstname, lastname FROM users WHERE email = :email');
 $req->execute(array('email'=> $_POST["email"]));

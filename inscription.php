@@ -1,6 +1,6 @@
 <?php
 $title="Inscription";
-include("header.php");
+include('inc/header.php');
 ?>
 <?php
 require "form.php";
@@ -32,5 +32,5 @@ $form=new Form($_POST,"signin");
     </div>
 </div>
 <?php
-include("footer.php");
+include('inc/footer.php');
 ?>

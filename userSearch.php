@@ -1,6 +1,6 @@
 <?php
 $title="Recherche";
-include('header.php');
+include('inc/header.php');
 
 if(isset($_POST['search'])){
 	if (!empty($_POST['searchBar'])) {
@@ -18,8 +18,9 @@ if(isset($_POST['search'])){
                     echo "<p>".$rep['firstname']." ".$rep['lastname']."</p>";
                 }
             }
-        }   
+        }
     }
 }
 
+include(inc/footer.php);
 ?>

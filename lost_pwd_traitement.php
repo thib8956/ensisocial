@@ -1,6 +1,6 @@
 <?php
 $title="Requête traitée";
-include("header.php");
+include('inc/header.php');
 ?>
 
 <div>Votre mot de passe a été envoyé à l'adresse mail</div>
@@ -16,5 +16,5 @@ include("header.php");
  ?>
 
 <?php
-include("footer.php");
+include('inc/footer.php');
 ?>
