@@ -1,6 +1,6 @@
 <?php
 $title="Connection";
-include("header.php");
+include('inc/header.php');
 ?>
 <p> Veuillez entrer vos identifiants</p>
 <form action="connectiontraitement.php" method="post" accept-charset="utf-8" class="form-inline">
@@ -21,5 +21,5 @@ include("header.php");
 	<a href="lost_pwd.php" >Mot de passe oublié</a>
 
 <?php
-include("footer.php");
+include('inc/footer.php');
 ?>

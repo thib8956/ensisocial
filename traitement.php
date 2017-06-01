@@ -1,17 +1,19 @@
 <?php
 $title="Inscription";
-include('header.php');
+include('inc/header.php');
+
 $answer = $db->query('SELECT email FROM users');
 $start = 506;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string,$start);
+
 function get_include_contents($filename) {
     if (is_file($filename)) {
         ob_start();
         include $filename;
         return ob_get_clean();
     }
-    return false;   
+    return false;
 }
 
 

@@ -8,18 +8,26 @@
 	}
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<title><?php echo $title; ?> - EnsiSocial</title>
 	<meta name="charset" content="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 </head>
+
 <body>
-	<header >
-		<div class="jumbotron text-center">
-			<h1>EnsiSocial</h1>
-		</div>
-		<?php
+	<!-- wrap header content -->
+	<div class="wrap">
+		<header>
+			<div class="jumbotron text-center">
+				<h1>EnsiSocial</h1>
+			</div>
+			<?php
 			include('navbar.php');
-		?>
-	</header>
+			?>
+		</header>
+	</div>
+	<!-- Wrap all page content -->
+	<div id="wrap">
