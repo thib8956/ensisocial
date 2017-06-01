@@ -11,7 +11,7 @@
             echo '<li><a href="">Groupes</a></li>';
             echo '<li><a href="">Contacts récents</a></li>';
 			?>
-			<form class="navbar-form navbar-left" method="post">  <!-- mettre action="truc.php" -->
+			<form class="navbar-form navbar-left" method="post" action="searchPage.php">
 				<div class="form-group">
 					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Search" autocomplete="off">
 				</div>
