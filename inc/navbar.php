@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="index.php">
-				<img alt="logo" src="img/ensisocial.jpg" height="100%">
+				<img alt="logo" src="img/ensisocial.png" height="100%">
 			</a>
 		</div>
 		<!-- Searchbar -->
