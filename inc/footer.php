@@ -11,6 +11,7 @@
 <script src="js/autocomplete.js" ></script>
 <script src="js/bootstrap.min.js"></script>
 <script type='text/JavaScript' src="js/memberconnected.js"></script>
-<!-- /Scripts -->
+<script language="javascript" type="text/javascript" src="serveurMessagerie/client.js"> </script>
+
 </body>
 </html>
