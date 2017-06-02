@@ -7,7 +7,7 @@ try {
 	die('Error:'.$e->getMessage());
 }
 
-require('form.php');
+require_once 'form.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
