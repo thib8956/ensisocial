@@ -24,11 +24,11 @@ try {
 	<script src="js/bootstrap.min.js"></script>
 	<script type='text/JavaScript' src="js/memberconnected.js"></script>
     <?php
-        require 'form.php';
+        require_once 'form.php';
     ?>
 </head>
 
-<body onload="javascript:ajax()">
+<body onload="javascript:member()">
 	<?php
 	include('navbar.php');
 	?>

@@ -3,14 +3,14 @@ session_start();
 $title=$_SESSION['firstname'];
 include('inc/header.php');
 
-$stmt = $db->query('SELECT *
+$stmt = $db->query('SELECT newsfeed.id,firstname,lastname,content,title,`date`
 	FROM newsfeed
 	JOIN authornews ON newsfeed.id = authornews.newsfeedid
 	JOIN users ON users.id = authornews.authorid
 	ORDER BY date DESC'
 	);
 $score = 42;
-$profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
+
 
 ?>
 
@@ -23,7 +23,7 @@ $profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 	</div>
 
 	<script>
-		javascript:ajax();
+		javascript:member();
 	</script>
 	<!-- ce div n'est pas vraiment vide il affiche la liste des membres connecté celui qui le supprime je le biffle signé: le respo web-->
 	<div id="memberconnected" ></div>
@@ -60,12 +60,12 @@ $profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 <div class="col-sm-offset-2 col-md-10">
 	<div class="row">
 		<form action="publication.php" method="post">
-		  <?php
-			  $form = new Form($_POST, 'post');
-			  echo $form->inputfield('title', 'text', 'Titre de la publication');
-			  echo $form->inputtextarea('content', 'Contenu', 5, 16);
-			  echo $form->submit('Publier');
-		  ?>
+			<?php
+			$form = new Form($_POST, 'post');
+			echo $form->inputfield('title', 'text', 'Titre de la publication');
+			echo $form->inputtextarea('content', 'Contenu', 5, 16);
+			echo $form->submit('Publier');
+			?>
 		</form>
 	</div>
 </div>
@@ -73,23 +73,30 @@ $profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 <!-- Display newsfeed -->
 <div class="col-sm-offset-2 col-md-10">
 	<?php
-	while ($res=$stmt->fetch()){
-		?>
-		<div class="row well">
-			<?php
-			echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
-			echo '<h3>'.$res['title'].'</h3>';
-			echo '<p>'.$res['content'].'</p>';
-			echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
-			echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
-			echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
-			echo '<p class="text-right small">'.$res['date'].'</p>';
+	echo '<div class="panel panel-white post panel-shadow">
+	<div class="post-heading">';
+		while ($res=$stmt->fetch()){
 			?>
-		</div>
+			<div class="row well">
+				<?php
 
-		<?php
-	}
-	echo '</div>';
-	include('inc/footer.php');
-	?>
+				echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
+				echo '<h3>'.$res['title'].'</h3>';
+				echo '<p>'.$res['content'].'</p>';
+				echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
+				echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
+				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
+				echo '<p class="text-right small">'.$res['date'].'</p>';
+				include('comment.php'); // include à répétition donc ne pas mettre include_once
+				?>
+
+			</div>
+
+			<?php
+		}
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+		include('inc/footer.php');
+		?>
 
