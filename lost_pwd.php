@@ -1,6 +1,8 @@
 <?php
 $title="Mot de passe oublié";
 include('inc/header.php');
+$form=new Form($_POST,"lostpwd");
+
 ?>
 
 <form action="lost_pwd_traitement.php" method="post" accept-charset="utf-8" class="form-inline">

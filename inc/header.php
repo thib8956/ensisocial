@@ -1,11 +1,13 @@
 <?php
-	try {
-		$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
-		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} catch (Exception $e) {
-		die('Error:'.$e->getMessage());
-	}
+try {
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $e) {
+	die('Error:'.$e->getMessage());
+}
+
+require_once 'form.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,11 +18,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/jquery-ui.css"/>
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="js/autocomplete.js" ></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script type='text/JavaScript' src="js/memberconnected.js"></script>
+	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
 <body onload="javascript:ajax()">
@@ -37,4 +35,4 @@
 		</header>
 	</div>
 	<!-- Wrap all page content -->
-	<div id="wrap">
+	<div id="wrap" style="padding-top: 100px;">
