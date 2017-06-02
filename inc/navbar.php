@@ -2,7 +2,15 @@
 	<ul class="nav navbar-nav">
 		<?php if (!isset($_SESSION['email'])){
 			echo '<li><a href="inscription.php" title="inscription">Inscription</a></li>';
-			echo '<li><a href="connection.php" title="connexion">Connexion</a></li>';
+            $form=new Form($_POST,"connection");
+            
+            echo '<form action="connectiontraitement.php" method="post" accept-charset="utf-8" class="form-inline" >';
+            echo $form->inputfield("email","email","Nom d'utilisateur");
+            echo $form->inputfield("pwd","password","Mot de Passe");
+            echo $form->submit('Connexion');
+            echo '<a href=\"lost_pwd.php\">Mot de passe oublié?</a>';
+            echo '</form>';    
+    
 		} else {
 			echo '<li><a href="">Profil</a></li>';
             echo '<li><a href="">Actualités</a></li>';

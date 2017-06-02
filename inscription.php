@@ -3,7 +3,6 @@ $title="Inscription";
 include('inc/header.php');
 ?>
 <?php
-require "form.php";
 $form=new Form($_POST,"signin");
 ?>
 <div class="bootstrap-iso">
@@ -34,4 +33,3 @@ $form=new Form($_POST,"signin");
 <?php
 include('inc/footer.php');
 ?>
-</form>
