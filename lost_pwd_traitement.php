@@ -1,6 +1,6 @@
 <?php
 $title="Requête traitée";
-include('inc/header.php');
+include_once('inc/header.php');
 $form= new Form($_POST,"lostpwd")
 ?>
 
@@ -33,11 +33,11 @@ else
         echo '<br><br></form>'; //affichage à améliorer
     } else {
         $subject = 'Mot de passe oublié - Ensisocial';
-        $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp; 
-        
+        $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp;
+
         $headers = 'From: ensisocial@noreply.com' . $passage_ligne .
         'Reply-To: ensisocial@noreply.com' . $passage_ligne .
-        'X-Mailer: PHP/' . phpversion(); // a modifier avec le message si on veut un message en html 
+        'X-Mailer: PHP/' . phpversion(); // a modifier avec le message si on veut un message en html
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
         $req2->execute();
         //mail($to, $subject, $message, $headers); //utiliser une adresse qui ne sera pas rejetée
@@ -46,5 +46,5 @@ else
  ?>
 
 <?php
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>

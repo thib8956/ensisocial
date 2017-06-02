@@ -1,7 +1,7 @@
 <?php
 
 $title="Connexion";
-include("inc/header.php");
+include_once("inc/header.php");
 $form=new Form($_POST,"connection");
 ?>
 <p> Veuillez entrer vos identifiants</p>
@@ -14,5 +14,5 @@ $form=new Form($_POST,"connection");
 ?>
 </form>
 <?php
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>
