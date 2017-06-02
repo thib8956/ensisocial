@@ -87,14 +87,14 @@ function fillDatabase($connection) {
         $stmt->execute(array(
                     'email' => $_POST['email'],
                     'password' => $hash, // Mot de passe hashé avec bcrypt
-                    'firstname' => $_POST['firstname'],
-                    'lastname' => $_POST['lastname'],
-                    'address' => $_POST['address'],
+                    'firstname' => htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8'),
+                    'lastname' => htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8'),
+                    'address' => htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8'),
                     'zipcode' => intval($_POST['zipcode']),
-                    'town' => $_POST['town'],
+                    'town' => htmlspecialchars($_POST['town'], ENT_QUOTES, 'UTF-8'),
                     'birth' => date('Y-m-d', strtotime($_POST['birth'])),
-                    'phone' => $_POST['phone'],
-                    'formation' => $_POST['formation']
+                    'phone' => htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8'),
+                    'formation' => htmlspecialchars($_POST['formation'], ENT_QUOTES, 'UTF-8')
                     ));
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">';
