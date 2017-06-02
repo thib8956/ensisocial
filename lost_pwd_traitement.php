@@ -35,6 +35,7 @@ else
     } else {
         $subject = 'Mot de passe oublié - Ensisocial';
         $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp;
+
         $headers = 'From: ensisocial@noreply.com' . $passage_ligne .
         'Reply-To: ensisocial@noreply.com' . $passage_ligne .
         'X-Mailer: PHP/' . phpversion(); // a modifier avec le message si on veut un message en html
