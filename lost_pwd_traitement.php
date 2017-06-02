@@ -1,6 +1,7 @@
 <?php
 $title="Requête traitée";
 include('inc/header.php');
+$form= new Form($_POST,"lostpwd")
 ?>
 
 <div>Votre mot de passe a été envoyé à l'adresse mail</div>
@@ -26,7 +27,11 @@ else
     $req->execute(array('email'=> $_POST["email"]));
     $nbs = $req->fetchAll();
     if (count($nbs)==0){
-        echo "Pas de compte lié à cette adresse"; //affichage à améliorer
+        echo "<div class=\"alert alert-danger\">Pas de compte lié à cette adresse</div>";
+        echo '<form action="lost_pwd_traitement.php" method="post" accept-charset="utf-8" class="form-inline">';
+        echo $form->inputfield("email","email","Rentrez votre adresse pour qu'on vous renvoie votre mot de passe");
+        echo $form->submit("Demander");
+        echo '<br><br></form>'; //affichage à améliorer
     } else {
         $subject = 'Mot de passe oublié - Ensisocial';
         $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp;
