@@ -3,16 +3,21 @@ function writeInDiv(text){
     objet.innerHTML = text;
 }
 
-function ajax()
+function member()
 {
     top.window.focus()
     var xhr=null;
-   
-    if (window.XMLHttpRequest) {
-        xhr = new XMLHttpRequest();
-    }
-    else if (window.ActiveXObject){
-        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+        if (window.ActiveXObject) {
+            try {
+                xhr = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch(e) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        else{
+            xhr = new XMLHttpRequest();
+        }
     }
     xhr.open("GET", "memberconnected.php", false);
     xhr.send(null);

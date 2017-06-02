@@ -34,5 +34,6 @@ require_once 'form.php';
 			?>
 		</header>
 	</div>
+
 	<!-- Wrap all page content -->
 	<div id="wrap" style="padding-top: 100px;">

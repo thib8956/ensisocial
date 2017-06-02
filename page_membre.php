@@ -24,7 +24,6 @@ try {
 
 ?>
 
-
 <div class="container col-sm-2 affix">
 	<div class="span3 well">
 		<center>
@@ -39,7 +38,7 @@ try {
 
 
 	<script>
-		javascript:ajax();
+		javascript:member();
 	</script>
 
 	<div id="memberconnected" ></div>
@@ -90,25 +89,28 @@ try {
 <!-- Display newsfeed -->
 <div class="col-sm-offset-2 col-md-10">
 	<?php
-	while ($res=$stmt->fetch()){
-		?>
-		<div class="row well">
+	echo '<div class="panel panel-white post panel-shadow">
+	<div class="post-heading">';
+		while ($res=$stmt->fetch()){
+			?>
+			<div class="row well">
+				<?php
+				echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
+				echo '<h3>'.$res['title'].'</h3>';
+				echo '<p>'.$res['content'].'</p>';
+				echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
+				echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
+				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
+				echo '<p class="text-right small">'.$res['date'].'</p>';
+				include('comment.php'); // include à répétition donc ne pas mettre include_once
+				?>
 
+			</div>
 
 			<?php
-			echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
-			echo '<h3>'.$res['title'].'</h3>';
-			echo '<p>'.$res['content'].'</p>';
-			echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
-			echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
-			echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
-			echo '<p class="text-right small">'.$res['date'].'</p>';
-			?>
-		</div>
-
-		<?php
-	}
-	echo '</div>';
-	include_once('inc/footer.php');
-	?>
-
+		}
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+		include('inc/footer.php');
+		?>
