@@ -1,6 +1,6 @@
 <?php
 $title="Mot de passe oublié";
-include('inc/header.php');
+include_once('inc/header.php');
 $form=new Form($_POST,"lostpwd");
 ?>
 
@@ -13,10 +13,6 @@ $form=new Form($_POST,"lostpwd");
     <br>
 </form>
 
-
-
-
-
 <?php
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>

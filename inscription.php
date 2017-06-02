@@ -1,6 +1,6 @@
 <?php
 $title="Inscription";
-include('inc/header.php');
+include_once('inc/header.php');
 
 $form = new Form($_POST,"signin");
 ?>
@@ -78,7 +78,7 @@ $form = new Form($_POST,"signin");
 <div class="container-fluid">
   <div class="row">
    <div class="col-md-6 col-sm-6 col-xs-12">
-    <form action="traitement.php" method="post">
+    <form onsubmit="return verifForm(this)" action="traitement.php" method="post">
         <?php
         echo $form->inputfield("email","email","Votre email",true);
         echo $form->inputfield("password","password","Mot de passe",true);
@@ -103,5 +103,5 @@ $form = new Form($_POST,"signin");
 </div>
 </div>
 <?php
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>

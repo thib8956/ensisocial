@@ -1,7 +1,7 @@
 <?php
 session_start();
 $title=$_SESSION['firstname'];
-include('inc/header.php');
+include_once('inc/header.php');
 
 if(isset($_POST['post'])){
 	if (!empty($_POST['title']) && !empty($_POST['content'])){
@@ -35,5 +35,5 @@ function createPublication($conn){
 	}
 }
 
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>
