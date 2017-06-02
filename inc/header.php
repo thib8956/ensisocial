@@ -1,11 +1,11 @@
 <?php
-try {
-	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
-	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $e) {
-	die('Error:'.$e->getMessage());
-}
+	try {
+		$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	} catch (Exception $e) {
+		die('Error:'.$e->getMessage());
+	}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,8 +16,6 @@ try {
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/jquery-ui.css"/>
-	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
-	<!-- Scripts -->
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<script src="js/autocomplete.js" ></script>
@@ -26,8 +24,17 @@ try {
 </head>
 
 <body onload="javascript:ajax()">
-	<?php
-	include('navbar.php');
-	?>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+	<!-- wrap header content -->
+	<div class="wrap">
+		<header>
+			<div class="jumbotron text-center">
+				<h1>EnsiSocial</h1>
+			</div>
+			<?php
+			include('navbar.php');
+			?>
+		</header>
+	</div>
 	<!-- Wrap all page content -->
-	<div id="wrap" style="padding-top: 70px;">
+	<div id="wrap">
