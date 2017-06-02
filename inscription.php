@@ -6,6 +6,77 @@ include('inc/header.php');
 require "form.php";
 $form=new Form($_POST,"signin");
 ?>
+
+<script type="text/javascript">
+    function surligne(champ, erreur)
+    {
+        if(erreur)
+        {
+            champ.style.backgroundColor='#FFEAEA';
+            champ.style.color='#000000';
+        }
+        else
+        {
+            champ.style.backgroundColor='';
+            champ.style.color='';
+        }
+    }
+    function verifText(champ)
+    {
+        if(champ.value=='')
+        {
+            surligne(champ, true);
+            return false;
+        }
+        else
+        {
+            surligne(champ, false);
+            return true;
+        }
+    }
+    function verifPass(champ1,champ2)
+    {
+        if(champ1.value === champ2.value && champ1.value!='' && champ2.value!='') {
+            return true;
+        }
+            
+        else 
+            return false;
+    }
+    function verifMail(champ)
+    {
+        
+    }
+    function verifForm(f)
+    {
+        var email_Ok = verifText(f.email);
+        var password_Ok = verifText(f.password);
+        var repassword_Ok = verifText(f.repassword);
+        var firstname_Ok = verifText(f.firstname);
+        var lastname_Ok = verifText(f.lastname);
+        var pass = f.password.value;
+        var repass = f.repassword.value;
+        if(email_Ok && password_Ok && repassword_Ok && firstname_Ok && lastname_Ok) 
+        {
+            if (pass === repass) 
+            {
+                return true;        
+            }
+            else
+            {
+                surligne(repassword,true);
+                alert("Vos mots de passe ne sont pas similaires");
+                return false;
+            }
+        }
+        else
+        {
+            alert("Merci de bien vouloir remplir tous les champs en rose");
+            return false;
+        }
+    }
+</script>
+
 <div class="container-fluid">
   <div class="row">
    <div class="col-md-6 col-sm-6 col-xs-12">
