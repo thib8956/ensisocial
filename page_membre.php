@@ -38,7 +38,7 @@ try {
 
 
 	<script>
-		javascript:member();
+		javascript:refresh();
 	</script>
 
 	<div id="memberconnected" ></div>
