@@ -1,0 +1,52 @@
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+    width: 30%;
+    text-align: center;
+}
+
+
+/* Full-width inputs */
+/*input[type=text], input[type=password] {
+    width: 90%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing:content-box;
+}*/
+
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+    width: 20%;
+    border-radius: 50%;
+}
+
+/* The "Forgot password" text */
+/*span.psw {
+    float: right;
+    padding-top: 16px;
+}*/
+
+
+
+body{
+  background: url(../img/ensisa.jpg);
+  background-size: 100%;
+}
+

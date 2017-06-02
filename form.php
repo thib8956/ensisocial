@@ -11,7 +11,7 @@ class form{
      * @param $data array regroupe tous les champs du formulaire
      *        $button donne le texte afficher sur le boutton
      */
-    public function __construct($data,$button){
+    public function __construct($data, $button){
         $this->data=$data;
         $this->button=$button;
     }
