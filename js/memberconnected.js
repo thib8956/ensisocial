@@ -1,12 +1,13 @@
 function writeInDiv(text){
-    var objet = document.getElementById('memberconnected');
+    var objet = document.getElementById('ta_div');
     objet.innerHTML = text;
 }
 
 function ajax()
 {
+    top.window.focus()
     var xhr=null;
-
+   
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     }

@@ -24,6 +24,7 @@ try {
 
 ?>
 
+
 <div class="container col-sm-2 affix">
 	<div class="span3 well">
 		<center>
@@ -36,14 +37,14 @@ try {
 		</center>
 	</div>
 
+
 	<script>
 		javascript:ajax();
 	</script>
-	<!-- ce div n'est pas vraiment vide il affiche la liste des membres connecté celui qui le supprime je le biffle signé: le respo web-->
-	<div id="memberconnected" ></div>
-</div>
+	<div id="ta_div" ></div>
 
-<!-- Pop up lorsque l'on clique sur l'image-->
+</div>
+<!-- pop up lorsque l'on clique sur l'image-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
 	<div class="modal-dialog" >
 		<div class="modal-content">
@@ -90,6 +91,8 @@ try {
 	while ($res=$stmt->fetch()){
 		?>
 		<div class="row well">
+
+
 			<?php
 			echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
 			echo '<h3>'.$res['title'].'</h3>';

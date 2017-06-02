@@ -3,8 +3,6 @@ $title="Inscription";
 include('inc/header.php');
 
 $answer = $db->query('SELECT email FROM users');
-
-// Récupération d'inscription puis découpe avec substr
 $start = 506;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string,$start);
@@ -18,31 +16,26 @@ function get_include_contents($filename) {
     return false;
 }
 
-// Envoi mail
-/*
-$objet = 'Confirmation de votre inscription EnsiSocial' ;
-$contenu = '
-<html>
-<head>
-   <title>Vous vous êtes inscrit(e) sur EnsiSocial</title>
-</head>
-<body>
-   <p>Bonjour '.$_POST['firstname'].' '.$_POST['lastname'].'</p>
-   <p>Vous venez de vous inscrire sur le site EnsiSocial avec les informations suivantes :<br>  -Adresse mail:'.$_POST['email'].'<br>
-   -Mot de passe'.$_POST['password'].'</p>
-</body>
-</html>';
-$to = ".$_POST['email'].";
-$headers = 'From: webmaster@example.com' . "\r\n" .
-'Reply-To: webmaster@example.com' . "\r\n" .
-'X-Mailer: PHP/' . phpversion();
-     */
-
-
 
 if(isset($_POST['signin']))
 {
-    if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname']))
+    if (empty($_POST['firstname']))
+    {
+        echo '<div class="alert alert-danger">';
+        echo "<p>Veuillez insérer un prénom.</p>";
+        echo '</div>';
+        echo $utile;
+        exit;
+     }
+    if (empty($_POST['lastname']))
+    {
+        echo '<div class="alert alert-danger">';
+        echo "<p>Veuillez insérer un nom.</p>";
+        echo '</div>';
+        echo $utile;
+        exit;
+    }
+	if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname']))
     {
         while($data = $answer->fetch())
         {
@@ -59,9 +52,7 @@ if(isset($_POST['signin']))
         {
             echo '<p>Mot de passe OK.</p>';
             fillDatabase($db);
-            //Envoi du mail
-            //mail($to, $objet, $contenu, $headers);
-            echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';
+            echo '<p>Vous êtes bien inscrit.</p>';
             exit;
         }
         else
@@ -102,4 +93,5 @@ function fillDatabase($connection) {
         echo '</div>';
     }
 }
+
 ?>

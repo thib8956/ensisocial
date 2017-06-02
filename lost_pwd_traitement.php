@@ -3,6 +3,7 @@ $title="Requête traitée";
 include('inc/header.php');
 ?>
 
+<div>Votre mot de passe a été envoyé à l'adresse mail</div>
 <?php
     $to = $_POST["email"]; //destinataire
 
@@ -28,11 +29,10 @@ else
         echo "Pas de compte lié à cette adresse"; //affichage à améliorer
     } else {
         $subject = 'Mot de passe oublié - Ensisocial';
-        $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp; 
-        
+        $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp;
         $headers = 'From: ensisocial@noreply.com' . $passage_ligne .
         'Reply-To: ensisocial@noreply.com' . $passage_ligne .
-        'X-Mailer: PHP/' . phpversion(); // a modifier avec le message si on veut un message en html 
+        'X-Mailer: PHP/' . phpversion(); // a modifier avec le message si on veut un message en html
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
         $req2->execute();
         //mail($to, $subject, $message, $headers); //utiliser une adresse qui ne sera pas rejetée

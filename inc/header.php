@@ -22,8 +22,17 @@ require_once 'form.php';
 </head>
 
 <body onload="javascript:ajax()">
-	<?php
-	include('navbar.php');
-	?>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+	<!-- wrap header content -->
+	<div class="wrap">
+		<header>
+			<div class="jumbotron text-center">
+				<h1>EnsiSocial</h1>
+			</div>
+			<?php
+			include('navbar.php');
+			?>
+		</header>
+	</div>
 	<!-- Wrap all page content -->
 	<div id="wrap" style="padding-top: 100px;">
