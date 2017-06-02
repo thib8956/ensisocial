@@ -2,7 +2,7 @@
 $title="Inscription";
 include('inc/header.php');
 
-$form=new Form($_POST,"signin");
+$form = new Form($_POST,"signin");
 ?>
 
 <script type="text/javascript">

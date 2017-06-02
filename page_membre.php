@@ -1,24 +1,38 @@
 <?php
 session_start();
-$title=$_SESSION['firstname'];
+if (!isset($_SESSION['id'])){
+	header('Location: index.php');
+}
+$title = $_SESSION['firstname'];
 include('inc/header.php');
 
-$stmt = $db->query('SELECT *
-	FROM newsfeed
-	JOIN authornews ON newsfeed.id = authornews.newsfeedid
-	JOIN users ON users.id = authornews.authorid
-	ORDER BY date DESC'
-	);
-$score = 42;
-$profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
+try {
+	$stmt = $db->query('SELECT *
+		FROM newsfeed
+		JOIN authornews ON newsfeed.id = authornews.newsfeedid
+		JOIN users ON users.id = authornews.authorid
+		ORDER BY date DESC'
+		);
+	$score = 42;
+	$profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
+} catch (PDOException $e) {
+	echo '<div class="alert alert-danger">';
+	die('Error:'.$e->getMessage());
+	echo '</div>';
+
+}
 
 ?>
 
 <div class="container col-sm-2 affix">
 	<div class="span3 well">
 		<center>
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
-			<h3><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'];?></h3>
+			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
+			<h3>
+				<?php
+				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
+				?>
+			</h3>
 		</center>
 	</div>
 
@@ -38,7 +52,7 @@ $profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 			</div>
 			<div class="modal-body">
 				<center>
-					<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+					<img class="img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0">
 					<h3 class="media-heading"><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'].' ' ?><small><?php echo $_SESSION['town'] ?></small></h3>
 				</center>
 				<hr>
@@ -60,12 +74,12 @@ $profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 <div class="col-sm-offset-2 col-md-10">
 	<div class="row">
 		<form action="publication.php" method="post">
-		  <?php
-			  $form = new Form($_POST, 'post');
-			  echo $form->inputfield('title', 'text', 'Titre de la publication');
-			  echo $form->inputtextarea('content', 'Contenu', 5, 16);
-			  echo $form->submit('Publier');
-		  ?>
+			<?php
+			$form = new Form($_POST, 'post');
+			echo $form->inputfield('title', 'text', 'Titre de la publication');
+			echo $form->inputtextarea('content', 'Contenu', 5, 16);
+			echo $form->submit('Publier');
+			?>
 		</form>
 	</div>
 </div>
