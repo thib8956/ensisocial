@@ -23,6 +23,7 @@
 					/*echo '<li><a href="">Actualités</a></li>';
 					echo '<li><a href="">Groupes</a></li>';*/
 					echo '<li><a href="">Contacts récents</a></li>';
+                    echo '<li><a href="chatPage.php">Messagerie</a></li>';
 					echo '<li><a href="disconnection.php">Déconnexion</a></li>';
 				}
 				?>
