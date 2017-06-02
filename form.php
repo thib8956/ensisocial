@@ -1,6 +1,5 @@
 <?php
 
-
 class form{
     private $data;
     private $surround='div';

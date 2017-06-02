@@ -1,11 +1,17 @@
 <?php
+require('form.php');
 session_start();
 $title=$_SESSION['firstname'];
 include('inc/header.php');
 
-$stmt = $db->query('SELECT * from newsfeed join authornews on newsfeed.id=authornews.newsfeedid join users on users.id=authornews.authorid ORDER BY date DESC');
+$stmt = $db->query('SELECT *
+	FROM newsfeed
+	JOIN authornews ON newsfeed.id = authornews.newsfeedid
+	JOIN users ON users.id = authornews.authorid
+	ORDER BY date DESC'
+	);
 $score = 42;
-$profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
+$profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 
 ?>
 
@@ -50,22 +56,20 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 </div>
 
 <!-- Add a publication -->
-<div class="col">
+<div class="col-sm-offset-2 col-md-10">
 	<div class="row">
-		<form>
-		  <div class="form-group">
-		    <label for="formGroupExampleInput">Example label</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-		  </div>
-		  <div class="form-group">
-		    <label for="formGroupExampleInput2">Another label</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-		  </div>
+		<form action="publication.php" method="post">
+		  <?php
+			  $form = new Form($_POST, 'post');
+			  echo $form->inputfield('title', 'text', 'Titre de la publication');
+			  echo $form->inputfield('content', 'textarea', 'Contenu');
+			  echo $form->submit('Publier');
+		  ?>
 		</form>
 	</div>
 </div>
 
-<!-- Newsfeed -->
+<!-- Display newsfeed -->
 <div class="col-sm-offset-2 col-md-10">
 	<?php
 	while ($res=$stmt->fetch()){
