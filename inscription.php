@@ -1,7 +1,7 @@
 <?php
 $title="Inscription";
 include('inc/header.php');
-require('form.php');
+
 $form=new Form($_POST,"signin");
 ?>
 
@@ -105,4 +105,3 @@ $form=new Form($_POST,"signin");
 <?php
 include('inc/footer.php');
 ?>
-</form>

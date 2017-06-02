@@ -1,7 +1,6 @@
 <?php
 $title="Mot de passe oublié";
 include('inc/header.php');
-require "form.php";
 $form=new Form($_POST,"lostpwd");
 ?>
 

@@ -23,6 +23,9 @@ try {
 	<script src="js/autocomplete.js" ></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script type='text/JavaScript' src="js/memberconnected.js"></script>
+    <?php
+        require 'form.php';
+    ?>
 </head>
 
 <body onload="javascript:ajax()">

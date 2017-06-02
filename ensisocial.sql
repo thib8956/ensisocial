@@ -7,6 +7,7 @@
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.19
 
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -134,6 +135,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `addres
 (5, 'd@uha', '$2y$11$ttG2EeeAA5D0hxahu3oMI.awUhQLs10YED4pr.uhUAue/DPhCWyN2', 'Gabin', 'Michalet', '', 0, '', '1970-01-01', '', 'IR', 0),
 (6, 'g@uha.fr', '$2y$11$7rrU7Ne2.FSQuhNgD7vymOJHTAkMMxYzlRzrKh0E8E6TIDPhGY6LC', 'Prout', 'Caca', '', 0, '', '1970-01-01', '', 'IR', 0);
 
+
 --
 -- Index pour les tables exportées
 --
@@ -188,6 +190,7 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `newsfeed`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT pour la table `users`
 --

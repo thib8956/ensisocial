@@ -31,17 +31,6 @@ footer {
 
 }
 
-header,
-footer {
-    width: 100%;
-}
-* {
-     margin: 0;
-    padding: 0;
-    font-family: Helvetica, Arial;
-}
-
-
 
 header {
     background-color: lightgreen;
@@ -66,6 +55,7 @@ body{
 }
 .navbar-default {
 	background-color:lightblue;
+    width: 100%;
 }
 .jumbotron{
   background-color: white;
