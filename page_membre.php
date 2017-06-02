@@ -49,7 +49,24 @@ $profil=$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 	</div>
 </div>
 
-<div class="col-sm-offset-2 col-md-10 ">
+<!-- Add a publication -->
+<div class="col">
+	<div class="row">
+		<form>
+		  <div class="form-group">
+		    <label for="formGroupExampleInput">Example label</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+		  </div>
+		  <div class="form-group">
+		    <label for="formGroupExampleInput2">Another label</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+		  </div>
+		</form>
+	</div>
+</div>
+
+<!-- Newsfeed -->
+<div class="col-sm-offset-2 col-md-10">
 	<?php
 	while ($res=$stmt->fetch()){
 		?>
