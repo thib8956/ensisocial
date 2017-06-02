@@ -1,11 +1,13 @@
 <?php
 $title="Inscription";
-include('inc/header.php');
+include_once('inc/header.php');
 
 $answer = $db->query('SELECT email FROM users');
-$start = 506;
+
+// Récupération d'inscription puis découpe avec substr
+$start = 0;
 $string = get_include_contents('inscription.php');
-$utile = substr ($string,$start);
+$utile = substr ($string, $start);
 
 function get_include_contents($filename) {
     if (is_file($filename)) {

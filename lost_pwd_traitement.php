@@ -1,6 +1,6 @@
 <?php
 $title="Requête traitée";
-include('inc/header.php');
+include_once('inc/header.php');
 $form= new Form($_POST,"lostpwd")
 ?>
 
@@ -46,5 +46,5 @@ else
  ?>
 
 <?php
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>

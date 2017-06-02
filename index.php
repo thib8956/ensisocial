@@ -1,10 +1,11 @@
 <?php
 $title="Accueil";
-include('inc/header.php');
+include_once('inc/header.php');
+
 $form=new Form($_POST,"login");
 ?>
 
 
 <?php
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>
