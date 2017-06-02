@@ -1,8 +1,7 @@
 <?php
 $title="Inscription";
 include('inc/header.php');
-?>
-<?php
+
 $form=new Form($_POST,"signin");
 ?>
 
@@ -38,13 +37,13 @@ $form=new Form($_POST,"signin");
         if(champ1.value === champ2.value && champ1.value!='' && champ2.value!='') {
             return true;
         }
-            
-        else 
+
+        else
             return false;
     }
     function verifMail(champ)
     {
-        
+
     }
     function verifForm(f)
     {
@@ -55,11 +54,11 @@ $form=new Form($_POST,"signin");
         var lastname_Ok = verifText(f.lastname);
         var pass = f.password.value;
         var repass = f.repassword.value;
-        if(email_Ok && password_Ok && repassword_Ok && firstname_Ok && lastname_Ok) 
+        if(email_Ok && password_Ok && repassword_Ok && firstname_Ok && lastname_Ok)
         {
-            if (pass === repass) 
+            if (pass === repass)
             {
-                return true;        
+                return true;
             }
             else
             {

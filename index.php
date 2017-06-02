@@ -2,7 +2,6 @@
 $title="Accueil";
 include('inc/header.php');
 
-require "form.php";
 $form=new Form($_POST,"login");
 ?>
 

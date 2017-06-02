@@ -16,10 +16,10 @@ function get_include_contents($filename) {
         return ob_get_clean();
     }
 
-    return false;   
-} 
+    return false;
+}
 
-// Envoi mail 
+// Envoi mail
 /*
 $objet = 'Confirmation de votre inscription EnsiSocial' ;
 $contenu = '
@@ -29,7 +29,7 @@ $contenu = '
 </head>
 <body>
    <p>Bonjour '.$_POST['firstname'].' '.$_POST['lastname'].'</p>
-   <p>Vous venez de vous inscrire sur le site EnsiSocial avec les informations suivantes :<br>  -Adresse mail:'.$_POST['email'].'<br>  
+   <p>Vous venez de vous inscrire sur le site EnsiSocial avec les informations suivantes :<br>  -Adresse mail:'.$_POST['email'].'<br>
    -Mot de passe'.$_POST['password'].'</p>
 </body>
 </html>';
@@ -64,7 +64,7 @@ if(isset($_POST['signin']))
             //mail($to, $objet, $contenu, $headers);
             echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';
             exit;
-        }        
+        }
         else
         {
             echo '<div class="alert alert-danger">';
@@ -104,5 +104,3 @@ function fillDatabase($connection) {
     }
 }
 ?>
-
-
