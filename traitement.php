@@ -6,7 +6,8 @@ $answer = $db->query('SELECT email FROM users');
 
 // Récupération d'inscription puis découpe avec substr
 $start = 506;
-$string = get_include_contents('inscription.php');
+//$string = get_include_contents('inscription.php');
+$string = "";
 $utile = substr ($string,$start);
 
 function get_include_contents($filename) {
@@ -15,7 +16,6 @@ function get_include_contents($filename) {
         include $filename;
         return ob_get_clean();
     }
-
     return false;
 }
 
