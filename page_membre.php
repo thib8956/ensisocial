@@ -41,7 +41,7 @@ try {
 	<script>
 		javascript:ajax();
 	</script>
-	<!-- ce div n'est pas vraiment vide il affiche la liste des membres connecté celui qui le supprime je le biffle signé: le respo web-->
+
 	<div id="memberconnected" ></div>
 </div>
 

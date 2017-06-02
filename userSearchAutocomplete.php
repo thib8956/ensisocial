@@ -1,19 +1,13 @@
 <?php
-    try {
-		$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
-		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} catch (Exception $e) {
-		die('Error:'.$e->getMessage());
-	}
+include_once('inc/header.php');
 
-    $term = $_GET['term'];
-    $termm = $_GET['term'];
+$term = $_GET['term'];
+$termm = $_GET['term'];
 
     $requete = $db->prepare('SELECT * FROM users WHERE firstname LIKE :term OR lastname LIKE :termm'); // j'effectue ma requête SQL grâce au mot-clé LIKE
 
     $requete->execute(array('term' => '%'.$term.'%',
-                             'termm' => '%'.$termm.'%'));
+        'termm' => '%'.$termm.'%'));
 
     $array = array(); // on créé le tableau
 
@@ -25,4 +19,6 @@
 
     }
     echo json_encode($array); // il n'y a plus qu'à convertir en JSON
-?>
+
+    include_once('inc/footer.php');
+    ?>

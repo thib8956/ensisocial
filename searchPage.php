@@ -2,6 +2,7 @@
 session_start();
 $title="Recherche";
 include_once('inc/header.php');
+
 if(isset($_POST['search'])){
     if (!empty($_POST['searchBar'])) {
         $wordList = explode(" ", $_POST['searchBar'], PHP_INT_MAX);
@@ -29,5 +30,6 @@ if(isset($_POST['search'])){
         header("Location: page_membre.php");
     }
 }
+
 include_once('inc/footer.php');
 ?>
