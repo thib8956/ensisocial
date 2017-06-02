@@ -1,5 +1,4 @@
 <?php
-require('form.php');
 session_start();
 $title=$_SESSION['firstname'];
 include('inc/header.php');
