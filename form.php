@@ -1,6 +1,5 @@
 <?php
 
-
 class form{
     private $data;
     private $surround='div';
@@ -72,10 +71,10 @@ class form{
 
     }
 
-    public function inputtextarea($name,$rows,$cols,$classlabel="",$classarea="form-control",$id="comment"){
+    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control",$id=""){
         return $this->surround('
-          <label for="'.$name.'" class='.$classlabel.'>Comment:</label>
-          <textarea class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'" id="'.$id.'"></textarea>');
+          <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
+          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'" id="'.$id.'"></textarea>');
 
    }
 

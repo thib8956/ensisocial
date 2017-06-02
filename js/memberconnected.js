@@ -5,7 +5,6 @@ function writeInDiv(text){
 
 function ajax()
 {
-    top.window.focus()
     var xhr=null;
 
     if (window.XMLHttpRequest) {

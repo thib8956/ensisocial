@@ -2,7 +2,6 @@
 
 $title="Connexion";
 include("inc/header.php");
-require 'form.php';
 $form=new Form($_POST,"connection");
 ?>
 <p> Veuillez entrer vos identifiants</p>
