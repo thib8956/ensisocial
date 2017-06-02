@@ -1,5 +1,5 @@
 function writeInDiv(text){
-    var objet = document.getElementById('ta_div');
+    var objet = document.getElementById('memberconnected');
     objet.innerHTML = text;
 }
 
