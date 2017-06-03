@@ -1,6 +1,6 @@
 <?php
 $title="Requête traitée";
-include_once('inc/header.php');
+include('inc/header.php');
 $form= new Form($_POST,"lostpwd")
 ?>
 
@@ -33,18 +33,36 @@ else
         echo '<br><br></form>'; //affichage à améliorer
     } else {
         $subject = 'Mot de passe oublié - Ensisocial';
-        $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp;
-
+        
+        $separation = "-----=".md5(rand()); //Pour séparer les différents types
         $headers = 'From: ensisocial@noreply.com' . $passage_ligne .
         'Reply-To: ensisocial@noreply.com' . $passage_ligne .
-        'X-Mailer: PHP/' . phpversion(); // a modifier avec le message si on veut un message en html
+        'MIME-Version: 1.0'. $passage_ligne .
+        'Content-Type: multipart/alternative;'. //Pour pouvoir mettre plusieurs types dans le message, genre un html et le texte alternatif
+        'boundary="'.$separation.'"'.$passage_ligne;
+        
+        $message_txt = 'Votre mot de passe temporaire: '.$nouvelmdp;
+        $message_html = '<html><div style="height:50px;background-color:aqua;">'.$message_txt.'</div></html>'; //Messages à modifier selon le mail
+        
+        $message =
+            $passage_ligne."--".$separation. $passage_ligne . //mettre avant chaque partie
+            'Content-Type:text/plain;charset="utf-8"'.$passage_ligne.
+            'Content-Transfer-Encoding: 8bit'.
+            $passage_ligne.$message_txt.$passage_ligne. //Message texte
+            
+            $passage_ligne."--".$separation.$passage_ligne.           
+            'Content-Type:text/html;charset="utf-8"'. $passage_ligne .
+            'Content-Transfer-Encoding: 8bit'. $passage_ligne . 
+            $passage_ligne.$message_html.$passage_ligne // Message html
+            ; 
+        
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
         $req2->execute();
-        //mail($to, $subject, $message, $headers); //utiliser une adresse qui ne sera pas rejetée
-        echo "<div>Votre mot de passe a été envoyé à l'adresse mail ".$to."</div>";
+        mail($to, $subject, $message, $headers); //utiliser une adresse qui ne sera pas rejetée - décommenter pour tester
+        echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
     }
  ?>
 
 <?php
-include_once('inc/footer.php');
+include('inc/footer.php');
 ?>
