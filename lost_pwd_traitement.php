@@ -1,6 +1,6 @@
 <?php
 $title="Requête traitée";
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 $form= new Form($_POST,"lostpwd")
 ?>
 
@@ -47,5 +47,5 @@ else
  ?>
 
 <?php
-include_once('inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

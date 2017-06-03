@@ -1,6 +1,6 @@
 <?php
 $title="Inscription";
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 $form = new Form($_POST,"signin");
 
@@ -153,6 +153,6 @@ $form = new Form($_POST,"signin");
 </div>
 </div>
 <?php
-include_once('inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>
 >>>>>>> Résolution problèmes d'affichage des erreurs
