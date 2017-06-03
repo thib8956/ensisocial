@@ -23,7 +23,7 @@ require_once 'form.php';
 
 <body onload="javascript:ajax()">
 	<?php
-	include('navbar.php');
+	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>
 	<!-- Wrap all page content -->
 	<div id="wrap" style="padding-top: 100px;">
