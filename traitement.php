@@ -1,6 +1,6 @@
 <?php
 $title="Inscription";
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 $answer = $db->query('SELECT email FROM users');
 

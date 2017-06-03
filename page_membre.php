@@ -4,7 +4,7 @@ if (!isset($_SESSION['id'])){
 	header('Location: index.php');
 }
 $title = $_SESSION['firstname'];
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
 	$stmt = $db->query('SELECT *
@@ -106,6 +106,6 @@ try {
 		<?php
 	}
 	echo '</div>';
-	include_once('inc/footer.php');
+	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 	?>
 

@@ -1,6 +1,6 @@
 <?php
 $title = "Connexion";
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 $req = $db->prepare('SELECT * FROM users WHERE email = :email');
 $req->execute(array('email'=> $_POST['email']));

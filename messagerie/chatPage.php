@@ -1,7 +1,7 @@
 <?php
 session_start();
 $title = 'Chat';
-include('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 ?>
 
 <?php 
@@ -101,5 +101,5 @@ onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()
 </div>
 
 <?php
-include('inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

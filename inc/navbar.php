@@ -23,13 +23,13 @@
 					/*echo '<li><a href="">Actualités</a></li>';
 					echo '<li><a href="">Groupes</a></li>';*/
 					echo '<li><a href="">Contacts récents</a></li>';
-                    echo '<li><a href="chatPage.php">Messagerie</a></li>';
+                    echo '<li><a href="messagerie/chatPage.php">Messagerie</a></li>';
 					echo '<li><a href="disconnection.php">Déconnexion</a></li>';
 				}
 				?>
 
 			</ul>
-			<!-- Searchbar -->
+			<!-- Searchbar -->       
 			<form class="nav navbar-form navbar-right" method="post" action="searchPage.php" role="search">
 				<div class="input-group add-on">
 					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher" autocomplete="off">

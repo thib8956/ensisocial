@@ -1,7 +1,7 @@
 <?php
 session_start();
 $title="Recherche";
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 if(isset($_POST['search'])){
     if (!empty($_POST['searchBar'])) {
@@ -31,5 +31,5 @@ if(isset($_POST['search'])){
     }
 }
 
-include_once('inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

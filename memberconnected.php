@@ -1,5 +1,5 @@
 <?php
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 $memberconnected = $db-> query('SELECT lastname, firstname, connected FROM users');
 while($data = $memberconnected->fetch()){
@@ -13,5 +13,5 @@ while($data = $memberconnected->fetch()){
 	}
 }
 
-include_once('inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>
