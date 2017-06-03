@@ -27,7 +27,7 @@ if(isset($_POST['search'])){
         }
     }
     else {
-        header("Location: page_membre.php");
+        header("Location: /ensisocial/page_membre.php");
     }
 }
 

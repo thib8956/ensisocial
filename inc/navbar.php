@@ -7,9 +7,9 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-left" href="index.php">
-				<img class="hidden-xs" src="img/ensisocial.png" alt="logo" height="50px">
-				<img class="visible-xs" src="img/ensisocial.png" alt="logo" height="70px">
+			<a class="navbar-left" href="/ensisocial/index.php">
+				<img class="hidden-xs" src="/ensisocial/img/ensisocial.jpg" alt="logo" height="50px">
+				<img class="visible-xs" src="/ensisocial/img/ensisocial.jpg" alt="logo" height="70px">
 			</a>
 		</div>
 
@@ -23,14 +23,14 @@
 					/*echo '<li><a href="">Actualités</a></li>';
 					echo '<li><a href="">Groupes</a></li>';*/
 					echo '<li><a href="">Contacts récents</a></li>';
-                    echo '<li><a href="messagerie/chatPage.php">Messagerie</a></li>';
-					echo '<li><a href="disconnection.php">Déconnexion</a></li>';
+                    echo '<li><a href="/ensisocial/messagerie/chatPage.php">Messagerie</a></li>';
+					echo '<li><a href="/ensisocial/disconnection.php">Déconnexion</a></li>';
 				}
 				?>
 
 			</ul>
 			<!-- Searchbar -->       
-			<form class="nav navbar-form navbar-right" method="post" action="searchPage.php" role="search">
+			<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
 				<div class="input-group add-on">
 					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
 					<div class="input-group-btn">
