@@ -28,7 +28,7 @@ $form=new Form($_POST,"login");
   </div>
   <div class="row">
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <p class="pwd"><a href="lost_pwd.php">Mot de passe oublié ?</a></p>
+      <p class="pwd"><a href="/ensisocial/lost_pwd.php">Mot de passe oublié ?</a></p>
     </div>
   </div>
 </div>

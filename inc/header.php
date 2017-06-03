@@ -16,8 +16,8 @@ require_once 'form.php';
 	<meta name="charset" content="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" href="/ensisocial/css/jquery-ui.css"/>
+	<link rel="stylesheet" href="/ensisocial/css/bootstrap.min.css"/>
 	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
