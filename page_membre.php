@@ -19,13 +19,10 @@ try {
 	echo '<div class="alert alert-danger">';
 	die('Error:'.$e->getMessage());
 	echo '</div>';
-
 }
-
 ?>
-
-<div class="container col-sm-2 affix">
-	<div class="span3 well">
+<div class="row">
+	<div class="col-sm-2 well affix">
 		<center>
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
@@ -34,23 +31,22 @@ try {
 				?>
 			</h3>
 		</center>
-	</div>
 
-	<script>
-		javascript:ajax();
-	</script>
-	<!-- ce div n'est pas vraiment vide il affiche la liste des membres connecté celui qui le supprime je le biffle signé: le respo web
-	Liste des membres connectés
-	-->
-	<div id="memberconnected" ></div>
+		<!-- Liste des membres connectés -->
+		<script>javascript:ajax();</script>
+		<p>Autres membres : </p>
+		<div id="memberconnected">Membres</div>
+	</div>
 </div>
+
+
 
 <!-- Pop up lorsque l'on clique sur l'image-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
 	<div class="modal-dialog" >
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">times</button>
+				<button type="button" class="close btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
 			</div>
 			<div class="modal-body">
 				<center>
@@ -59,13 +55,13 @@ try {
 				</center>
 				<hr>
 				<center>
-					<p class="text-left"><strong>formation: </strong> <?php  echo $_SESSION['formation'] ?></p>
-					<p class="text-left"><strong>né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
+					<p class="text-left"><strong>Formation: </strong> <?php  echo $_SESSION['formation'] ?></p>
+					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
 				</center>
 			</div>
 			<div class="modal-footer">
 				<center>
-					<button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</center>
 			</div>
 		</div>

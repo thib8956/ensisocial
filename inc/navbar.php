@@ -32,7 +32,7 @@
 			<!-- Searchbar -->
 			<form class="nav navbar-form navbar-right" method="post" action="searchPage.php" role="search">
 				<div class="input-group add-on">
-					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher" autocomplete="off">
+					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
 					<div class="input-group-btn">
 						<button type="submit" id="search" class="btn btn-primary" name="search">
 							<i class="glyphicon glyphicon-search"></i>
@@ -44,4 +44,4 @@
 	</div>
 </nav>
 
-<script>window.jQuery || document.write('<script src="../js/jquery.js"><\/script>')</script>
+<?php include_once('footer.php'); ?>

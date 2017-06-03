@@ -4,7 +4,7 @@ $title = 'Chat';
 include('inc/header.php');
 ?>
 
-<?php 
+<?php
 $colours = array('007AFF','FF7000','FF7000','15E25F','CFC700','CFC700','CF1100','CF00BE','F00');
 $user_colour = array_rand($colours);
 ?>
@@ -13,7 +13,7 @@ $user_colour = array_rand($colours);
 
 .panel{
 
-	
+
 margin-right: 3px;
 }
 
@@ -21,7 +21,7 @@ margin-right: 3px;
     background-color: #4CAF50;
     border: none;
     color: white;
-	margin-right: 30%;   
+	margin-right: 30%;
 	margin-left: 30%;
     text-decoration: none;
     display: block;
@@ -30,12 +30,12 @@ margin-right: 3px;
 	width:30%;
     height:40px;
 	margin-top: 5px;
-	 
+
 }
 input[type=text]{
 		width:100%;
 		margin-top:5px;
-		
+
 	}
 
 
@@ -69,18 +69,18 @@ input[type=text]{
         width: 95%;
 	height: 40%;
 	}
-    
+
 
 	.button{ width:100%;
-	margin-right:auto;   
+	margin-right:auto;
 	margin-left:auto;
 	height:40px;}
-	
-	
-	
-	
-	
-				
+
+
+
+
+
+
 }
 
 </style>
@@ -90,7 +90,7 @@ input[type=text]{
 <div class="message_box" id="message_box"></div>
 <div class="panel">
 
-<input type="text" name="message" id="message" placeholder="Message" maxlength="80" 
+<input type="text" name="message" id="message" placeholder="Message" maxlength="80"
 onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()"  />
 
 
