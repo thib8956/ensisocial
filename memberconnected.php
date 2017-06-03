@@ -1,17 +1,27 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
+try {
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$memberconnected = $db-> query('SELECT lastname, firstname, connected FROM users');
+} catch (Exception $e) {
+	die('Error:'.$e->getMessage());
+}
 
-$memberconnected = $db-> query('SELECT lastname, firstname, connected FROM users');
+echo '<ul class="list-group">';
 while($data = $memberconnected->fetch()){
 	$firstname = htmlentities($data['firstname']);
 	$lastname = htmlentities($data['lastname']);
-	if(htmlentities($data['connected'])){
-		echo '<p><span class="glyphicon glyphicon-record" style="color:#58D68D"></span> '.$firstname.' '.$lastname.' <br /></p>';
+
+	echo '<li class="list-group-item">';
+	if (htmlentities($data['connected'])){
+		echo '<span class="glyphicon glyphicon-record" style="color:#58D68D"></span>';
+	} else {
+		echo '<span class="glyphicon glyphicon-record" style="color:#D7DBDD"></span>';
 	}
-	else{
-		echo '<p><span class="glyphicon glyphicon-record" style="color:#D7DBDD"></span> '.$firstname.' '.$lastname.' <br /></p>';
-	}
+	echo ' '.$firstname.' '.$lastname;
+	echo '</li>';
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
+echo '</ul>';
 ?>
