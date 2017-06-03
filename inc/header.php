@@ -30,7 +30,7 @@ require_once 'form.php';
 				<h1>EnsiSocial</h1>
 			</div>
 			<?php
-			include('navbar.php');
+			include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 			?>
 		</header>
 	</div>
