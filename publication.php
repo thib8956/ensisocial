@@ -1,6 +1,10 @@
 <?php
+/**
+ * Page de création d'une publication dans le newsfeed.
+ */
+
 session_start();
-$title=$_SESSION['firstname'];
+$title = $_SESSION['firstname'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 if(isset($_POST['post'])){
@@ -11,8 +15,6 @@ if(isset($_POST['post'])){
 }
 
 function createPublication($conn){
-	echo '<div class="panel panel-white post panel-shadow">
-            <div class="post-description">'  ;
 	$curr_timestamp = date('Y-m-d H:i:s');
 	try {
 		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`) VALUES (:title, :date, :content)');
@@ -35,7 +37,6 @@ function createPublication($conn){
 		die('Error:'.$e->getMessage());
 		echo '</div>';
 	}
-	echo '</div></div>';
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
