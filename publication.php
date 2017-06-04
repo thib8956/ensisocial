@@ -1,7 +1,11 @@
 <?php
+/**
+ * Page de création d'une publication dans le newsfeed.
+ */
+
 session_start();
-$title=$_SESSION['firstname'];
-include('inc/header.php');
+$title = $_SESSION['firstname'];
+include_once('inc/header.php');
 
 if(isset($_POST['post'])){
 	if (!empty($_POST['title']) && !empty($_POST['content'])){
@@ -11,7 +15,6 @@ if(isset($_POST['post'])){
 }
 
 function createPublication($conn){
-	
 	$curr_timestamp = date('Y-m-d H:i:s');
 	try {
 		
@@ -40,8 +43,7 @@ function createPublication($conn){
 		die('Error:'.$e->getMessage());
 		echo '</div>';
 	}
-	
 }
 
-include('inc/footer.php');
+include_once('inc/footer.php');
 ?>

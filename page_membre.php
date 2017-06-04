@@ -14,6 +14,7 @@ $score = 42;
 
 ?>
 
+<!-- Left panel -->
 <div class="container col-sm-2 affix">
 	<div class="span3 well">
 		<center>
@@ -87,9 +88,18 @@ $score = 42;
 				echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
 				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
 				echo '<p class="text-right small">'.$res['date'].'</p>';
+				// Comment section
+				echo '<ul class="list-group">';
 				include('comment.php'); // include à répétition donc ne pas mettre include_once
+				echo '</ul>';
 				?>
-
+				<!-- Add a comment -->
+				<div class="input-group">
+					<form action="comment_submit.php" method="post" accept-charset="utf-8">
+						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
+						<?php echo '<input name="post_id" type="hidden" value='.$res['id'].'>' ?>
+					</form>
+				</div>
 			</div>
 
 			<?php
