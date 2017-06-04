@@ -23,7 +23,6 @@ if($res['id'] == $row['id']){
 
     while($row) {
         ?>
-
         <li class="list-group-item">
             <a class="pull-left" href="#">
                 <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">

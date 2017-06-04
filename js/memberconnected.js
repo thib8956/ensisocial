@@ -18,4 +18,5 @@ function member()
     xhr.open("GET", "memberconnected.php", false);
     xhr.send(null);
     writeInDiv(xhr.responseText);
+    setInterval("ajax()",5000);
 }

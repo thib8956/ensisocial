@@ -21,7 +21,7 @@ require_once 'form.php';
 	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
-<body onload="javascript:ajax()">
+<body onload="javascript:refresh()">
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
 	<!-- wrap header content -->
 	<div class="wrap">
