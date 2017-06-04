@@ -28,7 +28,7 @@ try {
     ?>
 </head>
 
-<body onload="javascript:member()">
+<body onload="javascript:refresh()">
 	<?php
 	include('navbar.php');
 	?>

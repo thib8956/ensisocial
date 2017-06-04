@@ -17,7 +17,6 @@ if($res['id']==$tagueul['id']){
 
         while($tagueul) {
             ?>
-            s
 
             <li class="comment">
                 <a class="pull-left" href="#">
