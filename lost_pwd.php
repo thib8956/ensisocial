@@ -13,10 +13,6 @@ $form=new Form($_POST,"lostpwd");
     <br>
 </form>
 
-
-
-
-
 <?php
 include('inc/footer.php');
 ?>
