@@ -30,7 +30,7 @@ if(isset($_POST['signin'])) {
             }
             if($_POST["password"] == $_POST["repassword"]){
                 echo '<p>Mot de passe OK.</p>';
-                $filename = htmlspecialchars($_FILES['picture']['name']);
+                $filename = md5($_FILES['picture']['name']).$_FILES['picture']['name'];
                 // Upload profile picture
                 upload('picture', $filename);
                 fillDatabase($db, $filename);
