@@ -20,7 +20,7 @@ try {
 	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
 	$data = $profile->fetch();
 	if (!empty($data['profile_pic'])){
-		$pic_path = 'data/'.$data['profile_pic'];
+		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
 	} else {
 		$pic_path = 'data/default-profile.png';
 	}
@@ -97,10 +97,11 @@ try {
 	echo '<div class="panel panel-white post panel-shadow">
 	<div class="post-heading">';
 		while ($publication=$stmt->fetch()){
+			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 			?>
 			<div class="publication well">
 				<a class="pull-left" href="#">
-				  <img class="avatar" src=<?php echo '"'.'data/'.$publication['profile_pic'].'"'; ?> alt="avatar" height="80px">
+				  <img class="avatar" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" height="80px">
 				</a>
 				<?php
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';

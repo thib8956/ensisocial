@@ -34,9 +34,9 @@ while($row) {
 
   <?php
   if (!empty($row['profile_pic'])){
-    $pic = 'data/'.$row['profile_pic'];
+    $pic = 'data/avatar/'.$row['profile_pic'];
   } else {
-    $pic = 'data/default-profile.png';
+    $pic = '/ensisocial/data/avatar/'.$data['profile_pic'];
   }
   ?>
 
