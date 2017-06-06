@@ -80,6 +80,27 @@ class form{
 
     }
 
+    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control",$id=""){
+        return $this->surround('
+          <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
+          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'" id="'.$id.'"></textarea>');
+
+   }
+
+   public function inputradiobutton($name,$value,$class){
+        $but="";
+        foreach ($value as $key => $value) {
+            $but=$but.'<input type=radio name="'.$name.'" value="'.$key.' class='.$class.'ckecked >'.$value.' <br>';
+        }
+        return $this->surround($but);
+   }
+
+   public function inputimg($name, $display, $classlabel="control-label", $classselect="form-control"){
+        return $this->surround('
+            <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
+            <input id="'.$name.'" type="file" name="'.$name.'" class='.$classselect.' capture>');
+   }
+
     /**
      * @return string retourn la commande html pour créer le bouton du formulaire
      */

@@ -3,9 +3,8 @@ function writeInDiv(text){
     objet.innerHTML = text;
 }
 
-function refresh()
-{
-    top.window.focus()
+
+function refresh(){
     var xhr=null;
 
     if (window.XMLHttpRequest) {
@@ -18,5 +17,5 @@ function refresh()
     xhr.open("GET", "memberconnected.php", false);
     xhr.send(null);
     writeInDiv(xhr.responseText);
-    setInterval("refresh()",5000);
+    setInterval("refresh()", 20000);
 }
