@@ -1,6 +1,6 @@
 <?php
 $title="Error 404";
-include("../inc/header.php");
+include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 ?>
 
 <div class="container">
@@ -12,11 +12,11 @@ include("../inc/header.php");
 	<div class="row">
 		<div class="col-lg-6 col-lg-offset-2">
 				<p>La page demandée n'a pas été trouvée !</p>
-				 <a href="index.php" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i>Revenir à l'accueil</a>
+				 <a href="/ensisocial/index.php" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i>Revenir à l'accueil</a>
 		</div>
 	</div>
 </div>
 
 <?php
-include("../inc/footer.php");
+include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>
