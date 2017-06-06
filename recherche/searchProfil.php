@@ -100,7 +100,5 @@ try {
 		echo '</div>';
 		echo '</div>';
 
-
-
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(session_status() != 2) {  //on verifie si la session n'est pas deja demarrée
+    session_start();
+}
 if (!isset($_SESSION['id'])){
 	header('Location: index.php');
 }
