@@ -20,3 +20,21 @@ function refresh()
     writeInDiv(xhr.responseText);
     setInterval("refresh()",10000);
 }
+
+$('#thumbs_up').click(function() {
+    // L'URL du fichier dans lequel tu appelles ta fonction
+    var url = '/thumbup.php';
+    $.post(url, function(data){
+        // Tu affiches le contenu dans ta div
+        $('.thumbup').html(data);
+    });
+});
+
+$('#thumbs_down').click(function() {
+    // L'URL du fichier dans lequel tu appelles ta fonctio
+    var url = '/thumbdown.php';
+    $.post(url, function(data){
+        // Tu affiches le contenu dans ta div
+        $('.thumbdown').html(data);
+    });
+});

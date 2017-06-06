@@ -21,19 +21,9 @@ require_once 'form.php';
 	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
-<body onload="javascript:refresh()">
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
-	<!-- wrap header content -->
-	<div class="wrap">
-		<header>
-			<div class="jumbotron text-center">
-				<h1>EnsiSocial</h1>
-			</div>
-			<?php
-			include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
-			?>
-		</header>
-	</div>
-
+<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');">
+	<?php
+	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
+	?>
 	<!-- Wrap all page content -->
 	<div id="wrap" style="padding-top: 100px;">
