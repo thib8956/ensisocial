@@ -5,7 +5,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 if (!empty($_POST['add'])){
 	createComment($db);
-	header('Location: '.$_SERVER["HTTP_REFERER"]);
+	header('Location: '.$_POST["back"]);
 } else {
 ?>
 	<div class="alert alert-danger alert-dismissible" role="alert">
@@ -13,7 +13,7 @@ if (!empty($_POST['add'])){
 		Votre commentaire ne peut pas être vide !
 	</div>
 	<?php
-	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/page_membre.php');
+	include_once($_SERVER['DOCUMENT_ROOT'].$_POST["back"]);
 }
 
 function createComment($conn){
