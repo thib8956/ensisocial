@@ -21,7 +21,7 @@ require_once 'form.php';
 	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
-<body onload="javascript:refresh()">
+<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');">
 	<?php
 	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>
