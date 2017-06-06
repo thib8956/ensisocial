@@ -11,6 +11,7 @@
 <script src="js/jquery-ui.js"></script>
 <script src="js/autocomplete.js" ></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="/ensisocial/js/createCookie.js"></script>
 <script type='text/JavaScript' src="js/memberconnected.js"></script>
 <script language="javascript" type="text/javascript" src="serveurMessagerie/client.js"> </script>
 </body>

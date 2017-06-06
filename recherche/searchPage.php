@@ -22,7 +22,7 @@ if(isset($_POST['search'])){
         }
 
         for ($i = 0; $i < count($array); $i++) {
-            echo $array[$i];
+            echo '<p><a href="/ensisocial/recherche/searchProfil.php" onclick="createCookie("searchID", "prout", 0)" >'.$array[$i].'</a></p>';
             echo "<br/>";
         }
     }
