@@ -7,7 +7,6 @@ var tmp = setInterval(function(){ refresh() }, 10000);
 function refresh()
 {
     var xhr=null;
-
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     }
