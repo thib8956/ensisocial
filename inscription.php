@@ -23,18 +23,25 @@ $form = new Form($_POST,"signin");
     {
         if(champ.value=='')
         {
-            surligne(champ, true);
+            surligne(champ,true);
+            return false;
+        }
+        else if (champ.value.includes("{") || champ.value.includes("/") || champ.value.includes("\\") || champ.value.includes("#") ||
+                champ.value.includes("(") || champ.value.includes("[") || champ.value.includes("$") || champ.value.includes(";") ||
+                champ.value.includes(">") || champ.value.includes("<") || champ.value.includes("*") || champ.value.includes("%"))
+        {
+            alert("Don't be evil !");
             return false;
         }
         else
         {
-            surligne(champ, false);
+            surligne(champ,false);
             return true;
         }
     }
     function verifPass(champ1,champ2)
     {
-        if(champ1.value === champ2.value && champ1.value!='' && champ2.value!='') {
+        if(champ1.value == champ2.value && champ1.value!='' && champ2.value!='') {
             return true;
         }
 
@@ -43,7 +50,14 @@ $form = new Form($_POST,"signin");
     }
     function verifMail(champ)
     {
-
+        if (champ.value.includes("@uha.fr"))
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
     }
     function verifForm(f)
     {
@@ -56,14 +70,24 @@ $form = new Form($_POST,"signin");
         var repass = f.repassword.value;
         if(email_Ok && password_Ok && repassword_Ok && firstname_Ok && lastname_Ok)
         {
-            if (pass === repass)
+            if (verifPass(f.password,f.repassword))
             {
-                return true;
+                if (verifMail(f.email))
+                {
+                    alert("Adresse UHA");
+                    return true;
+                }
+                else 
+                {
+                    alert("Non UHA détectée");
+                    return true;
+                }
             }
             else
             {
-                surligne(repassword,true);
                 alert("Vos mots de passe ne sont pas similaires");
+                f.repassword.style.backgroundColor='#FFEAEA';
+                f.repassword.style.color='#000000';
                 return false;
             }
         }
