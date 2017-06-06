@@ -31,7 +31,8 @@ $form = new Form($_POST,"signin");
    <div class="col-md-6 col-sm-6 col-xs-12">
     <form onsubmit="return verifForm(this)" action="traitement.php" method="post" enctype="multipart/form-data">
         <?php
-        echo '<input type="hidden" name="MAX_FILE_SIZE" value="12345" />';
+        // MAX_FILE_SIZE (in bytes) for profile picture (4 MiB).
+        echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
         echo $form->inputimg("picture", "Choisissez une image de profil");
         echo $form->inputfield("email","email","Votre email",true);
         echo $form->inputfield("password","password","Mot de passe",true);
