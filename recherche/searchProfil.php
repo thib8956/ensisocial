@@ -31,7 +31,9 @@ try {
 				?>
 			</h3>
 		</center>
-        
+		<!-- List of connected members. -->
+		<p>Autres membres : </p>
+		<div id="memberconnected">Membres</div>
 	</div>
 </div>
 
