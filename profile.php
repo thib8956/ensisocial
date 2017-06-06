@@ -7,19 +7,49 @@ $title="Profil";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 ?>
 
-<section id="profil"> // un beau contour pour le tout avec un fond spécial
-    <div class="divprofil"><p>Image de profil <a>Modifier</a></p></div> //divprofil pour souligner
-    <div class="divprofil"><p>Mot de passe <a>Modifier</a></p></div>
-    <div class="divprofil"><p>Nom</p></div>
-    <div class="divprofil"><p>Prénom</p></div>
-    <div class="divprofil"><p>Filière</p></div>
-    <div class="divprofil"><p>Mail</p></div>
-    <div class="divprofil"><p>Date de naissance</p></div>
-    <div class="divprofil"><p>Adresse <a>Modifier</a></p></div>
-    <div class="divprofil"><p>Code postal <a>Modifier</a></p></div>
-    <div class="divprofil"><p>Ville <a>Modifier</a></p></div>
-    <div class="divprofil"><p>Image de profil <a>Modifier</a></p></div>
-</section>
+<div class="container"> <!-- faudrait un beau contour pour le tout avec un fond spécial -->
+    <div class="info">
+    <div class="row"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+        <div class="col-md-2">Image de profil</div>
+        <div class="col-md-2"><a>Modifier</a></div>
+    </div>
+    </div><div class="info"> <!-- regroupe 1 type d'info dans un bloc, à arranger dans le css -->
+    <div class="row">
+        <div class="col-md-2">Mot de passe</div>
+        <div class="col-md-2"><a>Modifier</a></div>
+    </div>
+    </div><div class="info">
+    <div class="row">
+        <div class="col-md-2">Nom</div>
+    </div>
+    </div><div class="info">
+    <div class="row">
+        <div class="col-md-2">Prénom</div>
+    </div>
+    </div><div class="info">
+    <div class="row">
+        <div class="col-md-2">Filière</div>
+    </div>
+    </div><div class="info">
+    <div class="row">
+        <div class="col-md-2">Mail</div>
+    </div>
+    </div><div class="info">
+    <div class="row">
+        <div class="col-md-2">Adresse</div>
+        <div class="col-md-2"><a>Modifier</a></div>
+    </div>
+    </div><div class="info">
+    <div class="row">
+        <div class="col-md-2">Code postal</div>
+        <div class="col-md-2"><a>Modifier</a></div>
+    </div>
+    </div><div class="info">
+    <div class="row">
+        <div class="col-md-2">Ville</div>
+        <div class="col-md-2"><a>Modifier</a></div>
+    </div>
+    </div>
 
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
