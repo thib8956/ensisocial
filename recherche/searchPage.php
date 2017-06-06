@@ -21,10 +21,14 @@ if(isset($_POST['search'])){
                 array_push($idarray, $donnee['id']);
             }
         }
-
-        for ($i = 0; $i < count($array); $i++) {
-            echo '<p><a href="/ensisocial/recherche/searchProfil.php?id='.$idarray[$i].'">'.$array[$i].'</a></p>';
-            echo "<br/>";
+        if (count($array)==1) {
+            header("Location: /ensisocial/recherche/searchProfil.php?id=".$idarray[0]);
+        }
+        else {
+            for ($i = 0; $i < count($array); $i++) {
+                echo '<p><a href="/ensisocial/recherche/searchProfil.php?id='.$idarray[$i].'">'.$array[$i].'</a></p>';
+                echo "<br/>";
+            }
         }
     }
     else {
