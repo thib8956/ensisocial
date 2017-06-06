@@ -14,7 +14,16 @@ try {
 		ORDER BY date DESC'
 		);
 	$score = 42;
-	$profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
+
+	/* Fetch profile picture */
+	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
+	$data = $profile->fetch();
+	if (!empty($data['profile_pic'])){
+		$pic_path = 'data/'.$data['profile_pic'];
+	} else {
+		$pic_path = 'data/default-profile.png';
+	}
+
 } catch (PDOException $e) {
 	echo '<div class="alert alert-danger">';
 	die('Error:'.$e->getMessage());
@@ -26,7 +35,7 @@ try {
 <div class="container col-sm-2 affix">
 	<div class="span3 well">
 		<center>
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
+			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
 				<?php
 				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
@@ -49,7 +58,7 @@ try {
 			</div>
 			<div class="modal-body">
 				<center>
-					<img class="img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0">
+					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
 					<h3 class="media-heading"><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'].' ' ?><small><?php echo $_SESSION['town'] ?></small></h3>
 				</center>
 				<hr>
@@ -89,6 +98,9 @@ try {
 		while ($publication=$stmt->fetch()){
 			?>
 			<div class="publication well">
+				<a class="pull-left" href="#">
+				  <img class="avatar" src=<?php echo '"'.'data/'.$publication['profile_pic'].'"'; ?> alt="avatar" height="80px">
+				</a>
 				<?php
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
