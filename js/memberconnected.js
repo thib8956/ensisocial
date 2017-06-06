@@ -13,7 +13,7 @@ function refresh()
     else if (window.ActiveXObject){
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xhr.open("GET", "memberconnected.php", false);
+    xhr.open("GET", "/ensisocial/memberconnected.php", false);
     xhr.send(null);
     writeInDiv(xhr.responseText);
 }

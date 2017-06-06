@@ -1,1 +1,10 @@
+#Rewrite URL's
+#RewriteEngine On
+#RewriteRule ^404/?$ /ensisocial/errors/404-not-found.php [NC]
+#RewriteRule ^403/?$ /ensisocial/errors/403-forbidden.php [NC]
+
+
+# Enable Error Documents
+# (404,File Not Found) | (403,Forbidden)
 ErrorDocument 404 /ensisocial/errors/404-not-found.php
+ErrorDocument 403 /ensisocial/errors/403-forbidden.php

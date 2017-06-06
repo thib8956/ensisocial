@@ -46,7 +46,7 @@ try {
 			</h3>
 		</center>
 
-		<!-- Liste des membres connectés -->
+		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
 	</div>
