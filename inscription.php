@@ -44,16 +44,22 @@ $form = new Form($_POST,"signin");
             surligne(champ,true);
             return false;
         }
-        else if (champ.value.includes("{") || champ.value.includes("/") || champ.value.includes("\\") || champ.value.includes("#") ||
-                champ.value.includes("(") || champ.value.includes("[") || champ.value.includes("$") || champ.value.includes(";") ||
-                champ.value.includes(">") || champ.value.includes("<") || champ.value.includes("*") || champ.value.includes("%"))
-        {
-            alert("Don't be evil !");
-            return false;
-        }
         else
         {
             surligne(champ,false);
+            return true;
+        }
+    }
+    function antiInjec(champ)
+    {
+        if (champ.value.includes("{") || champ.value.includes("/") || champ.value.includes("\\") || champ.value.includes("#") ||
+                champ.value.includes("(") || champ.value.includes("[") || champ.value.includes("$") || champ.value.includes(";") ||
+                champ.value.includes(">") || champ.value.includes("<") || champ.value.includes("*") || champ.value.includes("%"))
+        {
+            return false;
+        }
+        else 
+        {
             return true;
         }
     }
@@ -79,6 +85,16 @@ $form = new Form($_POST,"signin");
     }
     function verifForm(f)
     {
+        var email_noInjec = antiInjec(f.email);
+        var pass_noInjec = antiInjec(f.password);
+        var repass_noInjec = antiInjec(f.repassword);
+        var firstname_noInjec = antiInjec(f.firstname);
+        var lastname_noInjec = antiInjec(f.lastname);
+        var address_noInjec = antiInjec(f.address);
+        var zip_noInjec = antiInjec(f.zipcode);
+        var town_noInjec = antiInjec(f.town);
+        var birth_noInjec = antiInjec(f.birth);
+        var phone_noInjec = antiInjec(f.phone);
         var email_Ok = verifText(f.email);
         var password_Ok = verifText(f.password);
         var repassword_Ok = verifText(f.repassword);
@@ -86,32 +102,41 @@ $form = new Form($_POST,"signin");
         var lastname_Ok = verifText(f.lastname);
         var pass = f.password.value;
         var repass = f.repassword.value;
-        if(email_Ok && password_Ok && repassword_Ok && firstname_Ok && lastname_Ok)
+        if (email_noInjec && pass_noInjec && repass_noInjec && firstname_noInjec && lastname_noInjec && address_noInjec && zip_noInjec && town_noInjec
+            && birth_noInjec && phone_noInjec)
         {
-            if (verifPass(f.password,f.repassword))
+            if(email_Ok && password_Ok && repassword_Ok && firstname_Ok && lastname_Ok)
             {
-                if (verifMail(f.email))
+                if (verifPass(f.password,f.repassword))
                 {
-                    alert("Adresse UHA");
-                    return true;
+                    if (verifMail(f.email))
+                    {
+                        alert("Adresse UHA");
+                        return true;
+                    }
+                    else 
+                    {
+                        alert("Non UHA détectée");
+                        return true;
+                    }
                 }
                 else
                 {
-                    alert("Non UHA détectée");
-                    return true;
+                    alert("Vos mots de passe ne sont pas similaires");
+                    f.repassword.style.backgroundColor='#FFEAEA';
+                    f.repassword.style.color='#000000';
+                    return false;
                 }
             }
             else
             {
-                alert("Vos mots de passe ne sont pas similaires");
-                f.repassword.style.backgroundColor='#FFEAEA';
-                f.repassword.style.color='#000000';
+                alert("Merci de bien vouloir remplir tous les champs en rose");
                 return false;
             }
         }
         else
         {
-            alert("Merci de bien vouloir remplir tous les champs en rose");
+            alert("Vous êtes vraiment quelqu'un de méchant");
             return false;
         }
     }
