@@ -2,8 +2,6 @@
 session_start();
 $title="Recherche";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-createCookie('test', 'prout', 0);
-echo $_COOKIE['test'];
-echo $_COOKIE['searchID'];
+echo $_GET['id'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

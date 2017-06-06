@@ -43,5 +43,3 @@
 		</div><!--/.nav-collapse -->
 	</div>
 </nav>
-
-<?php include_once('footer.php'); ?>
