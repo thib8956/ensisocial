@@ -1,13 +1,7 @@
 <?php
-if(session_status() != 2) {  //on verifie si la session n'est pas deja demarrée
-    session_start();
-}
-if (!isset($_SESSION['id'])){
-	header('Location: index.php');
-}
-$title = $_SESSION['firstname'];
+session_start();
+$title="Recherche";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-
 
 try {
 	$stmt = $db->query('SELECT *
@@ -17,16 +11,8 @@ try {
 		ORDER BY date DESC'
 		);
 	$score = 42;
-
-	/* Fetch profile picture */
-	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
-	$data = $profile->fetch();
-	if (!empty($data['profile_pic'])){
-		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
-	} else {
-		$pic_path = 'data/default-profile.png';
-	}
-
+	$profil  = $db->query('SELECT * from users WHERE id='.$_GET['id']);
+    $profilDonnee = $profil->fetch();
 } catch (PDOException $e) {
 	echo '<div class="alert alert-danger">';
 	die('Error:'.$e->getMessage());
@@ -38,17 +24,14 @@ try {
 <div class="row">
 	<div class="col-sm-2 well affix">
 		<center>
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
+			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
 				<?php
-				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
+				echo $profilDonnee['firstname'].' '.$profilDonnee['lastname'];
 				?>
 			</h3>
 		</center>
-
-		<!-- Liste des membres connectés -->
-		<p>Autres membres : </p>
-		<div id="memberconnected">Membres</div>
+        
 	</div>
 </div>
 
@@ -61,13 +44,13 @@ try {
 			</div>
 			<div class="modal-body">
 				<center>
-					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'].' ' ?><small><?php echo $_SESSION['town'] ?></small></h3>
+					<img class="img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0">
+					<h3 class="media-heading"><?php echo $profilDonnee['firstname'].' ';echo $profilDonnee['lastname'].' ' ?><small><?php echo $profilDonnee['town'] ?></small></h3>
 				</center>
 				<hr>
 				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $_SESSION['formation'] ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
+					<p class="text-left"><strong>Formation: </strong> <?php  echo $profilDonnee['formation'] ?></p>
+					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($profilDonnee['birth'])); ?></p>
 				</center>
 			</div>
 			<div class="modal-footer">
@@ -79,33 +62,16 @@ try {
 	</div>
 </div>
 
-<!-- Add a publication -->
-<div class="col-sm-offset-2 col-md-10">
-	<div class="row">
-		<form action="publication.php" method="post">
-			<?php
-			$form = new Form($_POST, 'post');
-			echo $form->inputfield('title', 'text', 'Titre de la publication');
-			echo $form->inputtextarea('content', 'Contenu', 5, 16);
-			echo $form->submit('Publier');
-			?>
-		</form>
-	</div>
-</div>
-
 <!-- Display newsfeed -->
 <div class="col-sm-offset-2 col-md-10">
 	<?php
 	echo '<div class="panel panel-white post panel-shadow">
 	<div class="post-heading">';
 		while ($publication=$stmt->fetch()){
-			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 			?>
 			<div class="publication well">
-				<a class="pull-left" href="#">
-				  <img class="avatar" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" height="80px">
-				</a>
 				<?php
+
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
 				echo '<p>'.$publication['content'].'</p>';
@@ -133,5 +99,7 @@ try {
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
-		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
-		?>
+		echo '</div>';
+
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
+?>

@@ -1,19 +1,13 @@
 <?php
 session_start();
 $title = $_SESSION['firstname'];
-include_once('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 if (!empty($_POST['add'])){
 	createComment($db);
-	header('Location: page_membre.php');
+	header('Location: '.$_POST["back"]);
 } else {
-?>
-	<div class="alert alert-danger alert-dismissible" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		Votre commentaire ne peut pas être vide !
-	</div>
-	<?php
-	include_once('page_membre.php');
+    header('Location: '.$_POST["back"]);
 }
 
 function createComment($conn){
@@ -40,5 +34,5 @@ function createComment($conn){
 	}
 }
 
-include_once('inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

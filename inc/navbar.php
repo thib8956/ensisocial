@@ -7,7 +7,14 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-left" href="/ensisocial/index.php">
+            <?php 
+                if(isset($_SESSION['id'])) {
+                    echo '<a class="navbar-left" href="/ensisocial/page_membre.php">';
+                }
+                else {
+                    echo '<a class="navbar-left" href="/ensisocial/index.php">';
+                }
+            ?>
 				<img class="hidden-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="50px">
 				<img class="visible-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="70px">
 			</a>
@@ -43,5 +50,3 @@
 		</div><!--/.nav-collapse -->
 	</div>
 </nav>
-
-<?php include_once('footer.php'); ?>

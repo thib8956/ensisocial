@@ -2,6 +2,7 @@
 session_start();
 $title = 'Chat';
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
+echo $_SERVER['DOCUMENT_ROOT'];
 ?>
 
 <?php
@@ -11,27 +12,6 @@ $user_colour = array_rand($colours);
 
 <style type="text/css">
 
-.panel{
-
-
-margin-right: 3px;
-}
-
-.button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-	margin-right: 30%;
-	margin-left: 30%;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-    cursor: pointer;
-	width:30%;
-    height:40px;
-	margin-top: 5px;
-
-}
 input[type=text]{
 		width:100%;
 		margin-top:5px;
@@ -64,17 +44,19 @@ input[type=text]{
 .user_message{color: #88B6E0;}
 
 @media only screen and (max-width: 720px) {
-    /* For mobile phones: */
-    .chat_wrapper {
-        width: 95%;
-	height: 40%;
-	}
+/* For mobile phones: */
+.chat_wrapper {
+width: 95%;
+height: 40%;
+}
 
 
-	.button{ width:100%;
-	margin-right:auto;
-	margin-left:auto;
-	height:40px;}
+.button { 
+width:100%;
+margin-right:auto;
+margin-left:auto;
+height:40px;
+}
 
 
 
@@ -88,15 +70,15 @@ input[type=text]{
 
 <div class="chat_wrapper">
 <div class="message_box" id="message_box"></div>
-<div class="panel">
+<div>
 
 <input type="text" name="message" id="message" placeholder="Message" maxlength="80"
-onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()"  />
+onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()" class="form-control ui-autocomplete-input" />
 
 
 </div>
 
-<button id="send-btn" class=button>Send</button>
+<button id="send-btn" class="btn btn-primary">Send</button>
 
 </div>
 

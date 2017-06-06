@@ -3,9 +3,9 @@ function writeInDiv(text){
     objet.innerHTML = text;
 }
 
-function refresh(){
+function refresh()
+{
     var xhr=null;
-
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     }
