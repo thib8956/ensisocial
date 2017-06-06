@@ -14,5 +14,5 @@ $form=new Form($_POST,"connection");
 ?>
 </form>
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']'/ensisocial/inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

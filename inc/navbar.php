@@ -8,8 +8,8 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-left" href="/ensisocial/index.php">
-				<img class="hidden-xs" src="/ensisocial/img/ensisocial.jpg" alt="logo" height="50px">
-				<img class="visible-xs" src="/ensisocial/img/ensisocial.jpg" alt="logo" height="70px">
+				<img class="hidden-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="50px">
+				<img class="visible-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="70px">
 			</a>
 		</div>
 
@@ -29,7 +29,7 @@
 				?>
 
 			</ul>
-			<!-- Searchbar -->       
+			<!-- Searchbar -->
 			<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
 				<div class="input-group add-on">
 					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">

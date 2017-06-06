@@ -42,7 +42,20 @@ else
         'boundary="'.$separation.'"'.$passage_ligne;
         
         $message_txt = 'Votre mot de passe temporaire: '.$nouvelmdp;
-        $message_html = '<html><div style="height:50px;background-color:aqua;">'.$message_txt.'</div></html>'; //Messages à modifier selon le mail
+        $message_html = '<html style="margin:auto;text-align:center;background-color:grey;">
+            <div style="margin: auto;
+        height:70px;
+        width: 260px;
+        border: 2px solid blue;
+        border-radius: 20px;
+        background-color: yellow;
+        ">
+                <p style="
+                text-decoration: underline;
+                font-weight:bold;
+                ">Votre mot de passe temporaire:</p>
+                <p>'.$nouvelmdp.'</p>
+            </div></html>'; //Messages à modifier selon le mail
         
         $message =
             $passage_ligne."--".$separation. $passage_ligne . //mettre avant chaque partie

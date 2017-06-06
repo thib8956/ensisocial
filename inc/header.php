@@ -21,7 +21,7 @@ require_once 'form.php';
 	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
-<body onload="javascript:ajax()">
+<body onload="javascript:refresh()">
 	<?php
 	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>
