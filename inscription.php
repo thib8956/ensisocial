@@ -15,7 +15,7 @@ $form = new Form($_POST,"signin");
         <?php
         // MAX_FILE_SIZE (in bytes) for profile picture (4 MiB).
         echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
-        echo $form->inputimg("picture", "Choisissez une image de profil");
+        echo $form->inputfile("picture", "Choisissez une image de profil");
         echo $form->inputfield("email","email","Votre email",true);
         echo $form->inputfield("password","password","Mot de passe",true);
         echo $form->inputfield("repassword","password","Retapez votre mot de passe",true);
