@@ -32,11 +32,11 @@ if(isset($_POST['signin'])) {
                 echo '<p>Mot de passe OK.</p>';
                 // Generate an unique filename for the profile pic.
                 $fname = md5($_FILES['picture']['name']);
-                $ext = substr(strrchr($_FILES[$index]['name'], '.'), 1); // Get file extension
+                $ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1); // Get file extension
                 $dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname.$ext;
                 // Upload profile picture
                 upload('picture', $dst);
-                fillDatabase($db, $fname);
+                fillDatabase($db, $fname.$ext);
                 //Envoi du mail
                 //mail($to, $objet, $contenu, $headers);
                 echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';

@@ -15,7 +15,7 @@ function refresh()
     {
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xhr.open("GET", "memberconnected.php", false);
+    xhr.open("GET", "/ensisocial/memberconnected.php", false);
     xhr.send(null);
     writeInDiv(xhr.responseText);
     setInterval("refresh()",10000);

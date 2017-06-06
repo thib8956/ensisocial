@@ -12,7 +12,7 @@ include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 	<div class="row">
 		<div class="col-lg-6 col-lg-offset-2">
 				<p>La page demandée n'a pas été trouvée !</p>
-				 <a href="/ensisocial/index.php" class="btn btn-danger btn-large"><i class="icon-share icon-white"></i>Revenir à l'accueil</a>
+				 <a href="/ensisocial/index.php" class="btn btn-danger btn-large"><i class="glyphicon glyphicon-home"></i>&nbsp;Revenir à l'accueil</a>
 		</div>
 	</div>
 </div>
