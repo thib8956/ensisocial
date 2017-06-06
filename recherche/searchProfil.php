@@ -86,8 +86,9 @@ try {
 				?>
 				<!-- Add a comment -->
 				<div class="input-group">
-					<form action="comment_submit.php" method="post" accept-charset="utf-8">
+					<form action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">
 						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
+                        <?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 					</form>
 				</div>

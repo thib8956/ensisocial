@@ -4,9 +4,9 @@ function writeInDiv(text){
 }
 
 
-function refresh(){
+function refresh()
+{
     var xhr=null;
-
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     }
@@ -17,5 +17,5 @@ function refresh(){
     xhr.open("GET", "memberconnected.php", false);
     xhr.send(null);
     writeInDiv(xhr.responseText);
-    setInterval("refresh()", 20000);
+    setInterval("refresh()",10000);
 }
