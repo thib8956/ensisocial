@@ -95,10 +95,15 @@ class form{
         return $this->surround($but);
    }
 
-   public function inputimg($name, $display, $classlabel="control-label", $classselect="form-control"){
+   /**
+    * Add a file input to the form.
+    * @param  string $name        <input name=[...]>
+    * @param  string $display     Display name of the label.
+    */
+   public function inputfile($name, $display, $classlabel="control-label", $classselect=""){
         return $this->surround('
             <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
-            <input id="'.$name.'" type="file" name="'.$name.'" class='.$classselect.' capture>');
+            <input id="'.$name.'" type="file" name="'.$name.'" class="file "'.$classselect.'>');
    }
 
     /**
