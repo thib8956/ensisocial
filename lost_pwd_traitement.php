@@ -34,13 +34,17 @@ else
         echo '<br><br></form>'; //affichage à améliorer
     } else {
         $subject = 'Mot de passe oublié - Ensisocial';
-        
+        $fromName= "EnsiSocial";
+        $from = "ensisocial@gmail.com";
         $separation = "-----=".md5(rand()); //Pour séparer les différents types
-        $headers = 'From: ensisocial@noreply.com' . $passage_ligne .
-        'Reply-To: ensisocial@noreply.com' . $passage_ligne .
+        
+        $headers = 'From: '.$fromName.'<'.$from.'>' . $passage_ligne .
+        'Reply-To: '.$fromName.'<'.$from.'>' . $passage_ligne .
         'MIME-Version: 1.0'. $passage_ligne .
         'Content-Type: multipart/alternative;'. //Pour pouvoir mettre plusieurs types dans le message, genre un html et le texte alternatif
-        'boundary="'.$separation.'"'.$passage_ligne;
+        'boundary="'.$separation.'"'.$passage_ligne.
+        'X-Sender: localhost'.$passage_ligne.
+        'X-Mailer: PHP/'.phpversion();
         
         $message_txt = 'Votre mot de passe temporaire: '.$nouvelmdp;
         $message_html = '<html style="margin:auto;text-align:center;background-color:grey;">
