@@ -6,6 +6,7 @@ if (!isset($_SESSION['id'])){
 $title = $_SESSION['firstname'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
+
 try {
 	$stmt = $db->query('SELECT *
 		FROM newsfeed
@@ -14,13 +15,15 @@ try {
 		ORDER BY date DESC'
 		);
 	$score = 42;
-	$profil  =$db->query('SELECT * from users WHERE id='.$_SESSION['id']);
+	$profil  = $db->query('SELECT * from users WHERE id='.$_SESSION['id']);
 } catch (PDOException $e) {
 	echo '<div class="alert alert-danger">';
 	die('Error:'.$e->getMessage());
 	echo '</div>';
 }
 ?>
+
+<!-- Left panel -->
 <div class="row">
 	<div class="col-sm-2 well affix">
 		<center>
@@ -38,8 +41,6 @@ try {
 		<div id="memberconnected">Membres</div>
 	</div>
 </div>
-
-
 
 <!-- Pop up lorsque l'on clique sur l'image-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
@@ -85,23 +86,38 @@ try {
 <!-- Display newsfeed -->
 <div class="col-sm-offset-2 col-md-10">
 	<?php
-	while ($res=$stmt->fetch()){
-		?>
-		<div class="row well">
-			<?php
-			echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
-			echo '<h3>'.$res['title'].'</h3>';
-			echo '<p>'.$res['content'].'</p>';
-			echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
-			echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
-			echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
-			echo '<p class="text-right small">'.$res['date'].'</p>';
+	echo '<div class="panel panel-white post panel-shadow">
+	<div class="post-heading">';
+		while ($res=$stmt->fetch()){
 			?>
-		</div>
+			<div class="row well">
+				<?php
 
-		<?php
-	}
-	echo '</div>';
-	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
-	?>
+				echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
+				echo '<h3>'.$res['title'].'</h3>';
+				echo '<p>'.$res['content'].'</p>';
+				echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
+				echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
+				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
+				echo '<p class="text-right small">'.$res['date'].'</p>';
+				// Comment section
+				echo '<ul class="list-group">';
+				include('comment.php'); // include à répétition donc ne pas mettre include_once
+				echo '</ul>';
+				?>
+				<!-- Add a comment -->
+				<div class="input-group">
+					<form action="comment_submit.php" method="post" accept-charset="utf-8">
+						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
+						<?php echo '<input name="post_id" type="hidden" value='.$res['id'].'>' ?>
+					</form>
+				</div>
+			</div>
 
+			<?php
+		}
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
+		?>

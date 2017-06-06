@@ -3,7 +3,7 @@ function writeInDiv(text){
     objet.innerHTML = text;
 }
 
-function ajax()
+function member()
 {
     var xhr=null;
 
@@ -16,5 +16,5 @@ function ajax()
     xhr.open("GET", "memberconnected.php", false);
     xhr.send(null);
     writeInDiv(xhr.responseText);
-        setInterval("ajax()",5000);
+    setInterval("ajax()",5000);
 }

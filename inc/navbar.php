@@ -29,7 +29,7 @@
 				?>
 
 			</ul>
-			<!-- Searchbar -->       
+			<!-- Searchbar -->
 			<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
 				<div class="input-group add-on">
 					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
