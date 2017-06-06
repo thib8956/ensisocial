@@ -2,6 +2,7 @@ function writeInDiv(text){
     var objet = document.getElementById('ta_div');
     objet.innerHTML = text;
 }
+var tmp = setInterval(function(){ refresh() }, 10000);
 
 
 function refresh()
