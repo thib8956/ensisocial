@@ -21,7 +21,7 @@ $form = new Form($_POST,"signin");
         echo $form->inputfield("firstname","string","Prénom",true);
         echo $form->inputfield("lastname","string","Nom",true);
         echo $form->inputfield("address","string","Adresse");
-        echo $form->inputfield("zipcode","int","Code Postale");
+        echo $form->inputfield("zipcode","int","Code Postal");
         echo $form->inputfield("town","string","Ville");
         echo $form->inputfield("birth","date","Date de naissance");
         echo $form->inputfield("phone","string","Téléphone");

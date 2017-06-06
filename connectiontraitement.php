@@ -2,12 +2,18 @@
 $title = "Connexion";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
-$req = $db->prepare('SELECT * FROM users WHERE email = :email');
-$req->execute(array('email'=> $_POST['email']));
-$row = $req->fetch();
+try {
+    $req = $db->prepare('SELECT * FROM users WHERE email = :email');
+    $req->execute(array('email'=> $_POST['email']));
+    $row = $req->fetch();
 
-$connected = $db->prepare("UPDATE `users` SET `connected` = 1 WHERE `users`.`id` = :id");
-$connected->execute(array('id' => $row['id'] ));
+    $connected = $db->prepare("UPDATE `users` SET `connected` = 1 WHERE `users`.`id` = :id");
+    $connected->execute(array('id' => $row['id'] ));
+} catch (PDOException $e) {
+    echo '<div class="alert alert-danger">';
+    die('Error:'.$e->getMessage());
+    echo '</div>';
+}
 
 /* Vérification du mot de passe.*/
 if (password_verify($_POST['pwd'], $row['password'])){
@@ -19,7 +25,7 @@ if (password_verify($_POST['pwd'], $row['password'])){
     $_SESSION['firstname'] = $row['firstname'];
     $_SESSION['lastname'] = $row['lastname'];
     $_SESSION['birth']=$row['birth'];
-    
+
     setcookie("userid", $_SESSION['id'], 0);
     setcookie("prenom", $_SESSION['firstname'], 0);
     setcookie("nom", $_SESSION['lastname'], 0);
