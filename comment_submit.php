@@ -7,13 +7,7 @@ if (!empty($_POST['add'])){
 	createComment($db);
 	header('Location: '.$_POST["back"]);
 } else {
-?>
-	<div class="alert alert-danger alert-dismissible" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		Votre commentaire ne peut pas être vide !
-	</div>
-	<?php
-	include_once($_SERVER['DOCUMENT_ROOT'].$_POST["back"]);
+    header('Location: '.$_POST["back"]);
 }
 
 function createComment($conn){
