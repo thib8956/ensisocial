@@ -19,9 +19,9 @@ function createPublication($conn){
 	try {
 		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`) VALUES (:title, :date, :content)');
 		$stmt->execute(array(
-			'title' => $_POST['title'],
+			'title' => htmlentities($_POST['title']),
 			'date' => $curr_timestamp,
-			'content' => $_POST['content']
+			'content' => htmlentities($_POST['content'])
 			));
 
 		$stmt = $conn->prepare('INSERT INTO `authornews` (`authorid`, `newsfeedid`)
@@ -29,7 +29,7 @@ function createPublication($conn){
 		$stmt->execute(array(
 			'date' => $curr_timestamp,
 			'author_id' => $_SESSION['id'],
-			'title' => $_POST['title']
+			'title' => htmlentities($_POST['title'])
 			));
 
 	} catch (PDOException $e) {
