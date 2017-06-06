@@ -8,8 +8,8 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-left" href="/ensisocial/index.php">
-				<img class="hidden-xs" src="/ensisocial/img/ensisocial.jpg" alt="logo" height="50px">
-				<img class="visible-xs" src="/ensisocial/img/ensisocial.jpg" alt="logo" height="70px">
+				<img class="hidden-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="50px">
+				<img class="visible-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="70px">
 			</a>
 		</div>
 
