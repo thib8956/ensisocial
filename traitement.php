@@ -52,10 +52,13 @@ if(isset($_POST['signin'])) {
             }
             if($_POST["password"] == $_POST["repassword"]){
                 echo '<p>Mot de passe OK.</p>';
-                $filename = md5($_FILES['picture']['name']).$_FILES['picture']['name'];
+                // Generate an unique filename for the profile pic.
+                $fname = md5($_FILES['picture']['name']);
+                $ext = substr(strrchr($_FILES[$index]['name'], '.'), 1); // Get file extension
+                $dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname.$ext;
                 // Upload profile picture
-                upload('picture', $filename);
-                fillDatabase($db, $filename);
+                upload('picture', $dst);
+                fillDatabase($db, $fname);
                 //Envoi du mail
                 //mail($to, $objet, $contenu, $headers);
                 echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';
@@ -71,9 +74,15 @@ if(isset($_POST['signin'])) {
     }
 }
 
-function fillDatabase($connection, $filename) {
-    if ($filename == ""){
-        $filename = 'default-profile.png';
+
+/**
+ * Fill the `users` table with the values given in the inscription form.
+ * @param  [type] $connection    Connection to the PDO.
+ * @param  [type] $profile_pic   Filename of the profile picture.
+ */
+function fillDatabase($connection, $profile_pic) {
+    if ($profile_pic == ""){
+        $profile_pic = 'default-profile.png';
     }
 	/* Chiffrement du mot de passe.*/
 	$options = [
@@ -97,7 +106,7 @@ function fillDatabase($connection, $filename) {
                     'birth' => date('Y-m-d', strtotime($_POST['birth'])),
                     'phone' => htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8'),
                     'formation' => htmlspecialchars($_POST['formation'], ENT_QUOTES, 'UTF-8'),
-                    'filename' => $filename
+                    'filename' => $profile_pic
                     ));
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">';
@@ -106,14 +115,44 @@ function fillDatabase($connection, $filename) {
     }
 }
 
+/**
+ * Upload a profile picture to the server.
+ * @param  string  $index       Name of the input field : $_FILES[$index]
+ * @param  string  $destination Destination path.
+ * All profile pictures are stored in /ensisocial/data/avatars
+ */
 function upload($index, $destination, $maxsize=FALSE, $extensions=FALSE){
-    $basedir = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/';
-    if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0){
-        return FALSE;
-    }
+    if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0) return FALSE;
+    // Test max file size
     if ($maxsize !== FALSE AND $_FILES[$index]['size'] > $maxsize) return FALSE;
-    $ext = substr(strrchr($_FILES[$index]['name'], '.'),1);
+    // Check whether the file has a valid extension.
     if ($extensions !== FALSE AND !in_array($ext,$extensions)) return FALSE;
-    return move_uploaded_file($_FILES[$index]['tmp_name'], $basedir.$destination);
+    $ret = move_uploaded_file($_FILES[$index]['tmp_name'], $destination);
+    print_errors($ret);
+    return $ret;
+}
+
+
+/**
+ * Print error messages according to move_upload_file() return codes.
+ * cf. http://www.php.net/manual/en/features.file-upload.errors.php
+ * @param  int $retcode return code of move_upload_file().
+ */
+function print_errors($retcode){
+    $phpFileUploadErrors = array(
+        0 => 'There is no error, the file uploaded with success',
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk.',
+        8 => 'A PHP extension stopped the file upload.',
+    );
+    if ($retcode > 0){
+        echo '<div class="alert alert-danger">';
+        echo $phpFileUploadErrors[$retcode];
+        echo '</div>';
+    }
 }
 ?>
