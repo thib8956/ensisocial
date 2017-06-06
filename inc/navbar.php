@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-            <?php 
+            <?php
                 if(isset($_SESSION['id'])) {
                     echo '<a class="navbar-left" href="/ensisocial/page_membre.php">';
                 }
