@@ -36,7 +36,6 @@ try {
 		</center>
 
 		<!-- Liste des membres connectés -->
-		<script>javascript:ajax();</script>
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
 	</div>
@@ -88,18 +87,18 @@ try {
 	<?php
 	echo '<div class="panel panel-white post panel-shadow">
 	<div class="post-heading">';
-		while ($res=$stmt->fetch()){
+		while ($publication=$stmt->fetch()){
 			?>
-			<div class="row well">
+			<div class="publication well">
 				<?php
 
-				echo '<h2>'.$res['firstname'].' '.$res['lastname'].'</h2>';
-				echo '<h3>'.$res['title'].'</h3>';
-				echo '<p>'.$res['content'].'</p>';
+				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
+				echo '<h3>'.$publication['title'].'</h3>';
+				echo '<p>'.$publication['content'].'</p>';
 				echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
 				echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
 				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
-				echo '<p class="text-right small">'.$res['date'].'</p>';
+				echo '<p class="text-right small">'.$publication['date'].'</p>';
 				// Comment section
 				echo '<ul class="list-group">';
 				include('comment.php'); // include à répétition donc ne pas mettre include_once
@@ -109,7 +108,7 @@ try {
 				<div class="input-group">
 					<form action="comment_submit.php" method="post" accept-charset="utf-8">
 						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
-						<?php echo '<input name="post_id" type="hidden" value='.$res['id'].'>' ?>
+						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 					</form>
 				</div>
 			</div>

@@ -4,7 +4,7 @@ try {
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$memberconnected = $db-> query('SELECT lastname, firstname, connected FROM users');
-} catch (Exception $e) {
+} catch (PDOException $e) {
 	die('Error:'.$e->getMessage());
 }
 
