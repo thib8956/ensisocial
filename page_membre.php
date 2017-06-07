@@ -100,7 +100,7 @@ try {
 		?>
 		<div class="panel panel-default" id="publi">
 			<?php
-			$score = $publication['upvote'] - $publication['downvote'];
+			$score = $publication['score'];
 			?>
 			<div class="panel-heading" id="page_membre">
 				<a class="pull-left" href="#">
