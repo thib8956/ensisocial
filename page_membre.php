@@ -24,7 +24,7 @@ try {
 	if (!empty($data['profile_pic'])){
 		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
 	} else {
-		$pic_path = 'data/default-profile.png';
+		$pic_path = '/ensisocial/data/avatar/default-profile.png';
 	}
 } catch (PDOException $e) {
 	echo '<div class="alert alert-danger">';
@@ -114,7 +114,7 @@ try {
 					</a>
 				<?php endif?>
 				<?php
-				$score=$publication['score'];
+				$score = $publication['score'];
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
@@ -123,9 +123,9 @@ try {
 			<div class="panel-body">
 				<?php
 				echo '<p>'.$publication['content'].'</p>';
-				if($score>=0){
+				if($score >= 0){
 					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
-				}else{
+				} else {
 					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
 				}
 

@@ -39,17 +39,19 @@
 					</a></li>
 				<?php endif ?>
 			</ul>
-			<!-- Searchbar -->
-			<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
-				<div class="input-group add-on">
-					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
-					<div class="input-group-btn">
-						<button type="submit" id="search" class="btn btn-primary" name="search">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
+			<?php if (isset($_SESSION['id'])): ?>
+				<!-- Searchbar -->
+				<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
+					<div class="input-group add-on">
+						<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
+						<div class="input-group-btn">
+							<button type="submit" id="search" class="btn btn-primary" name="search">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			<?php endif ?>
 		</div><!--/.nav-collapse -->
 	</div> <!-- /.container -->
 </nav>

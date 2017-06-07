@@ -2,9 +2,9 @@ $(document).ready(function() {
     // Lorsque je soumets le formulaire
     $('body').on('submit', '.submitAjax', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
- 
+
         var $this = $(this); // L'objet jQuery du formulaire
- 
+
         // Envoi de la requête HTTP en mode asynchrone
         $.ajax({
             url: $this.attr('action'), // Le nom du fichier indiqué dans le formulaire
@@ -13,6 +13,6 @@ $(document).ready(function() {
             success: function(){
                 $(".newsfeedwrap").load(location.href + " .newsfeed");
             }
-        }); 
+        });
     });
 });
