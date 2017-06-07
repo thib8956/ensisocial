@@ -37,21 +37,23 @@ $form=new Form($_POST,"login");
               $id='',
               $glyphicon='glyphicon-lock'
               );
-            ?>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input">
-                Se rappeler de moi
-              </label>
-            </div>
-            <?php
-            echo $form->submit('Se connecter !');
-            ?>
-          </form>
+              ?>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                  Se rappeler de moi
+                </label>
+              </div>
+              <?php
+              echo $form->submit('Se connecter !');
+              ?>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </div> <!-- .row -->
+</div> <!-- .container-fluid -->
+
   <!-- /Connection form -->
 
   <?php

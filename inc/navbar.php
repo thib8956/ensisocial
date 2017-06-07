@@ -18,23 +18,26 @@
 				<img class="hidden-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="50px">
 				<img class="visible-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="70px">
 			</a>
-		</div>
+		</div> <!-- .navbar-header -->
 
 		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
 			<ul class="nav navbar-nav">
-
-				<?php if (!isset($_SESSION['id'])){
-					echo '<li><a href="inscription.php" title="inscription"><span class="glyphicon glyphicon-user"></span>Inscription</a></li>';
-				} else {
-					echo '<li><a href="">Profil</a></li>';
-					/*echo '<li><a href="">Actualités</a></li>';
-					echo '<li><a href="">Groupes</a></li>';*/
-					echo '<li><a href="">Contacts récents</a></li>';
-                    echo '<li><a href="/ensisocial/messagerie/chatPage.php">Messagerie</a></li>';
-					echo '<li><a href="/ensisocial/disconnection.php">Déconnexion</a></li>';
-				}
-				?>
-
+				<?php if (!isset($_SESSION['id'])): ?>
+					<li><a href="inscription.php" title="inscription"><span class="glyphicon glyphicon-user"></span>&nbsp;Inscription</a></li>
+				<?php else: ?>
+					<li><a href="/ensisocial/profile.php">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profil
+					</a></li>
+					<li><a href="">
+						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Contacts récents
+					</a></li>
+					<li><a href="/ensisocial/messagerie/chatPage.php">
+						<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;Messagerie
+					</a></li>
+					<li><a href="/ensisocial/disconnection.php">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Déconnexion
+					</a></li>
+				<?php endif ?>
 			</ul>
 			<!-- Searchbar -->       
 			<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
@@ -48,5 +51,5 @@
 				</div>
 			</form>
 		</div><!--/.nav-collapse -->
-	</div>
+	</div> <!-- /.container -->
 </nav>
