@@ -13,8 +13,8 @@ $termm = $_GET['term'];
 
 $requete = $db->prepare('SELECT * FROM users WHERE firstname LIKE :term OR lastname LIKE :termm'); // j'effectue ma requête SQL grâce au mot-clé LIKE
 
-$requete->execute(array('term' => '%'.$term.'%',
-    'termm' => '%'.$termm.'%'));
+$requete->execute(array('term' => $term.'%',
+    'termm' => $termm.'%'));
 
 $array = array(); // on créé le tableau
 

@@ -5,9 +5,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 if (!empty($_POST['add'])){
 	createComment($db);
-	header('Location: '.$_POST["back"]);
+	//header('Location: '.$_POST["back"]);
 } else {
-    header('Location: '.$_POST["back"]);
+    //header('Location: '.$_POST["back"]);
 }
 
 function createComment($conn){
