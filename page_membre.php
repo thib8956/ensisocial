@@ -80,58 +80,58 @@ try {
 </div>
 
 <!-- Add a publication -->
-<div class="col-sm-offset-2 col-md-10">
-	<div class="row">
-		<form action="publication.php" method="post">
-			<?php
-			$form = new Form($_POST, 'post');
-			echo $form->inputfield('title', 'text', 'Titre de la publication');
-			echo $form->inputtextarea('content', 'Contenu', 5, 16);
-			echo $form->submit('Publier');
-			?>
-		</form>
+<div class="row">
+	<div class="col-sm-offset-2 col-md-9">
+			<form action="publication.php" method="post">
+				<?php
+				$form = new Form($_POST, 'post');
+				echo $form->inputfield('title', 'text', 'Titre de la publication');
+				echo $form->inputtextarea('content', 'Contenu', 5, 16);
+				echo $form->submit('Publier');
+				?>
+			</form>
 	</div>
 </div>
-
 <!-- Display newsfeed -->
-<div class="col-sm-offset-2 col-md-10">
+<div class="col-sm-offset-2 col-md-9">
 	<?php
-	echo '<div class="panel panel-white post panel-shadow">
-	<div class="post-heading">';
-		while ($publication=$stmt->fetch()){
-			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
-			?>
-			<div class="publication well">
+	while ($publication=$stmt->fetch()){
+		$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
+		?>
+		<div class="panel panel-default">
+			<div class="panel-heading">
 				<a class="pull-left" href="#">
-				  <img class="avatar" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" height="80px">
+					<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 				</a>
 				<?php
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
+				?>
+			</div> <!-- .panel-heading -->
+			<div class="panel-body">
+				<?php
 				echo '<p>'.$publication['content'].'</p>';
 				echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
 				echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
 				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
-				// Comment section
+					// Comment section
 				echo '<ul class="list-group">';
-				include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
-				echo '</ul>';
-				?>
-				<!-- Add a comment -->
-				<div class="input-group">
-					<form action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">
-						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
-                        <?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
-						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-					</form>
-				</div>
-			</div>
-
-			<?php
-		}
-		echo '</div>';
-		echo '</div>';
-		echo '</div>';
+					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
+					echo '</ul>';
+					?>
+					<!-- Add a comment -->
+					<div class="input-group">
+						<form action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">
+							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
+							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+						</form>
+					</div>
+				</div> <!-- /.panel-body -->
+			</div> <!-- /.panel -->
+		<?php
+		} // /while
+		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
 		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 		?>
