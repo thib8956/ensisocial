@@ -11,14 +11,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 $form = new Form($_POST,"profile_page");
 ?>
 
-<div class="container panel-group" id="accordion"> 
-    
+<div class="container panel-group" id="accordion">
+
     <div class="panel">
         <div class="row panel-heading"> <!-- panel-heading pour souligner, row pour la hauteur-->
             <div class="col-md-2">Image de profil</div>
             <div class="col-md-4 text-center">
                 <?php
-                    echo "<img class='img-circle' alt='profile_pic' src='data/avatar/".$profile["profile_pic"]."' style='height:50px;width:50px;' />";   
+                    echo "<img class='img-circle' alt='profile_pic' src='data/avatar/".$profile["profile_pic"]."' style='height:50px;width:50px;' />";
                 ?>
             </div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#profilepic">Modifier</a></div> <!-- href correspond à ce que ça collapse quand on appuie -->
@@ -31,9 +31,9 @@ $form = new Form($_POST,"profile_page");
             ?>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Mot de passe</div>
             <div class="col-md-4 text-center">***************</div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#password">Modifier</a></div>
@@ -60,9 +60,9 @@ $form = new Form($_POST,"profile_page");
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Nom</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -85,9 +85,9 @@ $form = new Form($_POST,"profile_page");
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Prénom</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -110,9 +110,9 @@ $form = new Form($_POST,"profile_page");
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Filière</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -135,9 +135,9 @@ $form = new Form($_POST,"profile_page");
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Mail</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -146,9 +146,9 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Adresse</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -171,7 +171,7 @@ $form = new Form($_POST,"profile_page");
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Code postal</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -195,7 +195,7 @@ $form = new Form($_POST,"profile_page");
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Ville</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -217,7 +217,7 @@ $form = new Form($_POST,"profile_page");
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Téléphone</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -247,7 +247,7 @@ $form = new Form($_POST,"profile_page");
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Date de naissance</div>
             <div class="col-md-4 text-center">
                 <?php
