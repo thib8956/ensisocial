@@ -7,40 +7,52 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-left" href="index.php">
-				<img class="hidden-xs" src="img/ensisocial.jpg" alt="logo" height="50px">
-				<img class="visible-xs" src="img/ensisocial.jpg" alt="logo" height="70px">
+            <?php
+                if(isset($_SESSION['id'])) {
+                    echo '<a class="navbar-left" href="/ensisocial/page_membre.php">';
+                }
+                else {
+                    echo '<a class="navbar-left" href="/ensisocial/index.php">';
+                }
+            ?>
+				<img class="hidden-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="50px">
+				<img class="visible-xs" src="/ensisocial/img/ensisocial.png" alt="logo" height="70px">
 			</a>
-		</div>
+		</div> <!-- .navbar-header -->
 
 		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
 			<ul class="nav navbar-nav">
-
-				<?php if (!isset($_SESSION['id'])){
-					echo '<li><a href="inscription.php" title="inscription"><span class="glyphicon glyphicon-user"></span>Inscription</a></li>';
-				} else {
-					echo '<li><a href="">Profil</a></li>';
-					/*echo '<li><a href="">Actualités</a></li>';
-					echo '<li><a href="">Groupes</a></li>';*/
-					echo '<li><a href="">Contacts récents</a></li>';
-					echo '<li><a href="disconnection.php">Déconnexion</a></li>';
-				}
-				?>
-
+				<?php if (!isset($_SESSION['id'])): ?>
+					<li><a href="inscription.php" title="inscription"><span class="glyphicon glyphicon-user"></span>&nbsp;Inscription</a></li>
+				<?php else: ?>
+					<li><a href="/ensisocial/profile.php">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profil
+					</a></li>
+					<li><a href="">
+						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Contacts récents
+					</a></li>
+					<li><a href="/ensisocial/messagerie/chatPage.php">
+						<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;Messagerie
+					</a></li>
+					<li><a href="/ensisocial/disconnection.php">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Déconnexion
+					</a></li>
+				<?php endif ?>
 			</ul>
-			<!-- Searchbar -->
-			<form class="nav navbar-form navbar-right" method="post" action="searchPage.php" role="search">
-				<div class="input-group add-on">
-					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher" autocomplete="off">
-					<div class="input-group-btn">
-						<button type="submit" id="search" class="btn btn-primary" name="search">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div><!--/.nav-collapse -->
-	</div>
-</nav>
 
-<script>window.jQuery || document.write('<script src="../js/jquery.js"><\/script>')</script>
+			<?php if (isset($_SESSION['id'])): ?>
+				<!-- Searchbar -->
+				<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
+					<div class="input-group add-on">
+						<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
+						<div class="input-group-btn">
+							<button type="submit" id="search" class="btn btn-primary" name="search">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			<?php endif ?>
+		</div><!--/.nav-collapse -->
+	</div> <!-- /.container -->
+</nav>

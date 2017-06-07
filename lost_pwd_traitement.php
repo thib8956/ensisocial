@@ -1,6 +1,7 @@
 <?php
 $title="Requête traitée";
-include('inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
+$form= new Form($_POST,"lostpwd")
 ?>
 
 <div>Votre mot de passe a été envoyé à l'adresse mail</div>
@@ -26,20 +27,60 @@ else
     $req->execute(array('email'=> $_POST["email"]));
     $nbs = $req->fetchAll();
     if (count($nbs)==0){
-        echo "Pas de compte lié à cette adresse"; //affichage à améliorer
+        echo "<div class=\"alert alert-danger\">Pas de compte lié à cette adresse</div>";
+        echo '<form action="lost_pwd_traitement.php" method="post" accept-charset="utf-8" class="form-inline">';
+        echo $form->inputfield("email","email","Rentrez votre adresse pour qu'on vous renvoie votre mot de passe");
+        echo $form->submit("Demander");
+        echo '<br><br></form>'; //affichage à améliorer
     } else {
         $subject = 'Mot de passe oublié - Ensisocial';
-        $message = 'Votre mot de passe temporaire :'.$passage_ligne.$nouvelmdp;
-        $headers = 'From: ensisocial@noreply.com' . $passage_ligne .
-        'Reply-To: ensisocial@noreply.com' . $passage_ligne .
-        'X-Mailer: PHP/' . phpversion(); // a modifier avec le message si on veut un message en html
+        $fromName= "EnsiSocial";
+        $from = "ensisocial@gmail.com";
+        $separation = "-----=".md5(rand()); //Pour séparer les différents types
+        
+        $headers = 'From: '.$fromName.'<'.$from.'>' . $passage_ligne .
+        'Reply-To: '.$fromName.'<'.$from.'>' . $passage_ligne .
+        'MIME-Version: 1.0'. $passage_ligne .
+        'Content-Type: multipart/alternative;'. //Pour pouvoir mettre plusieurs types dans le message, genre un html et le texte alternatif
+        'boundary="'.$separation.'"'.$passage_ligne.
+        'X-Sender: localhost'.$passage_ligne.
+        'X-Mailer: PHP/'.phpversion();
+        
+        $message_txt = 'Votre mot de passe temporaire: '.$nouvelmdp;
+        $message_html = '<html style="margin:auto;text-align:center;background-color:grey;">
+            <div style="margin: auto;
+        height:70px;
+        width: 260px;
+        border: 2px solid blue;
+        border-radius: 20px;
+        background-color: yellow;
+        ">
+                <p style="
+                text-decoration: underline;
+                font-weight:bold;
+                ">Votre mot de passe temporaire:</p>
+                <p>'.$nouvelmdp.'</p>
+            </div></html>'; //Messages à modifier selon le mail
+        
+        $message =
+            $passage_ligne."--".$separation. $passage_ligne . //mettre avant chaque partie
+            'Content-Type:text/plain;charset="utf-8"'.$passage_ligne.
+            'Content-Transfer-Encoding: 8bit'.
+            $passage_ligne.$message_txt.$passage_ligne. //Message texte
+            
+            $passage_ligne."--".$separation.$passage_ligne.           
+            'Content-Type:text/html;charset="utf-8"'. $passage_ligne .
+            'Content-Transfer-Encoding: 8bit'. $passage_ligne . 
+            $passage_ligne.$message_html.$passage_ligne // Message html
+            ; 
+        
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
         $req2->execute();
-        //mail($to, $subject, $message, $headers); //utiliser une adresse qui ne sera pas rejetée
-        echo "<div>Votre mot de passe a été envoyé à l'adresse mail ".$to."</div>";
+        mail($to, $subject, $message, $headers); //utiliser une adresse qui ne sera pas rejetée - décommenter pour tester
+        echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
     }
  ?>
 
 <?php
-include('inc/footer.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>
