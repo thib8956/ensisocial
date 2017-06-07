@@ -1,11 +1,4 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
---
--- Client :  127.0.0.1
--- Généré le :  Mer 07 Juin 2017 à 20:53
--- Version du serveur :  10.1.21-MariaDB
--- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +10,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `ensisocial`
+-- Database: `ensisocial`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `authorcomment`
+-- Table structure for table `authorcomment`
 --
 
 CREATE TABLE `authorcomment` (
@@ -32,17 +25,9 @@ CREATE TABLE `authorcomment` (
   `pk_authorcomment` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `authorcomment`
---
-
-INSERT INTO `authorcomment` (`authorid`, `commentid`, `pk_authorcomment`) VALUES
-(2, 1, 1);
-
--- --------------------------------------------------------
 
 --
--- Structure de la table `authornews`
+-- Table structure for table `authornews`
 --
 
 CREATE TABLE `authornews` (
@@ -51,17 +36,11 @@ CREATE TABLE `authornews` (
   `pk_authornews` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `authornews`
---
-
-INSERT INTO `authornews` (`authorid`, `newsfeedid`, `pk_authornews`) VALUES
-(3, 22, 11);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -73,16 +52,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `comments`
---
-
-INSERT INTO `comments` (`id`, `content`, `date`, `upvote`, `downvote`) VALUES
-(1, 'njk', '2017-06-07 16:05:20', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `newscomment`
+-- Table structure for table `newscomment`
 --
 
 CREATE TABLE `newscomment` (
@@ -92,16 +62,7 @@ CREATE TABLE `newscomment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `newscomment`
---
-
-INSERT INTO `newscomment` (`newsfeedid`, `commentid`, `pk_newscomment`) VALUES
-(22, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `newsfeed`
+-- Table structure for table `newsfeed`
 --
 
 CREATE TABLE `newsfeed` (
@@ -114,17 +75,10 @@ CREATE TABLE `newsfeed` (
   `score` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Contenu de la table `newsfeed`
---
-
-INSERT INTO `newsfeed` (`id`, `title`, `date`, `content`, `place`, `type`, `score`) VALUES
-(22, 'hgdsjkg', '2017-06-07 14:01:05', 'jksgbsg\r\n', NULL, NULL, 0);
-
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -144,7 +98,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connected`, `profile_pic`) VALUES
@@ -167,11 +121,11 @@ CREATE TABLE `vote` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `authorcomment`
+-- Indexes for table `authorcomment`
 --
 ALTER TABLE `authorcomment`
   ADD PRIMARY KEY (`pk_authorcomment`),
@@ -179,7 +133,7 @@ ALTER TABLE `authorcomment`
   ADD KEY `fk_user` (`authorid`);
 
 --
--- Index pour la table `authornews`
+-- Indexes for table `authornews`
 --
 ALTER TABLE `authornews`
   ADD PRIMARY KEY (`pk_authornews`),
@@ -187,13 +141,13 @@ ALTER TABLE `authornews`
   ADD KEY `fk_author` (`authorid`);
 
 --
--- Index pour la table `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `newscomment`
+-- Indexes for table `newscomment`
 --
 ALTER TABLE `newscomment`
   ADD PRIMARY KEY (`pk_newscomment`),
@@ -201,18 +155,19 @@ ALTER TABLE `newscomment`
   ADD KEY `fk_news` (`newsfeedid`);
 
 --
--- Index pour la table `newsfeed`
+-- Indexes for table `newsfeed`
 --
 ALTER TABLE `newsfeed`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+
 -- Index pour la table `vote`
 --
 ALTER TABLE `vote`
@@ -245,12 +200,15 @@ ALTER TABLE `comments`
 ALTER TABLE `newscomment`
   MODIFY `pk_newscomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT pour la table `newsfeed`
+ALTER TABLE `newscomment`
+  MODIFY `pk_newscomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT for table `newsfeed`
 --
 ALTER TABLE `newsfeed`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
@@ -270,7 +228,6 @@ ALTER TABLE `authorcomment`
   ADD CONSTRAINT `fk_comment` FOREIGN KEY (`commentid`) REFERENCES `comments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`authorid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
 -- Contraintes pour la table `authornews`
 --
 ALTER TABLE `authornews`

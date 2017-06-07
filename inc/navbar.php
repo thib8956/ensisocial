@@ -39,6 +39,7 @@
 					</a></li>
 				<?php endif ?>
 			</ul>
+
 			<?php if (isset($_SESSION['id'])): ?>
 				<!-- Searchbar -->
 				<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">

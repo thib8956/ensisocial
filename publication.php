@@ -7,7 +7,6 @@ session_start();
 $title=$_SESSION['firstname'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
-
 if(isset($_POST['post'])){
 	if (!empty($_POST['title']) && !empty($_POST['content'])){
 		createPublication($db);

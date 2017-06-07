@@ -38,8 +38,6 @@ $headers = 'From: webmaster@example.com' . "\r\n" .
 'X-Mailer: PHP/' . phpversion();
      */
 
-
-
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
         while($data = $answer->fetch()) {

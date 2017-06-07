@@ -1,5 +1,6 @@
 <?php
 
+
 class form{
     private $data;
     private $surround='div';
@@ -10,7 +11,7 @@ class form{
      * @param $data array regroupe tous les champs du formulaire
      *        $button donne le texte afficher sur le boutton
      */
-    public function __construct($data, $button){
+    public function __construct($data,$button){
         $this->data=$data;
         $this->button=$button;
     }
@@ -49,7 +50,25 @@ class form{
                 return $this->surround($section);
             }
 
+        $section='<label for="'.$display.'" class="control-label"></label>
+						<select name="'.$name.'" class="form-control">';
+        foreach($option as $key =>$value){
+            $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
         }
+
+						$section=$section.'</select>';
+        return $this->surround($section);
+
+    }
+
+
+    /**
+     * @param $index
+     * @return string
+     */
+    private function getType($index){
+        return isset($this->data[$index]) ? gettype($this->data[îndex]):null;
+    }
 
 
     /**
@@ -74,27 +93,6 @@ class form{
 
         if ($glyphicon) $input = $this->surround($input, 'input-group');
         return $this->surround($label . $input);
-
-        /*
-        Avec input-group
-        <div class="form-group">
-            <label for="inputfield2" class="col-sm-2 control-label">Input 2</label>
-            <div class="controls">
-                <div class="input-group col-sm-10">
-                    <input type="text" class="form-control" id="inputfield2" placeholder="Input 2">
-                    <span class="input-group-addon">.00</span>
-                </div>
-            </div>
-        </div>
-
-        Sans input-group
-        <div class="form-group">
-            <label for="inputfield1" class="col-sm-2 control-label">Input 1</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputfield1" placeholder="Input 1">
-            </div>
-        </div>
-         */
     }
 
     public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control",$id=""){
@@ -126,7 +124,7 @@ class form{
     /**
      * @return string retourn la commande html pour créer le bouton du formulaire
      */
-    public function submit($display,$class="btn btn-primary",$id=""){
-        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="'.$class.'" id="'.$id.'">');
+    public function submit($display){
+        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-primary">');
     }
 }

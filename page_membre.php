@@ -8,7 +8,6 @@ if (!isset($_SESSION['id'])){
 $title = $_SESSION['firstname'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
-
 try {
 	$stmt = $db->query('SELECT *
 		FROM newsfeed
@@ -89,6 +88,7 @@ try {
 			</form>
 	</div>
 </div>
+
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
 <div class="col-sm-offset-2 col-md-9 newsfeed">
@@ -119,7 +119,6 @@ try {
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
 			</div> <!-- .panel-heading -->
-
 			<div class="panel-body">
 				<?php
 				echo '<p>'.$publication['content'].'</p>';
@@ -128,7 +127,6 @@ try {
 				} else {
 					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
 				}
-
 				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
 				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';

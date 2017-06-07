@@ -4,6 +4,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 $form= new Form($_POST,"lostpwd")
 ?>
 
+<div>Votre mot de passe a été envoyé à l'adresse mail</div>
 <?php
     $to = $_POST["email"]; //destinataire
 
