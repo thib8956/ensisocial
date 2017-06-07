@@ -126,7 +126,9 @@ try {
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
-						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a>
+						<?php 
+						if ($_SESSION['id'] == $publication['authorid']){?>
+						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a><?php ;}?> 
 					</div>
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->
