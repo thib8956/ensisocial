@@ -1,7 +1,8 @@
-function writeInDiv(text){
-    var objet = document.getElementById('ta_div');
+function writeInDiv(text) {
+    var objet = document.getElementById('memberconnected');
     objet.innerHTML = text;
 }
+
 var tmp = setInterval(function(){ refresh() }, 10000);
 
 function createRequestObject() {
@@ -32,16 +33,16 @@ function refresh() {
     setInterval("refresh()",10000);
 }
 
-function clicup(num) {
+function clicup(num,iduser) {
     http = createRequestObject();
     http.open("POST", 'thumb.php', true);
     http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    http.send("num="+num+"&action=0");
+    http.send("num="+num+"&action=0&iduser="+iduser);
 }
 
-function clicdown(num) {
+function clicdown(num,iduser) {
     http = createRequestObject();
     http.open("POST", 'thumb.php', true);
     http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    http.send("num="+num+"&action=1");
+    http.send("num="+num+"&action=1&iduser="+iduser);
 }

@@ -114,6 +114,7 @@ try {
 					</a>
 				<?php endif?>
 				<?php
+				$score=$publication['score'];
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
@@ -128,8 +129,8 @@ try {
 					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
 				}
 
-				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].') ></button>&nbsp;&nbsp;';
-				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].') ></button>';
+				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
+				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
 				// Comment section
 				echo '<ul class="list-group">';
