@@ -37,10 +37,6 @@ if ( $nb1['authorid'] == $connectedid ){
 
 	header('Location: page_membre.php');
 	exit();
-} else {
-	echo 'erreur';
-	header('Location: page_membre.php');
-	exit();
 }
 
 // fermeture de la connection à la db

@@ -6,6 +6,7 @@ try {
     newsfeed.id,
     lastname,
     firstname,
+    authorid,
     comments.date,
     users.profile_pic,
     comments.id
@@ -49,7 +50,8 @@ while($row) {
     <h4 class="user"><?php echo $row['firstname'].' '.$row['lastname']; ?></h4>
     <h5 class="time"><?php echo $row['date']; ?></h5>
     <p><?php echo $row['content']; ?></p>
-    <a href=<?php echo "deletecomment.php?id=".$row['id']; ?>>delete comment</a>
+    <?php if ($_SESSION['id'] == $row['authorid']){?>
+   	 <a href=<?php echo "deletecomment.php?id=".$row['id']; ?>>delete comment</a><?php ;}?> 
   </li>
   <?php
   $row=$comment->fetch();
