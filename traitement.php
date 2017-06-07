@@ -18,6 +18,26 @@ function get_include_contents($filename) {
     return false;
 }
 
+// Envoi mail
+/*
+$objet = 'Confirmation de votre inscription EnsiSocial' ;
+$contenu = '
+<html>
+<head>
+   <title>Vous vous êtes inscrit(e) sur EnsiSocial</title>
+</head>
+<body>
+   <p>Bonjour '.$_POST['firstname'].' '.$_POST['lastname'].'</p>
+   <p>Vous venez de vous inscrire sur le site EnsiSocial avec les informations suivantes :<br>  -Adresse mail:'.$_POST['email'].'<br>
+   -Mot de passe'.$_POST['password'].'</p>
+</body>
+</html>';
+$to = ".$_POST['email'].";
+$headers = 'From: webmaster@example.com' . "\r\n" .
+'Reply-To: webmaster@example.com' . "\r\n" .
+'X-Mailer: PHP/' . phpversion();
+     */
+
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
         while($data = $answer->fetch()) {

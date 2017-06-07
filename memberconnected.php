@@ -22,6 +22,5 @@ while($data = $memberconnected->fetch()){
 	echo ' '.$firstname.' '.$lastname;
 	echo '</li>';
 }
-
 echo '</ul>';
 ?>

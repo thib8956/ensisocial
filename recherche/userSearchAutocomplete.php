@@ -23,12 +23,4 @@ while ($donnee = $requete->fetch()) // on effectue une boucle pour obtenir les d
     array_push($array, $donnee['firstname'].' '.$donnee['lastname']); // et on ajoute celles-ci à notre tableau
 }
 echo json_encode($array); // il n'y a plus qu'à convertir en JSON
-
-    while($donnee = $requete->fetch()) // on effectue une boucle pour obtenir les données
-
-    {
-        array_push($array, $donnee['firstname'].' '.$donnee['lastname']); // et on ajoute celles-ci à notre tableau
-
-    }
-    echo json_encode($array); // il n'y a plus qu'à convertir en JSON
 ?>

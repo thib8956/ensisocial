@@ -33,7 +33,7 @@ try {
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
 				<?php
-				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
+				echo $profilDonnee['firstname'].' '.$profilDonnee['lastname'];
 				?>
 			</h3>
 		</center>
@@ -53,12 +53,12 @@ try {
 			<div class="modal-body">
 				<center>
 					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'].' ' ?><small><?php echo $_SESSION['town'] ?></small></h3>
+					<h3 class="media-heading"><?php echo $profilDonnee['firstname'].' '; echo$profilDonnee['lastname'].' ' ?><small><?php echo $profilDonnee['town'] ?></small></h3>
 				</center>
 				<hr>
 				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $_SESSION['formation'] ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
+					<p class="text-left"><strong>Formation: </strong> <?php  echo $profilDonnee['formation'] ?></p>
+					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($profilDonnee['birth'])); ?></p>
 				</center>
 			</div>
 			<div class="modal-footer">

@@ -93,27 +93,6 @@ class form{
 
         if ($glyphicon) $input = $this->surround($input, 'input-group');
         return $this->surround($label . $input);
-
-        /*
-        Avec input-group
-        <div class="form-group">
-            <label for="inputfield2" class="col-sm-2 control-label">Input 2</label>
-            <div class="controls">
-                <div class="input-group col-sm-10">
-                    <input type="text" class="form-control" id="inputfield2" placeholder="Input 2">
-                    <span class="input-group-addon">.00</span>
-                </div>
-            </div>
-        </div>
-
-        Sans input-group
-        <div class="form-group">
-            <label for="inputfield1" class="col-sm-2 control-label">Input 1</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputfield1" placeholder="Input 1">
-            </div>
-        </div>
-         */
     }
 
     public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control",$id=""){

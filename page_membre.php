@@ -32,8 +32,8 @@ try {
 }
 ?>
 <!-- Left panel -->
-<div class="container col-sm-2 affix">
-	<div class="span3 well">
+<div class="row">
+	<div class="col-sm-2 well affix">
 		<center>
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
@@ -88,8 +88,8 @@ try {
 			</form>
 	</div>
 </div>
-<!-- Display newsfeed -->
 
+<!-- Display newsfeed -->
 <div class="newsfeedwrap">
 <div class="col-sm-offset-2 col-md-9 newsfeed">
 	<?php
@@ -114,27 +114,24 @@ try {
 					</a>
 				<?php endif?>
 				<?php
-				$score=$publication['score'];
+				$score = $publication['score'];
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
 			</div> <!-- .panel-heading -->
-
 			<div class="panel-body">
 				<?php
 				echo '<p>'.$publication['content'].'</p>';
-				if($score>=0){
+				if($score >= 0){
 					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
-				}else{
+				} else {
 					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
 				}
-
 				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
 				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
 				// Comment section
 				echo '<ul class="list-group">';
-
 				include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
 				echo '</ul>';
 				?>
