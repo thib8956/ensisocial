@@ -47,11 +47,16 @@ while($row) {
       <img class="avatar" src=<?php echo $pic; ?> alt="avatar" height="80px">
     </a>
 
+    <?php if ($_SESSION['id'] == $row['authorid']): ?>
+      <a class="btn btn-default pull-right" href=<?php echo "deletecomment.php?id=".$row['id']; ?>>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        Supprimer
+      </a>
+    <?php endif ?>
+
     <h4 class="user"><?php echo $row['firstname'].' '.$row['lastname']; ?></h4>
     <h5 class="time"><?php echo $row['date']; ?></h5>
     <p><?php echo $row['content']; ?></p>
-    <?php if ($_SESSION['id'] == $row['authorid']){?>
-   	 <a href=<?php echo "deletecomment.php?id=".$row['id']; ?>>delete comment</a><?php ;}?> 
   </li>
   <?php
   $row=$comment->fetch();
