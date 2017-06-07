@@ -70,7 +70,7 @@ class form{
             $input .= '<span class="glyphicon '.$glyphicon.'"></span>';
             $input .= '</span>';
         }
-        $input .= '<input type="'.$name.'" class="'.$classselect.'" id="'.$id.'">';
+        $input .= '<input name="'.$name.'" type="'.$type.'" class="'.$classselect.'" id="'.$id.'">';
 
         if ($glyphicon) $input = $this->surround($input, 'input-group');
         return $this->surround($label . $input);
