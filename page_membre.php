@@ -104,6 +104,14 @@ try {
 				<a class="pull-left" href="#">
 					<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 				</a>
+
+				<?php if ($_SESSION['id'] == $publication['authorid']): ?>
+					<a class="btn btn-default pull-right" href=<?php echo 'delete.php?id='.$publication['newsfeedid']; ?>>
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						Supprimer
+					</a>
+				<?php endif?>
+
 				<?php
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
@@ -128,9 +136,6 @@ try {
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
-						<?php 
-						if ($_SESSION['id'] == $publication['authorid']){?>
-						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a><?php ;}?> 
 					</div>
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->
