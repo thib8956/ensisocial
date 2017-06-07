@@ -7,7 +7,8 @@ try {
     lastname,
     firstname,
     comments.date,
-    users.profile_pic
+    users.profile_pic,
+    comments.id
     FROM comments,
     authorcomment,
     newscomment,
@@ -48,6 +49,7 @@ while($row) {
     <h4 class="user"><?php echo $row['firstname'].' '.$row['lastname']; ?></h4>
     <h5 class="time"><?php echo $row['date']; ?></h5>
     <p><?php echo $row['content']; ?></p>
+    <a href=<?php echo "deletecomment.php?id=".$row['id']; ?>>delete comment</a>
   </li>
   <?php
   $row=$comment->fetch();
