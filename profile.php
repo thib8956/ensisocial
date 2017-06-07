@@ -5,85 +5,258 @@ if (!isset($_SESSION['id'])){
 }
 $title="Profil";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
+    $req = $db->prepare('SELECT * FROM users WHERE email = :email');
+    $req->execute(array('email'=> $_SESSION["email"]));
+    $profile = $req->fetch();
+$form = new Form($_POST,"profile_page");
 ?>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-        Collapsible Group 2</a>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
-    </div>
-  </div>
-
-<div class="container panel-group" id="accordion"> <!-- faudrait un beau contour pour le tout avec un fond spécial -->
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+<div class="container panel-group" id="accordion"> 
+    
+    <div class="panel">
+        <div class="row panel-heading"> <!-- panel-heading pour souligner, row pour la hauteur-->
             <div class="col-md-2">Image de profil</div>
-            <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#profilepic">Modifier</a></div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo "<img class='img-circle' alt='profile_pic' src='data/avatar/".$profile["profile_pic"]."' style='height:50px;width:50px;' />";   
+                ?>
+            </div>
+            <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#profilepic">Modifier</a></div> <!-- href correspond à ce que ça collapse quand on appuie -->
         </div>
-        <div id="profilepic" class="panel-collapse collapse">Insérer ici le truc pour changer d'image</div>
+        <div id="profilepic" class="panel-collapse collapse">
+            <?php
+                echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
+                echo $form->inputfile('picture', 'Choisissez une image de profil');
+            ?>
+        </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Mot de passe</div>
+            <div class="col-md-4 text-center">********</div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#password">Modifier</a></div>
         </div>
-        <div id="password" class="panel-collapse collapse">
-                Insérer ici le truc pour changer de mdp
+        <div id="password" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'oldpassword',
+                    'password',
+                    'Ancien mot de passe'
+                );
+                echo $form->inputfield(
+                    'newpassword',
+                    'password',
+                    'Nouveau mot de passe'
+                );
+                echo $form->inputfield(
+                    'repassword',
+                    'password',
+                    'Retapez votre mot de passe'
+                );
+            ?>
+            </form>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Nom</div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["lastname"];
+                ?>
+            </div>
+            <div class="col-md-2">
+                <a data-toggle="collapse" data-parent="#accordion" href="#lastname">Modifier</a>
+            </div>
+        </div>
+        <div id="lastname" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'lastname',
+                    'string',
+                    'Nom'
+                );
+                ?>
+            </form>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Prénom</div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["firstname"];
+                ?>
+            </div>
+            <div class="col-md-2">
+                <a data-toggle="collapse" data-parent="#accordion" href="#firstname">Modifier</a>
+            </div>
+        </div>
+        <div id="firstname" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'firstname',
+                    'string',
+                    'Prénom'
+                );
+                ?>
+            </form>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Filière</div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["formation"];
+                ?>
+            </div>
+            <div class="col-md-2">
+                <a data-toggle="collapse" data-parent="#accordion" href="#formation">Modifier</a>
+            </div>
+        </div>
+        <div id="formation" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'formation',
+                    'string',
+                    'Formation'
+                );
+                ?>
+            </form>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Mail</div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["email"];
+                ?>
+            </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Adresse</div>
-            <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#address">Modifier</a></div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["addresse"];
+                ?></div>
+            <div class="col-md-2">
+                <a data-toggle="collapse" data-parent="#accordion" href="#address">Modifier</a>
+            </div>
         </div>
-        <div id="address" class="panel-collapse collapse">
-                Insérer ici le truc pour changer d'adresse
+        <div id="address" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'address',
+                    'string',
+                    'Adresse'
+                );
+                ?>
+            </form>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Code postal</div>
-            <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#postalcode">Modifier</a></div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["zipcode"];
+                ?>
+            </div>
+            <div class="col-md-2">
+                <a data-toggle="collapse" data-parent="#accordion" href="#zipcode">Modifier</a>
+            </div>
         </div>
-        <div id="postalcode" class="panel-collapse collapse">
-                Insérer ici le truc pour changer de code postal
+        <div id="zipcode" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'zipcode',
+                    'int',
+                    'Code postal'
+                );
+                ?>
+            </form>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="row panel-heading"> <!-- rajouter une classe pour une border-bottom si possible jpense ça ferait beau-->
+    <div class="panel">
+        <div class="row panel-heading"> 
             <div class="col-md-2">Ville</div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["town"];
+                ?>
+            </div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#town">Modifier</a></div>
         </div>
-        <div id="town" class="panel-collapse collapse">
-                Insérer ici le truc pour changer de ville
+        <div id="town" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'town',
+                    'string',
+                    'Ville'
+                );
+                ?>
+            </form>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="row panel-heading"> 
+            <div class="col-md-2">Téléphone</div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["phone"];
+                ?>
+            </div>
+            <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#phone">Modifier</a></div>
+        </div>
+        <div id="phone" class="panel-collapse collapse row">
+            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'phone',
+                    'string',
+                    'Numéro de téléphone'
+                );
+                ?>
+            </form>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="row panel-heading"> 
+            <div class="col-md-2">Date de naissance</div>
+            <div class="col-md-4 text-center">
+                <?php
+                    echo $profile["birth"];
+                ?>
+            </div>
+            <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#birth">Modifier</a></div>
+        </div>
+        <div id="birth" class="panel-collapse collapse row">
+            <form class="col-md-4 d-inline"> <!--Rajouter le traitement du formulaire-->
+                <?php
+                echo $form->inputfield(
+                    'birth',
+                    'date',
+                    'Date de naissance'
+                );
+                ?>
+            </form>
         </div>
     </div>
 </div>

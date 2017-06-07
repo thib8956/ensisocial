@@ -33,7 +33,6 @@ try {
 	echo '</div>';
 }
 ?>
-
 <!-- Left panel -->
 <div class="row">
 	<div class="col-sm-2 well affix">
@@ -92,9 +91,12 @@ try {
 	</div>
 </div>
 <!-- Display newsfeed -->
-<div class="col-sm-offset-2 col-md-9">
+<div class="newsfeedwrap">
+<div class="col-sm-offset-2 col-md-9 newsfeed">
 	<?php
+    $commId=0;
 	while ($publication=$stmt->fetch()){
+        $commId+=1;
 		$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 		?>
 		<div class="panel panel-default">
@@ -121,8 +123,8 @@ try {
 					?>
 					<!-- Add a comment -->
 					<div class="input-group">
-						<form action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">
-							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
+						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
+							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
@@ -135,5 +137,6 @@ try {
 		<?php
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
+        echo '</div>'; /* /.newsfeed */
 		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 		?>
