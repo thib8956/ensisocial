@@ -27,6 +27,7 @@ $form = new Form($_POST,"profile_page");
             <?php
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
                 echo $form->inputfile('picture', 'Choisissez une image de profil');
+                echo $form->submit("Valider");
             ?>
         </div>
     </div>
@@ -34,7 +35,7 @@ $form = new Form($_POST,"profile_page");
     <div class="panel">
         <div class="row panel-heading"> 
             <div class="col-md-2">Mot de passe</div>
-            <div class="col-md-4 text-center">********</div>
+            <div class="col-md-4 text-center">***************</div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#password">Modifier</a></div>
         </div>
         <div id="password" class="panel-collapse collapse row">
@@ -128,7 +129,7 @@ $form = new Form($_POST,"profile_page");
                 echo $form->inputfield(
                     'formation',
                     'string',
-                    'Formation'
+                    'Filière'
                 );
                 ?>
             </form>
@@ -220,7 +221,15 @@ $form = new Form($_POST,"profile_page");
             <div class="col-md-2">Téléphone</div>
             <div class="col-md-4 text-center">
                 <?php
-                    echo $profile["phone"];
+                    $length=strlen($profile["phone"]);
+                    $phone="";
+                    for ($i=0;$i<$length;$i++){
+                        if ($i!=0 && $i%2==0){
+                            $phone.=" ";
+                        }
+                        $phone.=$profile["phone"][$i];
+                    } //Pour l'affichage du tel
+                    echo $phone;
                 ?>
             </div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#phone">Modifier</a></div>
