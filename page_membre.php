@@ -26,7 +26,6 @@ try {
 	} else {
 		$pic_path = 'data/default-profile.png';
 	}
-
 } catch (PDOException $e) {
 	echo '<div class="alert alert-danger">';
 	die('Error:'.$e->getMessage());
@@ -99,8 +98,11 @@ try {
         $commId+=1;
 		$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 		?>
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class="panel panel-default" id="publi">
+			<?php
+			$score = $publication['upvote'] - $publication['downvote'];
+			?>
+			<div class="panel-heading" id="page_membre">
 				<a class="pull-left" href="#">
 					<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 				</a>
@@ -111,34 +113,40 @@ try {
 						Supprimer
 					</a>
 				<?php endif?>
-
 				<?php
+				$score=$publication['score'];
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
 			</div> <!-- .panel-heading -->
+
 			<div class="panel-body">
 				<?php
 				echo '<p>'.$publication['content'].'</p>';
-				echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.$score.'&nbsp;&nbsp;';
-				echo '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;';
-				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
+				if($score>=0){
+					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
+				}else{
+					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
+				}
+
+				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
+				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
-					// Comment section
+				// Comment section
 				echo '<ul class="list-group">';
-					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
-					echo '</ul>';
-					?>
-					<!-- Add a comment -->
-					<div class="input-group">
-						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
-							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
-							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-						</form>
-					</div>
-				</div> <!-- /.panel-body -->
-			</div> <!-- /.panel -->
+				include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
+				echo '</ul>';
+				?>
+				<!-- Add a comment -->
+				<div class="input-group">
+					<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
+						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
+						<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+					</form>
+				</div>
+			</div> <!-- /.panel-body -->
+		</div> <!-- /.panel -->
 		<?php
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
