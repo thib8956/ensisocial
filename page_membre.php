@@ -24,7 +24,6 @@ try {
 	echo '</div>';
 }
 ?>
-
 <!-- Left panel -->
 <div class="row">
 	<div class="col-sm-2 well affix">
@@ -83,9 +82,9 @@ try {
 		</form>
 	</div>
 </div>
-
 <!-- Display newsfeed -->
-<div class="col-sm-offset-2 col-md-10">
+<div class="newsfeed">
+<div class="col-sm-offset-2 col-md-10 test">
 	<?php
 	echo '<div class="panel panel-white post panel-shadow">
 	<div class="post-heading">';
@@ -108,16 +107,16 @@ try {
 				?>
 				<!-- Add a comment -->
 				<div class="input-group">
-					<form action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">
-						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add">
+					<form class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">
+						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
                         <?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 					</form>
 				</div>
 			</div>
-
 			<?php
 		}
+        echo '</div>';
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
