@@ -102,7 +102,7 @@ try {
 			<?php
 			$score = $publication['upvote'] - $publication['downvote'];
 			?>
-			<div class="panel-heading">
+			<div class="panel-heading" id="page_membre">
 				<a class="pull-left" href="#">
 					<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 				</a>
@@ -113,7 +113,6 @@ try {
 						Supprimer
 					</a>
 				<?php endif?>
-
 				<?php
 				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
@@ -123,9 +122,14 @@ try {
 			<div class="panel-body">
 				<?php
 				echo '<p>'.$publication['content'].'</p>';
-				echo '<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="score">'.$score.'</span>&nbsp;&nbsp;';
-				echo '<button type= "" id="thumbs_up" class="btn btn-link" ><span class="glyphicon glyphicon-thumbs-up thumbup" ></span></button>&nbsp;&nbsp;';
-				echo '<button type="" id="thumbs_down" class="btn btn-link"><span class="glyphicon glyphicon-thumbs-down thumbdown" ></span></button>';
+				if($score>=0){
+					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
+				}else{
+					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
+				}
+
+				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].') ></button>&nbsp;&nbsp;';
+				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
 				// Comment section
 				echo '<ul class="list-group">';
