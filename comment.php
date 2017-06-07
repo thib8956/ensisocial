@@ -48,7 +48,7 @@ while($row) {
     </a>
 
     <?php if ($_SESSION['id'] == $row['authorid']): ?>
-      <a class="btn btn-default pull-right" href=<?php echo "deletecomment.php?id=".$row['id']; ?>>
+      <a class="btn btn-default pull-right" href=<?php echo "/ensisocial/deletecomment.php?id=".$row['id']; ?>>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         Supprimer
       </a>
