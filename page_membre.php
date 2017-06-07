@@ -90,10 +90,13 @@ try {
 	</div>
 </div>
 <!-- Display newsfeed -->
-<div class="newsfeed">
-<div class="col-sm-offset-2 col-md-10 test">
+
+<div class="newsfeedwrap">
+<div class="col-sm-offset-2 col-md-9 newsfeed">
 	<?php
+    $commId=0;
 	while ($publication=$stmt->fetch()){
+        $commId+=1;
 		$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 		?>
 		<div class="panel panel-default">
@@ -116,23 +119,23 @@ try {
 					// Comment section
 				echo '<ul class="list-group">';
 
-				include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
-				echo '</ul>';
-				?>
-				<!-- Add a comment -->
-				<div class="input-group">
-					<form class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">
-						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-                        <?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
-						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-					</form>
-				</div>
-			</div>
-			<?php
-		}
-        echo '</div>';
-		echo '</div>';
-		echo '</div>';
-		echo '</div>';
+					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
+					echo '</ul>';
+					?>
+					<!-- Add a comment -->
+					<div class="input-group">
+						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
+							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
+							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+						</form>
+						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a>
+					</div>
+				</div> <!-- /.panel-body -->
+			</div> <!-- /.panel -->
+		<?php
+		} // /while
+		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
+        echo '</div>'; /* /.newsfeed */
 		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 		?>
