@@ -24,7 +24,7 @@ try {
 	if (!empty($data['profile_pic'])){
 		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
 	} else {
-		$pic_path = 'data/default-profile.png';
+		$pic_path = '/ensisocial/data/avatar/default-profile.png';
 	}
 
 } catch (PDOException $e) {
@@ -128,9 +128,9 @@ try {
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
-						<?php 
+						<?php
 						if ($_SESSION['id'] == $publication['authorid']){?>
-						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a><?php ;}?> 
+						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a><?php ;}?>
 					</div>
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->
