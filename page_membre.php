@@ -44,7 +44,6 @@ try {
 				?>
 			</h3>
 		</center>
-
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
@@ -126,6 +125,7 @@ try {
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
+						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a>
 					</div>
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->
