@@ -66,7 +66,7 @@ height:40px;
 }
 
 </style>
-
+<script language="javascript" type="text/javascript" src="/ensisocial/messagerie/client.js"></script>
 
 <div class="chat_wrapper">
 <div class="message_box" id="message_box"></div>

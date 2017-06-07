@@ -27,10 +27,9 @@ function createRequestObject() {
 
 function refresh() {
     var xhr=createRequestObject();
-    xhr.open("GET", "memberconnected.php", false);
+    xhr.open("GET", "/ensisocial/memberconnected.php", false);
     xhr.send(null);
     writeInDiv(xhr.responseText);
-    setInterval("refresh()",10000);
 }
 
 function clicup(num,iduser) {
