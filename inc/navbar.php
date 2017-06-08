@@ -25,7 +25,8 @@
 				<?php if (!isset($_SESSION['id'])): ?>
 					<li><a href="inscription.php" title="inscription"><span class="glyphicon glyphicon-user"></span>&nbsp;Inscription</a></li>
 				<?php else: ?>
-					<li><a href="/ensisocial/profile.php">
+					<!-- Page de profil personelle -->
+					<li><a href="/ensisocial/recherche/searchProfil.php?id=<?php echo $_SESSION['id']; ?>">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profil
 					</a></li>
 					<li><a href="">

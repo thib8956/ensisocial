@@ -4,7 +4,6 @@ $title="Recherche";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
-	
 	$profil  = $db->query('SELECT * from users WHERE id='.$_GET['id']);
 	$profilDonnee = $profil->fetch();
 	if (!empty($data['profile_pic'])){
@@ -38,6 +37,11 @@ try {
 				?>
 			</h3>
 		</center>
+		<?php if ($profilDonnee['id'] == $_SESSION['id']): ?>
+			<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
+			</a></p>
+		<?php endif ?>
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
@@ -74,7 +78,7 @@ try {
 <!-- Add a publication -->
 <div class="row">
 	<div class="col-sm-offset-2 col-md-9">
-	
+
 		<form action="/ensisocial/publication.php" method="post">
 		<?php
 			$form = new Form($_POST, 'post');
@@ -84,7 +88,7 @@ try {
 			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />
 		</form>'
 			?>
-			
+
 	</div>
 </div>
 
