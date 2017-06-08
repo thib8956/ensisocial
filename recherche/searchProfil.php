@@ -5,7 +5,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
 	$profil  = $db->query('SELECT * from users WHERE id='.$_GET['id']);
-	$profilDonnee = $profil->fetch();
+	$data = $profil->fetch();
 	if (!empty($data['profile_pic'])){
 		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
 	} else {
@@ -33,10 +33,10 @@ try {
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
 				<?php
-				echo $profilDonnee['firstname'].' '.$profilDonnee['lastname'];
+				echo $data['firstname'].' '.$data['lastname'];
 				?>
 			</h3>
-			<?php if ($profilDonnee['id'] == $_SESSION['id']): ?>
+			<?php if ($data['id'] == $_SESSION['id']): ?>
 				<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
 					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
 				</a></p>
@@ -58,12 +58,12 @@ try {
 			<div class="modal-body">
 				<center>
 					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $profilDonnee['firstname'].' '; echo$profilDonnee['lastname'].' ' ?><small><?php echo $profilDonnee['town'] ?></small></h3>
+					<h3 class="media-heading"><?php echo $data['firstname'].' '; echo$data['lastname'].' ' ?><small><?php echo $data['town'] ?></small></h3>
 				</center>
 				<hr>
 				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$profilDonnee['formation']]; ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($profilDonnee['birth'])); ?></p>
+					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$data['formation']]; ?></p>
+					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($data['birth'])); ?></p>
 				</center>
 			</div>
 			<div class="modal-footer">
