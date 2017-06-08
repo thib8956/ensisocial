@@ -24,7 +24,7 @@ $form = new Form($_POST,"profile_page");
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#profilepic">Modifier</a></div> <!-- href correspond à ce que ça collapse quand on appuie -->
         </div>
         <div id="profilepic" class="panel-collapse collapse">
-            <form method="post"  accept-charset="utf-8" class="col-md-4">
+            <form action="edit-profile/change_pic.php" method="post"  accept-charset="utf-8" class="col-md-4">
             <?php
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
                 echo $form->inputfile('picture', 'Choisissez une image de profil');

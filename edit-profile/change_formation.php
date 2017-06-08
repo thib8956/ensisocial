@@ -12,5 +12,5 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 //peut etre une page pour valider le changement serait cool en fait pour ça
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
-header('Location: /ensisocial/profile.php');
+header('Location: /ensisocial/edit-profile.php');
 ?>
