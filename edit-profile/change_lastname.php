@@ -12,7 +12,8 @@ $stmt->execute(array(
 	'lname' => htmlentities($_POST['lastname']),
 	'id' => intval($_SESSION['id'])
 	));
-//peut etre une page pour valider le changement serait cool en fait pour ça
+// Update session variable
+if (isset($_SESSION['lastname'])) $_SESSION['lastname'] = htmlentities($_POST['lastname']);
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 header('Location: /ensisocial/edit-profile.php');

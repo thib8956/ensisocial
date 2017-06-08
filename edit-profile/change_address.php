@@ -10,7 +10,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 $stmt = $db->prepare('UPDATE users SET addresse = :addr WHERE id = :id');
 $stmt->execute(array('addr' => htmlentities($_POST['address']),
 	'id' => intval($_SESSION['id'])));
-//peut etre une page pour valider le changement serait cool en fait pour ça
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 header('Location: /ensisocial/edit-profile.php');
