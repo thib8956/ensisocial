@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	//create a new WebSocket object.
-	var wsUri = "ws://localhost:9050/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
+	var wsUri = "ws://192.168.1.55:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
 	websocket = new WebSocket(wsUri); 
 	
 	websocket.onopen = function(ev) { // connection is open 
@@ -39,7 +39,7 @@ $(document).ready(function(){
 		var type = msg.type; //message type
 		var umsg = msg.message; //message text
 		var uname = msg.name; //user name
-		var ucolor = getCookie('color'); //color
+		var ucolor = msg.color; //color
 
 		if(type == 'usermsg') 
 		{

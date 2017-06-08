@@ -117,7 +117,7 @@ try {
 				echo '<span class="glyphicon glyphicon-thumbs-down"></span>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
 					// Comment section
-				echo '<ul class="list-group">';
+				    echo '<ul class="list-group">';
 					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
 					echo '</ul>';
 					?>
@@ -128,7 +128,7 @@ try {
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
-						<a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>>delete </a>
+						<p><a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>> delete </a></p>
 					</div>
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->

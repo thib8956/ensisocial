@@ -8,7 +8,6 @@
 
 <!-- Scripts -->
 <script src="/ensisocial/js/jquery.js"></script>
-<script src="/ensisocial/messagerie/client.js"></script>
 <script src="/ensisocial/js/jquery-ui.js"></script>
 <script src="/ensisocial/js/autocomplete.js" ></script>
 <script src="/ensisocial/js/bootstrap.min.js"></script>
