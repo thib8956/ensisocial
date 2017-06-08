@@ -74,47 +74,56 @@ try {
 <!-- Add a publication -->
 <div class="row">
 	<div class="col-sm-offset-2 col-md-9">
-	
+		
 		<form action="/ensisocial/publication.php" method="post">
-		<?php
+			<?php
 			$form = new Form($_POST, 'post');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
 			echo $form->inputtextarea('content', 'Contenu', 5, 16);
 			echo $form->submit('Publier');
 			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />
 		</form>'
-			?>
-			
+		?>
+		
 	</div>
 </div>
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-<div class="col-sm-offset-2 col-md-9 newsfeed">
-	<?php
-    $commId=0;
-	while ($publication=$stmt->fetch()){
-        $commId+=1;
-		$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
-		?>
-		<div class="panel panel-default" id="publi">
-			<?php
-			$score = $publication['score'];
+	<div class="col-sm-offset-2 col-md-9 newsfeed">
+		<?php
+		$commId=0;
+		while ($publication=$stmt->fetch()){
+			$place= $db->query('SELECT * FROM users WHERE users.id='.$publication['place']);
+			$loc=$place->fetch();
+			$commId+=1;
+			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 			?>
-			<div class="panel-heading" id="page_membre">
-				<a class="pull-left" href="#">
-					<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
-				</a>
-
-				<?php if ($_SESSION['id'] == $publication['authorid']): ?>
-					<a class="btn btn-default pull-right" href=<?php echo '/ensisocial/delete.php?id='.$publication['newsfeedid']; ?>>
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						Supprimer
-					</a>
-				<?php endif?>
+			<div class="panel panel-default" id="publi">
 				<?php
 				$score = $publication['score'];
-				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
+				?>
+				<div class="panel-heading" id="page_membre">
+					<a class="pull-left" href="#">
+						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
+					</a>
+
+					<?php if ($_SESSION['id'] == $publication['authorid']): ?>
+						<a class="btn btn-default pull-right" href=<?php echo '/ensisocial/delete.php?id='.$publication['newsfeedid']; ?>>
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							Supprimer
+						</a>
+					<?php endif?>
+					<?php
+					$score = $publication['score'];
+					echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
+					<small>
+						<span class="glyphicon glyphicon-chevron-right">
+						</span>
+						<a href="/ensisocial/recherche/searchProfil.php?id='.$loc['id'].'">'.$loc['firstname'].' '.$loc['lastname'].'
+						</a>
+					</small>
+				</h2>';
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
 			</div> <!-- .panel-heading -->
@@ -139,17 +148,17 @@ try {
 				<!-- Add a comment -->
 				<div class="input-group">
 					<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
-						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-						<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
-						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-					</form>
-				</div>
-			</div> <!-- /.panel-body -->
-		</div> <!-- /.panel -->
-		<?php
+					<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
+					<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+					<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+				</form>
+			</div>
+		</div> <!-- /.panel-body -->
+	</div> <!-- /.panel -->
+	<?php
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
-        echo '</div>'; /* /.newsfeed */
+		echo '</div>'; /* /.newsfeed */
 		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 		?>
 
