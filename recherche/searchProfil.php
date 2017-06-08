@@ -36,12 +36,12 @@ try {
 				echo $profilDonnee['firstname'].' '.$profilDonnee['lastname'];
 				?>
 			</h3>
+			<?php if ($profilDonnee['id'] == $_SESSION['id']): ?>
+				<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
+				</a></p>
+			<?php endif ?>
 		</center>
-		<?php if ($profilDonnee['id'] == $_SESSION['id']): ?>
-			<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
-			</a></p>
-		<?php endif ?>
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
@@ -62,7 +62,7 @@ try {
 				</center>
 				<hr>
 				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $profilDonnee['formation'] ?></p>
+					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$profilDonnee['formation']]; ?></p>
 					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($profilDonnee['birth'])); ?></p>
 				</center>
 			</div>
