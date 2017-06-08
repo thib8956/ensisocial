@@ -10,21 +10,25 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 if(isset($_POST['post'])){
 	if (!empty($_POST['title']) && !empty($_POST['content'])){
 		createPublication($db);
-		header('Location: page_membre.php');
+		if($_POST["idplace"]==NULL){
+			header('Location: page_membre.php');
+		}else{
+			header('Location: recherche/searchProfil.php?id='.$_POST["idplace"]);
+		}
 	}
 }
+
 
 function createPublication($conn){
 	$curr_timestamp = date('Y-m-d H:i:s');
 	try {
-
-		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`) VALUES (:title, :date, :content)');
+		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`,`place`) VALUES (:title, :date, :content, :place)');
 		$stmt->execute(array(
 			'title' => htmlentities($_POST['title']),
 			'date' => $curr_timestamp,
-			'content' => htmlentities($_POST['content'])
+			'content' => htmlentities($_POST['content']),
+			'place' => intval($_POST['idplace'])
 			));
-
 		$stmt = $conn->prepare('INSERT INTO `authornews` (`authorid`, `newsfeedid`)
 			VALUES (:author_id, (SELECT id FROM newsfeed WHERE `date` = :date AND `title` = :title))');
 		$stmt->execute(array(
