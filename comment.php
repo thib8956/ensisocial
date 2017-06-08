@@ -23,8 +23,34 @@ try {
     ORDER BY comments.`date` 
     LIMIT :limit
     ');
-  $comment->execute(array('newsid' => $publication['newsfeedid'], 'limit' => $_SESSION['commentUnfold'][$publication['newsfeedid']]));
-  $row = $comment->fetch();
+$comment->execute(array('newsid' => $publication['newsfeedid'], 'limit' => $_SESSION['commentUnfold'][$publication['newsfeedid']]));
+$nbrDisplayComment=$comment->rowCount();
+$row = $comment->fetch();
+$countComment = $db->prepare('
+    SELECT comments.content,
+    newsfeed.id,
+    lastname,
+    firstname,
+    authorid,
+    comments.date,
+    users.profile_pic,
+    comments.id
+    FROM comments,
+    authorcomment,
+    newscomment,
+    users,
+    newsfeed
+    WHERE comments.id = authorcomment.commentid
+    AND authorcomment.authorid = users.id
+    AND comments.id = newscomment.commentid
+    AND newscomment.newsfeedid = newsfeed.id
+    AND newsfeed.id = :newsid
+    ');
+$countComment->execute(array('newsid' => $publication['newsfeedid']));
+$nbrTotalComment=$countComment->rowCount();
+if($nbrDisplayComment > $nbrTotalComment) {
+    $nbrDisplayComment=$nbrTotalComment;
+}
 
 } catch (PDOException $e) {
   echo '<div class="alert alert-danger">';

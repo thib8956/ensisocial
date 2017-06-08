@@ -166,7 +166,9 @@ try {
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
 						<p>
-                            <a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'&amp;value=10'; ?>>Voir plus de commentaires </a>
+                            <?php if($nbrDisplayComment != $nbrTotalComment) { ?>
+                                <a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'>Voir plus de commentaires  ('.$nbrDisplayComment.'/'.$nbrTotalComment.') </a>' ?>
+                            <?php } ?>
                             <?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]!=5) { ?>
                                 <a class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
                             <?php } ?>
