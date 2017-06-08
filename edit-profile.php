@@ -5,10 +5,11 @@ if (!isset($_SESSION['id'])){
 }
 $title="Profil";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-    $req = $db->prepare('SELECT * FROM users WHERE email = :email');
-    $req->execute(array('email'=> $_SESSION["email"]));
-    $profile = $req->fetch();
+$req = $db->prepare('SELECT * FROM users WHERE email = :email');
+$req->execute(array('email'=> $_SESSION["email"]));
+$profile = $req->fetch();
 $form = new Form($_POST,"profile_page");
+
 ?>
 
 <div class="container panel-group" id="accordion">
@@ -121,7 +122,7 @@ $form = new Form($_POST,"profile_page");
             <div class="col-md-2">Filière</div>
             <div class="col-md-4 text-center">
                 <?php
-                    echo $profile["formation"];
+                    echo $FORMATIONS[$profile['formation']];
                 ?>
             </div>
             <div class="col-md-2">
@@ -132,11 +133,7 @@ $form = new Form($_POST,"profile_page");
             <form action="edit-profile/change_formation.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
         echo $form->inputsection('formation','string','formation',
-            array('IR' => 'Informatique et Réseaux',
-              'AS' =>'Automatique et Systèmes',
-              'meca' => 'Mécanique',
-              'textile' => 'Textile',
-              'FIP' => 'Filière par alternance'));
+                                $FORMATIONS);
                 echo $form->submit("Valider");
                 ?>
             </form>

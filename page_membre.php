@@ -42,10 +42,10 @@ try {
 				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
 				?>
 			</h3>
+			<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
+			</a></p>
 		</center>
-		<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
-			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
-		</a></p>
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
@@ -66,7 +66,7 @@ try {
 				</center>
 				<hr>
 				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $_SESSION['formation'] ?></p>
+					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$_SESSION['formation']]; ?></p>
 					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
 				</center>
 			</div>
