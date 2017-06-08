@@ -25,7 +25,8 @@
 				<?php if (!isset($_SESSION['id'])): ?>
 					<li><a href="inscription.php" title="inscription"><span class="glyphicon glyphicon-user"></span>&nbsp;Inscription</a></li>
 				<?php else: ?>
-					<li><a href="/ensisocial/profile.php">
+					<!-- Page de profil personelle -->
+					<li><a href="/ensisocial/recherche/searchProfil.php?id=<?php echo $_SESSION['id']; ?>">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profil
 					</a></li>
 					<li><a href="">
@@ -39,17 +40,20 @@
 					</a></li>
 				<?php endif ?>
 			</ul>
-			<!-- Searchbar -->
-			<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
-				<div class="input-group add-on">
-					<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
-					<div class="input-group-btn">
-						<button type="submit" id="search" class="btn btn-primary" name="search">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
+
+			<?php if (isset($_SESSION['id'])): ?>
+				<!-- Searchbar -->
+				<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
+					<div class="input-group add-on">
+						<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
+						<div class="input-group-btn">
+							<button type="submit" id="search" class="btn btn-primary" name="search">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			<?php endif ?>
 		</div><!--/.nav-collapse -->
 	</div> <!-- /.container -->
 </nav>

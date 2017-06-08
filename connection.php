@@ -13,6 +13,7 @@ $form=new Form($_POST,"connection");
     echo "<a href=\"/ensisocial/lost_pwd.php\">Mot de passe oublié?</a>";
 ?>
 </form>
+
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

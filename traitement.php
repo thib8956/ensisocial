@@ -38,8 +38,6 @@ $headers = 'From: webmaster@example.com' . "\r\n" .
 'X-Mailer: PHP/' . phpversion();
      */
 
-
-
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
         while($data = $answer->fetch()) {
@@ -53,7 +51,7 @@ if(isset($_POST['signin'])) {
             if($_POST["password"] == $_POST["repassword"]){
                 echo '<p>Mot de passe OK.</p>';
                 // Generate an unique filename for the profile pic.
-                $fname = md5($_FILES['picture']['name']);
+                $fname = md5(uniqid(rand(), true));
                 $ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1); // Get file extension
                 $dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname.$ext;
                 // Upload profile picture

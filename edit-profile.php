@@ -5,40 +5,44 @@ if (!isset($_SESSION['id'])){
 }
 $title="Profil";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-    $req = $db->prepare('SELECT * FROM users WHERE email = :email');
-    $req->execute(array('email'=> $_SESSION["email"]));
-    $profile = $req->fetch();
+$req = $db->prepare('SELECT * FROM users WHERE email = :email');
+$req->execute(array('email'=> $_SESSION["email"]));
+$profile = $req->fetch();
 $form = new Form($_POST,"profile_page");
+
 ?>
 
-<div class="container panel-group" id="accordion"> 
-    
+<div class="container panel-group" id="accordion">
+
     <div class="panel">
         <div class="row panel-heading"> <!-- panel-heading pour souligner, row pour la hauteur-->
             <div class="col-md-2">Image de profil</div>
             <div class="col-md-4 text-center">
                 <?php
-                    echo "<img class='img-circle' alt='profile_pic' src='data/avatar/".$profile["profile_pic"]."' style='height:50px;width:50px;' />";   
+                    echo "<img class='img-circle' alt='profile_pic' src='data/avatar/".$profile["profile_pic"]."' style='height:50px;width:50px;' />";
                 ?>
             </div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#profilepic">Modifier</a></div> <!-- href correspond à ce que ça collapse quand on appuie -->
         </div>
         <div id="profilepic" class="panel-collapse collapse">
+            <form action="edit-profile/change_pic.php" method="post"  accept-charset="utf-8" class="col-md-4">
             <?php
                 echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
                 echo $form->inputfile('picture', 'Choisissez une image de profil');
+                echo $form->submit("Valider");
             ?>
+            </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Mot de passe</div>
-            <div class="col-md-4 text-center">********</div>
+            <div class="col-md-4 text-center">***************</div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#password">Modifier</a></div>
         </div>
         <div id="password" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_password.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'oldpassword',
@@ -55,13 +59,14 @@ $form = new Form($_POST,"profile_page");
                     'password',
                     'Retapez votre mot de passe'
                 );
+                echo $form->submit("Valider");
             ?>
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Nom</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -73,20 +78,21 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="lastname" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_lastname.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'lastname',
                     'string',
                     'Nom'
                 );
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Prénom</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -98,24 +104,25 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="firstname" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_firstname.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'firstname',
                     'string',
                     'Prénom'
                 );
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Filière</div>
             <div class="col-md-4 text-center">
                 <?php
-                    echo $profile["formation"];
+                    echo $FORMATIONS[$profile['formation']];
                 ?>
             </div>
             <div class="col-md-2">
@@ -123,20 +130,18 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="formation" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_formation.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
-                echo $form->inputfield(
-                    'formation',
-                    'string',
-                    'Formation'
-                );
+        echo $form->inputsection('formation','string','formation',
+                                $FORMATIONS);
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Mail</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -145,9 +150,9 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
     </div>
-    
+
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Adresse</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -158,19 +163,20 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="address" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_address.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'address',
                     'string',
                     'Adresse'
                 );
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Code postal</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -182,19 +188,20 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="zipcode" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_zipcode.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'zipcode',
                     'int',
                     'Code postal'
                 );
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Ville</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -204,41 +211,51 @@ $form = new Form($_POST,"profile_page");
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#town">Modifier</a></div>
         </div>
         <div id="town" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_town.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'town',
                     'string',
                     'Ville'
                 );
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Téléphone</div>
             <div class="col-md-4 text-center">
                 <?php
-                    echo $profile["phone"];
+                    $length=strlen($profile["phone"]);
+                    $phone="";
+                    for ($i=0;$i<$length;$i++){
+                        if ($i!=0 && $i%2==0){
+                            $phone.=" ";
+                        }
+                        $phone.=$profile["phone"][$i];
+                    } //Pour l'affichage du tel
+                    echo $phone;
                 ?>
             </div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#phone">Modifier</a></div>
         </div>
         <div id="phone" class="panel-collapse collapse row">
-            <form class="col-md-4"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_phone.php" method="post" accept-charset="utf-8" class="col-md-4"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'phone',
                     'string',
                     'Numéro de téléphone'
                 );
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>
     </div>
     <div class="panel">
-        <div class="row panel-heading"> 
+        <div class="row panel-heading">
             <div class="col-md-2">Date de naissance</div>
             <div class="col-md-4 text-center">
                 <?php
@@ -248,13 +265,14 @@ $form = new Form($_POST,"profile_page");
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#birth">Modifier</a></div>
         </div>
         <div id="birth" class="panel-collapse collapse row">
-            <form class="col-md-4 d-inline"> <!--Rajouter le traitement du formulaire-->
+            <form action="edit-profile/change_birth.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline"> <!--Rajouter le traitement du formulaire-->
                 <?php
                 echo $form->inputfield(
                     'birth',
                     'date',
                     'Date de naissance'
                 );
+                echo $form->submit("Valider");
                 ?>
             </form>
         </div>

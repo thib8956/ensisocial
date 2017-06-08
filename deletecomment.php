@@ -31,9 +31,6 @@ if ( $nb1['authorid'] == $connectedid ){
 	exit();
 	}
 
-else { echo 'erreur'; 
-	header('Location: page_membre.php');
-	exit();}
 
 // fermeture de la connection à la bdd
 if ($bdd) {$bdd = NULL;}?>

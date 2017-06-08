@@ -8,6 +8,11 @@ try {
 }
 
 require_once 'form.php';
+$FORMATIONS = array('IR' => 'Informatique et Réseaux',
+  'AS' =>'Automatique et Systèmes',
+  'meca' => 'Mécanique',
+  'textile' => 'Textile',
+  'FIP' => 'Filière par alternance');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,7 +26,7 @@ require_once 'form.php';
 	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
-<body onload="javascript:refresh()">
+<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');">
 	<?php
 	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>

@@ -3,6 +3,7 @@ $title="Inscription";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 $form = new Form($_POST,"signin");
+
 ?>
 
 <script src="/ensisocial/js/treatment.js">
@@ -122,5 +123,3 @@ $form = new Form($_POST,"signin");
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>
-<!-- public function inputfield($name, $type, $display, $mandatory=FALSE, $classlabel="control-label", $classselect="form-control", $id="", $glyphicon=FALSE){
--->
