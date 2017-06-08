@@ -12,12 +12,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 //Partie de traitement
     $req = $db->prepare('SELECT * FROM users WHERE email = :email');
-    $req->execute(array('email'=> $_SESSION['email']));
+    $req->execute(array('email'=> htmlentities($_SESSION['email'])));
     $row = $req->fetch(); //On récupère les infos
     if (password_verify($_POST['oldpassword'], $row['password'])){
         if ($_POST['newpassword']==$_POST['repassword']){
-            $req2= $db->prepare('UPDATE users SET password="'.$hash.'" WHERE id='.$_SESSION['id']);
-            $req2->execute();
+            $req2= $db->prepare('UPDATE users SET password=:hash WHERE id=:id');
+            $req2->execute(array('hash'=>$hash,
+                                    'id'=> intval($_SESSION['id'])));
         }
     }
 // messages d'alerte à rajouter quand c'est pas les bons, mettre que c'est bien changé sinon

@@ -99,7 +99,8 @@ try {
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
-			$place= $db->query('SELECT * FROM users WHERE users.id='.$publication['place']);
+			$place= $db->prepare('SELECT * FROM users WHERE users.id=:id');
+			$place->execute(array('id'=>intval($publication['place'])));
 			$loc=$place->fetch();
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
