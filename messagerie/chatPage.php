@@ -103,8 +103,6 @@ height:40px;
         <button id="send-btn" class="btn btn-primary">Send</button>
     </div>
 </div>
-<script src="/ensisocial/js/jquery.js"></script>
-<script src="/ensisocial/messagerie/client.js"></script>
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

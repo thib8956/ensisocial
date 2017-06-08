@@ -20,9 +20,10 @@ try {
     AND comments.id = newscomment.commentid
     AND newscomment.newsfeedid = newsfeed.id
     AND newsfeed.id = :newsid
-    ORDER BY comments.`date`
+    ORDER BY comments.`date` 
+    LIMIT :limit
     ');
-  $comment->execute(array('newsid' => $publication['newsfeedid']));
+  $comment->execute(array('newsid' => $publication['newsfeedid'], 'limit' => $_SESSION['commentUnfold'][$publication['newsfeedid']]));
   $row = $comment->fetch();
 
 } catch (PDOException $e) {
@@ -48,7 +49,7 @@ while($row) {
     </a>
 
     <?php if ($_SESSION['id'] == $row['authorid']): ?>
-      <a class="btn btn-default pull-right" href=<?php echo "/ensisocial/deletecomment.php?id=".$row['id']; ?>>
+      <a class="btn btn-default pull-right supprComment" href=<?php echo "/ensisocial/deletecomment.php?id=".$row['id']; ?>>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         Supprimer
       </a>

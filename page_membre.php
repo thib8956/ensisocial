@@ -103,6 +103,11 @@ try {
 			$loc=$place->fetch();
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
+            
+            if(!isset($_SESSION['commentUnfold'][$publication['newsfeedid']])) { //creation de la limite de commentaire
+                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;   
+            }
+            
 			?>
 			<div class="panel panel-default" id="publi">
 				<?php
@@ -114,7 +119,7 @@ try {
 					</a>
 
 					<?php if ($_SESSION['id'] == $publication['authorid']): ?>
-						<a class="btn btn-default pull-right" href=<?php echo 'delete.php?id='.$publication['newsfeedid']; ?>>
+						<a class="btn btn-default pull-right supprNews" href=<?php echo 'delete.php?id='.$publication['newsfeedid']; ?>>
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							Supprimer
 						</a>
@@ -160,7 +165,12 @@ try {
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
-						<p><a href=<?php echo "delete.php?id=".$publication['newsfeedid']; ?>> delete </a></p>
+						<p>
+                            <a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'&amp;value=10'; ?>>Voir plus de commentaires </a>
+                            <?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]!=5) { ?>
+                                <a class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
+                            <?php } ?>
+                        </p>
 					</div>
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->
