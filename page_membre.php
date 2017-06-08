@@ -31,6 +31,7 @@ try {
 	echo '</div>';
 }
 ?>
+
 <!-- Left panel -->
 <div class="row">
 	<div class="col-sm-2 well affix">
@@ -42,13 +43,16 @@ try {
 				?>
 			</h3>
 		</center>
+		<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
+			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
+		</a></p>
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
 	</div>
 </div>
 
-<!-- Pop up lorsque l'on clique sur l'image-->
+<!-- Pop up when clicking picture -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
 	<div class="modal-dialog" >
 		<div class="modal-content">

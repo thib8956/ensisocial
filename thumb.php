@@ -18,11 +18,11 @@ function thumb($id,$action,$conn,$iduser){
 	echo $vote["iduser"];
 	if($vote['iduser']==$iduser && $vote['idnews']==$id){
 		if($vote['vote']){
-			$thumbdown=$conn->prepare('UPDATE `newsfeed` 
+			$thumbdown=$conn->prepare('UPDATE `newsfeed`
 				SET `score` = `score`-1 WHERE `id` =:id ;');
 			$thumbdown->execute(array('id'=>$id));
 		}else{
-			$thumbup=$conn->prepare('UPDATE `newsfeed` 
+			$thumbup=$conn->prepare('UPDATE `newsfeed`
 				SET `score` = `score`+1 WHERE `id` =:id ;');
 
 			$thumbup->execute(array('id'=>$id));
@@ -32,18 +32,18 @@ function thumb($id,$action,$conn,$iduser){
 									'idnews'=>$id));
 	}else{
 		if($action== 1){
-			$thumbdown=$conn->prepare('UPDATE `newsfeed` 
+			$thumbdown=$conn->prepare('UPDATE `newsfeed`
 				SET `score` = `score`-1 WHERE `id` =:id ;');
 			$thumbdown->execute(array('id'=>$id));
 			$votee=false;
-			
+
 		} else{
-			$thumbup=$conn->prepare('UPDATE `newsfeed` 
+			$thumbup=$conn->prepare('UPDATE `newsfeed`
 				SET `score` = `score`+1 WHERE `id` =:id ;');
 
 			$thumbup->execute(array('id'=>$id));
 			$votee=true;
-			
+
 		}
 		$voted=$conn->prepare('INSERT INTO `vote` (`iduser`, `idnews`, `pk_vote`, `vote`) VALUES (:iduser, :idnews, NULL, :vote)');
 		$voted->execute(array('iduser'=>$iduser,

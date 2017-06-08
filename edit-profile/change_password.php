@@ -23,5 +23,5 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 // messages d'alerte à rajouter quand c'est pas les bons, mettre que c'est bien changé sinon
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
-header('Location: /ensisocial/profile.php');
+header('Location: /ensisocial/edit-profile.php');
 ?>
