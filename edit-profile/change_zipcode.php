@@ -7,9 +7,11 @@ $title="change_zipcode";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 //Partie de traitement
-    $req2= $db->prepare('UPDATE users SET zipcode=:zipcode WHERE id=:id');
-    $req2->execute(array('zipcode'=>$_POST['zipcode'],
-    					'id'=>intval($_SESSION["id"])));
+$req2= $db->prepare('UPDATE users SET zipcode=:zipcode WHERE id=:id');
+$req2->execute(
+	array('zipcode'=>$_POST['zipcode'],
+		'id'=>intval($_SESSION["id"])
+		));
 //peut etre une page pour valider le changement serait cool en fait pour ça
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
