@@ -14,7 +14,7 @@ try {
 		FROM groupe
 		ORDER BY name');
 	}else{
-		$stmt=$db->prepare('SELECT * 
+		$stmt=$db->prepare('SELECT groupe.id,groupe.name,groupe.description,groupe.img
 		FROM groupe 
 		JOIN member ON member.idgroup=groupe.id
 		WHERE member.iduser= :id
@@ -54,7 +54,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 					</a>
 					<h2>
-						<?php echo $row['name'] ?>
+					<?php if($id!=NULL){?>
+						<a href= <?php echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$row['name'].'</a>'; 
+
+					}else{
+						echo $row['name'];
+					}
+					?>
+
 						<a class="btn btn-link" data-toggle="collapse" data-target=<?php echo '#'.$row['id'] ?> aria-expanded="false">
 							<span class="glyphicon glyphicon-option-horizontal"></span>
 						</a>
@@ -64,7 +71,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			<div class="panel-body collapse" id=<?php echo $row['id']; ?>>
 				<div>
 				<?php
-				echo '<p>'.$row['description'].'</p>';?>
+				echo '<p>'.$row['description'].'</p>';
+				?>
 				</div>
 			</div><!--panel-body -->
 		</div><!--panel panel-default-->

@@ -45,19 +45,31 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
 			echo $form->inputtextarea('content', 'Contenu', 5, 16);
 			echo $form->submit('Publier');
+			echo '<input type="hidden" name="type" class="btn btn-primary-outline" value="1" />
+		</form>';
 			?>
 		</form>
 	</div>
 </div>
-
+<!-- check if you can see the news -->
+<?php
+$right=$db->query('SELECT iduser FROM member');
+$right=$right->fetch();
+?>
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
 	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
+			$test=$publication['place']==1 and $_SESSION['id']==$right['iduser'];
+			if($publication['place']==0 or $test){
 			$place= $db->query('SELECT * FROM users WHERE users.id='.$publication['place']);
 			$loc=$place->fetch();
+			if($publication['type']==1){
+				$group=$db->query('SELECT * FROM groupe WHERE groupe.id='.$publication['place']);
+				$group=$group->fetch();
+			}
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 
@@ -82,9 +94,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					<?php endif;
 
 					$score = $publication['score'];
-					if($publication['place']==0){
+					if($publication['place']==0 ){
 						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
-					}else{
+					}elseif($publication['place']!=0 && $publication['type']==0){
 						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
 						<small>
 							<span class="glyphicon glyphicon-chevron-right">
@@ -93,7 +105,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 							</a>
 						</small>
 					</h2>';
-				}
+					}
+					else{
+						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
+						<small>
+							<span class="glyphicon glyphicon-chevron-right">
+							</span>
+							<a href="/ensisocial/recherche/searchProfil.php?id='.$loc['id'].'">'.$group['name'].'
+							</a>
+						</small>
+					</h2>';
+					}
 				echo '<h3>'.$publication['title'].'</h3>';
 
 				?>
@@ -133,6 +155,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->
 		<?php
+		}
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
 		echo '</div>'; /* /.newsfeed */

@@ -11,6 +11,16 @@ $id=(isset($_GET["id"])) ? $_GET["id"] : NULL;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
+	$member=$db->prepare('SELECT iduser FROM member WHERE idgroup=:id');
+	$member->execute(array('id'=>$id));
+	$idmember=array();
+	while($memb=$member->fetch()){
+		array_push($idmember, $memb['iduser']);
+	}
+	
+	if(!in_array($_SESSION['id'], $idmember)){
+		header('location:/ensisocial/group/group.php');
+	}
 	$stmt = $db->prepare('SELECT *
 		FROM newsfeed 
 		JOIN authornews ON newsfeed.id = authornews.newsfeedid

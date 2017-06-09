@@ -2,17 +2,17 @@
 /**
  * Page de création d'une publication dans le newsfeed.
  */
-
 session_start();
 $title=$_SESSION['firstname'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-
+$place=(isset($_POST['idplace'])) ? $_POST['idplace'] :NULL;
+$type=(isset($_POST['type'])) ? $_POST['type'] :NULL;
 if(isset($_POST['post'])){
 	if (!empty($_POST['title']) && !empty($_POST['content'])){
 		createPublication($db);
-		if($_POST["idplace"]==NULL){
+		if($place==NULL){
 			header('Location: page_membre.php');
-		}elseif($_POST["type"]==0){
+		}elseif( $place !=NULL && $type==NULL  ){
 			header('Location: recherche/searchProfil.php?id='.$_POST["idplace"]);
 		}else{
 			header('Location: group/groupPage.php?id='.$_POST["idplace"]);
