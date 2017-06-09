@@ -38,6 +38,17 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit password -->
     <div class="panel">
+        <?php
+        if (isset($_GET['pwd'])){
+            if ($_GET['pwd']==0){
+                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Remplis les champs...</div></div>"; // mettre en rouge
+            } elseif ($_GET['pwd']==1){
+                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>"; // vert
+            } else {
+                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>"; // rouge
+            }
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Mot de passe</div>
             <div class="col-md-4 text-center">***************</div>
@@ -69,6 +80,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit firstname -->
     <div class="panel">
+        <?php
+        if (isset($_GET['fn'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre prénom a bien été changé</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Prénom</div>
             <div class="col-md-4 text-center">
@@ -96,6 +112,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit lastname -->
     <div class="panel">
+        <?php
+        if (isset($_GET['ln'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre nom a bien été changé</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Nom</div>
             <div class="col-md-4 text-center">
@@ -123,6 +144,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit formations -->
     <div class="panel">
+        <?php
+        if (isset($_GET['fm'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre formation a bien été changée</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Filière</div>
             <div class="col-md-4 text-center">
@@ -159,6 +185,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit address -->
     <div class="panel">
+        <?php
+        if (isset($_GET['ad'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre adresse a bien été changée</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Adresse</div>
             <div class="col-md-4 text-center">
@@ -185,6 +216,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit zipcode -->
     <div class="panel">
+        <?php
+        if (isset($_GET['zip'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre code postal a bien été changé</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Code postal</div>
             <div class="col-md-4 text-center">
@@ -212,6 +248,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit town -->
     <div class="panel">
+        <?php
+        if (isset($_GET['tn'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre ville a bien été changée</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Ville</div>
             <div class="col-md-4 text-center">
@@ -237,6 +278,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit phone number -->
     <div class="panel">
+        <?php
+        if (isset($_GET['tel'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre numéro de téléphone a bien été changé</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Téléphone</div>
             <div class="col-md-4 text-center">
@@ -270,6 +316,11 @@ $form = new Form($_POST,"profile_page");
 
     <!-- Edit birth date -->
     <div class="panel">
+        <?php
+        if (isset($_GET['birth'])){
+            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre date de naissance a bien été changée</div></div>"; //vert
+        }
+        ?>
         <div class="row panel-heading">
             <div class="col-md-2">Date de naissance</div>
             <div class="col-md-4 text-center">

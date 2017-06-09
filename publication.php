@@ -15,7 +15,9 @@ if(isset($_POST['post'])){
 		}else{
 			header('Location: recherche/searchProfil.php?id='.$_POST["idplace"]);
 		}
-	}
+	} else {
+        echo "<div>Il y a eu une erreur dans l'exécution de votre requête: une publication ne peut pas être vide</div>";
+    }
 }
 
 

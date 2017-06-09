@@ -20,37 +20,50 @@ if (isset($_FILES['picture'])){
 } elseif (isset($_POST['newpassword'])){
 	if (empty($_POST['oldpassword']) or empty($_POST['newpassword']) or empty($_POST['repassword'])){
 		// TODO : error messages
-		exit();
+        header('Location: /ensisocial/edit-profile.php?pwd=0');
 	} else {
-		updatePassword($db,
+		if (updatePassword($db,
 			htmlentities($_POST['oldpassword']),
 			htmlentities($_POST['newpassword']),
 			htmlentities($_POST['repassword'])
-			);
+			)) // teste si ca change bien
+        {
+            header('Location: /ensisocial/edit-profile.php?pwd=1');
+        } else {
+            header('Location: /ensisocial/edit-profile.php?pwd=2');
+        }
 	}
 } elseif (isset($_POST['firstname'])){
 	updateProfile($db, 'firstname', htmlentities($_POST['firstname']));
     $_SESSION['firstname'] = htmlentities($_POST['firstname']);
+    header('Location: /ensisocial/edit-profile.php?fn=true');
 } elseif (isset($_POST['lastname'])){
 	updateProfile($db, 'lastname', htmlentities($_POST['lastname']));
     $_SESSION['lastname'] = htmlentities($_POST['lastname']);
+    header('Location: /ensisocial/edit-profile.php?ln=true');
 } elseif (isset($_POST['formation'])){
 	updateProfile($db, 'formation', htmlentities($_POST['formation']));
     $_SESSION['formation']=htmlentities($_POST['formation']);
+    header('Location: /ensisocial/edit-profile.php?fm=true');
 } elseif (isset($_POST['address'])){
 	echo '<p>Changement d\'adresse';
 	echo '<p>'.$_POST['address'].'</p>';
-	updateProfile($db, 'addresse', htmlentities($_POST['address']));
+	updateProfile($db, 'addresse', htmlentities($_POST['address'])); 
+    header('Location: /ensisocial/edit-profile.php?ad=true');
 } elseif (isset($_POST['zipcode'])){
 	updateProfile($db, 'zipcode', htmlentities($_POST['zipcode']));
+    header('Location: /ensisocial/edit-profile.php?zip=true');
 } elseif (isset($_POST['town'])){
 	updateProfile($db, 'town', htmlentities($_POST['town']));
 	$_SESSION['town'] = htmlentities($_POST['town']);
+    header('Location: /ensisocial/edit-profile.php?tn=true');
 } elseif (isset($_POST['phone'])){
 	updateProfile($db, 'phone', htmlentities($_POST['phone']));
+    header('Location: /ensisocial/edit-profile.php?tel=true');
 } elseif (isset($_POST['birth'])){
 	updateProfile($db, 'birth', htmlentities($_POST['birth']));
     $_SESSION['birth']=htmlentities($_POST['birth']);
+    header('Location: /ensisocial/edit-profile.php?birth=true');
 }
 
 /**
@@ -122,9 +135,10 @@ function updatePassword($pdo, $oldpassword, $newpassword, $repassword){
 	        $stmt= $pdo->prepare('UPDATE users SET password=:hash WHERE id=:id');
 	        $stmt->execute(array('hash'=>$hash,
 	            'id'=> intval($_SESSION['id'])));
+            return true;
 	    }
 	}
+    return false;
 }
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
-header('Location: /ensisocial/edit-profile.php');
 ?>
