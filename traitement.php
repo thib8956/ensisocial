@@ -50,13 +50,21 @@ if(isset($_POST['signin'])) {
                 exit;
             } elseif($_POST["password"] == $_POST["repassword"]){
                 echo '<p>Mot de passe OK.</p>';
-                // Generate an unique filename for the profile pic.
-                $fname = md5(uniqid(rand(), true));
-                $ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1); // Get file extension
-                $dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname.$ext;
-                // Upload profile picture
-                upload('picture', $dst);
-                fillDatabase($db, $fname.$ext);
+
+                if (!empty($_FILES['picture']['name'])){
+                    // Generate an unique filename for the profile pic.
+                    $fname = md5(uniqid(rand(), true));
+                    $ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1); // Get file extension
+                    $fname .= $ext;
+                    $dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname;
+
+                    // Upload profile picture
+                    upload('picture', $dst);
+                } else {
+                    $fname = 'default-profile.png';
+                }
+                fillDatabase($db, $fname);
+
                 //Envoi du mail
                 //mail($to, $objet, $contenu, $headers);
                 echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';
