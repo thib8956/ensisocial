@@ -37,7 +37,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-2 col-md-9">
+	<div class="col-sm-offset-3 col-md-8">
 		<form action="publication.php" method="post">
 			<?php
 			$form = new Form($_POST, 'post');
@@ -51,7 +51,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-2 col-md-9 newsfeed">
+	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
@@ -59,11 +59,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			$loc=$place->fetch();
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
-            
+
             if(!isset($_SESSION['commentUnfold'][$publication['newsfeedid']])) { //creation de la limite de commentaire
-                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;   
+                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;
             }
-            
+
 			?>
 			<div class="panel panel-default" id="publi">
 				<?php

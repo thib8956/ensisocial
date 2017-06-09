@@ -30,7 +30,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-2 col-md-9">
+	<div class="col-sm-offset-3 col-md-8">
 
 		<form action="/ensisocial/publication.php" method="post">
 			<?php
@@ -48,7 +48,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-2 col-md-9 newsfeed">
+	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){

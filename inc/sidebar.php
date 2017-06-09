@@ -1,6 +1,5 @@
-<!-- Left panel -->
-<div class="row">
-	<div class="col-sm-2 well affix">
+<div class="col-sm-3 col-md-3"  role="complementary">
+	<nav id="sidebar" class="sidebar affix hidden-print hidden-sm hidden-xs">
 		<center>
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
@@ -12,10 +11,12 @@
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
 			</a></p>
 		</center>
+
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
-	</div>
+		<a href="#top" class="back-to-top">Revenir en haut</a>
+	</nav>
 </div>
 
 <!-- Pop up when clicking picture -->
@@ -44,3 +45,20 @@
 		</div>
 	</div>
 </div>
+
+<style type="text/css">
+	.sidebar {
+		z-index: 1;
+		background: white;
+		left: 0;
+		padding: 10px;
+	}
+</style>
+
+<script type="text/javascript">
+function toggleSidebar(){
+	$('#sidebar').toggleClass('hidden-xs');
+	$('#sidebar').toggleClass('hidden-sm');
+}
+
+</script>
