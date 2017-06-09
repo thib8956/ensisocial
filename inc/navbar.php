@@ -28,8 +28,8 @@
 					<li><a href="/ensisocial/profile.php">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profil
 					</a></li>
-					<li><a href="">
-						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Contacts récents
+					<li><a href="/ensisocial/upload_form.php">
+						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Uploads
 					</a></li>
 					<li><a href="/ensisocial/messagerie/chatPage.php">
 						<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;Messagerie
