@@ -13,7 +13,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $('body').on('click', '.supprComment', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
         var $this = $(this); // L'objet jQuery du formulaire
@@ -26,7 +26,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $('body').on('click', '.supprNews', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
         var $this = $(this); // L'objet jQuery du formulaire
@@ -39,7 +39,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $('body').on('click', '.showMore', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
         var $this = $(this); // L'objet jQuery du formulaire
@@ -52,7 +52,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $('body').on('click', '.showLess', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
         var $this = $(this); // L'objet jQuery du formulaire
@@ -65,7 +65,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $('body').on('click', '.thumb', function(e) {
         e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
         var $this = $(this); // L'objet jQuery du formulaire
