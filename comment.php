@@ -20,10 +20,13 @@ try {
     AND comments.id = newscomment.commentid
     AND newscomment.newsfeedid = newsfeed.id
     AND newsfeed.id = :newsid
-    ORDER BY comments.`date` 
+    ORDER BY comments.`date`
     LIMIT :limit
     ');
-$comment->execute(array('newsid' => $publication['newsfeedid'], 'limit' => $_SESSION['commentUnfold'][$publication['newsfeedid']]));
+$comment->execute(array(
+  'newsid' => $publication['newsfeedid'],
+  'limit' => $_SESSION['commentUnfold'][$publication['newsfeedid']]
+  ));
 $nbrDisplayComment=$comment->rowCount();
 $row = $comment->fetch();
 $countComment = $db->prepare('
