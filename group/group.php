@@ -5,6 +5,7 @@ if (session_status() != 2){
 	echo '<p>Erreur : session non démarrée</p>';
 	header('/ensisocial/index.php');
 }
+$id=(isset($_GET["id"])) ? $_GET["id"] : NULL;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
@@ -14,9 +15,19 @@ try {
 		JOIN users ON users.id = authornews.authorid
 		ORDER BY date DESC'
 		);
-	$group=$db->query('SELECT * 
-		FROM groupe 
+	if($id==NULL){
+		$group=$db->query('SELECT * 
+		FROM groupe
 		ORDER BY name');
+	}else{
+		$group=$db->prepare('SELECT * 
+		FROM groupe 
+		JOIN member ON member.idgroup=groupe.id
+		WHERE member.iduser= :id
+		ORDER BY name');
+		$group->execute(array('id'=> intval($id)));
+	}
+	
 	$user = $_SESSION;
 
 	/* Fetch profile picture */
