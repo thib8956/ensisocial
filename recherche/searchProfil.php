@@ -25,56 +25,9 @@ try {
 	die('Error:'.$e->getMessage());
 	echo '</div>';
 }
+// Sidebar
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
-<!-- Left panel -->
-<div class="row">
-	<div class="col-sm-2 well affix">
-		<center>
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
-			<h3>
-				<?php
-				echo $data['firstname'].' '.$data['lastname'];
-				?>
-			</h3>
-			<?php if ($data['id'] == $_SESSION['id']): ?>
-				<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
-				</a></p>
-			<?php endif ?>
-		</center>
-		<!-- List of connected members. -->
-		<p>Autres membres : </p>
-		<div id="memberconnected">Membres</div>
-	</div>
-</div>
-
-<!-- Pop up lorsque l'on clique sur l'image-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
-	<div class="modal-dialog" >
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
-			</div>
-			<div class="modal-body">
-				<center>
-					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $data['firstname'].' '; echo$data['lastname'].' ' ?><small><?php echo $data['town'] ?></small></h3>
-				</center>
-				<hr>
-				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$data['formation']]; ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($data['birth'])); ?></p>
-				</center>
-			</div>
-			<div class="modal-footer">
-				<center>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</center>
-			</div>
-		</div>
-	</div>
-</div>
-
 <!-- Add a publication -->
 <div class="row">
 	<div class="col-sm-offset-2 col-md-9">
