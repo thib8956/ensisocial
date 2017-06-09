@@ -6,6 +6,7 @@ if (!isset($_SESSION['id'])){
 	header('Location: index.php');
 }
 $title = $_SESSION['firstname'];
+$user = $_SESSION;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
@@ -37,7 +38,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-2 col-md-9">
+	<div class="col-sm-offset-3 col-md-8">
 		<form action="publication.php" method="post">
 			<?php
 			$form = new Form($_POST, 'post');
@@ -51,7 +52,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-2 col-md-9 newsfeed">
+	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
@@ -59,11 +60,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			$loc=$place->fetch();
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
-            
+
             if(!isset($_SESSION['commentUnfold'][$publication['newsfeedid']])) { //creation de la limite de commentaire
-                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;   
+                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;
             }
-            
+
 			?>
 			<div class="panel panel-default" id="publi">
 				<?php
@@ -112,8 +113,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				} else {
 					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
 				}
-				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
-				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
+				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
+				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
 					// Comment section
 				    echo '<ul class="list-group">';

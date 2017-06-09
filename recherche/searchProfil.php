@@ -26,11 +26,12 @@ try {
 	echo '</div>';
 }
 // Sidebar
+$user = $data;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-2 col-md-9">
+	<div class="col-sm-offset-3 col-md-8">
 
 		<form action="/ensisocial/publication.php" method="post">
 			<?php
@@ -48,7 +49,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-2 col-md-9 newsfeed">
+	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
@@ -57,6 +58,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			$loc=$place->fetch();
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
+
+			if(!isset($_SESSION['commentUnfold'][$publication['newsfeedid']])) { //creation de la limite de commentaire
+			                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;
+			            }
+
 			?>
 			<div class="panel panel-default" id="publi">
 				<?php
@@ -114,11 +120,19 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				<!-- Add a comment -->
 				<div class="input-group">
 					<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
-					<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-					<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
-					<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-				</form>
-			</div>
+						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
+						<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+					</form>
+					<p>
+                        <?php if($nbrDisplayComment != $nbrTotalComment) { ?>
+                            <a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'>Voir plus de commentaires  ('.$nbrDisplayComment.'/'.$nbrTotalComment.') </a>' ?>
+                        <?php } ?>
+                        <?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]!=5) { ?>
+                            <a class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
+                        <?php } ?>
+                    </p>
+				</div>
 		</div> <!-- /.panel-body -->
 	</div> <!-- /.panel -->
 	<?php
