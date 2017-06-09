@@ -48,8 +48,7 @@ if(isset($_POST['signin'])) {
                 echo '</div>';
                 echo $utile;
                 exit;
-            }
-            if($_POST["password"] == $_POST["repassword"]){
+            } elseif($_POST["password"] == $_POST["repassword"]){
                 echo '<p>Mot de passe OK.</p>';
                 // Generate an unique filename for the profile pic.
                 $fname = md5(uniqid(rand(), true));
