@@ -37,6 +37,9 @@
 					<li><a href="/ensisocial/upload_form.php">
 						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Uploads
 					</a></li>
+					<li><a href="/ensisocial/group/group.php">
+						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Groupe
+					</a></li>
 					<li><a href="/ensisocial/messagerie/chatPage.php">
 						<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;Messagerie
 					</a></li>

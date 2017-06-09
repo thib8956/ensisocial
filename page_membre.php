@@ -74,14 +74,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					<a class="pull-left" href="#">
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 					</a>
-
 					<?php if ($_SESSION['id'] == $publication['authorid']): ?>
 						<a class="btn btn-default pull-right supprNews" href=<?php echo 'delete.php?id='.$publication['newsfeedid']; ?>>
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							Supprimer
 						</a>
-					<?php endif?>
-					<?php
+					<?php endif;
+
 					$score = $publication['score'];
 					if($publication['place']==0){
 						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';

@@ -35,7 +35,8 @@ if ( $nb1['authorid'] == $connectedid ){
 		WHERE `newscomment`.`commentid` IS NULL
 		');
 
-	//header('Location: page_membre.php');
+
+
 	exit();
 }
 
