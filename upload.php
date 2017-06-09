@@ -15,9 +15,9 @@ if( isset($_POST['upload']) ) // si formulaire soumis
     $type_file = $_FILES['fichier']['type'];
     echo $type_file;
     if(!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png')
-      && !strstr($type_file, 'mp4') && !strstr($type_file, 'mpeg'))
+      && !strstr($type_file, 'mp4') && !strstr($type_file, 'mpeg') && !strstr($type_file, 'wav'))
     {
-        exit("Le fichier n'est pas une image");
+        exit("Le fichier n'est pas dans un format pris en charge");
     } 
 
     // on copie le fichier dans le dossier de destination
@@ -28,8 +28,10 @@ if( isset($_POST['upload']) ) // si formulaire soumis
         print_errors($ret);
         exit("Impossible de copier le fichier dans $content_dir");
     }
-    print_errors($ret);
-    echo "Le fichier a bien été uploadé";
+    else {
+        print_errors($ret);
+        echo "Le fichier a bien été uploadé";
+    }
 }
 
 function print_errors($retcode){
