@@ -1,4 +1,4 @@
-<?php 
+<?php
 //connection BDD
 session_start();
 
@@ -8,10 +8,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 try{   $bdd = new PDO('mysql:host=localhost;dbname=ensisocial;charset=utf8','root','');
 echo 'ok';}
 
-catch (Exception $e){ 
+catch (Exception $e){
 die('Erreur : ' . $e->getMessage());
 }
- 
+
 $commentid = $_GET['id'];
 $connectedid = $_SESSION['id'] ;
 
@@ -27,7 +27,7 @@ $nb1 = $req->fetch();
 if ( $nb1['authorid'] == $connectedid ){
 	// Delete
 	$bdd->query("delete  FROM comments  where id=".$commentid);
-	// header('Location: page_membre.php');
+
 	exit();
 	}
 
