@@ -41,11 +41,11 @@ $form = new Form($_POST,"profile_page");
         <?php
         if (isset($_GET['pwd'])){
             if ($_GET['pwd']==0){
-                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Remplis les champs...</div></div>"; // mettre en rouge
+                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Remplis les champs...</div></div>"; 
             } elseif ($_GET['pwd']==1){
-                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>"; // vert
+                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>"; 
             } else {
-                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>"; // rouge
+                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>"; 
             }
         }
         ?>
@@ -81,8 +81,8 @@ $form = new Form($_POST,"profile_page");
     <!-- Edit firstname -->
     <div class="panel">
         <?php
-        if (isset($_GET['fn'])){
-            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre prénom a bien été changé</div></div>"; //vert
+        if (isset($_GET['fn']) && $_GET['fn']==1){
+                echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre prénom a bien été changé</div></div>";
         }
         ?>
         <div class="row panel-heading">
