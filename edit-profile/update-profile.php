@@ -34,36 +34,48 @@ if (isset($_FILES['picture'])){
         }
 	}
 } elseif (isset($_POST['firstname'])){
-	updateProfile($db, 'firstname', htmlentities($_POST['firstname']));
-    $_SESSION['firstname'] = htmlentities($_POST['firstname']);
-    header('Location: /ensisocial/edit-profile.php?fn=true');
+    if (empty($_POST['firstname'])){
+        header('Location: /ensisocial/edit-profile.php?fn=0');
+    } else {
+        updateProfile($db, 'firstname', htmlentities($_POST['firstname']));
+        $_SESSION['firstname'] = htmlentities($_POST['firstname']);
+        header('Location: /ensisocial/edit-profile.php?fn=1');
+    }
 } elseif (isset($_POST['lastname'])){
-	updateProfile($db, 'lastname', htmlentities($_POST['lastname']));
-    $_SESSION['lastname'] = htmlentities($_POST['lastname']);
-    header('Location: /ensisocial/edit-profile.php?ln=true');
+    if (empty($_POST['lastname'])){
+        header('Location: /ensisocial/edit-profile.php?ln=0');
+    } else {
+	   updateProfile($db, 'lastname', htmlentities($_POST['lastname']));
+        $_SESSION['lastname'] = htmlentities($_POST['lastname']);
+        header('Location: /ensisocial/edit-profile.php?ln=1');
+    }
 } elseif (isset($_POST['formation'])){
 	updateProfile($db, 'formation', htmlentities($_POST['formation']));
     $_SESSION['formation']=htmlentities($_POST['formation']);
-    header('Location: /ensisocial/edit-profile.php?fm=true');
+    header('Location: /ensisocial/edit-profile.php?fm=1');
 } elseif (isset($_POST['address'])){
 	echo '<p>Changement d\'adresse';
 	echo '<p>'.$_POST['address'].'</p>';
 	updateProfile($db, 'addresse', htmlentities($_POST['address'])); 
-    header('Location: /ensisocial/edit-profile.php?ad=true');
+    header('Location: /ensisocial/edit-profile.php?ad=1');
 } elseif (isset($_POST['zipcode'])){
 	updateProfile($db, 'zipcode', htmlentities($_POST['zipcode']));
-    header('Location: /ensisocial/edit-profile.php?zip=true');
+    header('Location: /ensisocial/edit-profile.php?zip=1');
 } elseif (isset($_POST['town'])){
 	updateProfile($db, 'town', htmlentities($_POST['town']));
 	$_SESSION['town'] = htmlentities($_POST['town']);
-    header('Location: /ensisocial/edit-profile.php?tn=true');
+    header('Location: /ensisocial/edit-profile.php?tn=1');
 } elseif (isset($_POST['phone'])){
 	updateProfile($db, 'phone', htmlentities($_POST['phone']));
-    header('Location: /ensisocial/edit-profile.php?tel=true');
+    header('Location: /ensisocial/edit-profile.php?tel=1');
 } elseif (isset($_POST['birth'])){
-	updateProfile($db, 'birth', htmlentities($_POST['birth']));
-    $_SESSION['birth']=htmlentities($_POST['birth']);
-    header('Location: /ensisocial/edit-profile.php?birth=true');
+    if (empty($_POST['birth'])){
+        header('Location: /ensisocial/edit-profile.php?birth=0');
+    } else {
+        updateProfile($db, 'birth', htmlentities($_POST['birth']));
+        $_SESSION['birth']=htmlentities($_POST['birth']);
+        header('Location: /ensisocial/edit-profile.php?birth=1');
+    }
 }
 
 /**
