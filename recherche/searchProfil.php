@@ -90,6 +90,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			<div class="panel-body">
 				<?php
 				echo '<p>'.$publication['content'].'</p>';
+                if (preg_match("#https?://www\.youtube\.com/watch\?v=#",$publication['content'])) {
+                    $beginning = strpos($publication['content'], "https://www.youtube.com/watch?v=");
+                    $end = $beginning+43;        
+                    $url1 = substr($publication['content'], $beginning, $end);
+                    $urlbien = substr_replace($url1,"embed/",24,8);
+                    echo '<p><iframe src='.$urlbien.' width="600" height="400"></iframe></p>';
+                }
 				if($score >= 0){
 					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
 				} else {
