@@ -26,6 +26,7 @@ try {
 	echo '</div>';
 }
 // Sidebar
+$user = $data;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 <!-- Add a publication -->

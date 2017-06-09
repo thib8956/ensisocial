@@ -6,6 +6,7 @@ if (!isset($_SESSION['id'])){
 	header('Location: index.php');
 }
 $title = $_SESSION['firstname'];
+$user = $_SESSION;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {

@@ -4,7 +4,7 @@
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
 				<?php
-				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
+				echo $user['firstname'].' '.$user['lastname'];
 				?>
 			</h3>
 			<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
@@ -29,12 +29,12 @@
 			<div class="modal-body">
 				<center>
 					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $_SESSION['firstname'].' ';echo $_SESSION['lastname'].' ' ?><small><?php echo $_SESSION['town'] ?></small></h3>
+					<h3 class="media-heading"><?php echo $user['firstname'].' ';echo $user['lastname'].' ' ?><small><?php echo $user['town'] ?></small></h3>
 				</center>
 				<hr>
 				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$_SESSION['formation']]; ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
+					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$user['formation']]; ?></p>
+					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($user['birth'])); ?></p>
 				</center>
 			</div>
 			<div class="modal-footer">
