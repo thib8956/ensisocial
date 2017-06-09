@@ -1,6 +1,6 @@
 <?php
 if(session_status() != 2) {  //on verifie si la session n'est pas deja demarrée
-    session_start();
+session_start();
 }
 if (!isset($_SESSION['id'])){
 	header('Location: index.php');
@@ -15,7 +15,7 @@ try {
 		JOIN users ON users.id = authornews.authorid
 		ORDER BY date DESC'
 		);
-	$score = 42;
+
 
 	/* Fetch profile picture */
 	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
@@ -30,93 +30,72 @@ try {
 	die('Error:'.$e->getMessage());
 	echo '</div>';
 }
-?>
-<!-- Left panel -->
-<div class="row">
-	<div class="col-sm-2 well affix">
-		<center>
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
-			<h3>
-				<?php
-				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
-				?>
-			</h3>
-		</center>
-		<!-- List of connected members. -->
-		<p>Autres membres : </p>
-		<div id="memberconnected">Membres</div>
-	</div>
-</div>
 
-<!-- Pop up lorsque l'on clique sur l'image-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
-	<div class="modal-dialog" >
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
-			</div>
-			<div class="modal-body">
-				<center>
-					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $_SESSION['firstname'].' ';echo$_SESSION['lastname'].' ' ?><small><?php echo $_SESSION['town'] ?></small></h3>
-				</center>
-				<hr>
-				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $_SESSION['formation'] ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($_SESSION['birth'])); ?></p>
-				</center>
-			</div>
-			<div class="modal-footer">
-				<center>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</center>
-			</div>
-		</div>
-	</div>
-</div>
+// Sidebar
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
+?>
 
 <!-- Add a publication -->
 <div class="row">
 	<div class="col-sm-offset-2 col-md-9">
-			<form action="publication.php" method="post">
-				<?php
-				$form = new Form($_POST, 'post');
-				echo $form->inputfield('title', 'text', 'Titre de la publication');
-				echo $form->inputtextarea('content', 'Contenu', 5, 16);
-				echo $form->submit('Publier');
-				?>
-			</form>
+		<form action="publication.php" method="post">
+			<?php
+			$form = new Form($_POST, 'post');
+			echo $form->inputfield('title', 'text', 'Titre de la publication');
+			echo $form->inputtextarea('content', 'Contenu', 5, 16);
+			echo $form->submit('Publier');
+			?>
+		</form>
 	</div>
 </div>
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-<div class="col-sm-offset-2 col-md-9 newsfeed">
-	<?php
-    $commId=0;
-	while ($publication=$stmt->fetch()){
-        $commId+=1;
-		$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
-		?>
-		<div class="panel panel-default" id="publi">
-			<?php
-			$score = $publication['score'];
+	<div class="col-sm-offset-2 col-md-9 newsfeed">
+		<?php
+		$commId=0;
+		while ($publication=$stmt->fetch()){
+			$place= $db->query('SELECT * FROM users WHERE users.id='.$publication['place']);
+			$loc=$place->fetch();
+			$commId+=1;
+			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
+            
+            if(!isset($_SESSION['commentUnfold'][$publication['newsfeedid']])) { //creation de la limite de commentaire
+                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;   
+            }
+            
 			?>
-			<div class="panel-heading" id="page_membre">
-				<a class="pull-left" href="#">
-					<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
-				</a>
-
-				<?php if ($_SESSION['id'] == $publication['authorid']): ?>
-					<a class="btn btn-default pull-right" href=<?php echo 'delete.php?id='.$publication['newsfeedid']; ?>>
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						Supprimer
-					</a>
-				<?php endif?>
+			<div class="panel panel-default" id="publi">
 				<?php
 				$score = $publication['score'];
-				echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
+				?>
+				<div class="panel-heading" id="page_membre">
+					<a class="pull-left" href="#">
+						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
+					</a>
+
+					<?php if ($_SESSION['id'] == $publication['authorid']): ?>
+						<a class="btn btn-default pull-right supprNews" href=<?php echo 'delete.php?id='.$publication['newsfeedid']; ?>>
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							Supprimer
+						</a>
+					<?php endif?>
+					<?php
+					$score = $publication['score'];
+					if($publication['place']==0){
+						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
+					}else{
+						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
+						<small>
+							<span class="glyphicon glyphicon-chevron-right">
+							</span>
+							<a href="/ensisocial/recherche/searchProfil.php?id='.$loc['id'].'">'.$loc['firstname'].' '.$loc['lastname'].'
+							</a>
+						</small>
+					</h2>';
+				}
 				echo '<h3>'.$publication['title'].'</h3>';
+
 				?>
 			</div> <!-- .panel-heading -->
 			<div class="panel-body">
@@ -130,24 +109,32 @@ try {
 				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
 				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
-				// Comment section
-				echo '<ul class="list-group">';
-				include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
-				echo '</ul>';
-				?>
-				<!-- Add a comment -->
-				<div class="input-group">
-					<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
-						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-						<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
-						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-					</form>
-				</div>
-			</div> <!-- /.panel-body -->
-		</div> <!-- /.panel -->
+					// Comment section
+				    echo '<ul class="list-group">';
+					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
+					echo '</ul>';
+					?>
+					<!-- Add a comment -->
+					<div class="input-group">
+						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
+							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
+							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+						</form>
+						<p>
+                            <?php if($nbrDisplayComment != $nbrTotalComment) { ?>
+                                <a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'>Voir plus de commentaires  ('.$nbrDisplayComment.'/'.$nbrTotalComment.') </a>' ?>
+                            <?php } ?>
+                            <?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]!=5) { ?>
+                                <a class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
+                            <?php } ?>
+                        </p>
+					</div>
+				</div> <!-- /.panel-body -->
+			</div> <!-- /.panel -->
 		<?php
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
-        echo '</div>'; /* /.newsfeed */
+		echo '</div>'; /* /.newsfeed */
 		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 		?>

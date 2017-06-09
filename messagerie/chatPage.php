@@ -2,7 +2,21 @@
 session_start();
 $title = 'Chat';
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-echo $_SERVER['DOCUMENT_ROOT'];
+try {
+	/* Fetch profile picture */
+	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
+	$data = $profile->fetch();
+	if (!empty($data['profile_pic'])){
+		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
+	} else {
+		$pic_path = 'data/default-profile.png';
+	}
+
+} catch (PDOException $e) {
+	echo '<div class="alert alert-danger">';
+	die('Error:'.$e->getMessage());
+	echo '</div>';
+}
 ?>
 
 <?php
@@ -22,8 +36,6 @@ input[type=text]{
 .chat_wrapper {
 	width: 70%;
 	height:472px;
-	margin-right: auto;
-	margin-left: auto;
 	background: #3B5998;
 	border: 1px solid #999999;
 	padding: 10px;
@@ -64,24 +76,33 @@ height:40px;
 
 
 }
-
 </style>
-<script language="javascript" type="text/javascript" src="/ensisocial/messagerie/client.js"></script>
-
-<div class="chat_wrapper">
-<div class="message_box" id="message_box"></div>
-<div>
-
-<input type="text" name="message" id="message" placeholder="Message" maxlength="80"
-onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()" class="form-control ui-autocomplete-input" />
-
-
+<div class="row">
+	<div class="col-sm-2 well affix">
+		<center>
+			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
+			<h3>
+				<?php
+				echo $_SESSION['firstname'].' '.$_SESSION['lastname'];
+				?>
+			</h3>
+		</center>
+		<!-- List of connected members. -->
+		<p>Autres membres : </p>
+		<div id="memberconnected">Membres</div>
+	</div>
 </div>
 
-<button id="send-btn" class="btn btn-primary">Send</button>
-
+<div class="row">
+    <div class="col-sm-offset-2 col-md-9 chat_wrapper">
+        <div class="message_box" id="message_box"></div>
+            <div>
+                <input type="text" name="message" id="message" placeholder="Message" maxlength="80"
+                onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()" class="form-control ui-autocomplete-input" />
+            </div>
+        <button id="send-btn" class="btn btn-primary">Send</button>
+    </div>
 </div>
-
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

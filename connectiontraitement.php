@@ -19,12 +19,13 @@ try {
 if (password_verify($_POST['pwd'], $row['password'])){
 	session_start();
 	$_SESSION['formation']=$row['formation'];
-	$_SESSION['town']=$row['town'];
-	$_SESSION['id']=$row['id'];
+	$_SESSION['town'] = $row['town'];
+	$_SESSION['id'] = $row['id'];
 	$_SESSION['email'] = $row['email'];
     $_SESSION['firstname'] = $row['firstname'];
     $_SESSION['lastname'] = $row['lastname'];
     $_SESSION['birth']=$row['birth'];
+    $_SESSION['commentUnfold']=array();  //sert pour les commentaire
 
     setcookie("userid", $_SESSION['id'], 0);
     setcookie("prenom", $_SESSION['firstname'], 0);
@@ -33,7 +34,7 @@ if (password_verify($_POST['pwd'], $row['password'])){
     $num_colour = array_rand($colours);
     setcookie("color", $colours[$num_colour], 0);
 
-	header ('Location: page_membre.php');
+    header ('Location: page_membre.php');
 } else {
 	echo '<p>Bad email or password</p>';
 }

@@ -39,7 +39,7 @@ $(document).ready(function(){
 		var type = msg.type; //message type
 		var umsg = msg.message; //message text
 		var uname = msg.name; //user name
-		var ucolor = getCookie('color'); //color
+		var ucolor = msg.color; //color
 
 		if(type == 'usermsg')
 		{

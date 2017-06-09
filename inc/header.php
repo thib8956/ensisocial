@@ -8,6 +8,11 @@ try {
 }
 
 require_once 'form.php';
+$FORMATIONS = array('IR' => 'Informatique et Réseaux',
+  'AS' =>'Automatique et Systèmes',
+  'meca' => 'Mécanique',
+  'textile' => 'Textile',
+  'FIP' => 'Filière par alternance');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
