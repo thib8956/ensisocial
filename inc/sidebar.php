@@ -4,7 +4,12 @@
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
 			<h3>
 				<?php
-				echo $user['firstname'].' '.$user['lastname'];
+				if(!isset($user['name'])){
+					echo $user['firstname'].' '.$user['lastname'];
+				}else{
+					echo $user['name'];
+				}
+
 				?>
 			</h3>
 			<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
@@ -27,6 +32,7 @@
 				<button type="button" class="close btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
 			</div>
 			<div class="modal-body">
+			<?php if(!isset($user["name"])){ ?>
 				<center>
 					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
 					<h3 class="media-heading"><?php echo $user['firstname'].' ';echo $user['lastname'].' ' ?><small><?php echo $user['town'] ?></small></h3>
@@ -36,6 +42,16 @@
 					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$user['formation']]; ?></p>
 					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($user['birth'])); ?></p>
 				</center>
+			<?php }else{?>
+				<center>
+					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
+					<h3 class="media-heading"><?php echo $user['name']?></h3>
+				</center>
+				<hr>
+				<center>
+					<p class="text-left"><strong>Description:</strong><br> <?php  echo $user['description']; ?></p>
+				</center>
+			<?php } ?>
 			</div>
 			<div class="modal-footer">
 				<center>

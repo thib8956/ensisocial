@@ -12,8 +12,11 @@ if(isset($_POST['post'])){
 		createPublication($db);
 		if($_POST["idplace"]==NULL){
 			header('Location: page_membre.php');
-		}else{
+		}elseif($_POST["type"]==0){
 			header('Location: recherche/searchProfil.php?id='.$_POST["idplace"]);
+		}else{
+			header('Location: group/groupPage.php?id='.$_POST["idplace"]);
+
 		}
 	}
 }
@@ -22,12 +25,13 @@ if(isset($_POST['post'])){
 function createPublication($conn){
 	$curr_timestamp = date('Y-m-d H:i:s');
 	try {
-		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`,`place`) VALUES (:title, :date, :content, :place)');
+		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`,`place`,`type`) VALUES (:title, :date, :content, :place, :type)');
 		$stmt->execute(array(
 			'title' => htmlentities($_POST['title']),
 			'date' => $curr_timestamp,
 			'content' => htmlentities($_POST['content']),
-			'place' => intval($_POST['idplace'])
+			'place' => intval($_POST['idplace']),
+			'type' => intval($_POST['type'])
 			));
 		$stmt = $conn->prepare('INSERT INTO `authornews` (`authorid`, `newsfeedid`)
 			VALUES (:author_id, (SELECT id FROM newsfeed WHERE `date` = :date AND `title` = :title))');

@@ -9,23 +9,17 @@ $id=(isset($_GET["id"])) ? $_GET["id"] : NULL;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
-	$stmt = $db->query('SELECT *
-		FROM newsfeed
-		JOIN authornews ON newsfeed.id = authornews.newsfeedid
-		JOIN users ON users.id = authornews.authorid
-		ORDER BY date DESC'
-		);
 	if($id==NULL){
-		$group=$db->query('SELECT * 
+		$stmt=$db->query('SELECT * 
 		FROM groupe
 		ORDER BY name');
 	}else{
-		$group=$db->prepare('SELECT * 
+		$stmt=$db->prepare('SELECT * 
 		FROM groupe 
 		JOIN member ON member.idgroup=groupe.id
 		WHERE member.iduser= :id
 		ORDER BY name');
-		$group->execute(array('id'=> intval($id)));
+		$stmt->execute(array('id'=> intval($id)));
 	}
 	
 	$user = $_SESSION;
@@ -51,7 +45,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 <div class="groupswrap">
 	<div class="col-sm-offset-3 col-md-8 newsfeed">
 	<?php
-	while ($row=$group->fetch()){
+	while ($row=$stmt->fetch()){
 		$avatar = '/ensisocial/data/avatar/'.$row['img'];
 		?>
 		<div class="panel panel-default" id="group">
@@ -67,7 +61,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					</h2>	 
 			</div>
 
-			<div class="panel-body " id=<?php echo $row['id']; ?>>
+			<div class="panel-body collapse" id=<?php echo $row['id']; ?>>
 				<div>
 				<?php
 				echo '<p>'.$row['description'].'</p>';?>

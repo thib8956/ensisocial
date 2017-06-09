@@ -39,7 +39,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
 			echo $form->inputtextarea('content', 'Contenu', 5, 16);
 			echo $form->submit('Publier');
-			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />
+			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />';
+			echo '<input type="hidden" name="type" class="btn btn-primary-outline" value= />
 		</form>';
 		?>
 
