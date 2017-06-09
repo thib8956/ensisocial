@@ -26,7 +26,7 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
 </head>
 
-<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');">
+<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');" style="<?php echo $background?>">
 	<?php
 	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>

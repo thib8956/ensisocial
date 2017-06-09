@@ -29,8 +29,8 @@
 					<li><a href="/ensisocial/recherche/searchProfil.php?id=<?php echo $_SESSION['id']; ?>">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profil
 					</a></li>
-					<li><a href="">
-						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Contacts récents
+					<li><a href="/ensisocial/group/group.php">
+						<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;Groupe
 					</a></li>
 					<li><a href="/ensisocial/messagerie/chatPage.php">
 						<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;Messagerie

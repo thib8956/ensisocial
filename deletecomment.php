@@ -27,7 +27,7 @@ $nb1 = $req->fetch();
 if ( $nb1['authorid'] == $connectedid ){
 	// Delete
 	$bdd->query("delete  FROM comments  where id=".$commentid);
-	header('Location: page_membre.php');
+	// header('Location: page_membre.php');
 	exit();
 	}
 
