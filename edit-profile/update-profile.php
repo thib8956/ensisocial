@@ -30,10 +30,13 @@ if (isset($_FILES['picture'])){
 	}
 } elseif (isset($_POST['firstname'])){
 	updateProfile($db, 'firstname', htmlentities($_POST['firstname']));
+    $_SESSION['firstname'] = htmlentities($_POST['firstname']);
 } elseif (isset($_POST['lastname'])){
 	updateProfile($db, 'lastname', htmlentities($_POST['lastname']));
+    $_SESSION['lastname'] = htmlentities($_POST['lastname']);
 } elseif (isset($_POST['formation'])){
 	updateProfile($db, 'formation', htmlentities($_POST['formation']));
+    $_SESSION['formation']=htmlentities($_POST['formation']);
 } elseif (isset($_POST['address'])){
 	echo '<p>Changement d\'adresse';
 	echo '<p>'.$_POST['address'].'</p>';
@@ -42,10 +45,12 @@ if (isset($_FILES['picture'])){
 	updateProfile($db, 'zipcode', htmlentities($_POST['zipcode']));
 } elseif (isset($_POST['town'])){
 	updateProfile($db, 'town', htmlentities($_POST['town']));
+	$_SESSION['town'] = htmlentities($_POST['town']);
 } elseif (isset($_POST['phone'])){
 	updateProfile($db, 'phone', htmlentities($_POST['phone']));
 } elseif (isset($_POST['birth'])){
 	updateProfile($db, 'birth', htmlentities($_POST['birth']));
+    $_SESSION['birth']=htmlentities($_POST['birth']);
 }
 
 /**
