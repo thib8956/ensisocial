@@ -1,6 +1,7 @@
 # Ignore profile pictures
-data/avatar/
+data/
 !data/avatar/default-profile.png
+
 
 .Trash-1000/
 .idea/

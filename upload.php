@@ -2,10 +2,12 @@
 
 if( isset($_POST['upload']) ) // si formulaire soumis
 {
-    $content_dir = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/uploads/'; // dossier où sera déplacé le fichier
-
     $tmp_file = $_FILES['fichier']['tmp_name'];
-
+    $fname = md5(uniqid(rand(), true));
+    $ext = '.'.substr(strrchr($_FILES['fichier']['name'], '.'), 1);
+    $content_dir = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/media/'.$fname.$ext; // dossier où sera déplacé le fichier
+    
+    
     if( !is_uploaded_file($tmp_file) )
     {
         exit("Le fichier est introuvable");
@@ -22,15 +24,17 @@ if( isset($_POST['upload']) ) // si formulaire soumis
 
     // on copie le fichier dans le dossier de destination
     $name_file = $_FILES['fichier']['name'];
-    $ret = move_uploaded_file($tmp_file, $content_dir . $name_file);
+    $ret = move_uploaded_file($tmp_file, $content_dir);
     if ($ret != 0)
     {
         print_errors($ret);
+        echo "/media/".$fname.$ext;
         exit("Impossible de copier le fichier dans $content_dir");
     }
     else {
         print_errors($ret);
         echo "Le fichier a bien été uploadé";
+        echo "/media/".$fname.$ext;
     }
 }
 
