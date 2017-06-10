@@ -34,6 +34,22 @@ if (isset($_FILES['picture'])){
 	updateProfile($db, 'lastname', htmlentities($_POST['lastname']));
 } elseif (isset($_POST['formation'])){
 	updateProfile($db, 'formation', htmlentities($_POST['formation']));
+	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
+	$idgroup->execute(array('name'=>$_POST["oldformation"]));
+	$idgroup=$idgroup->fetch(); // catch old formation
+	$stmt=$db->prepare('DELETE FROM `member` WHERE `member`.`iduser` = :iduser AND `member`.`idgroup`=:idgroup' );
+	$stmt->execute(array(
+	'iduser'=>$_SESSION['id'],
+	'idgroup' =>$idgroup['id']
+	));
+	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
+	$idgroup->execute(array('name'=>$_POST["formation"]));
+	$idnewgroup=$idgroup->fetch();
+	$stmt=$db->prepare('INSERT iNTO `member` (`iduser`, `idgroup`) VALUES(:iduser, :idgroup)');
+	$stmt->execute(array(
+		'iduser'=>$_SESSION['id'],
+		'idgroup' =>$idnewgroup['id']
+		));
 } elseif (isset($_POST['address'])){
 	echo '<p>Changement d\'adresse';
 	echo '<p>'.$_POST['address'].'</p>';
@@ -47,6 +63,7 @@ if (isset($_FILES['picture'])){
 } elseif (isset($_POST['birth'])){
 	updateProfile($db, 'birth', htmlentities($_POST['birth']));
 }
+
 
 /**
  * Update a field of the table `users` according to a profile change.
@@ -113,11 +130,11 @@ function updatePassword($pdo, $oldpassword, $newpassword, $repassword){
 	$stmt->execute(array('email'=> htmlentities($_SESSION['email'])));
 	$row = $stmt->fetch();
 	if (password_verify($_POST['oldpassword'], $row['password'])){
-	    if ($_POST['newpassword']==$_POST['repassword']){
-	        $stmt= $pdo->prepare('UPDATE users SET password=:hash WHERE id=:id');
-	        $stmt->execute(array('hash'=>$hash,
-	            'id'=> intval($_SESSION['id'])));
-	    }
+		if ($_POST['newpassword']==$_POST['repassword']){
+			$stmt= $pdo->prepare('UPDATE users SET password=:hash WHERE id=:id');
+			$stmt->execute(array('hash'=>$hash,
+				'id'=> intval($_SESSION['id'])));
+		}
 	}
 }
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');

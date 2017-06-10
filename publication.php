@@ -16,7 +16,6 @@ if(isset($_POST['post'])){
 			header('Location: recherche/searchProfil.php?id='.$_POST["idplace"]);
 		}else{
 			header('Location: group/groupPage.php?id='.$_POST["idplace"]);
-
 		}
 	}
 }

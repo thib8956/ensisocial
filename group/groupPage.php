@@ -47,6 +47,8 @@ try {
 
 
 $user=$data;
+$user["FORMATIONS"]=$FORMATIONS;
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 ?>
@@ -104,6 +106,19 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					<?php endif?>
 					<?php
 					$score = $publication['score'];
+					foreach ($FORMATIONS as $key => $value) {
+						echo " ".$key;
+					}
+					if(array_key_exists($loc['name'], $FORMATIONS)){
+					echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
+					<small>
+						<span class="glyphicon glyphicon-chevron-right">
+						</span>
+						<a href="/ensisocial/group/groupPage.php?id='.$loc['id'].'">'.$FORMATIONS[$loc['name']].'
+						</a>
+					</small>
+				</h2>';
+				}else{
 					echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
 					<small>
 						<span class="glyphicon glyphicon-chevron-right">
@@ -112,6 +127,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 						</a>
 					</small>
 				</h2>';
+				}
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
 			</div> <!-- .panel-heading -->

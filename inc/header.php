@@ -11,7 +11,7 @@ require_once 'form.php';
 $FORMATIONS = array('IR' => 'Informatique et Réseaux',
   'AS' =>'Automatique et Systèmes',
   'meca' => 'Mécanique',
-  'textile' => 'Textile',
+  'textile' => 'Textile et fibres',
   'FIP' => 'Filière par alternance');
 ?>
 <!DOCTYPE html>

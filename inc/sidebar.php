@@ -1,3 +1,11 @@
+<?php
+$FORMATIONS = array('IR' => 'Informatique et Réseaux',
+  'AS' =>'Automatique et Systèmes',
+  'meca' => 'Mécanique',
+  'textile' => 'Textile et fibres',
+  'FIP' => 'Filière par alternance');
+?>
+
 <div class="col-sm-3 col-md-3"  role="complementary">
 	<nav id="sidebar" class="sidebar affix hidden-print hidden-sm hidden-xs">
 		<center>
@@ -7,7 +15,11 @@
 				if(!isset($user['name'])){
 					echo $user['firstname'].' '.$user['lastname'];
 				}else{
-					echo $user['name'];
+					if(array_key_exists($user['name'], $FORMATIONS)){
+						echo $FORMATIONS[$user['name']];
+					}else{ 
+						echo $user['name'];
+					}
 				}
 
 				?>
@@ -45,7 +57,7 @@
 			<?php }else{?>
 				<center>
 					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $user['name']?></h3>
+					<h3 class="media-heading"><?php if(array_key_exists($user['name'], $FORMATIONS)){echo $FORMATIONS[$user['name']];}else{ echo $user['name'];}?></h3>
 				</center>
 				<hr>
 				<center>

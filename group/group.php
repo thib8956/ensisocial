@@ -55,10 +55,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					</a>
 					<h2>
 					<?php if($id!=NULL){?>
-						<a href= <?php echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$row['name'].'</a>'; 
+						<a href= <?php if(array_key_exists($row['name'], $FORMATIONS)){
+							echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$FORMATIONS[$row['name']].'</a>';
+						}else{
+							echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$row['name'].'</a>';
+						}
 
 					}else{
-						echo $row['name'];
+						echo $FORMATIONS[$row['name']];
 					}
 					?>
 
