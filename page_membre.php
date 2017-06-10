@@ -88,7 +88,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					$score = $publication['score'];
 					if($publication['place']==0){
 						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'</h2>';
-					}else{
+					} else {
 						echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
 						<small>
 							<span class="glyphicon glyphicon-chevron-right">
@@ -115,20 +115,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
                 }
                 if (preg_match("#/media/.+\.(jpe?g|gif|bmp|png)#",$publication['content'])) {
                     echo '<div>';
+                    // Get file extension
+					$ext = '.'.substr(strrchr($publication['content'], '.'), 1);
                     $beginning = strpos($publication['content'], "/media/");
-                    $end = $beginning+36;
+                    $end = $beginning+39;
                     $url1 = substr($publication['content'], $beginning, $end);
-                    $urlbien = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data'.$url1;
-                    echo '<p><img src='.$urlbien.'/></p>';
+                    $urlbien = '/ensisocial/data'.$url1.$ext;
+                    echo '<p><img src="'.$urlbien.'" class="img-responsive"></p>';
                     echo "</div>";
                 }
                 if (preg_match("#/media/.+\.mp3#",$publication['content'])) {
                     echo '<div>';
+                    // Get file extension
+					$ext = '.'.substr(strrchr($publication['content'], '.'), 1);
                     $beginning = strpos($publication['content'], "/media/");
-                    $end = $beginning+36;
+                    $end = $beginning+39;
                     $url1 = substr($publication['content'], $beginning, $end);
-                    $urlbien = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data'.$url1;
-                    echo '<p><audio src='.$urlbien.' controls></audio></p>';
+                    $urlbien = '/ensisocial/data'.$url1.$ext;
+                    echo '<p><audio src="'.$urlbien.'" controls></audio></p>';
                     echo "</div>";
                 }
                 if (preg_match("#/media/.+\.(mp4|mped|wav)#",$publication['content'])) {
