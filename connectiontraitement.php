@@ -7,8 +7,8 @@ try {
     $req->execute(array('email'=> $_POST['email']));
     $row = $req->fetch();
 
-    $connected = $db->prepare("UPDATE `users` SET `connected` = 1 WHERE `users`.`id` = :id");
-    $connected->execute(array('id' => $row['id'] ));
+    $connected = $db->prepare("UPDATE `users` SET `connectedTime` = :time WHERE `users`.`id` = :id");
+    $connected->execute(array('time' => time(),'id' => $row['id'] ));
 } catch (PDOException $e) {
     echo '<div class="alert alert-danger">';
     die('Error:'.$e->getMessage());
