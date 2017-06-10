@@ -55,9 +55,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
-		while ($publication=$stmt->fetch()){
+		while ($publication=$stmt->fetch()) {
 			$place= $db->query('SELECT * FROM users WHERE users.id='.$publication['place']);
-			$loc=$place->fetch();
+			$user=$place->fetch();
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
 
@@ -71,7 +71,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				$score = $publication['score'];
 				?>
 				<div class="panel-heading" id="page_membre">
-					<a class="pull-left" href="#">
+					<a class="pull-left" href=<?php
+					echo '"/ensisocial/recherche/searchProfil.php?id='
+					.$publication['authorid'].'"';
+					?>>
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 					</a>
 
@@ -90,7 +93,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 						<small>
 							<span class="glyphicon glyphicon-chevron-right">
 							</span>
-							<a href="/ensisocial/recherche/searchProfil.php?id='.$loc['id'].'">'.$loc['firstname'].' '.$loc['lastname'].'
+							<a href="/ensisocial/recherche/searchProfil.php?id='.$user['id'].'">'.$user['firstname'].' '.$user['lastname'].'
 							</a>
 						</small>
 					</h2>';
@@ -100,42 +103,42 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			</div> <!-- .panel-heading -->
 			<div class="panel-body">
 				<?php
-				echo '<p>'.$publication['content'].'</p>'; 
+				echo '<p>'.$publication['content'].'</p>';
                 if (preg_match("#https?://www\.youtube\.com/watch\?v=#",$publication['content'])) {
-                    echo '<div class="embed-responsive embed-responsive-16by9">'; 
+                    echo '<div class="embed-responsive embed-responsive-16by9">';
                     $beginning = strpos($publication['content'], "https://www.youtube.com/watch?v=");
-                    $end = $beginning+43;        
+                    $end = $beginning+43;
                     $url1 = substr($publication['content'], $beginning, $end);
                     $urlbien = substr_replace($url1,"embed/",24,8);
                     echo '<p><iframe src='.$urlbien.'></iframe></p>';
-                    echo "</div>"; 
-                } 
+                    echo "</div>";
+                }
                 if (preg_match("#/media/.+\.(jpe?g|gif|bmp|png)#",$publication['content'])) {
-                    echo '<div>'; 
+                    echo '<div>';
                     $beginning = strpos($publication['content'], "/media/");
-                    $end = $beginning+36;        
+                    $end = $beginning+36;
                     $url1 = substr($publication['content'], $beginning, $end);
                     $urlbien = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data'.$url1;
                     echo '<p><img src='.$urlbien.'/></p>';
-                    echo "</div>"; 
+                    echo "</div>";
                 }
                 if (preg_match("#/media/.+\.mp3#",$publication['content'])) {
-                    echo '<div>'; 
+                    echo '<div>';
                     $beginning = strpos($publication['content'], "/media/");
-                    $end = $beginning+36;        
+                    $end = $beginning+36;
                     $url1 = substr($publication['content'], $beginning, $end);
                     $urlbien = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data'.$url1;
                     echo '<p><audio src='.$urlbien.' controls></audio></p>';
-                    echo "</div>"; 
+                    echo "</div>";
                 }
                 if (preg_match("#/media/.+\.(mp4|mped|wav)#",$publication['content'])) {
-                    echo '<div>'; 
+                    echo '<div>';
                     $beginning = strpos($publication['content'], "/media/");
-                    $end = $beginning+36;        
+                    $end = $beginning+36;
                     $url1 = substr($publication['content'], $beginning, $end);
                     $urlbien = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data'.$url1;
                     echo '<p><video src='.$urlbien.' controls></video></p>';
-                    echo "</div>"; 
+                    echo "</div>";
                 }
 				if($score >= 0){
 					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
