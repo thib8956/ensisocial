@@ -1,15 +1,17 @@
 $(document).ready(function(){
 	//create a new WebSocket object.
-	var wsUri = "ws://localhost:9050/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
+	var wsUri = "ws://localhost:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
 	websocket = new WebSocket(wsUri);
 
 	websocket.onopen = function(ev) { // connection is open
-		$('#message_box').append("<div class=\"system_msg\">Connected!</div>"); //notify user
+		//$('#message_box').append("<div class=\"system_msg\">Connected!</div>"); //notify user
 	}
 
 	$('#send-btn').click(function(){ //use clicks message send button
 		var mymessage = $('#message').val(); //get message text
 		var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
+        var mycolor = getCookie('color'); //get user color
+
 
 		if(myname == ""){ //empty name?
 			alert("Enter your Name please!");
@@ -27,10 +29,11 @@ $(document).ready(function(){
 		var msg = {
 		message: mymessage,
 		name: myname,
-		color : '<?php echo $colours[$user_colour]; ?>'
+		color : mycolor
 		};
 		//convert and send data to server
 		websocket.send(JSON.stringify(msg));
+        $('#message').val(''); //reset text
 	});
 
 	//#### Message received from server?
@@ -49,8 +52,6 @@ $(document).ready(function(){
 		{
 			$('#message_box').append("<div class=\"system_msg\">"+umsg+"</div>");
 		}
-
-		$('#message').val(''); //reset text
 
 		var objDiv = document.getElementById("message_box");
 		objDiv.scrollTop = objDiv.scrollHeight;
