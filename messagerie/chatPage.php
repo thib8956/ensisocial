@@ -66,10 +66,6 @@ height:40px;
 }
 
 
-
-
-
-
 }
 </style>
 <div class="row">
