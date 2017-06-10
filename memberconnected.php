@@ -22,7 +22,7 @@ while($data = $memberconnected->fetch()){
 	$lastname = htmlentities($data['lastname']);
 
 	echo '<li class="list-group-item">';
-	if (htmlentities($data['connectedTime']) > time() - 60){
+	if (htmlentities($data['connectedTime']) > time() - 11){
 		echo '<span class="glyphicon glyphicon-record" style="color:#58D68D"></span>';
 	} else {
 		echo '<span class="glyphicon glyphicon-record" style="color:#D7DBDD"></span>';

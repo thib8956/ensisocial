@@ -3,7 +3,7 @@ function writeInDiv(text) {
     objet.innerHTML = text;
 }
 
-var tmp = setInterval(function(){ refresh() }, 10000);
+var tmp = setInterval(function(){ refresh() }, 5000);
 
 function createRequestObject() {
     var http;
