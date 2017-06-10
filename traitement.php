@@ -98,8 +98,8 @@ function fillDatabase($connection, $profile_pic) {
 
     try {
         $stmt = $connection->prepare(
-            'INSERT INTO users (`email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connected`, `profile_pic`)
-            VALUES (:email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, FALSE,:filename)'
+            'INSERT INTO users (`email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connectedTime`, `profile_pic`)
+            VALUES (:email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, NULL,:filename)'
             );
         $stmt->execute(array(
                     'email' => $_POST['email'],

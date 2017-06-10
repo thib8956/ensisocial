@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 09 Juin 2017 à 14:37
+-- Généré le :  Sam 10 Juin 2017 à 17:54
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -216,7 +216,7 @@ CREATE TABLE `users` (
   `birth` date NOT NULL,
   `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `formation` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `connected` tinyint(1) NOT NULL,
+  `connectedTime` int(10) UNSIGNED DEFAULT NULL,
   `profile_pic` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'default-profile.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -224,14 +224,14 @@ CREATE TABLE `users` (
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connected`, `profile_pic`) VALUES
-(2, 'a@uha.fr', '$2y$11$1TCxXMN5QGPc7nRrWkr1aeRxmxkE9Y2VccDFJF52gimpRZpsf0C7.', 'François', 'Straebler', '51 rue de chorey', 21200, 'beaune', '1970-01-01', '0771068564', 'IR', 0, '3c5ea46acaebe1c136639b7a88d2aa87.jpg'),
-(3, 'b@uha.fr', '$2y$11$fDFOYpFrqCX5uBWWN8566eNwMhnUPJemmGHfNQT4HFZH.lr0mJ/dq', 'Thibaud le BG du 69', 'Gasser', '69 rue de la voiture sa m&egrave;re', 69690, 'KEKEVILLE', '1969-01-01', '0669696969', 'IR', 0, '418a50b5cb341772afc204570dce374c.jpg'),
-(4, 'c@uha.fr', '$2y$11$x5hZP/nOJfLJ5agVWsnCVu78yezij.kfMBO1sqyaGeDI96ai0JLu2', 'Florian', 'Jaby', '', 0, '', '1970-01-01', '', 'IR', 0, 'default-profile.png'),
-(5, 'd@uha', '$2y$11$ttG2EeeAA5D0hxahu3oMI.awUhQLs10YED4pr.uhUAue/DPhCWyN2', 'Gabin', 'Michalet', '', 0, '', '1970-01-01', '', 'IR', 0, '29e43cb78e85afd7985b1ee164e6eced.jpg'),
-(7, 'test@uha.fr', '$2y$11$8oPRz6yLjREgzu4FEmQfT.Upw.OfLRAjqUyNSRIsp/1.J.9jl4UJC', 'test', 'test', '', 0, '', '2017-06-10', '', 'textile', 0, '3126f911561df8a0d23ef727810c0b0c.jpg'),
-(8, 'putin@uha.fr', '$2y$11$cVw4K.YHZPtm6InGnUhfgOCVfStkJYgHELMk0aGlRd.agz/wGWewy', 'poutine', 'vladimir', '', 0, '', '1970-01-01', '', 'IR', 0, 'a283a5e2dc2471950c36ed202b27e9b1.jpg'),
-(9, 'queen@uha.fr', '$2y$11$MOd012GX9KyZik9W8flRcevOHsvPQzPgowZ/LGa1dKfyJpG2w7FQC', 'la reine', 'd&#039;angleterre', '', 0, '', '1970-01-01', '', 'IR', 1, '21c57cd7e706f9b9ea88715f5d8313b2.gif');
+INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connectedTime`, `profile_pic`) VALUES
+(2, 'a@uha.fr', '$2y$11$1TCxXMN5QGPc7nRrWkr1aeRxmxkE9Y2VccDFJF52gimpRZpsf0C7.', 'François', 'Straebler', '51 rue de chorey', 21200, 'beaune', '1970-01-01', '0771068564', 'IR', 1497109800, '3c5ea46acaebe1c136639b7a88d2aa87.jpg'),
+(3, 'b@uha.fr', '$2y$11$fDFOYpFrqCX5uBWWN8566eNwMhnUPJemmGHfNQT4HFZH.lr0mJ/dq', 'Thibaud le BG du 69', 'Gasser', '69 rue de la voiture sa m&egrave;re', 69690, 'KEKEVILLE', '1969-01-01', '0669696969', 'IR', 1497110048, '418a50b5cb341772afc204570dce374c.jpg'),
+(4, 'c@uha.fr', '$2y$11$x5hZP/nOJfLJ5agVWsnCVu78yezij.kfMBO1sqyaGeDI96ai0JLu2', 'Florian', 'Jaby', '', 0, '', '1970-01-01', '', 'IR', 1497109846, 'default-profile.png'),
+(5, 'd@uha', '$2y$11$ttG2EeeAA5D0hxahu3oMI.awUhQLs10YED4pr.uhUAue/DPhCWyN2', 'Gabin', 'Michalet', '', 0, '', '1970-01-01', '', 'IR', NULL, '29e43cb78e85afd7985b1ee164e6eced.jpg'),
+(7, 'test@uha.fr', '$2y$11$8oPRz6yLjREgzu4FEmQfT.Upw.OfLRAjqUyNSRIsp/1.J.9jl4UJC', 'test', 'test', '', 0, '', '2017-06-10', '', 'textile', NULL, '3126f911561df8a0d23ef727810c0b0c.jpg'),
+(8, 'putin@uha.fr', '$2y$11$cVw4K.YHZPtm6InGnUhfgOCVfStkJYgHELMk0aGlRd.agz/wGWewy', 'poutine', 'vladimir', '', 0, '', '1970-01-01', '', 'IR', NULL, 'a283a5e2dc2471950c36ed202b27e9b1.jpg'),
+(9, 'queen@uha.fr', '$2y$11$MOd012GX9KyZik9W8flRcevOHsvPQzPgowZ/LGa1dKfyJpG2w7FQC', 'la reine', 'd&#039;angleterre', '', 0, '', '1970-01-01', '', 'IR', NULL, '21c57cd7e706f9b9ea88715f5d8313b2.gif');
 
 -- --------------------------------------------------------
 
