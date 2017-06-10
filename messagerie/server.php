@@ -33,8 +33,8 @@ while (true) {
 		perform_handshaking($header, $socket_new, $host, $port); //perform websocket handshake
 		
 		socket_getpeername($socket_new, $ip); //get ip address of connected socket
-		$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
-		send_message($response); //notify all users about new connection
+		//$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
+		//send_message($response); //notify all users about new connection
 		
 		//make room for new socket
 		$found_socket = array_search($socket, $changed);
@@ -50,12 +50,15 @@ while (true) {
 			$received_text = unmask($buf); //unmask data
 			$tst_msg = json_decode($received_text); //json decode 
 			$user_name = $tst_msg->name; //sender name
+            $user_name = mb_convert_encoding($user_name, "auto");
 			$user_message = $tst_msg->message; //message text
 			$user_color = $tst_msg->color; //color
 			
-			//prepare data to be sent to client
-			$response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
-			send_message($response_text); //send data
+            if($user_message != null & $user_name != null) {
+                //prepare data to be sent to client
+                $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
+                send_message($response_text); //send data
+            }
 			break 2; //exist this loop
 		}
 		
@@ -67,8 +70,8 @@ while (true) {
 			unset($clients[$found_socket]);
 			
 			//notify all users about disconnected connection
-			$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
-			send_message($response);
+			//$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
+			//send_message($response);
 		}
 	}
 }
