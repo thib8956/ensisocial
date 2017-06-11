@@ -1,7 +1,9 @@
 <div class="col-sm-3 col-md-3"  role="complementary">
 	<nav id="sidebar" class="sidebar affix hidden-print hidden-sm hidden-xs">
-		<center>
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
+		<div class="text-center">
+			<a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+				<img src=<?php echo $pic_path ?> id="aboutme" width="140" height="140" alt="avatar" class="img-circle img-responsive center-block">
+			</a>
 			<h3>
 				<?php
 				echo $user['firstname'].' '.$user['lastname'];
@@ -10,7 +12,7 @@
 			<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
 			</a></p>
-		</center>
+		</div>
 
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
@@ -27,15 +29,17 @@
 				<button type="button" class="close btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
 			</div>
 			<div class="modal-body">
-				<center>
-					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
+				<div class="text-center">
+					<img class="img-circle img-responsive center-block" src=<?php echo $pic_path ?> alt="avatar" id="aboutme" width="140" height="140">
 					<h3 class="media-heading"><?php echo $user['firstname'].' ';echo $user['lastname'].' ' ?><small><?php echo $user['town'] ?></small></h3>
-				</center>
+					<p class="text-left">
+						<strong>Formation: </strong> <?php  echo $FORMATIONS[$user['formation']]; ?>
+					</p>
+					<p class="text-left">
+						<strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($user['birth'])); ?>
+					</p>
+				</div>
 				<hr>
-				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$user['formation']]; ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($user['birth'])); ?></p>
-				</center>
 			</div>
 			<div class="modal-footer">
 				<center>
