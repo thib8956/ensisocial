@@ -4,6 +4,7 @@
         line-height: 0;
         bottom:0;
         width: 25%;
+        z-index: 5;
     }
     
     input[type=text]{
