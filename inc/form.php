@@ -19,8 +19,8 @@ class form{
     /**
      * @param $html
      */
-    private function surround($html, $class="form-group", $id=""){
-        return "<{$this->surround} class=".$class." id=".$id." >{$html}</{$this->surround}>";
+    private function surround($html, $class="form-group"){
+        return "<{$this->surround} class=".$class." >{$html}</{$this->surround}>";
     }
 
     /**
@@ -38,10 +38,10 @@ class form{
      * @param $option
      * @return string
      */
-    public function inputsection($name, $type, $display, $option, $classlabel="control-label", $classselect="form-control",$id=""){
+    public function inputsection($name, $type, $display, $option, $classlabel="control-label", $classselect="form-control"){
         if ($id==NULL){
             $section='<label for="'.$display.'" class="'.$classlabel.'"></label>
-            <select name="'.$name.'" class="'.$classselect.'" id="'.$id.'">';
+            <select name="'.$name.'" class="'.$classselect.'">';
                 foreach($option as $key =>$value){
                     $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
                 }
@@ -78,7 +78,7 @@ class form{
      * @param bool $mandatory
      * @return string
      */
-    public function inputfield($name, $type, $display, $mandatory=FALSE, $classlabel="control-label", $classselect="form-control", $id="", $glyphicon=FALSE){
+    public function inputfield($name, $type, $display, $mandatory=FALSE, $classlabel="control-label", $classselect="form-control", $glyphicon=FALSE){
         $label = '<label for="'.$name.'" class="'.$classlabel.'">'.$display;
         if ($mandatory) $label .= '<span class="asteriskField">*</span>';
         $label .= '</label>';
@@ -89,16 +89,16 @@ class form{
             $input .= '<span class="glyphicon '.$glyphicon.'"></span>';
             $input .= '</span>';
         }
-        $input .= '<input name="'.$name.'" type="'.$type.'" class="'.$classselect.'" id="'.$id.'">';
+        $input .= '<input name="'.$name.'" type="'.$type.'" class="'.$classselect.'">';
 
         if ($glyphicon) $input = $this->surround($input, 'input-group');
         return $this->surround($label . $input);
     }
 
-    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control",$id=""){
+    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control"){
         return $this->surround('
           <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
-          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'" id="'.$id.'"></textarea>');
+          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'"></textarea>');
 
    }
 

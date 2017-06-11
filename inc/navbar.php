@@ -21,11 +21,11 @@
 				echo '<a class="navbar-left" href="/ensisocial/index.php">';
 			}
 			?>
-			<img src="/ensisocial/img/ensisocial.png" alt="logo" height="50px">
+			<img src="/ensisocial/img/ensisocial.png" alt="logo" height="50">
 		</a>
 		</div> <!-- .navbar-header -->
 
-		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px">
 			<ul class="nav navbar-nav">
 				<?php if (!isset($_SESSION['id'])): ?>
 					<li><a href="inscription.php" title="inscription"><span class="glyphicon glyphicon-user"></span>&nbsp;Inscription</a></li>
