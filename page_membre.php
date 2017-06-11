@@ -36,6 +36,17 @@ try {
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 
+<!-- Style des boutton afficher/reduire les commentaires-->
+<style type="text/css">
+    .formulaire {
+        display: inline-flex;
+        margin-top: 3px;
+    }
+    .inputButton:hover {
+        cursor: pointer;
+    }
+</style>
+
 <!-- Add a publication -->
 <div class="row">
 	<div class="col-sm-offset-3 col-md-8">
@@ -164,15 +175,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
-                        <style type="text/css">
-                            .formulaire {
-                                display: inline-flex;
-                                margin-top: 3px;
-                            }
-                            .inputButton:hover {
-                                cursor: pointer;
-                            }
-                        </style>
 						<div class="container">
                             <div class="row">
                             
