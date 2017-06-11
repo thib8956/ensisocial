@@ -3,7 +3,8 @@
         position: fixed;
         line-height: 0;
         bottom:0;
-        width: 20%;
+        width: 25%;
+        z-index: 5;
     }
     
     input[type=text]{
@@ -21,14 +22,14 @@
         border: 1px solid #999999;
         padding: 10px;
 */
-        font: 14px 'lucida grande',tahoma,verdana,arial,sans-serif;
+        font: 12px 'lucida grande',tahoma,verdana,arial,sans-serif;
     }
     .chat_wrapper .message_box {
-        background: #F7F7F7;
-        height:200px;
+/*        background: #F7F7F7;*/
+        height:300px;
             overflow: auto;
 /*        padding: 10px 10px 20px 10px;*/
-        border: 1px solid #999999;
+/*        border: 1px solid #999999;*/
     }
     .chat_wrapper  input{
         padding: 2px 2px 2px 5px;
@@ -63,11 +64,9 @@
         </h4>
       </div>
       <div id="collapse1" class="panel-collapse collapse">
-        <div class="panel-body">
-                <div class="chat_wrapper">
-                    <div class="message_box" id="message_box"></div>
-                </div>
-        </div>
+          <div class="chat_wrapper">
+              <div class="panel-body message_box" id="message_box"></div>
+            </div>
         <div class="panel-footer">
             <div>
                 <input type="text" name="message" id="message" placeholder="Message" maxlength="80" onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()" class="form-control ui-autocomplete-input" />

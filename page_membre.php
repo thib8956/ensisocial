@@ -165,12 +165,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
 						<p>
-                            <?php if($nbrDisplayComment != $nbrTotalComment) { ?>
-                                <a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'>Voir plus de commentaires  ('.$nbrDisplayComment.'/'.$nbrTotalComment.') </a>' ?>
-                            <?php } ?>
-                            <?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]!=5) { ?>
-                                <a class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
-                            <?php } ?>
+                            <a <?php if($nbrDisplayComment == $nbrTotalComment) {echo "disabled";}?> class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].' >Voir plus de commentaires  ('.$nbrDisplayComment.'/'.$nbrTotalComment.') </a>'; ?>
+                                <a <?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]==5) {echo "disabled";} ?> class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
                         </p>
 					</div>
 				</div> <!-- /.panel-body -->
