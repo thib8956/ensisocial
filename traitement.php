@@ -41,14 +41,19 @@ $headers = 'From: webmaster@example.com' . "\r\n" .
 
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
+        $mailUsed = false;
         while($data = $answer->fetch()) {
             if ($_POST['email'] == $data['email']){
                 echo '<div class="alert alert-danger">';
                 echo "<p>Adresse mail déjà utilisée.</p>";
                 echo '</div>';
                 echo $utile;
+                $mailUsed = true;
                 exit;
-            } elseif($_POST["password"] == $_POST["repassword"]){
+            } 
+        }
+        if (!$mailUsed){
+            if($_POST["password"] == $_POST["repassword"]){
                 echo '<p>Mot de passe OK.</p>';
 
                 if (!empty($_FILES['picture']['name'])){
@@ -76,6 +81,8 @@ if(isset($_POST['signin'])) {
                 echo $utile;
                 exit;
             }
+        } else {
+            "<div class='alert alert-danger'>Cette adresse est déjà utilisée</div>";
         }
     }
 }
