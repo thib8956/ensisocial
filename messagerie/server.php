@@ -17,6 +17,8 @@ socket_listen($socket);
 //create & add listning socket to the list
 $clients = array($socket);
 
+$messages = new Messages;
+
 //start endless loop, so that our script doesn't stop
 while (true) {
 	//manage multipal connections
@@ -33,8 +35,13 @@ while (true) {
 		perform_handshaking($header, $socket_new, $host, $port); //perform websocket handshake
 		
 		socket_getpeername($socket_new, $ip); //get ip address of connected socket
-		//$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
+		$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
 		//send_message($response); //notify all users about new connection
+        
+        $messages_array = $messages->getMessages();  //send the 100 previous messages
+        foreach ($messages_array as $message) {
+            send_messageClient($message, $socket_new);
+        }
 		
 		//make room for new socket
 		$found_socket = array_search($socket, $changed);
@@ -57,6 +64,7 @@ while (true) {
             if($user_message != null & $user_name != null) {
                 //prepare data to be sent to client
                 $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
+                $messages->add($response_text);
                 send_message($response_text); //send data
             }
 			break 2; //exist this loop
@@ -85,6 +93,12 @@ function send_message($msg)
 	{
 		@socket_write($changed_socket,$msg,strlen($msg));
 	}
+	return true;
+}
+
+function send_messageClient($msg,$client)
+{
+    @socket_write($client,$msg,strlen($msg));
 	return true;
 }
 
@@ -151,3 +165,43 @@ function perform_handshaking($receved_header,$client_conn, $host, $port)
 	"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 	socket_write($client_conn,$upgrade,strlen($upgrade));
 }
+
+class Messages {
+    
+    private $_storage;
+    
+    public function __construct() {
+        $this->_storage = array();
+    }
+    
+    public function getMessages() {
+        return $this->_storage;
+    }
+    
+    public function add($message) {
+        if (count($this->_storage) == 100) {
+            array_shift($this->_storage);
+            $this->_storage[] = $message;
+        }
+        else {
+            $this->_storage[] = $message;
+        }
+    }
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
