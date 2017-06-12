@@ -1,7 +1,6 @@
 <?php
 //connection BDD
 session_start();
-/*include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');*/
 
 try {
 	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");

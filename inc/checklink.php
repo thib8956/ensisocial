@@ -1,7 +1,7 @@
-<?php 
-function checkLink($test) 
+<?php
+function checkLink($test)
 {
-    if (preg_match("#https?://www\.youtube\.com/watch\?v=#i",$test)) 
+    if (preg_match("#https?://www\.youtube\.com/watch\?v=#i",$test))
     {
         $beginning = strpos($test, "https://www.youtube.com/watch?v=");
         $end = 43;
@@ -13,8 +13,8 @@ function checkLink($test)
         echo '<p><iframe src='.$urlbien.' allowfullscreen></iframe></p>';
         echo "</div>";
     }
-    if (preg_match("#https?://www\.dailymotion\.com/video/.{7}#i",$test)) 
-    {    
+    if (preg_match("#https?://www\.dailymotion\.com/video/.{7}#i",$test))
+    {
         $beginning = strpos($test, "http://www.dailymotion.com/video/");
         $end = 40;
         $url = substr($test, $beginning, $end);
@@ -55,7 +55,7 @@ function checkLink($test)
         echo '<p><audio src="'.$urlbien.'" controls></audio></p>';
         echo "</div>";
     }
-    if (preg_match("#/media/.+\.(mp4|mped|wav)#i",$test)) 
+    if (preg_match("#/media/.+\.(mp4|mped|wav)#i",$test))
     {
         $beginning = strpos($test, "/media/");
         $end = 39;

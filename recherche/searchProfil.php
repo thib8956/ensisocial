@@ -78,7 +78,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					</a>
 
 					<?php if ($_SESSION['id'] == $publication['authorid']): ?>
-						<a class="btn btn-default pull-right supprNews" href=<?php echo '/ensisocial/delete.php?id='.$publication['newsfeedid']; ?> >
+						<a class="btn btn-default pull-right supprNews" href=<?php echo '"/ensisocial/delete.php?id='.$publication['newsfeedid'].'"'; ?> >
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							Supprimer
 						</a>
@@ -120,7 +120,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				<div class="input-group">
 					<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
 						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-						<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+						<?php echo '<input type="hidden" name="back" value="'.$_SERVER['REQUEST_URI'].'">' ?>
 						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 					</form>
 					<p>

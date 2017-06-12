@@ -20,19 +20,19 @@ if (isset($_FILES['picture'])){
 } elseif (isset($_POST['newpassword'])){
 	if (empty($_POST['oldpassword']) or empty($_POST['newpassword']) or empty($_POST['repassword'])){
 		// TODO : error messages
-        header('Location: /ensisocial/edit-profile.php?pwd=0');
-	} else {
-		if (updatePassword($db,
+        header('Location: /ensisocial/edit-profile.php?pwd=0'); //si pas de valeurs
+	} elseif (strlen($_POST['newpassword'])<6){
+        header('Location: /ensisocial/edit-profile.php?pwd=1'); //si mdp trop court
+    } elseif (updatePassword($db,
 			htmlentities($_POST['oldpassword']),
 			htmlentities($_POST['newpassword']),
 			htmlentities($_POST['repassword'])
 			)) // teste si ca change bien
         {
-            header('Location: /ensisocial/edit-profile.php?pwd=1');
-        } else {
             header('Location: /ensisocial/edit-profile.php?pwd=2');
+        } else {
+            header('Location: /ensisocial/edit-profile.php?pwd=3');
         }
-	}
 } elseif (isset($_POST['firstname'])){
     if (empty($_POST['firstname'])){
         header('Location: /ensisocial/edit-profile.php?fn=0');

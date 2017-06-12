@@ -43,7 +43,7 @@ $form = new Form($_POST,"signin");
           $glyphicon='glyphicon-lock'
           );
         echo $form->inputfield('firstname',
-          'string',
+          'text',
           'Prénom',
           $mandatory=TRUE,
           $classlabel='control-label',
@@ -51,7 +51,7 @@ $form = new Form($_POST,"signin");
           $glyphicon='glyphicon-user'
           );
         echo $form->inputfield('lastname',
-          'string',
+          'text',
           'Nom',
           $mandatory=TRUE,
           $classlabel='control-label',
@@ -59,7 +59,7 @@ $form = new Form($_POST,"signin");
           $glyphicon='glyphicon-user'
           );
         echo $form->inputfield('address',
-          'string',
+          'text',
           'Adresse',
           $mandatory=FALSE,
           $classlabel='control-label',
@@ -67,7 +67,7 @@ $form = new Form($_POST,"signin");
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('zipcode',
-          'int',
+          'text',
           'Code Postal',
           $mandatory=FALSE,
           $classlabel='control-label',
@@ -75,7 +75,7 @@ $form = new Form($_POST,"signin");
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('town',
-          'string',
+          'text',
           'Ville',
           $mandatory=FALSE,
           $classlabel='control-label',
@@ -83,7 +83,7 @@ $form = new Form($_POST,"signin");
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('birth',
-          'date',
+          'text',
           'Date de naissance',
           $mandatory=FALSE,
           $classlabel='control-label',
@@ -91,7 +91,7 @@ $form = new Form($_POST,"signin");
           $glyphicon='glyphicon-calendar'
           );
         echo $form->inputfield('phone',
-          'string',
+          'text',
           'Téléphone',
           $mandatory=FALSE,
           $classlabel='control-label',

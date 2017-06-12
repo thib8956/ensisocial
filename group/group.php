@@ -48,7 +48,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 	while ($row=$stmt->fetch()){
 		$avatar = '/ensisocial/data/avatar/'.$row['img'];
 		?>
-		<div class="panel panel-default" id="group">
+		<div class="panel panel-default" >
 			<div class="panel-heading clearfix">
 					<a class="pull-left" href="#">
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
@@ -56,9 +56,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					<h2>
 					<?php if($id!=NULL){?>
 						<a href= <?php if(array_key_exists($row['name'], $FORMATIONS)){
-							echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$FORMATIONS[$row['name']].'</a>';
+							echo '"/ensisocial/group/groupPage.php?id='.$row['id'].'">'.$FORMATIONS[$row['name']].'</a>';
 						}else{
-							echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$row['name'].'</a>';
+							echo '"/ensisocial/group/groupPage.php?id='.$row['id'].'"">'.$row['name'].'</a>';
 						}
 
 					}else{

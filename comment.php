@@ -74,7 +74,7 @@ while($row) {
 
   <li class="list-group-item">
     <a class="pull-left" href="#">
-      <img class="avatar" src=<?php echo $pic; ?> alt="avatar" height="80px">
+      <img class="avatar" src=<?php echo $pic; ?> alt="avatar" height="80">
     </a>
 
     <?php if ($_SESSION['id'] == $row['authorid']): ?>

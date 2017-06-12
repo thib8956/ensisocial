@@ -26,8 +26,9 @@
 		</a>
 		</div> <!-- .navbar-header -->
 
-		<div id="navbar" role="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px">
-			<div class="nav navbar-nav">
+		<div id="navbar" role="navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px">
+			<ul class="nav navbar-nav">
+				
 				<?php if (!isset($_SESSION['id'])): ?>
 					<li>
 						<a href="inscription.php" title="inscription">
@@ -48,10 +49,10 @@
 					</li>
 					<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>&nbsp;Groupe&nbsp;<span class="caret"></span></span></small>
+						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>&nbsp;Groupe&nbsp;<span class="caret"></span>
 					</a>
-					<ul class="dropdown-menu" rol="menu" aria-labelledby="navbarDropdownMenuLink">
-					         <li role="presentation"> <a class="dropdown-item" role="menuitem" tabindex="-1" href=<?php echo "/ensisocial/group/group.php?id=".$_SESSION['id'] ?>>Mes groupes</a></li>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="navbarDropdownMenuLink">
+					         <li role="presentation"> <a class="dropdown-item" role="menuitem" tabindex="-1" href=<?php echo '"/ensisocial/group/group.php?id='.$_SESSION['id'].'"' ?>>Mes groupes</a></li>
 					         <li role="presentation"> <a class="dropdown-item" role="menuitem" tabindex="-1" href="/ensisocial/group/group.php">Groupes</a></li>
 					 </ul>
 					</li>
@@ -59,18 +60,22 @@
 						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Déconnexion
 					</a></li>
 					<!-- Searchbar -->
+					<li>
 					<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
 						<div class="input-group add-on">
 							<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
 							<div class="input-group-btn">
-								<button type="submit" id="search" class="btn btn-primary" name="search">
-									<i class="glyphicon glyphicon-search"></i>
+								<button type="submit" id="search" class="btn btn-default" name="search">
+									<span class="sr-only">Search</span>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 								</button>
 							</div>
 						</div>
 					</form>
+					</li>
 				<?php endif ?>
-			</div>
+				
+			</ul>
 		</div><!--/.nav-collapse -->
 	</div> <!-- /.container -->
 </nav>
