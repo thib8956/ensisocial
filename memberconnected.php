@@ -20,14 +20,12 @@ while($data = $memberconnected->fetch()){
 	$firstname = $data['firstname'];
 	$lastname = $data['lastname'];
 
-	echo '<li class="list-group-item">';
 	if (htmlentities($data['connectedTime']) > time() - 11){
+		echo '<li class="list-group-item">';
 		echo '<span class="glyphicon glyphicon-record" style="color:#58D68D"></span>';
-	} else {
-		echo '<span class="glyphicon glyphicon-record" style="color:#D7DBDD"></span>';
+		echo ' '.$firstname.' '.$lastname;
+		echo '</li>';
 	}
-	echo ' '.$firstname.' '.$lastname;
-	echo '</li>';
 }
 echo '</ul>';
 ?>

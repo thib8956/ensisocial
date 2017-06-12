@@ -161,20 +161,12 @@ function updatePassword($pdo, $oldpassword, $newpassword, $repassword){
 	$stmt->execute(array('email'=> htmlentities($_SESSION['email'])));
 	$row = $stmt->fetch();
 	if (password_verify($_POST['oldpassword'], $row['password'])){
-<<<<<<< HEAD
 	    if ($_POST['newpassword']==$_POST['repassword']){
 	        $stmt= $pdo->prepare('UPDATE users SET password=:hash WHERE id=:id');
 	        $stmt->execute(array('hash'=>$hash,
 	            'id'=> intval($_SESSION['id'])));
             return true;
 	    }
-=======
-		if ($_POST['newpassword']==$_POST['repassword']){
-			$stmt= $pdo->prepare('UPDATE users SET password=:hash WHERE id=:id');
-			$stmt->execute(array('hash'=>$hash,
-				'id'=> intval($_SESSION['id'])));
-		}
->>>>>>> groupe
 	}
     return false;
 }

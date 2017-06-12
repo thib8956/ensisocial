@@ -2,6 +2,7 @@
 data/
 !data/avatar/default-profile.png
 !data/avatar/default-group.png
+!data/media/.gitignore
 
 
 .Trash-1000/
