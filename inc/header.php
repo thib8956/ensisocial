@@ -29,8 +29,8 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	<!-- CSS Themes -->
 	<?php
 		if(session_status() == 2){
-			if (isset($_SESSION['formation']) and $_SESSION['formation'] == 'IR'){
-				echo '<link rel="stylesheet" href="/ensisocial/css/themes/theme_IR.css" />';
+			if (isset($_SESSION['formation'])){
+				echo '<link rel="stylesheet" href="/ensisocial/css/themes/theme_'.$_SESSION['formation'].'.css" />';
 			}
 		}
 	 ?>

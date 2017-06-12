@@ -17,7 +17,7 @@ try {
 		ORDER BY date DESC'
 		);
 
-   
+
 	/* Fetch profile picture */
 	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
 	$data = $profile->fetch();
@@ -143,6 +143,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
         	<?php
         	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/checklink.php');
             checkLink($publication['content']);
+            echo '<p>'.$publication['content'].'</p>';
+
         	if($score >= 0){
         		echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
         	} else {
