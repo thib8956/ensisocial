@@ -78,15 +78,6 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	</div>
 </div>
 
-<style type="text/css">
-	.sidebar {
-		z-index: 1;
-		background: white;
-		left: 0;
-		padding: 10px;
-	}
-</style>
-
 <script type="text/javascript">
 function toggleSidebar(){
 	$('#sidebar').toggleClass('hidden-xs');

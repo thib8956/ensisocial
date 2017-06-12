@@ -1,7 +1,7 @@
 </div> <!-- /.container-fluid -->
 
 <footer class="footer">
-    <p class="muted credit">2017. Créé par l'équipe de EnsiSocial</p>
+    <p class="text-center">2017. Créé par l'équipe de EnsiSocial</p>
 </footer>
 
 <!-- Scripts -->

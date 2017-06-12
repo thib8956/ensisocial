@@ -36,27 +36,16 @@ try {
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 
-<!-- Style des boutton afficher/reduire les commentaires-->
-<style type="text/css">
-    .formulaire {
-        display: inline-flex;
-        margin-top: 3px;
-    }
-    .inputButton:hover {
-        cursor: pointer;
-    }
-</style>
-
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-3 col-md-8">
+	<div class="col-sm-offset-3 col-md-6">
 		<form action="publication.php" method="post">
 			<?php
 			$form = new Form($_POST, 'post');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
 			echo $form->inputtextarea('content', 'Contenu', 5, 16);
 			echo $form->submit('Publier');
-			echo '<input type="hidden" name="type" class="btn btn-primary-outline" value="0" />
+			echo '<input type="hidden" name="type" value="0" />
 		</form>';
 		?>
 	</form>
@@ -66,8 +55,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-3 col-md-8 newsfeed">
-
+	<div class="col-sm-offset-3 col-md-6 newsfeed">
 		<?php
 
 		$commId=0;
@@ -154,17 +142,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
         <div class="panel-body" id=<?php echo 'post'.$publication['newsfeedid']?>>
         	<?php
         	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/checklink.php');
-            checkLink($publication['content']);    
+            checkLink($publication['content']);
         	if($score >= 0){
         		echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
         	} else {
         		echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
         	}
-           
+
             if((!empty($vote['iduser'])) and $vote['vote']==1){ // si c'est poce bleu c'est vert
             	echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') style="color:#00DD00" ></button>&nbsp;&nbsp;';
             	echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
-            	
+
             }elseif((!empty($vote['iduser'])) and $vote['vote']==0){// si c'est pas poce bleu c'est rouge
                 echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].')  ></button>&nbsp;&nbsp;';
                 echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') style="color:#DD0000" ></button>';
@@ -172,9 +160,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
             }else{ // si c'est rien c'est rien
                 echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
                 echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
-               
+
             }
-           
+
             echo '<p class="text-right small">'.$publication['date'].'</p>';
 			// Comment section
         	echo '<ul class="list-group">';

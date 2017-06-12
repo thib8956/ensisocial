@@ -41,11 +41,11 @@ $form = new Form($_POST,"profile_page");
         <?php
         if (isset($_GET['pwd'])){
             if ($_GET['pwd']==0){
-                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Remplis les champs...</div></div>"; 
+                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Remplis les champs...</div></div>";
             } elseif ($_GET['pwd']==1){
-                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>"; 
+                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>";
             } else {
-                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>"; 
+                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>";
             }
         }
         ?>
@@ -129,7 +129,7 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="lastname" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
                 <?php
                 echo $form->inputfield(
                     'lastname',
@@ -202,7 +202,7 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="address" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
                 <?php
                 echo $form->inputfield(
                     'address',
@@ -234,7 +234,7 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="zipcode" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
                 <?php
                 echo $form->inputfield(
                     'zipcode',
@@ -332,7 +332,7 @@ $form = new Form($_POST,"profile_page");
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#birth">Modifier</a></div>
         </div>
         <div id="birth" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline">
                 <?php
                 echo $form->inputfield(
                     'birth',

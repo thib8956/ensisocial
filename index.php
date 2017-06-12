@@ -24,7 +24,6 @@ $form=new Form($_POST,"login");
               $mandatory=TRUE,
               $classlabel='control-label',
               $classselect='form-control',
-              $id='',
               $glyphicon='glyphicon-envelope'
               );
             echo $form->inputfield(
@@ -34,7 +33,6 @@ $form=new Form($_POST,"login");
               $mandatory=TRUE,
               $classlabel='control-label',
               $classselect='form-control',
-              $id='',
               $glyphicon='glyphicon-lock'
               );
               ?>

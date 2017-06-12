@@ -113,6 +113,6 @@ class form{
      * @return string retourn la commande html pour créer le bouton du formulaire
      */
     public function submit($display){
-        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-primary">');
+        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-default">');
     }
 }
