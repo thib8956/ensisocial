@@ -146,6 +146,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
 		echo '</div>'; /* /.newsfeed */
+        include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/messagerie/chatBox.php');
 		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 		?>
 
