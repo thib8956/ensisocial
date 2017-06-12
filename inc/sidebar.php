@@ -1,3 +1,11 @@
+<?php
+$FORMATIONS = array('IR' => 'Informatique et Réseaux',
+  'AS' =>'Automatique et Systèmes',
+  'meca' => 'Mécanique',
+  'textile' => 'Textile et fibres',
+  'FIP' => 'Filière par alternance');
+?>
+
 <div class="col-sm-3 col-md-3"  role="complementary">
 	<nav id="sidebar" class="sidebar affix hidden-print hidden-sm hidden-xs">
 		<div class="text-center">
@@ -6,7 +14,16 @@
 			</a>
 			<h3>
 				<?php
-				echo $user['firstname'].' '.$user['lastname'];
+				if(!isset($user['name'])){
+					echo $user['firstname'].' '.$user['lastname'];
+				}else{
+					if(array_key_exists($user['name'], $FORMATIONS)){
+						echo $FORMATIONS[$user['name']];
+					} else {
+						echo $user['name'];
+					}
+				}
+
 				?>
 			</h3>
 			<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
@@ -29,6 +46,7 @@
 				<button type="button" class="close btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
 			</div>
 			<div class="modal-body">
+			<?php if(!isset($user["name"])){ ?>
 				<div class="text-center">
 					<img class="img-circle img-responsive center-block" src=<?php echo $pic_path ?> alt="avatar" id="aboutme" width="140" height="140">
 					<h3 class="media-heading"><?php echo $user['firstname'].' ';echo $user['lastname'].' ' ?><small><?php echo $user['town'] ?></small></h3>
@@ -40,11 +58,22 @@
 					</p>
 				</div>
 				<hr>
+
+			<?php } else { ?>
+				<div class="text-center">
+					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
+					<h3 class="media-heading"><?php if(array_key_exists($user['name'], $FORMATIONS)){echo $FORMATIONS[$user['name']];}else{ echo $user['name'];}?></h3>
+				</div>
+				<hr>
+				<div class="text-center">
+					<p class="text-left"><strong>Description:</strong><br> <?php  echo $user['description']; ?></p>
+				</div>
+			<?php } ?>
 			</div>
 			<div class="modal-footer">
-				<center>
+				<div class="text-center">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</center>
+				</div>
 			</div>
 		</div>
 	</div>

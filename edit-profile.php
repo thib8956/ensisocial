@@ -167,6 +167,7 @@ $form = new Form($_POST,"profile_page");
                     $FORMATIONS);
                 echo $form->submit("Valider");
                 ?>
+                <input type="hidden" name="oldformation" class="btn btn-primary-outline" value=<?php echo $profile['formation']?> />
             </form>
         </div>
     </div>

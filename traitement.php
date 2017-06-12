@@ -112,6 +112,21 @@ function fillDatabase($connection, $profile_pic) {
                     'formation' => htmlspecialchars($_POST['formation'], ENT_QUOTES, 'UTF-8'),
                     'filename' => $profile_pic
                     ));
+
+        $stmt=$connection->prepare('SELECT id from users WHERE email=:email');
+        $stmt->execute(array(
+            'email'=>$_POST['email']));
+        $iduser=$stmt->fetch();
+        
+        $stmt=$connection->prepare('SELECT id from groupe WHERE name=:name');
+        $stmt->execute(array(
+            'name'=>$_POST['formation']));
+        $idgroup=$stmt->fetch();
+
+        $stmt=$connection->prepare('INSERT INTO member(`iduser`, `idgroup`) VALUES(:iduser, :idgroup)');
+        $stmt->execute(array(
+            'iduser'=>$iduser['id'],
+            'idgroup'=> $idgroup['id']));
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">';
         die('Error:'.$e->getMessage());

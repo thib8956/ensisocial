@@ -19,8 +19,9 @@ $nb1 = $req->fetch();
 
 if ($nb1['authorid'] == $connectedid){
 	// Delete comment
-	$bdd->query("delete  FROM comments  where id=".$commentid);
+	$bdd->query("DELETE  FROM comments  WHERE id=".$commentid);
 }
+
 
 // fermeture de la connection à la bdd
 if ($bdd) {

@@ -15,7 +15,6 @@ try {
 } catch (PDOException $e) {
 	die('Error:'.$e->getMessage());
 }
-
 echo '<ul class="list-group">';
 while($data = $memberconnected->fetch()){
 	$firstname = $data['firstname'];
