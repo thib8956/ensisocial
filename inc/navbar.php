@@ -65,8 +65,9 @@
 						<div class="input-group add-on">
 							<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
 							<div class="input-group-btn">
-								<button type="submit" id="search" class="btn btn-primary" name="search">
-									<i class="glyphicon glyphicon-search"></i>
+								<button type="submit" id="search" class="btn btn-default" name="search">
+									<span class="sr-only">Search</span>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 								</button>
 							</div>
 						</div>

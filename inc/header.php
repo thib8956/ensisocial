@@ -24,10 +24,19 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	<link rel="icon" type="image/png" href="/ensisocial/favicon.png" />
     <link rel="stylesheet" href="/ensisocial/css/jquery-ui.css"/>
 	<link rel="stylesheet" href="/ensisocial/css/bootstrap.min.css"/>
-	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="/ensisocial/css/custom.css">
+	<!-- CSS Themes -->
+	<?php
+		if(session_status() == 2){
+			if (isset($_SESSION['formation'])){
+				echo '<link rel="stylesheet" href="/ensisocial/css/themes/theme_'.$_SESSION['formation'].'.css" />';
+			}
+		}
+	 ?>
 </head>
 
-<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');" style="<?php echo $background?>">
+<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');">
 	<?php
 	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>

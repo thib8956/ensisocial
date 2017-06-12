@@ -1,0 +1,64 @@
+footer {
+	color: white;
+	width: 100%;
+	text-shadow: 2px 2px 4px #000000;
+	height: 50px;
+}
+
+.ui-autocomplete {
+	z-index: 1051 !important;
+}
+
+.sidebar {
+	z-index: 1;
+	background: white;
+	left: 0;
+	padding: 10px;
+}
+
+.btn.btn-link:hover {
+  text-decoration: none;
+}
+
+
+/* Chatbox CSS */
+.chat {
+	position: fixed;
+	line-height: 0;
+	bottom: 0;
+	z-index: 5;
+}
+
+.chat_wrapper {
+	font: 12px 'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+.chat_wrapper .message_box {
+	max-height: 300px;
+	overflow: auto;
+}
+
+.system_msg{
+	color: #BDBDBD;
+	font-style: italic;
+}
+
+.user_name{
+	font-weight:bold;
+}
+
+.user_message{
+	color: #88B6E0;
+}
+
+/* /Chatbox CSS */
+
+/* Style des boutton afficher/reduire les commentaires */
+.formulaire {
+    display: inline-flex;
+    margin-top: 3px;
+}
+
+.inputButton:hover {
+    cursor: pointer;
+}
