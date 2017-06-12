@@ -9,7 +9,7 @@ $place=(isset($_POST['idplace'])) ? $_POST['idplace'] :NULL;
 $type=(isset($_POST['type'])) ? $_POST['type'] :NULL;
 if(isset($_POST['post'])){
 	if (!empty($_POST['title']) && !empty($_POST['content'])){
-		createPublication($db);
+		createPublication($db,$place);
 		if($place==NULL){
 			header('Location: page_membre.php');
 		}elseif( $place !=NULL && $type==NULL  ){
@@ -23,7 +23,7 @@ if(isset($_POST['post'])){
 }
 
 
-function createPublication($conn){
+function createPublication($conn,$place){
 	$curr_timestamp = date('Y-m-d H:i:s');
 	try {
 		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`,`place`,`type`) VALUES (:title, :date, :content, :place, :type)');
