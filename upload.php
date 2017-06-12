@@ -4,7 +4,25 @@ $title="Uploads";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 //$user = $_SESSION; // pour la sidebar
 //include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
+try{
+    $user = $_SESSION;
+    $profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
+    $data = $profile->fetch();
+    if (!empty($data['profile_pic'])){
+        $pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
+    } else {
+        $pic_path = '/ensisocial/data/avatar/default-group.png';
+    }
+}catch(PDOException $e){
+    echo '<div class="alert alert-danger">';
+    die('Error:'.$e->getMessage());
+    echo '</div>';
+}
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
+?>
+<div class="col-sm-offset-3 col-md-8">
+<?php
 if( isset($_POST['upload']) ) // si formulaire soumis
 {
     $tmp_file = $_FILES['fichier']['tmp_name'];
@@ -42,8 +60,9 @@ if( isset($_POST['upload']) ) // si formulaire soumis
         echo("Voici votre lien : ");
         echo("/media/".$fname.$ext);
     }
-}
-
+}?>
+</div>
+<?php
 function print_errors($retcode){
     $phpFileUploadErrors = array(
         0 => 'There is no error, the file uploaded with success',
