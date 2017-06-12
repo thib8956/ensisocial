@@ -34,9 +34,6 @@ if ( $nb1['authorid'] == $connectedid ){
 		 FROM (`comments` LEFT JOIN `newscomment` ON `newscomment`.`commentid` = `comments`.`id`)
 		WHERE `newscomment`.`commentid` IS NULL
 		');
-
-
-
 	exit();
 }
 

@@ -1,34 +1,59 @@
+
+
 <?php
+$title="Groupe";
 session_start();
-$title="Recherche";
+if (session_status() != 2){
+	echo '<p>Erreur : session non démarrée</p>';
+	header('/ensisocial/index.php');
+}
+$id=(isset($_GET["id"])) ? $_GET["id"] : NULL;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
-	$profil  = $db->query('SELECT * from users WHERE id='.$_GET['id']);
-	$data = $profil->fetch();
-	if (!empty($data['profile_pic'])){
-		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
-	} else {
-		$pic_path = '/ensisocial/data/avatar/default-profile.png';
+	$member=$db->prepare('SELECT iduser FROM member WHERE idgroup=:id');
+	$member->execute(array('id'=>$id));
+	$idmember=array();
+	while($memb=$member->fetch()){
+		array_push($idmember, $memb['iduser']);
 	}
-	$stmt = $db->query('
-		SELECT *
-		FROM newsfeed
+	
+	if(!in_array($_SESSION['id'], $idmember)){
+		header('location:/ensisocial/group/group.php');
+	}
+	$stmt = $db->prepare('SELECT *
+		FROM newsfeed 
 		JOIN authornews ON newsfeed.id = authornews.newsfeedid
 		JOIN users ON users.id = authornews.authorid
-		WHERE place='.$_GET['id'].'
-		ORDER BY date DESC'
-		);
+		WHERE type=1
+		AND place=:id');
+	$stmt->execute(array('id'=>$id));
 
+	$group=$db->query('SELECT * from groupe WHERE id='.$_GET['id']);
+	$data=$group->fetch();
+	
+
+	/* Fetch profile picture */
+	if (!empty($data['img'])){
+		$pic_path = '/ensisocial/data/avatar/'.$data['img'];
+	} else {
+		$pic_path = '/ensisocial/data/avatar/default-group.png';
+	}
 } catch (PDOException $e) {
 	echo '<div class="alert alert-danger">';
 	die('Error:'.$e->getMessage());
 	echo '</div>';
 }
-// Sidebar
-$user = $data;
+
+
+$user=$data;
+$user["FORMATIONS"]=$FORMATIONS;
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
+
 ?>
+
+
 <!-- Add a publication -->
 <div class="row">
 	<div class="col-sm-offset-3 col-md-8">
@@ -39,22 +64,21 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
 			echo $form->inputtextarea('content', 'Contenu', 5, 16);
 			echo $form->submit('Publier');
-			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />
-
+			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />';
+			echo '<input type="hidden" name="type" class="btn btn-primary-outline" value="1" />
 		</form>';
 		?>
-
+	
 
 	</div>
 </div>
-
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
 	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
-			$place= $db->prepare('SELECT * FROM users WHERE users.id=:id');
+			$place= $db->prepare('SELECT * FROM groupe WHERE groupe.id=:id');
 			$place->execute(array('id'=>intval($publication['place'])));
 			$loc=$place->fetch();
 			$commId+=1;
@@ -82,14 +106,28 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					<?php endif?>
 					<?php
 					$score = $publication['score'];
+					foreach ($FORMATIONS as $key => $value) {
+						echo " ".$key;
+					}
+					if(array_key_exists($loc['name'], $FORMATIONS)){
 					echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
 					<small>
 						<span class="glyphicon glyphicon-chevron-right">
 						</span>
-						<a href="/ensisocial/recherche/searchProfil.php?id='.$loc['id'].'">'.$loc['firstname'].' '.$loc['lastname'].'
+						<a href="/ensisocial/group/groupPage.php?id='.$loc['id'].'">'.$FORMATIONS[$loc['name']].'
 						</a>
 					</small>
 				</h2>';
+				}else{
+					echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
+					<small>
+						<span class="glyphicon glyphicon-chevron-right">
+						</span>
+						<a href="/ensisocial/group/groupPage.php?id='.$loc['id'].'">'.$loc['name'].'
+						</a>
+					</small>
+				</h2>';
+				}
 				echo '<h3>'.$publication['title'].'</h3>';
 				?>
 			</div> <!-- .panel-heading -->
@@ -129,10 +167,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				</div>
 		</div> <!-- /.panel-body -->
 	</div> <!-- /.panel -->
-	<?php
+
+<?php
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
 		echo '</div>'; /* /.newsfeed */
-		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
-		?>
-
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
+?>
