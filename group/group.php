@@ -50,7 +50,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 		?>
 		<div class="panel panel-default" id="group">
 			<div class="panel-heading clearfix">
-					<a class="pull-left" href=<?php echo '"/ensisocial/recherche/searchProfil.php?id='.$publication['authorid'].'"'; ?>>
+					<a class="pull-left" href="#">
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 					</a>
 					<h2>

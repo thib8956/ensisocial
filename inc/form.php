@@ -39,26 +39,14 @@ class form{
      * @return string
      */
     public function inputsection($name, $type, $display, $option, $classlabel="control-label", $classselect="form-control"){
-        if ($id==NULL){
-            $section='<label for="'.$display.'" class="'.$classlabel.'"></label>
-            <select name="'.$name.'" class="'.$classselect.'">';
-                foreach($option as $key =>$value){
-                    $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
-                }
-
-                $section=$section.'</select>';
-                return $this->surround($section);
+        $section='<label for="'.$display.'" class="'.$classlabel.'"></label>
+        <select name="'.$name.'" class="'.$classselect.'">';
+            foreach($option as $key =>$value){
+                $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
             }
 
-        $section='<label for="'.$display.'" class="control-label"></label>
-						<select name="'.$name.'" class="form-control">';
-        foreach($option as $key =>$value){
-            $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
-        }
-
-						$section=$section.'</select>';
-        return $this->surround($section);
-
+            $section=$section.'</select>';
+            return $this->surround($section);
     }
 
 

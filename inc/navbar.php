@@ -2,7 +2,7 @@
 
 	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="sidebar-toggle btn navbar-left" data-toggle="collapse" data-target="#sidebar" onclick="toggleSidebar()">
+			<button type="button" class="sidebar-toggle btn navbar-left hidden-md hidden-lg" data-toggle="collapse" data-target="#sidebar" onclick="toggleSidebar()">
 				<span class="sr-only">Toggle sidebar</span>
 				<span class="glyphicon glyphicon-menu-down"></span>
 			</button>
@@ -48,17 +48,12 @@
 					</li>
 					<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>&nbsp;Groupe&nbsp;<small><span class="glyphicon glyphicon-menu-down"></span></small>
+						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>&nbsp;Groupe&nbsp;<span class="caret"></span></span></small>
 					</a>
 					<ul class="dropdown-menu" rol="menu" aria-labelledby="navbarDropdownMenuLink">
 					         <li role="presentation"> <a class="dropdown-item" role="menuitem" tabindex="-1" href=<?php echo "/ensisocial/group/group.php?id=".$_SESSION['id'] ?>>Mes groupes</a></li>
 					         <li role="presentation"> <a class="dropdown-item" role="menuitem" tabindex="-1" href="/ensisocial/group/group.php">Groupes</a></li>
 					 </ul>
-					</li>
-					<li>
-					<a href="/ensisocial/messagerie/chatPage.php">
-						<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;Messagerie
-					</a>
 					</li>
 					<li><a href="/ensisocial/disconnection.php">
 						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Déconnexion

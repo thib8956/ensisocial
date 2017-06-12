@@ -9,13 +9,13 @@ $place=(isset($_POST['idplace'])) ? $_POST['idplace'] :NULL;
 $type=(isset($_POST['type'])) ? $_POST['type'] :NULL;
 if(isset($_POST['post'])){
 	if (!empty($_POST['title']) && !empty($_POST['content'])){
-		createPublication($db);
+		createPublication($db,$place);
 		if($place==NULL){
 			header('Location: page_membre.php');
 		}elseif( $place !=NULL && $type==NULL  ){
-			header('Location: recherche/searchProfil.php?id='.$_POST["idplace"]);
+			header('Location: recherche/searchProfil.php?id='.$place);
 		}else{
-			header('Location: group/groupPage.php?id='.$_POST["idplace"]);
+			header('Location: group/groupPage.php?id='.$place);
 		}
 	} else {
         echo "<div>Il y a eu une erreur dans l'exécution de votre requête: une publication ne peut pas être vide</div>";
@@ -23,7 +23,7 @@ if(isset($_POST['post'])){
 }
 
 
-function createPublication($conn){
+function createPublication($conn,$place){
 	$curr_timestamp = date('Y-m-d H:i:s');
 	try {
 		$stmt = $conn->prepare('INSERT INTO `newsfeed` (`title`, `date`, `content`,`place`,`type`) VALUES (:title, :date, :content, :place, :type)');
@@ -31,7 +31,7 @@ function createPublication($conn){
 			'title' => htmlentities($_POST['title']),
 			'date' => $curr_timestamp,
 			'content' => htmlentities($_POST['content']),
-			'place' => intval($_POST['idplace']),
+			'place' => intval($place),
 			'type' => intval($_POST['type'])
 			));
 		$stmt = $conn->prepare('INSERT INTO `authornews` (`authorid`, `newsfeedid`)
