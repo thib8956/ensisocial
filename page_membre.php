@@ -17,7 +17,7 @@ try {
 		ORDER BY date DESC'
 		);
 
-    $vote=$db->prepare('SELECT iduser,vote FROM vote where idnews=:idnews and iduser=:iduser');
+   
 	/* Fetch profile picture */
 	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
 	$data = $profile->fetch();
@@ -72,6 +72,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 		$commId=0;
 		while ($publication=$stmt->fetch()){
+            $vote=$db->prepare('SELECT iduser,vote FROM vote where idnews=:idnews and iduser=:iduser');
             $vote->execute(array(
                 'idnews'=>$publication['newsfeedid'],
                 'iduser'=>$_SESSION['id']));
