@@ -10,7 +10,7 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	<nav id="sidebar" class="sidebar affix hidden-print hidden-sm hidden-xs">
 		<div class="text-center">
 			<a href="#aboutModal" data-toggle="modal" data-target="#myModal">
-				<img src=<?php echo $pic_path ?> id="aboutme" width="140" height="140" alt="avatar" class="img-circle img-responsive center-block">
+				<img src=<?php echo $pic_path ?> width="140" height="140" alt="avatar" class="img-circle img-responsive center-block">
 			</a>
 			<h3>
 				<?php
@@ -38,7 +38,7 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 </div>
 
 <!-- Pop up when clicking picture -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true" >
 	<div class="modal-dialog" >
 		<div class="modal-content">
 			<div class="modal-header">
@@ -47,7 +47,7 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 			<div class="modal-body">
 			<?php if(!isset($user["name"])){ ?>
 				<div class="text-center">
-					<img class="img-circle img-responsive center-block" src=<?php echo $pic_path ?> alt="avatar" id="aboutme" width="140" height="140">
+					<img class="img-circle img-responsive center-block" src=<?php echo $pic_path ?> alt="avatar" width="140" height="140">
 					<h3 class="media-heading"><?php echo $user['firstname'].' ';echo $user['lastname'].' ' ?><small><?php echo $user['town'] ?></small></h3>
 					<p class="text-left">
 						<strong>Formation: </strong> <?php  echo $FORMATIONS[$user['formation']]; ?>

@@ -59,7 +59,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			echo '<input type="hidden" name="type" class="btn btn-primary-outline" value="0" />
 		</form>';
 		?>
-	</form>
 </div>
 </div>
 
@@ -102,13 +101,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
             }
             ?>
 
-            <div class="panel panel-default" id="publi">
-            	<div class="panel-heading" id="page_membre">
+            <div class="panel panel-default">
+            	<div class="panel-heading" >
             		<a class="pull-left" href=<?php echo '"/ensisocial/recherche/searchProfil.php?id='.$publication['authorid'].'"'; ?>>
             			<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
             		</a>
             		<?php if ($_SESSION['id'] == $publication['authorid']): ?>
-            			<a class="btn btn-default pull-right supprNews" href=<?php echo 'delete.php?id='.$publication['newsfeedid']; ?>>
+            			<a class="btn btn-default pull-right supprNews" href=<?php echo '"delete.php?id='.$publication['newsfeedid'].'"'; ?>>
             				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             				Supprimer
             			</a>
