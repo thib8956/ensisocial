@@ -3,7 +3,7 @@
 
 class form{
     private $data;
-    private $surround='div';
+    private $surround = 'div';
     private $button;
 
     /**
@@ -12,8 +12,8 @@ class form{
      *        $button donne le texte afficher sur le boutton
      */
     public function __construct($data,$button){
-        $this->data=$data;
-        $this->button=$button;
+        $this->data = $data;
+        $this->button = $button;
     }
 
     /**
@@ -26,7 +26,7 @@ class form{
     /**
      * @param $index
      * @return string
-     *     */
+     */
     private function getValue($index){
         return isset($this->data[$index]) ? $this->data[$index]:null;
     }

@@ -7,7 +7,7 @@ try {
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$memberconnected = $db-> query('SELECT lastname, firstname, connectedTime FROM users');
-    
+
     if(isset($_SESSION['id'])) {
         $connectionRefresh = $db->prepare('UPDATE users SET connectedTime = :time WHERE id = :id');
         $connectionRefresh->execute(array('time' => time(),'id' => $_SESSION['id']));
@@ -15,11 +15,10 @@ try {
 } catch (PDOException $e) {
 	die('Error:'.$e->getMessage());
 }
-
 echo '<ul class="list-group">';
 while($data = $memberconnected->fetch()){
-	$firstname = htmlentities($data['firstname']);
-	$lastname = htmlentities($data['lastname']);
+	$firstname = $data['firstname'];
+	$lastname = $data['lastname'];
 
 	echo '<li class="list-group-item">';
 	if (htmlentities($data['connectedTime']) > time() - 11){

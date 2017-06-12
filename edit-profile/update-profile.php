@@ -52,11 +52,28 @@ if (isset($_FILES['picture'])){
 } elseif (isset($_POST['formation'])){
 	updateProfile($db, 'formation', htmlentities($_POST['formation']));
     $_SESSION['formation']=htmlentities($_POST['formation']);
-    header('Location: /ensisocial/edit-profile.php?fm=1');
+
+	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
+	$idgroup->execute(array('name'=>$_POST["oldformation"]));
+	$idgroup=$idgroup->fetch(); // catch old formation
+	$stmt=$db->prepare('DELETE FROM `member` WHERE `member`.`iduser` = :iduser AND `member`.`idgroup`=:idgroup' );
+	$stmt->execute(array(
+	'iduser'=>$_SESSION['id'],
+	'idgroup' =>$idgroup['id']
+	));
+	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
+	$idgroup->execute(array('name'=>$_POST["formation"]));
+	$idnewgroup=$idgroup->fetch();
+	$stmt=$db->prepare('INSERT iNTO `member` (`iduser`, `idgroup`) VALUES(:iduser, :idgroup)');
+	$stmt->execute(array(
+		'iduser'=>$_SESSION['id'],
+		'idgroup' =>$idnewgroup['id']
+		));
+	header('Location: /ensisocial/edit-profile.php?fm=1');
 } elseif (isset($_POST['address'])){
 	echo '<p>Changement d\'adresse';
 	echo '<p>'.$_POST['address'].'</p>';
-	updateProfile($db, 'addresse', htmlentities($_POST['address'])); 
+	updateProfile($db, 'addresse', htmlentities($_POST['address']));
     header('Location: /ensisocial/edit-profile.php?ad=1');
 } elseif (isset($_POST['zipcode'])){
 	updateProfile($db, 'zipcode', htmlentities($_POST['zipcode']));
@@ -77,6 +94,7 @@ if (isset($_FILES['picture'])){
         header('Location: /ensisocial/edit-profile.php?birth=1');
     }
 }
+
 
 /**
  * Update a field of the table `users` according to a profile change.
@@ -143,12 +161,20 @@ function updatePassword($pdo, $oldpassword, $newpassword, $repassword){
 	$stmt->execute(array('email'=> htmlentities($_SESSION['email'])));
 	$row = $stmt->fetch();
 	if (password_verify($_POST['oldpassword'], $row['password'])){
+<<<<<<< HEAD
 	    if ($_POST['newpassword']==$_POST['repassword']){
 	        $stmt= $pdo->prepare('UPDATE users SET password=:hash WHERE id=:id');
 	        $stmt->execute(array('hash'=>$hash,
 	            'id'=> intval($_SESSION['id'])));
             return true;
 	    }
+=======
+		if ($_POST['newpassword']==$_POST['repassword']){
+			$stmt= $pdo->prepare('UPDATE users SET password=:hash WHERE id=:id');
+			$stmt->execute(array('hash'=>$hash,
+				'id'=> intval($_SESSION['id'])));
+		}
+>>>>>>> groupe
 	}
     return false;
 }

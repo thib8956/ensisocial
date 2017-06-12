@@ -18,7 +18,7 @@ $connectedid = $_SESSION['id'] ;
 $db->query("SELECT * FROM newsfeed");
 
 // Vérifier auteur
-$req=$db->prepare("SELECT authorid FROM authornews JOIN newsfeed ON newsfeed.id = authornews.newsfeedid WHERE newsfeed.id=:newsid");
+$req=$db->prepare('SELECT authorid FROM authornews JOIN newsfeed ON newsfeed.id = authornews.newsfeedid WHERE newsfeed.id=:newsid');
 $req->execute(array('newsid' => $newsfeedid));
 $nb1 = $req->fetch();
 
@@ -34,8 +34,7 @@ if ( $nb1['authorid'] == $connectedid ){
 		 FROM (`comments` LEFT JOIN `newscomment` ON `newscomment`.`commentid` = `comments`.`id`)
 		WHERE `newscomment`.`commentid` IS NULL
 		');
-
-	//header('Location: page_membre.php');
+	exit();
 }
 
 // fermeture de la connection à la db

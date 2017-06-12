@@ -10,15 +10,6 @@ $start = 0;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string, $start);
 
-function get_include_contents($filename) {
-    if (is_file($filename)) {
-        ob_start();
-        include $filename;
-        return ob_get_clean();
-    }
-    return false;
-}
-
 // Envoi mail
 /*
 $objet = 'Confirmation de votre inscription EnsiSocial' ;
@@ -50,7 +41,7 @@ if(isset($_POST['signin'])) {
                 echo $utile;
                 $mailUsed = true;
                 exit;
-            } 
+            }
         }
         if (!$mailUsed){
             if($_POST["password"] == $_POST["repassword"]){
@@ -76,7 +67,7 @@ if(isset($_POST['signin'])) {
                 exit;
             } else {
                 echo '<div class="alert alert-danger">';
-                echo "Vos 2 mots de passe ne sont pas similaires.";
+                echo "Vos 2 mots de passe ne sont pas identiques.";
                 echo '</div>';
                 echo $utile;
                 exit;
@@ -121,6 +112,21 @@ function fillDatabase($connection, $profile_pic) {
                     'formation' => htmlspecialchars($_POST['formation'], ENT_QUOTES, 'UTF-8'),
                     'filename' => $profile_pic
                     ));
+
+        $stmt=$connection->prepare('SELECT id from users WHERE email=:email');
+        $stmt->execute(array(
+            'email'=>$_POST['email']));
+        $iduser=$stmt->fetch();
+        
+        $stmt=$connection->prepare('SELECT id from groupe WHERE name=:name');
+        $stmt->execute(array(
+            'name'=>$_POST['formation']));
+        $idgroup=$stmt->fetch();
+
+        $stmt=$connection->prepare('INSERT INTO member(`iduser`, `idgroup`) VALUES(:iduser, :idgroup)');
+        $stmt->execute(array(
+            'iduser'=>$iduser['id'],
+            'idgroup'=> $idgroup['id']));
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">';
         die('Error:'.$e->getMessage());
@@ -128,4 +134,17 @@ function fillDatabase($connection, $profile_pic) {
     }
 }
 
+/**
+ * [get_include_contents description]
+ * @param  [type] $filename [description]
+ * @return [type]           [description]
+ */
+function get_include_contents($filename) {
+    if (is_file($filename)) {
+        ob_start();
+        include $filename;
+        return ob_get_clean();
+    }
+    return false;
+}
 ?>
