@@ -1,5 +1,6 @@
 <?php
 
+
 class form{
     private $data;
     private $surround='div';
@@ -10,7 +11,7 @@ class form{
      * @param $data array regroupe tous les champs du formulaire
      *        $button donne le texte afficher sur le boutton
      */
-    public function __construct($data, $button){
+    public function __construct($data,$button){
         $this->data=$data;
         $this->button=$button;
     }
@@ -18,8 +19,8 @@ class form{
     /**
      * @param $html
      */
-    private function surround($html,$class="form-group",$id=""){
-        return "<{$this->surround} class=".$class."id=".$id." >{$html}</{$this->surround}>";
+    private function surround($html, $class="form-group"){
+        return "<{$this->surround} class=".$class." >{$html}</{$this->surround}>";
     }
 
     /**
@@ -37,10 +38,10 @@ class form{
      * @param $option
      * @return string
      */
-    public function inputsection($name, $type, $display,$option,$classlabel="control-label",$classselect="form-control",$id=""){
+    public function inputsection($name, $type, $display, $option, $classlabel="control-label", $classselect="form-control"){
         if ($id==NULL){
             $section='<label for="'.$display.'" class="'.$classlabel.'"></label>
-            <select name="'.$name.'" class="'.$classselect.'" id="'.$id.'">';
+            <select name="'.$name.'" class="'.$classselect.'">';
                 foreach($option as $key =>$value){
                     $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
                 }
@@ -49,7 +50,25 @@ class form{
                 return $this->surround($section);
             }
 
+        $section='<label for="'.$display.'" class="control-label"></label>
+						<select name="'.$name.'" class="form-control">';
+        foreach($option as $key =>$value){
+            $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
         }
+
+						$section=$section.'</select>';
+        return $this->surround($section);
+
+    }
+
+
+    /**
+     * @param $index
+     * @return string
+     */
+    private function getType($index){
+        return isset($this->data[$index]) ? gettype($this->data[îndex]):null;
+    }
 
 
     /**
@@ -59,26 +78,31 @@ class form{
      * @param bool $mandatory
      * @return string
      */
-    public function inputfield($name, $type, $display, $mandatory=false,$classlabel="control-label",$classselect="form-control",$id=""){
-        if ($mandatory==true) {
-            return $this->surround(
-                '<label for="'.$name.'" class="'.$classlabel.'">'.$display.'<span class="asteriskField">*</span></label>
-                <input type="'.$type.'" name="'.$name.'" class="'.$classselect.'" id='.$id.'>');
-        }
-        return $this->surround(
-            '<label for="'.$name.'" class="control-label">'.$display.'</label>
-            <input type="'.$type.'" name="'.$name.'" class="form-control" id="'.$id.'">');
+    public function inputfield($name, $type, $display, $mandatory=FALSE, $classlabel="control-label", $classselect="form-control", $glyphicon=FALSE){
+        $label = '<label for="'.$name.'" class="'.$classlabel.'">'.$display;
+        if ($mandatory) $label .= '<span class="asteriskField">*</span>';
+        $label .= '</label>';
 
+        $input = '';
+        if ($glyphicon){
+            $input .= '<span class="input-group-addon">';
+            $input .= '<span class="glyphicon '.$glyphicon.'"></span>';
+            $input .= '</span>';
+        }
+        $input .= '<input name="'.$name.'" type="'.$type.'" class="'.$classselect.'">';
+
+        if ($glyphicon) $input = $this->surround($input, 'input-group');
+        return $this->surround($label . $input);
     }
 
-    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control",$id=""){
+    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control"){
         return $this->surround('
           <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
-          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'" id="'.$id.'"></textarea>');
+          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'"></textarea>');
 
    }
 
-   public function inputradiobut($name,$value,$class){
+   public function inputradiobutton($name,$value,$class){
         $but="";
         foreach ($value as $key => $value) {
             $but=$but.'<input type=radio name="'.$name.'" value="'.$key.' class='.$class.'ckecked >'.$value.' <br>';
@@ -86,10 +110,21 @@ class form{
         return $this->surround($but);
    }
 
+   /**
+    * Add a file input to the form.
+    * @param  string $name        <input name=[...]>
+    * @param  string $display     Display name of the label.
+    */
+   public function inputfile($name, $display, $classlabel="control-label", $classselect=""){
+        return $this->surround('
+            <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
+            <input id="'.$name.'" type="file" name="'.$name.'" class="file "'.$classselect.'>');
+   }
+
     /**
      * @return string retourn la commande html pour créer le bouton du formulaire
      */
-    public function submit($display,$class="btn btn-primary",$id=""){
-        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="'.$class.'" id="'.$id.'">');
+    public function submit($display){
+        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-primary">');
     }
 }

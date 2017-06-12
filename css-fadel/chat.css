@@ -1,0 +1,62 @@
+
+.btn{
+  background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+nav {
+ 
+box-shadow:	
+		0pt 2px 5px rgba(105, 108, 109,  0.7),	
+		0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+  
+   font-weight: bold;
+}
+
+
+
+#footer {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Arial;
+}
+
+
+#footer{
+  text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+   bottom:10;
+  position: fixed;
+}
+
+
+.col-sm-2{
+  background-color: whitesmoke;
+  top: 50;
+  position: fixed;
+}
+
+
+.navbar-left.btn{
+  margin-right:30px;
+  margin-top: 12px;
+}
+
+#search{
+  margin-top: 5px;
+  padding-bottom: : 10px
+}
+
+.chat_wrapper{
+  margin-left: 250px;
+}
+
+#send-btn {
+  margin-top: 12px;
+}
