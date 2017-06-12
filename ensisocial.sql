@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 12 Juin 2017 à 09:35
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
+-- Généré le :  Lun 12 Juin 2017 à 22:45
+-- Version du serveur :  10.1.21-MariaDB
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -37,24 +37,10 @@ CREATE TABLE `authorcomment` (
 --
 
 INSERT INTO `authorcomment` (`authorid`, `commentid`, `pk_authorcomment`) VALUES
-(3, 5, 5),
-(7, 7, 7),
-(7, 8, 8),
-(2, 9, 9),
-(9, 10, 10),
-(9, 11, 11),
-(9, 12, 12),
-(9, 13, 13),
-(9, 14, 14),
-(9, 15, 15),
-(9, 16, 16),
-(9, 17, 17),
-(9, 18, 18),
-(9, 19, 19),
-(9, 20, 20),
-(9, 21, 21),
-(9, 22, 22),
-(8, 23, 23);
+(9, 1, 1),
+(9, 2, 2),
+(9, 3, 3),
+(9, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -73,19 +59,10 @@ CREATE TABLE `authornews` (
 --
 
 INSERT INTO `authornews` (`authorid`, `newsfeedid`, `pk_authornews`) VALUES
-(2, 68, 57),
-(3, 69, 58),
-(3, 71, 60),
-(7, 72, 61),
-(3, 73, 62),
-(5, 74, 63),
-(5, 75, 64),
-(9, 77, 66),
-(9, 78, 67),
-(9, 79, 68),
-(9, 80, 69),
-(9, 81, 70),
-(9, 82, 71);
+(9, 190, 179),
+(9, 191, 180),
+(9, 192, 181),
+(9, 193, 182);
 
 -- --------------------------------------------------------
 
@@ -106,8 +83,10 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `content`, `date`, `upvote`, `downvote`) VALUES
-(9, 'ou&eacute; c tro la clace', '2017-06-08 13:38:18', NULL, NULL),
-(23, 'Fucking bitch', '2017-06-12 09:25:15', NULL, NULL);
+(1, 'qsdsqdqsd', '2017-06-12 20:44:05', NULL, NULL),
+(2, 'sqdsqdsq', '2017-06-12 21:12:21', NULL, NULL),
+(3, 'sqdqsd', '2017-06-12 21:12:23', NULL, NULL),
+(4, 'sqdsq', '2017-06-12 21:16:31', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -159,7 +138,9 @@ INSERT INTO `member` (`id`, `iduser`, `idgroup`, `admin`) VALUES
 (18, 30, 2, 1),
 (21, 23, 1, 1),
 (28, 32, 1, 1),
-(29, 9, 1, 1);
+(29, 9, 1, 1),
+(30, 33, 1, 1),
+(31, 34, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -178,24 +159,10 @@ CREATE TABLE `newscomment` (
 --
 
 INSERT INTO `newscomment` (`newsfeedid`, `commentid`, `pk_newscomment`) VALUES
-(68, 5, 5),
-(71, 7, 7),
-(71, 8, 8),
-(73, 9, 9),
-(81, 10, 10),
-(75, 11, 11),
-(75, 12, 12),
-(75, 13, 13),
-(75, 14, 14),
-(75, 15, 15),
-(75, 16, 16),
-(81, 17, 17),
-(81, 18, 18),
-(81, 19, 19),
-(81, 20, 20),
-(81, 21, 21),
-(81, 22, 22),
-(81, 23, 23);
+(191, 1, 1),
+(192, 2, 2),
+(192, 3, 3),
+(193, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -209,7 +176,7 @@ CREATE TABLE `newsfeed` (
   `date` datetime NOT NULL,
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `place` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` tinyint(1) DEFAULT '0',
   `score` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -218,19 +185,10 @@ CREATE TABLE `newsfeed` (
 --
 
 INSERT INTO `newsfeed` (`id`, `title`, `date`, `content`, `place`, `type`, `score`) VALUES
-(68, 'fssdf', '2017-06-08 10:20:52', 'fdsg', '0', NULL, 0),
-(69, 'Hhhz', '2017-06-08 11:05:35', 'jjfjfj', '0', NULL, 0),
-(71, 'zz', '2017-06-08 11:07:22', 'zzz', '4', NULL, 0),
-(72, 'dfs', '2017-06-08 11:23:54', 'dsfsf', '3', NULL, 0),
-(73, 'Vive le tuning', '2017-06-08 13:35:52', 'C&eacute; tro bi1', '0', NULL, 1),
-(74, 'heiiiinnnnnnnnnn', '2017-06-08 13:40:52', 'agagagagagag\r\n', '0', NULL, 0),
-(75, 'fhhfdsjkfhds', '2017-06-08 13:42:28', 'hsdfjkhfdsk\r\n', '3', NULL, -2),
-(77, 'qhukqfdqh', '2017-06-09 11:39:59', 'dfsbkfghsdgb\r\n', '2', NULL, 0),
-(78, 'hhjhg', '2017-06-09 14:05:09', 'hgfjfj', '9', NULL, 0),
-(79, 'gjdkfdf', '2017-06-09 14:06:53', 'sndljfnds\r\n', '0', NULL, 0),
-(80, 'fdsfsd', '2017-06-09 14:07:05', 'dfsfsdf', '9', NULL, 0),
-(81, 'fsdbdjs', '2017-06-09 14:07:18', 'fbdskfbsdk\r\n', '3', NULL, -1),
-(82, 'God saves me', '2017-06-12 09:30:26', 'I am the queen', '1', '1', 1);
+(190, 'fdsfsdfq', '2017-06-12 16:25:23', 'sdqfdsfq', '0', 0, 0),
+(191, 'fdsds', '2017-06-12 19:49:02', 'dsfsd', '0', 0, 0),
+(192, 'sqdds', '2017-06-12 21:12:15', 'qsdqs', '0', 0, 1),
+(193, 'sqdds', '2017-06-12 21:15:00', 'sqdsqdsq', '9', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -245,12 +203,12 @@ CREATE TABLE `users` (
   `firstname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `addresse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `zipcode` int(11) NOT NULL,
+  `zipcode` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `town` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `birth` date NOT NULL,
   `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `formation` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `connectedTime` int(10) UNSIGNED DEFAULT NULL,
+  `connectedTime` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `profile_pic` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'default-profile.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -259,13 +217,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connectedTime`, `profile_pic`) VALUES
-(2, 'a@uha.fr', '$2y$11$1TCxXMN5QGPc7nRrWkr1aeRxmxkE9Y2VccDFJF52gimpRZpsf0C7.', 'François', 'Straebler', '51 rue de chorey', 21200, 'beaune', '1970-01-01', '0771068564', 'IR', 1497109800, '3c5ea46acaebe1c136639b7a88d2aa87.jpg'),
-(3, 'b@uha.fr', '$2y$11$fDFOYpFrqCX5uBWWN8566eNwMhnUPJemmGHfNQT4HFZH.lr0mJ/dq', 'Thibaud le BG du 69', 'Gasser', '69 rue de la voiture sa m&egrave;re', 69690, 'KEKEVILLE', '1969-01-01', '0669696969', 'IR', 1497248555, '418a50b5cb341772afc204570dce374c.jpg'),
-(4, 'c@uha.fr', '$2y$11$x5hZP/nOJfLJ5agVWsnCVu78yezij.kfMBO1sqyaGeDI96ai0JLu2', 'Florian', 'Jaby', '', 0, '', '1970-01-01', '', 'IR', 1497109846, 'default-profile.png'),
-(5, 'd@uha', '$2y$11$ttG2EeeAA5D0hxahu3oMI.awUhQLs10YED4pr.uhUAue/DPhCWyN2', 'Gabin', 'Michalet', '', 0, '', '1970-01-01', '', 'IR', NULL, '29e43cb78e85afd7985b1ee164e6eced.jpg'),
-(7, 'test@uha.fr', '$2y$11$8oPRz6yLjREgzu4FEmQfT.Upw.OfLRAjqUyNSRIsp/1.J.9jl4UJC', 'test', 'test', '', 0, '', '2017-06-10', '', 'textile', NULL, '3126f911561df8a0d23ef727810c0b0c.jpg'),
-(8, 'putin@uha.fr', '$2y$11$cVw4K.YHZPtm6InGnUhfgOCVfStkJYgHELMk0aGlRd.agz/wGWewy', 'poutine', 'vladimir', '', 0, '', '1970-01-01', '', 'IR', 1497252429, 'a283a5e2dc2471950c36ed202b27e9b1.jpg'),
-(9, 'queen@uha.fr', '$2y$11$MOd012GX9KyZik9W8flRcevOHsvPQzPgowZ/LGa1dKfyJpG2w7FQC', 'Elisabeth', 'II d\'Angleterre', '', 0, '', '1970-01-01', '', 'IR', 1497252954, '21c57cd7e706f9b9ea88715f5d8313b2.gif');
+(2, 'a@uha.fr', '$2y$11$1TCxXMN5QGPc7nRrWkr1aeRxmxkE9Y2VccDFJF52gimpRZpsf0C7.', 'François', 'Straebler', '51 rue de chorey', '21200', 'beaune', '1970-01-01', '0771068564', 'IR', 1497258872, '3c5ea46acaebe1c136639b7a88d2aa87.jpg'),
+(3, 'b@uha.fr', '$2y$11$fDFOYpFrqCX5uBWWN8566eNwMhnUPJemmGHfNQT4HFZH.lr0mJ/dq', 'Thibaud le BG du 69', 'Gasser', '69 rue de la voiture sa m&egrave;re', '69690', 'KEKEVILLE', '1969-01-01', '0669696969', 'IR', 0, '418a50b5cb341772afc204570dce374c.jpg'),
+(4, 'c@uha.fr', '$2y$11$x5hZP/nOJfLJ5agVWsnCVu78yezij.kfMBO1sqyaGeDI96ai0JLu2', 'Florian', 'Jaby', '', '0', '', '1970-01-01', '', 'IR', 1497283515, 'default-profile.png'),
+(5, 'd@uha', '$2y$11$ttG2EeeAA5D0hxahu3oMI.awUhQLs10YED4pr.uhUAue/DPhCWyN2', 'Gabin', 'Michalet', '', '0', '', '1970-01-01', '', 'IR', 0, '29e43cb78e85afd7985b1ee164e6eced.jpg'),
+(7, 'test@uha.fr', '$2y$11$8oPRz6yLjREgzu4FEmQfT.Upw.OfLRAjqUyNSRIsp/1.J.9jl4UJC', 'test', 'test', '', '0', '', '2017-06-10', '', 'textile', 0, '3126f911561df8a0d23ef727810c0b0c.jpg'),
+(8, 'putin@uha.fr', '$2y$11$cVw4K.YHZPtm6InGnUhfgOCVfStkJYgHELMk0aGlRd.agz/wGWewy', 'poutine', 'vladimir', '', '0', '', '1970-01-01', '', 'IR', 0, 'a283a5e2dc2471950c36ed202b27e9b1.jpg'),
+(9, 'queen@uha.fr', '$2y$11$MOd012GX9KyZik9W8flRcevOHsvPQzPgowZ/LGa1dKfyJpG2w7FQC', 'elisabeth', 'd&#039;angleterre', 'buckinguegamPALAS', '1234', 'njkndfjknfdsjkq', '0001-01-01', 'bonjour', 'IR', 1497300304, '21c57cd7e706f9b9ea88715f5d8313b2.gif'),
+(13, 'florian.jaby@uha.fr', '$2y$11$H7btDMQ/7.vDhx3ZsjAyWO5rhkiUMjSKrVJGLT66w/0pNXeBbTUye', 'florian', 'jaby', '', '0', '', '1970-01-01', '', 'IR', 0, '6559967f2918ba24abbf4b93ea9305a7.'),
+(22, 'p@uha.fr', '$2y$11$rNjuioRdE.IZgjxpPPODl.fX/gEefgCdcWEaIOLVKC7vJFXsSJi6G', 'paul', 'paul', '', '0', '', '1970-01-01', '', 'meca', 1, '06a0129f05f593b4c3a9513fd021301d.'),
+(23, 'textil@uha.fr', '$2y$11$JhAdhMHuDXQa3UddKD34yOthbVH/8ChhHIOxUj9yszltO/vxuyhVu', 'test', 'test', '', '0', '', '1970-01-01', '', 'IR', 0, 'ce44922373727b5c903de52d39de54fa.'),
+(30, 'meca@uha.fr', '$2y$11$3dlblbgM2oICL2IyHWTj7uUaiq7s4YRJ/wkXlVPbLWFHilWZ1w6T.', 'meca', 'meca', '', '0', '', '1970-01-01', '', 'meca', 0, '1f6879995ed4e00199b33a6357abca42.'),
+(31, 'fip@ufa.fr', '$2y$11$zhx1lU0wYWH.tUQbnryudu9vFp82O8NkKtANBi7t54C7u1VaQQA1m', 'fip', 'fip', '', '0', '', '1970-01-01', '', 'FIP', 0, '64b7f517f2de5779195e87ed7cb0f282.'),
+(32, 'as@uha.fr', '$2y$11$pW8..jMSFpS5uRsZ54ayb.GHNMD87POPMPV/EI7vQLObqEz.DtFdW', 'as', 'as', '', '0', '', '1970-01-01', '', 'IR', 1497298381, 'f327a564e5035b030d855e405723bae4.'),
+(33, 'fbqhjbdsq@undsqj.fr', '$2y$11$ZqhNJsL2t7jswCSTOmBML.mNMleJ3XWEkTlp1GZkqGTzQB0tvlap2', 'sqdqs', 'qdsqsq', '', '0', '', '1970-01-01', '', 'IR', 0, 'default-profile.png'),
+(34, 'qdsdsq@uha.fr', '$2y$11$siWmT2wmGu1xRxGb91GaBOD9J.XN9AaWP9Y9mqizZyX4uo4XoRud2', 'dsdsq', 'sdqdsq', '', '0', '', '1970-01-01', '', 'IR', 0, 'default-profile.png');
 
 -- --------------------------------------------------------
 
@@ -285,7 +251,7 @@ CREATE TABLE `vote` (
 --
 
 INSERT INTO `vote` (`iduser`, `idnews`, `pk_vote`, `vote`) VALUES
-(9, 82, 1, 1);
+(9, 192, 14, 1);
 
 --
 -- Index pour les tables exportées
@@ -363,17 +329,17 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `authorcomment`
 --
 ALTER TABLE `authorcomment`
-  MODIFY `pk_authorcomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `pk_authorcomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `authornews`
 --
 ALTER TABLE `authornews`
-  MODIFY `pk_authornews` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `pk_authornews` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 --
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `groupe`
 --
@@ -383,27 +349,27 @@ ALTER TABLE `groupe`
 -- AUTO_INCREMENT pour la table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT pour la table `newscomment`
 --
 ALTER TABLE `newscomment`
-  MODIFY `pk_newscomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `pk_newscomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `newsfeed`
 --
 ALTER TABLE `newsfeed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT pour la table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `pk_vote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pk_vote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Contraintes pour les tables exportées
 --
