@@ -8,9 +8,9 @@ function checkLink($test)
         $url1 = substr($test, $beginning, $end);
         $test = preg_replace("#https?://www\.youtube\.com/watch\?v=.{11}#i", "", $test);
         $urlbien = substr_replace($url1,"embed/",24,8);
-        echo "<p>".$test."</p>";
+        echo "<p>'.$test.'</p>";
         echo '<div class="embed-responsive embed-responsive-16by9">';
-        echo '<p><iframe src='.$urlbien.' controls></iframe></p>';
+        echo '<p><iframe src='.$urlbien.' allowfullscreen></iframe></p>';
         echo "</div>";
     }
     if (preg_match("#https?://www\.dailymotion\.com/video/.{7}#i",$test)) 
@@ -37,7 +37,7 @@ function checkLink($test)
         $urlbien = '/ensisocial/data'.$url1.$ext;
         echo '<p>'.$test.'</p>';
         echo '<div>';
-        echo '<p><img src="'.$urlbien.'" class="img-responsive"></p>';
+        echo '<p><img src="'.$urlbien.'" class="img-responsive" alt="'.$ext.'"></p>';
         echo "</div>";
     }
     if (preg_match("#/media/.+\.mp3#i",$test))
