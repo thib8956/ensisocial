@@ -32,4 +32,4 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>
 	<!-- Wrap all page content -->
-	<div id="wrap" style="padding-top: 100px;">
+	<div class="container-fluid" style="padding-top: 150px;">

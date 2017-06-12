@@ -1,10 +1,8 @@
-</div> <!-- /wrap -->
+</div> <!-- /.container-fluid -->
 
-<div id="footer" class="footer">
-      <div class="container">
-        <p class="muted credit">2017. Créé par l'équipe de EnsiSocial</p>
-      </div>
-</div>
+<footer class="footer">
+    <p class="muted credit">2017. Créé par l'équipe de EnsiSocial</p>
+</footer>
 
 <!-- Scripts -->
 <script src="/ensisocial/js/jquery.js"></script>

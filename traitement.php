@@ -96,8 +96,8 @@ function fillDatabase($connection, $profile_pic) {
 
     try {
         $stmt = $connection->prepare(
-            'INSERT INTO users (`email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connectedTime`, `profile_pic`)
-            VALUES (:email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, NULL,:filename)'
+            'INSERT INTO users (`email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `profile_pic`)
+            VALUES (:email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, :filename)'
             );
         $stmt->execute(array(
                     'email' => $_POST['email'],
@@ -117,7 +117,7 @@ function fillDatabase($connection, $profile_pic) {
         $stmt->execute(array(
             'email'=>$_POST['email']));
         $iduser=$stmt->fetch();
-        
+
         $stmt=$connection->prepare('SELECT id from groupe WHERE name=:name');
         $stmt->execute(array(
             'name'=>$_POST['formation']));
