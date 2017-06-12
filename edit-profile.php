@@ -134,13 +134,9 @@ $form = new Form($_POST,"profile_page");
                 <a data-toggle="collapse" data-parent="#accordion" href="#lastName">Modifier</a>
             </div>
         </div>
-<<<<<<< HEAD
         <div id="lastName" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
-=======
-        <div id="lastname" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
->>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
+
                 <?php
                 echo $form->inputfield(
                     'lastname',
@@ -212,13 +208,10 @@ $form = new Form($_POST,"profile_page");
                 <a data-toggle="collapse" data-parent="#accordion" href="#live">Modifier</a>
             </div>
         </div>
-<<<<<<< HEAD
+
         <div id="live" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
-=======
-        <div id="address" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
->>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
+
                 <?php
                 echo $form->inputfield(
                     'address',
@@ -249,13 +242,10 @@ $form = new Form($_POST,"profile_page");
                 <a data-toggle="collapse" data-parent="#accordion" href="#code">Modifier</a>
             </div>
         </div>
-<<<<<<< HEAD
+
         <div id="code" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
-=======
-        <div id="zipcode" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
->>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
+
                 <?php
                 echo $form->inputfield(
                     'zipcode',
@@ -352,13 +342,11 @@ $form = new Form($_POST,"profile_page");
             </div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#birthday">Modifier</a></div>
         </div>
-<<<<<<< HEAD
+
         <div id="birthday" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline"> 
-=======
-        <div id="birth" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline">
->>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
+
+
                 <?php
                 echo $form->inputfield(
                     'birth',
