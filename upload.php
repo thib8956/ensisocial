@@ -1,7 +1,9 @@
 <?php
 session_start();
-$title="Accueil";
+$title="Uploads";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
+//$user = $_SESSION; // pour la sidebar
+//include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 if( isset($_POST['upload']) ) // si formulaire soumis
 {
