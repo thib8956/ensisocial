@@ -70,5 +70,9 @@ function checkLink($test)
         echo '<p><video src='.$urlbien.' controls></video></p>';
         echo "</div>";
     }
+    else
+    {
+        echo '<p>'.$test.'</p>';
+    }
 }
 ?>
