@@ -30,7 +30,7 @@ if (password_verify($_POST['pwd'], $row['password'])){
     setcookie("userid", $_SESSION['id'], 0);
     setcookie("prenom", $_SESSION['firstname'], 0);
     setcookie("nom", $_SESSION['lastname'], 0);
-    $colours = array('007AFF','FF7000','FF7000','15E25F','CFC700','CFC700','CF1100','CF00BE','F00');
+    $colours = array('5856D6','007AFF','5AC8FA','4CD964','FF2D55','FF9500','FFCC00','F00');
     $num_colour = array_rand($colours);
     setcookie("color", $colours[$num_colour], 0);
 

@@ -1,24 +1,35 @@
 $(document).ready(function(){
 	//create a new WebSocket object.
-	var wsUri = "ws://10.57.110.20:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
+	var wsUri = "ws://192.168.1.55:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
 	websocket = new WebSocket(wsUri);
 
 	websocket.onopen = function(ev) { // connection is open
 		//$('#message_box').append("<div class=\"system_msg\">Connected!</div>"); //notify user
+        var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
+        var mycolor = getCookie('color'); //get user color
+        var myid = getCookie('userid'); //get user id
+
+		//prepare json data
+		var msg = {
+		message: "log",
+		name: myname,
+		color: mycolor,
+        type: "logmsg",
+        to: "all",
+        from: myid
+		};
+		//convert and send data to server
+		websocket.send(JSON.stringify(msg));
 	}
 
 	$('#send-btn').click(function(){ //use clicks message send button
 		var mymessage = $('#message').val(); //get message text
 		var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
+        var myid = getCookie('userid'); //get user id
         var mycolor = getCookie('color'); //get user color
-
-
-		if(myname == ""){ //empty name?
-			alert("Enter your Name please!");
-			return;
-		}
+        
 		if(mymessage == ""){ //emtpy message?
-			alert("Enter Some message Please!");
+			//alert("Enter Some message Please!");
 			return;
 		}
 		//document.getElementById("name").style.visibility = "hidden";
@@ -29,7 +40,10 @@ $(document).ready(function(){
 		var msg = {
 		message: mymessage,
 		name: myname,
-		color : mycolor
+		color: mycolor,
+        type: "usermsg",
+        to: "9",
+        from: myid
 		};
 		//convert and send data to server
 		websocket.send(JSON.stringify(msg));
@@ -42,6 +56,7 @@ $(document).ready(function(){
 		var type = msg.type; //message type
 		var umsg = msg.message; //message text
 		var uname = msg.name; //user name
+        uname = uname.replace(/\+/g, " ");
 		var ucolor = msg.color; //color
 
 		if(type == 'usermsg')
