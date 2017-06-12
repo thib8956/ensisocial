@@ -34,7 +34,6 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 		<!-- List of connected members. -->
 		<p>Autres membres : </p>
 		<div id="memberconnected">Membres</div>
-		<a href="#top" class="back-to-top">Revenir en haut</a>
 	</nav>
 </div>
 
