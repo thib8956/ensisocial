@@ -35,6 +35,7 @@ require 'phpmailer/PHPMailerAutoload.php';
         $mail->setFrom('ensisocial@gmail.com');
         $mail->addAddress($to);
         $mail->isHTML(true);
+        //$mail->SMTPDebug=3; //Messages d'erreur
         $mail->Subject = 'Mot de passe oublié - Ensisocial';
         $mail->Body = '<html style="margin:auto;text-align:center;">
             <div style="margin-left:20%;margin-top:20%">
@@ -48,10 +49,17 @@ require 'phpmailer/PHPMailerAutoload.php';
         $mail->CharSet = 'UTF-8';
         //send the message, check for errors
         if (!$mail->send()) {
-            echo "ERROR: " . $mail->ErrorInfo;
+            //echo "ERROR: " . $mail->ErrorInfo;
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            if($mail->send()){
+                echo "<div>Mot de passe envoyé via TLS</div>";
+                $req2->execute();
+            }
         } else {
             echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
             $req2->execute();
+            //echo $mail->ErrorInfo; //affichage des infos de connexion
         }
     }
  ?>
