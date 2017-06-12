@@ -1,4 +1,7 @@
 <?php
+session_start();
+$title="Accueil";
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 if( isset($_POST['upload']) ) // si formulaire soumis
 {
@@ -15,7 +18,6 @@ if( isset($_POST['upload']) ) // si formulaire soumis
 
     // on vérifie maintenant l'extension
     $type_file = $_FILES['fichier']['type'];
-    echo $type_file;
     if(!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png')
       && !strstr($type_file, 'mp4') && !strstr($type_file, 'mpeg') && !strstr($type_file, 'wav'))
     {
@@ -25,16 +27,18 @@ if( isset($_POST['upload']) ) // si formulaire soumis
     // on copie le fichier dans le dossier de destination
     $name_file = $_FILES['fichier']['name'];
     $ret = move_uploaded_file($tmp_file, $content_dir);
-    if ($ret != 0)
+    if ($ret == false)
     {
-        print_errors($ret);
-        echo "/media/".$fname.$ext;
-        exit("Impossible de copier le fichier dans $content_dir");
+        //print_errors($ret);
+        echo("Voici votre lien : ");
+        echo("/media/".$fname.$ext);
+        //exit("Impossible de copier le fichier dans $content_dir");
     }
     else {
-        print_errors($ret);
-        echo "Le fichier a bien été uploadé";
-        echo "/media/".$fname.$ext;
+        //print_errors($ret);
+        echo "Le fichier a bien été uploadé <br>";
+        echo("Voici votre lien : ");
+        echo("/media/".$fname.$ext);
     }
 }
 
@@ -55,4 +59,6 @@ function print_errors($retcode){
         echo '</div>';
     }
 }
+
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>
