@@ -7,7 +7,7 @@ try {
 	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$memberconnected = $db-> query('SELECT lastname, firstname, connected FROM users');
+	$memberconnected = $db-> query('SELECT lastname, firstname FROM users');
 } catch (PDOException $e) {
 	die('Error:'.$e->getMessage());
 }
