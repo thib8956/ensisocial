@@ -41,11 +41,16 @@ $form = new Form($_POST,"profile_page");
         <?php
         if (isset($_GET['pwd'])){
             if ($_GET['pwd']==0){
-                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Remplis les champs...</div></div>";
-            } elseif ($_GET['pwd']==1){
-                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>";
-            } else {
-                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>";
++                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Il faut remplir les champs</div></div>"; 
+             } elseif ($_GET['pwd']==1){
+-                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>"; 
++                echo "<div class='row alert alert-danger'>
++                        <div class='col-md-8 text-center'>Mot de passe trop court</div>
++                      </div>"; 
++            } elseif ($_GET['pwd']==2){
++                echo "<div class='alert alert-success row'>
++                            <div class='col-md-8 text-center'>Votre mdp a bien été changé !</div>
++                      </div>";
             }
         }
         ?>
