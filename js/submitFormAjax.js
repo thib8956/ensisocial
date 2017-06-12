@@ -8,9 +8,9 @@ $(document).ready(function() {
             url: $this.attr('action'), // Le nom du fichier indiqué dans le formulaire
             type: $this.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
             data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
-            success: function(){
+            success: setTimeout(function(){
                 $(".newsfeedwrap").load(location.href + " .newsfeed");
-            }
+            },100)
         });
     });
 
@@ -21,9 +21,9 @@ $(document).ready(function() {
         $.ajax({
             url: $this.attr('href'), // Le nom du fichier indiqué dans le formulaire
             data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
-            success: function(){
+            success: setTimeout(function(){
                 $(".newsfeedwrap").load(location.href + " .newsfeed");
-            }
+            },100)
         });
     });
 
@@ -34,9 +34,9 @@ $(document).ready(function() {
         $.ajax({
             url: $this.attr('href'), // Le nom du fichier indiqué dans le formulaire
             data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
-            success: function(){
+            success: setTimeout(function(){
                 $(".newsfeedwrap").load(location.href + " .newsfeed");
-            }
+            },100)
         });
     });
 
@@ -47,9 +47,11 @@ $(document).ready(function() {
         $.ajax({
             url: $this.attr('href'), // Le nom du fichier indiqué dans le formulaire
             data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
-            success: function(){
+            success: setTimeout(function(){
+
                 $(".newsfeedwrap").load(location.href + " .newsfeed");
-            }
+               
+            },200)
         });
     });
 });

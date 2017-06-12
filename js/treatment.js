@@ -84,13 +84,12 @@ function verifForm(f)
             {
                 if (verifMail(f.email))
                 {
-                    alert("Adresse UHA");
                     return true;
                 }
                 else 
                 {
-                    alert("Non UHA détectée");
-                    return true;
+                    alert("Ce n'est pas une adresse mail UHA");
+                    return false;
                 }
             }
             else
@@ -109,7 +108,7 @@ function verifForm(f)
     }
     else
     {
-        alert("Vous êtes vraiment quelqu'un de méchant");
+        alert("Caractères non autorisés utilisés");
         return false;
     }
 }

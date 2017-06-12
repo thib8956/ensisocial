@@ -24,7 +24,6 @@ require 'phpmailer/PHPMailerAutoload.php';
     } else {
         
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
-        $req2->execute();
         $mail = new PHPMailer;
         $mail->isSMTP();
         $mail->SMTPSecure = 'ssl';
@@ -52,6 +51,7 @@ require 'phpmailer/PHPMailerAutoload.php';
             echo "ERROR: " . $mail->ErrorInfo;
         } else {
             echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
+            $req2->execute();
         }
     }
  ?>

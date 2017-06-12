@@ -17,7 +17,7 @@ try {
 		ORDER BY date DESC'
 		);
 
-
+   
 	/* Fetch profile picture */
 	$profile  = $db->query('SELECT profile_pic from users WHERE id='.$_SESSION['id']);
 	$data = $profile->fetch();
@@ -62,14 +62,21 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 	</form>
 </div>
 </div>
-<!-- check if you can see the news -->
+
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
 	<div class="col-sm-offset-3 col-md-8 newsfeed">
+
 		<?php
+
 		$commId=0;
 		while ($publication=$stmt->fetch()){
+            $vote=$db->prepare('SELECT iduser,vote FROM vote where idnews=:idnews and iduser=:iduser');
+            $vote->execute(array(
+                'idnews'=>$publication['newsfeedid'],
+                'iduser'=>$_SESSION['id']));
+            $vote=$vote->fetch();
 			$member=array();
 			if($publication['type']==1){
 				$right=$db->prepare('SELECT iduser FROM member WHERE idgroup=:id');
@@ -144,68 +151,31 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
             ?>
         </div> <!-- .panel-heading -->
-        <div class="panel-body">
+        <div class="panel-body" id=<?php echo 'post'.$publication['newsfeedid']?>>
         	<?php
-        	if (preg_match("#https?://www\.youtube\.com/watch\?v=#",$publication['content'])) {
-                echo '<div class="embed-responsive embed-responsive-16by9">';
-                $beginning = strpos($publication['content'], "https://www.youtube.com/watch?v=");
-                $end = 43;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $urlbien = substr_replace($url1,"embed/",24,8);
-                echo '<p><iframe src='.$urlbien.'></iframe></p>';
-                echo "</div>";
-                
-            }
-            if (preg_match("#/media/.+\.(jpe?g|gif|bmp|png)#i",$publication['content'])) {
-                echo '<div>';
-				$beginning = strpos($publication['content'], "/media/");
-                $end = 39;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $exp = substr($publication['content'], $beginning, $end+5);
-                $expbien = preg_replace("# #","",$exp);
-                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
-                $publication['content'] = preg_replace("#/media/.+\.(jpe?g|gif|bmp|png)#i", "", $publication['content']);
-                $urlbien = '/ensisocial/data'.$url1.$ext;
-                echo '<p>'.$publication['content'].'</p>';
-                echo '<p><img src="'.$urlbien.'" class="img-responsive"></p>';
-                echo "</div>";
-            }
-            if (preg_match("#/media/.+\.mp3#i",$publication['content'])) {
-                echo '<div>';
-                $beginning = strpos($publication['content'], "/media/");
-                $end = 39;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $exp = substr($publication['content'], $beginning, $end+4);
-                $expbien = preg_replace("# #","",$exp);
-                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
-                $publication['content'] = preg_replace("#/media/.+\.mp3#i","",$publication['content']);
-                $urlbien = '/ensisocial/data'.$url1.$ext;
-                echo '<p>'.$publication['content'].'</p>';
-                echo '<p><audio src="'.$urlbien.'" controls></audio></p>';
-                echo "</div>";
-            }
-            if (preg_match("#/media/.+\.(mp4|mped|wav)#i",$publication['content'])) {
-                echo '<div>';
-                $beginning = strpos($publication['content'], "/media/");
-                $end = 39;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $exp = substr($publication['content'], $beginning, $end+4);
-                $expbien = preg_replace("# #","",$exp);
-                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
-                $publication['content'] = preg_replace("#/media/.+\.(mp4|mped|wav)#i", "", $publication['content']);
-                $urlbien = '/ensisocial/data'.$url1.$ext;
-                echo '<p>'.$publication['content'].'</p>';
-                echo '<p><video src='.$urlbien.' controls></video></p>';
-                echo "</div>";
-            }
+        	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/checklink.php');
+            checkLink($publication['content']);    
         	if($score >= 0){
         		echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
         	} else {
         		echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
         	}
-        	echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
-        	echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
-        	echo '<p class="text-right small">'.$publication['date'].'</p>';
+           
+            if((!empty($vote['iduser'])) and $vote['vote']==1){ // si c'est poce bleu c'est vert
+            	echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') style="color:#00DD00" ></button>&nbsp;&nbsp;';
+            	echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
+            	
+            }elseif((!empty($vote['iduser'])) and $vote['vote']==0){// si c'est pas poce bleu c'est rouge
+                echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].')  ></button>&nbsp;&nbsp;';
+                echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') style="color:#DD0000" ></button>';
+
+            }else{ // si c'est rien c'est rien
+                echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
+                echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
+               
+            }
+           
+            echo '<p class="text-right small">'.$publication['date'].'</p>';
 			// Comment section
         	echo '<ul class="list-group">';
 					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once

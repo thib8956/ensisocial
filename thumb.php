@@ -13,10 +13,12 @@ $iduser=(isset($_POST['iduser'])) ? $_POST['iduser'] : NULL ;
 
 
 function thumb($id,$action,$conn,$iduser){
-	$hasvote=$conn->query('SELECT * FROM vote');
+	$hasvote=$conn->prepare('SELECT * FROM vote where idnews=:idnews and iduser=:iduser');
+	$hasvote->execute(array(
+		'idnews'=>$id,
+		'iduser'=>$iduser));
 	$vote=$hasvote->fetch();
-	echo $vote["iduser"];
-	if($vote['iduser']==$iduser && $vote['idnews']==$id){
+	if(!empty($vote)){
 		if($vote['vote']){
 			$thumbdown=$conn->prepare('UPDATE `newsfeed`
 				SET `score` = `score`-1 WHERE `id` =:id ;');

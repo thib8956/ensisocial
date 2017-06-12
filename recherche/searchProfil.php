@@ -98,60 +98,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			</div> <!-- .panel-heading -->
 
 			<div class="panel-body">
-				<?php
-				if (preg_match("#https?://www\.youtube\.com/watch\?v=#",$publication['content'])) {
-                echo '<div class="embed-responsive embed-responsive-16by9">';
-                $beginning = strpos($publication['content'], "https://www.youtube.com/watch?v=");
-                $end = 43;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $urlbien = substr_replace($url1,"embed/",24,8);
-                echo '<p><iframe src='.$urlbien.'></iframe></p>';
-                echo "</div>";
-                
-            }
-            if (preg_match("#/media/.+\.(jpe?g|gif|bmp|png)#i",$publication['content'])) {
-                echo '<div>';
-				$beginning = strpos($publication['content'], "/media/");
-                $end = 39;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $exp = substr($publication['content'], $beginning, $end+5);
-                $expbien = preg_replace("# #","",$exp);
-                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
-                $publication['content'] = preg_replace("#/media/.+\.(jpe?g|gif|bmp|png)#i", "", $publication['content']);
-                $urlbien = '/ensisocial/data'.$url1.$ext;
-                echo '<p>'.$publication['content'].'</p>';
-                echo '<p><img src="'.$urlbien.'" class="img-responsive"></p>';
-                echo "</div>";
-            }
-            if (preg_match("#/media/.+\.mp3#i",$publication['content'])) {
-                echo '<div>';
-                $beginning = strpos($publication['content'], "/media/");
-                $end = 39;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $exp = substr($publication['content'], $beginning, $end+4);
-                $expbien = preg_replace("# #","",$exp);
-                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
-                $publication['content'] = preg_replace("#/media/.+\.mp3#i","",$publication['content']);
-                $urlbien = '/ensisocial/data'.$url1.$ext;
-                echo '<p>'.$publication['content'].'</p>';
-                echo '<p><audio src="'.$urlbien.'" controls></audio></p>';
-                echo "</div>";
-            }
-            if (preg_match("#/media/.+\.(mp4|mped|wav)#i",$publication['content'])) {
-                echo '<div>';
-                $beginning = strpos($publication['content'], "/media/");
-                $end = 39;
-                $url1 = substr($publication['content'], $beginning, $end);
-                $exp = substr($publication['content'], $beginning, $end+4);
-                $expbien = preg_replace("# #","",$exp);
-                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
-                $publication['content'] = preg_replace("#/media/.+\.(mp4|mped|wav)#i", "", $publication['content']);
-                $urlbien = '/ensisocial/data'.$url1.$ext;
-                echo '<p>'.$publication['content'].'</p>';
-                echo '<p><video src='.$urlbien.' controls></video></p>';
-                echo "</div>";
-            }
-
+				<?php 
+                include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/checklink.php');
+                checkLink($publication['content']);                        
+				
 				if($score >= 0){
 					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
 				} else {

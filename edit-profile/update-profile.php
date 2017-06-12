@@ -89,7 +89,7 @@ if (isset($_FILES['picture'])){
     if (empty($_POST['birth'])){
         header('Location: /ensisocial/edit-profile.php?birth=0');
     } else {
-        updateProfile($db, 'birth', htmlentities($_POST['birth']));
+        updateProfile($db, 'birth', date('Y-m-d', strtotime($_POST['birth'])));
         $_SESSION['birth']=htmlentities($_POST['birth']);
         header('Location: /ensisocial/edit-profile.php?birth=1');
     }

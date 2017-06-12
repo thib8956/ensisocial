@@ -1,7 +1,9 @@
 <?php
 session_start();
-$title="Accueil";
+$title="Uploads";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
+//$user = $data; // Pour la sidebar
+//include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 <form method="post" enctype="multipart/form-data" action="upload.php">
     <p>
