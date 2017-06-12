@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	//create a new WebSocket object.
-	var wsUri = "ws://localhost:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
+	var wsUri = "ws://10.57.110.20:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
 	websocket = new WebSocket(wsUri);
 
 	websocket.onopen = function(ev) { // connection is open

@@ -131,7 +131,70 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 		<div class="panel-body">
 			<?php
-			echo '<p>'.$publication['content'].'</p>';
+			if (preg_match("#https?://www\.youtube\.com/watch\?v=#i",$publication['content'])) {
+                $beginning = strpos($publication['content'], "https://www.youtube.com/watch?v=");
+                $end = 43;
+                $url1 = substr($publication['content'], $beginning, $end);
+                $publication['content'] = preg_replace("#https?://www\.youtube\.com/watch\?v=.{11}#i", "", $publication['content']);
+                $urlbien = substr_replace($url1,"embed/",24,8);
+                echo "<p>".$publication['content']."</p>";
+                echo '<div class="embed-responsive embed-responsive-16by9">';
+                echo '<p><video src='.$urlbien.' controls></video></p>';
+                echo "</div>";
+            }
+            if (preg_match("#https?://www\.dailymotion\.com/video/.{7}#i",$publication['content'])) {
+                $beginning = strpos($publication['content'], "http://www.dailymotion.com/video/");
+                $end = 40;
+                $url = substr($publication['content'], $beginning, $end);
+                $urlbien = preg_replace("#https?://www\.dailymotion\.com/video/#i", "http://www.dailymotion.com/embed/video/", $url);
+                $publication['content'] = preg_replace("#https?://www\.dailymotion\.com/video/.{7}#i", "", $publication['content']);
+                echo "<p>".$publication['content']."</p>";
+                echo '<div class="embed-responsive embed-responsive-16by9">';
+                echo '<p><iframe src='.$urlbien.' allowfullscreen></iframe>';
+                echo "</div>";
+            }
+            if (preg_match("#/media/.+\.(jpe?g|gif|bmp|png)#i",$publication['content'])) {
+				$beginning = strpos($publication['content'], "/media/");
+                $end = 39;
+                $url1 = substr($publication['content'], $beginning, $end);
+                $exp = substr($publication['content'], $beginning, $end+5);
+                $expbien = preg_replace("# #","",$exp);
+                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
+                $publication['content'] = preg_replace("#/media/.+\.(jpe?g|gif|bmp|png)#i", "", $publication['content']);
+                $urlbien = '/ensisocial/data'.$url1.$ext;
+                echo '<p>'.$publication['content'].'</p>';
+                echo '<div>';
+                echo '<p><img src="'.$urlbien.'" class="img-responsive"></p>';
+                echo "</div>";
+            }
+            if (preg_match("#/media/.+\.mp3#i",$publication['content'])) {
+                $beginning = strpos($publication['content'], "/media/");
+                $end = 39;
+                $url1 = substr($publication['content'], $beginning, $end);
+                $exp = substr($publication['content'], $beginning, $end+4);
+                $expbien = preg_replace("# #","",$exp);
+                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
+                $publication['content'] = preg_replace("#/media/.+\.mp3#i","",$publication['content']);
+                $urlbien = '/ensisocial/data'.$url1.$ext;
+                echo '<p>'.$publication['content'].'</p>';
+                echo '<div>';
+                echo '<p><audio src="'.$urlbien.'" controls></audio></p>';
+                echo "</div>";
+            }
+            if (preg_match("#/media/.+\.(mp4|mped|wav)#i",$publication['content'])) {
+                $beginning = strpos($publication['content'], "/media/");
+                $end = 39;
+                $url1 = substr($publication['content'], $beginning, $end);
+                $exp = substr($publication['content'], $beginning, $end+4);
+                $expbien = preg_replace("# #","",$exp);
+                $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
+                $publication['content'] = preg_replace("#/media/.+\.(mp4|mped|wav)#i", "", $publication['content']);
+                $urlbien = '/ensisocial/data'.$url1.$ext;
+                echo '<p>'.$publication['content'].'</p>';
+                echo '<div class="embed-responsive embed-responsive-16by9">';
+                echo '<p><video src='.$urlbien.' controls></video></p>';
+                echo "</div>";
+            }
 			if($score >= 0){
 				echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
 			} else {
@@ -141,7 +204,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
 			echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 			echo '<p class="text-right small">'.$publication['date'].'</p>';
-				// Comment section
+			// Comment section
 			echo '<ul class="list-group">';
 				include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
 				echo '</ul>';

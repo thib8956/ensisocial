@@ -2,7 +2,7 @@
 
 	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="sidebar-toggle btn navbar-left" data-toggle="collapse" data-target="#sidebar" onclick="toggleSidebar()">
+			<button type="button" class="sidebar-toggle btn navbar-left hidden-md hidden-lg" data-toggle="collapse" data-target="#sidebar" onclick="toggleSidebar()">
 				<span class="sr-only">Toggle sidebar</span>
 				<span class="glyphicon glyphicon-menu-down"></span>
 			</button>

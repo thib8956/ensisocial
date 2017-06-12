@@ -16,7 +16,6 @@ function upload($index, $destination, $maxsize=FALSE, $extensions=FALSE){
     // Check whether the file has a valid extension.
     if ($extensions !== FALSE AND !in_array($ext,$extensions)) return FALSE;
     $ret = move_uploaded_file($_FILES[$index]['tmp_name'], $destination);
-    print_errors($ret);
     return $ret;
 }
 
