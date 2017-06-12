@@ -14,8 +14,11 @@ socket_bind($socket, 0, $port);
 //listen to port
 socket_listen($socket);
 
+$defaultid = -1;
 //create & add listning socket to the list
 $clients = array($socket);
+
+$map = array();
 
 $messages = new Messages;
 
@@ -30,7 +33,7 @@ while (true) {
 	if (in_array($socket, $changed)) {
 		$socket_new = socket_accept($socket); //accpet new socket
 		$clients[] = $socket_new; //add socket to client array
-		
+        
 		$header = socket_read($socket_new, 1024); //read data sent by the socket
 		perform_handshaking($header, $socket_new, $host, $port); //perform websocket handshake
 		
@@ -60,12 +63,28 @@ while (true) {
             $user_name = mb_convert_encoding($user_name, "auto");
 			$user_message = $tst_msg->message; //message text
 			$user_color = $tst_msg->color; //color
+            $user_type = $tst_msg->type; //type
+            $user_to = $tst_msg->to; //to
+            $user_from = $tst_msg->from; //from
 			
             if($user_message != null & $user_name != null) {
                 //prepare data to be sent to client
                 $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
-                $messages->add($response_text);
-                send_message($response_text); //send data
+                if($user_type == 'usermsg') {
+                    if($user_to == 'all') {
+                        $messages->add($response_text);
+                        send_message($response_text); //send data
+                    }
+                    else {
+                        $socketById=$map[$user_to];
+                        send_messageClient($response_text, $socketById);
+                        $socketById=$map[$user_from];
+                        send_messageClient($response_text, $socketById);
+                    }
+                }
+                elseif($user_type == 'logmsg'){
+                    $map[$user_from] = $changed_socket;
+                }
             }
 			break 2; //exist this loop
 		}
