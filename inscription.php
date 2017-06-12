@@ -28,7 +28,7 @@ $form = new Form($_POST,"signin");
         echo $form->inputfield(
           'password',
           'password',
-          'Mot de passe',
+          'Mot de passe <small>(6 caractères minimum)</small>',
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',

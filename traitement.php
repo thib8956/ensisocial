@@ -45,7 +45,11 @@ if(isset($_POST['signin'])) {
         }
         if (!$mailUsed){
             if($_POST["password"] == $_POST["repassword"]){
-                echo '<p>Mot de passe OK.</p>';
+                if (strlen($_POST["password"])<6){
+                    echo '<div class="alert alert-danger"><p>Mot de passe trop court</p></div>';
+                    echo $utile;
+                    exit;
+                }
 
                 if (!empty($_FILES['picture']['name'])){
                     // Generate an unique filename for the profile pic.
