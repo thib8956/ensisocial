@@ -41,9 +41,15 @@ $form = new Form($_POST,"profile_page");
         <?php
         if (isset($_GET['pwd'])){
             if ($_GET['pwd']==0){
-                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Remplis les champs...</div></div>"; 
+                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Il faut remplir les champs</div></div>"; 
             } elseif ($_GET['pwd']==1){
-                echo "<div class='alert alert-success row'><div class='row'><div class='col-md-8 text-center'>Votre mdp a bien été changé !</div></div>"; 
+                echo "<div class='row alert alert-danger'>
+                        <div class='col-md-8 text-center'>Mot de passe trop court</div>
+                      </div>"; 
+            } elseif ($_GET['pwd']==2){
+                echo "<div class='alert alert-success row'>
+                            <div class='col-md-8 text-center'>Votre mdp a bien été changé !</div>
+                      </div>"; 
             } else {
                 echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>"; 
             }
@@ -128,8 +134,13 @@ $form = new Form($_POST,"profile_page");
                 <a data-toggle="collapse" data-parent="#accordion" href="#lastName">Modifier</a>
             </div>
         </div>
+<<<<<<< HEAD
         <div id="lastName" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+=======
+        <div id="lastname" class="panel-collapse collapse row">
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
+>>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
                 <?php
                 echo $form->inputfield(
                     'lastname',
@@ -201,8 +212,13 @@ $form = new Form($_POST,"profile_page");
                 <a data-toggle="collapse" data-parent="#accordion" href="#live">Modifier</a>
             </div>
         </div>
+<<<<<<< HEAD
         <div id="live" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+=======
+        <div id="address" class="panel-collapse collapse row">
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
+>>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
                 <?php
                 echo $form->inputfield(
                     'address',
@@ -233,8 +249,13 @@ $form = new Form($_POST,"profile_page");
                 <a data-toggle="collapse" data-parent="#accordion" href="#code">Modifier</a>
             </div>
         </div>
+<<<<<<< HEAD
         <div id="code" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+=======
+        <div id="zipcode" class="panel-collapse collapse row">
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
+>>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
                 <?php
                 echo $form->inputfield(
                     'zipcode',
@@ -331,8 +352,13 @@ $form = new Form($_POST,"profile_page");
             </div>
             <div class="col-md-2"><a data-toggle="collapse" data-parent="#accordion" href="#birthday">Modifier</a></div>
         </div>
+<<<<<<< HEAD
         <div id="birthday" class="panel-collapse collapse row">
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline"> 
+=======
+        <div id="birth" class="panel-collapse collapse row">
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline">
+>>>>>>> dff90ff9a7634c1bf3ac982cd9f9412ffec487ac
                 <?php
                 echo $form->inputfield(
                     'birth',

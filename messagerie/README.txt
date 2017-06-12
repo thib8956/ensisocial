@@ -4,6 +4,6 @@ Running Server :
 
 2. Ouvrir le shell du serveur
 
-3. Ecrire: 
+3. Ecrire:
 	php -q c:\path\server.php
 
