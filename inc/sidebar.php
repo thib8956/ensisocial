@@ -16,6 +16,8 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 				<?php
 				if(!isset($user['name'])){
 					echo $user['firstname'].' '.$user['lastname'];
+
+
 				}else{
 					if(array_key_exists($user['name'], $FORMATIONS)){
 						echo $FORMATIONS[$user['name']];
@@ -60,7 +62,7 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 
 			<?php } else { ?>
 				<div class="text-center">
-					<img class="img-circle" src=<?php echo $pic_path ?> alt="aboutme" width="140" height="140" border="0">
+					<img class="img-circle" src=<?php echo $pic_path ?> alt="avatar" width="140" height="140" >
 					<h3 class="media-heading"><?php if(array_key_exists($user['name'], $FORMATIONS)){echo $FORMATIONS[$user['name']];}else{ echo $user['name'];}?></h3>
 				</div>
 				<hr>

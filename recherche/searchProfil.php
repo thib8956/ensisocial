@@ -65,11 +65,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			            }
 
 			?>
-			<div class="panel panel-default" id="publi">
+			<div class="panel panel-default" >
 				<?php
 				$score = $publication['score'];
 				?>
-				<div class="panel-heading" id="page_membre">
+				<div class="panel-heading" >
 					<a class="pull-left" href=<?php
 					echo '"/ensisocial/recherche/searchProfil.php?id='
 					.$publication['authorid'].'"';
