@@ -5,7 +5,18 @@ $form= new Form($_POST,"lostpwd");
 require 'phpmailer/PHPMailerAutoload.php';
 ?>
 <?php
-    $nouvelmdp=md5(rand());
+    
+    function randomize($car) {
+        $string = "";
+        $chaine = "abcdefghijklmnpqrstuvwxy0123456789";
+        srand((double)microtime()*1000000);
+        for($i=0; $i<$car; $i++) {
+            $string .= $chaine[rand()%strlen($chaine)];
+        }
+        return $string;
+    }
+
+    $nouvelmdp=randomize(8);
     $to=$_POST['email'];
     $options = [
           'cost' => 11
