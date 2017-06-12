@@ -5,7 +5,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try {
 	$profil  = $db->query('SELECT * from users WHERE id='.$_GET['id']);
-	$profilDonnee = $profil->fetch();
+	$data = $profil->fetch();
 	if (!empty($data['profile_pic'])){
 		$pic_path = '/ensisocial/data/avatar/'.$data['profile_pic'];
 	} else {
@@ -25,59 +25,13 @@ try {
 	die('Error:'.$e->getMessage());
 	echo '</div>';
 }
+// Sidebar
+$user = $data;
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
-<!-- Left panel -->
-<div class="row">
-	<div class="col-sm-2 well affix">
-		<center>
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" class="img-circle img-responsive"></a>
-			<h3>
-				<?php
-				echo $profilDonnee['firstname'].' '.$profilDonnee['lastname'];
-				?>
-			</h3>
-			<?php if ($profilDonnee['id'] == $_SESSION['id']): ?>
-				<p><a class="btn btn-default" href="/ensisocial/edit-profile.php">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Modifier mes informations
-				</a></p>
-			<?php endif ?>
-		</center>
-		<!-- List of connected members. -->
-		<p>Autres membres : </p>
-		<div id="memberconnected">Membres</div>
-	</div>
-</div>
-
-<!-- Pop up lorsque l'on clique sur l'image-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true" >
-	<div class="modal-dialog" >
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
-			</div>
-			<div class="modal-body">
-				<center>
-					<img class="img-circle" src=<?php echo $pic_path ?> name="aboutme" width="140" height="140" border="0">
-					<h3 class="media-heading"><?php echo $profilDonnee['firstname'].' '; echo$profilDonnee['lastname'].' ' ?><small><?php echo $profilDonnee['town'] ?></small></h3>
-				</center>
-				<hr>
-				<center>
-					<p class="text-left"><strong>Formation: </strong> <?php  echo $FORMATIONS[$profilDonnee['formation']]; ?></p>
-					<p class="text-left"><strong>Né le : </strong> <?php  echo date('d-m-Y', strtotime($profilDonnee['birth'])); ?></p>
-				</center>
-			</div>
-			<div class="modal-footer">
-				<center>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</center>
-			</div>
-		</div>
-	</div>
-</div>
-
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-2 col-md-9">
+	<div class="col-sm-offset-3 col-md-8">
 
 		<form action="/ensisocial/publication.php" method="post">
 			<?php
@@ -86,6 +40,7 @@ try {
 			echo $form->inputtextarea('content', 'Contenu', 5, 16);
 			echo $form->submit('Publier');
 			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />
+
 		</form>';
 		?>
 
@@ -95,7 +50,7 @@ try {
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-2 col-md-9 newsfeed">
+	<div class="col-sm-offset-3 col-md-8 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
@@ -104,18 +59,26 @@ try {
 			$loc=$place->fetch();
 			$commId+=1;
 			$avatar = '/ensisocial/data/avatar/'.$publication['profile_pic'];
+
+			if(!isset($_SESSION['commentUnfold'][$publication['newsfeedid']])) { //creation de la limite de commentaire
+			                $_SESSION['commentUnfold'][$publication['newsfeedid']]=5;
+			            }
+
 			?>
 			<div class="panel panel-default" id="publi">
 				<?php
 				$score = $publication['score'];
 				?>
 				<div class="panel-heading" id="page_membre">
-					<a class="pull-left" href="#">
+					<a class="pull-left" href=<?php
+					echo '"/ensisocial/recherche/searchProfil.php?id='
+					.$publication['authorid'].'"';
+					?>>
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
 					</a>
 
 					<?php if ($_SESSION['id'] == $publication['authorid']): ?>
-						<a class="btn btn-default pull-right" href=<?php echo '/ensisocial/delete.php?id='.$publication['newsfeedid']; ?>>
+						<a class="btn btn-default pull-right supprNews" href=<?php echo '/ensisocial/delete.php?id='.$publication['newsfeedid']; ?> >
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							Supprimer
 						</a>
@@ -137,14 +100,24 @@ try {
 			<div class="panel-body">
 				<?php
 				echo '<p>'.$publication['content'].'</p>';
+                if (preg_match("#https?://www\.youtube\.com/watch\?v=#",$publication['content'])) {
+                	echo '<div class="embed-responsive embed-responsive-16by9">';
+                    $beginning = strpos($publication['content'], "https://www.youtube.com/watch?v=");
+                    $end = $beginning+43;
+                    $url1 = substr($publication['content'], $beginning, $end);
+                    $urlbien = substr_replace($url1,"embed/",24,8);
+                    echo '<p><iframe src='.$urlbien.'></iframe></p>';
+                    echo '</div>';
+                }
+
 				if($score >= 0){
 					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
 				} else {
 					echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
 				}
 
-				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
-				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
+				echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
+				echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
 				echo '<p class="text-right small">'.$publication['date'].'</p>';
 				// Comment section
 				echo '<ul class="list-group">';
@@ -154,11 +127,19 @@ try {
 				<!-- Add a comment -->
 				<div class="input-group">
 					<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
-					<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-					<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
-					<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-				</form>
-			</div>
+						<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
+						<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+						<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+					</form>
+					<p>
+                        <?php if($nbrDisplayComment != $nbrTotalComment) { ?>
+                            <a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'>Voir plus de commentaires  ('.$nbrDisplayComment.'/'.$nbrTotalComment.') </a>' ?>
+                        <?php } ?>
+                        <?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]!=5) { ?>
+                            <a class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
+                        <?php } ?>
+                    </p>
+				</div>
 		</div> <!-- /.panel-body -->
 	</div> <!-- /.panel -->
 	<?php

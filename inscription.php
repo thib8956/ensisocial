@@ -23,7 +23,6 @@ $form = new Form($_POST,"signin");
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-envelope'
           );
         echo $form->inputfield(
@@ -33,7 +32,6 @@ $form = new Form($_POST,"signin");
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-lock'
           );
         echo $form->inputfield('repassword',
@@ -42,7 +40,6 @@ $form = new Form($_POST,"signin");
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-lock'
           );
         echo $form->inputfield('firstname',
@@ -51,7 +48,6 @@ $form = new Form($_POST,"signin");
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-user'
           );
         echo $form->inputfield('lastname',
@@ -60,7 +56,6 @@ $form = new Form($_POST,"signin");
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-user'
           );
         echo $form->inputfield('address',
@@ -69,7 +64,6 @@ $form = new Form($_POST,"signin");
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('zipcode',
@@ -78,7 +72,6 @@ $form = new Form($_POST,"signin");
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('town',
@@ -87,7 +80,6 @@ $form = new Form($_POST,"signin");
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('birth',
@@ -96,7 +88,6 @@ $form = new Form($_POST,"signin");
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-calendar'
           );
         echo $form->inputfield('phone',
@@ -105,7 +96,6 @@ $form = new Form($_POST,"signin");
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-earphone'
           );
         echo $form->inputsection('formation','string','formation',

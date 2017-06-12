@@ -3,7 +3,7 @@ function writeInDiv(text) {
     objet.innerHTML = text;
 }
 
-var tmp = setInterval(function(){ refresh() }, 10000);
+var tmp = setInterval(function(){ refresh() }, 5000);
 
 function createRequestObject() {
     var http;
@@ -34,14 +34,14 @@ function refresh() {
 
 function clicup(num,iduser) {
     http = createRequestObject();
-    http.open("POST", 'thumb.php', true);
+    http.open("POST", '/ensisocial/thumb.php', true);
     http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     http.send("num="+num+"&action=0&iduser="+iduser);
 }
 
 function clicdown(num,iduser) {
     http = createRequestObject();
-    http.open("POST", 'thumb.php', true);
+    http.open("POST", '/ensisocial/thumb.php', true);
     http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     http.send("num="+num+"&action=1&iduser="+iduser);
 }

@@ -1,6 +1,7 @@
 <?php
 $title="Inscription";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/upload.php');
 
 $answer = $db->query('SELECT email FROM users');
 
@@ -8,15 +9,6 @@ $answer = $db->query('SELECT email FROM users');
 $start = 0;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string, $start);
-
-function get_include_contents($filename) {
-    if (is_file($filename)) {
-        ob_start();
-        include $filename;
-        return ob_get_clean();
-    }
-    return false;
-}
 
 // Envoi mail
 /*
@@ -40,34 +32,48 @@ $headers = 'From: webmaster@example.com' . "\r\n" .
 
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
+        $mailUsed = false;
         while($data = $answer->fetch()) {
             if ($_POST['email'] == $data['email']){
                 echo '<div class="alert alert-danger">';
                 echo "<p>Adresse mail déjà utilisée.</p>";
                 echo '</div>';
                 echo $utile;
+                $mailUsed = true;
                 exit;
             }
+        }
+        if (!$mailUsed){
             if($_POST["password"] == $_POST["repassword"]){
                 echo '<p>Mot de passe OK.</p>';
-                // Generate an unique filename for the profile pic.
-                $fname = md5(uniqid(rand(), true));
-                $ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1); // Get file extension
-                $dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname.$ext;
-                // Upload profile picture
-                upload('picture', $dst);
-                fillDatabase($db, $fname.$ext);
+
+                if (!empty($_FILES['picture']['name'])){
+                    // Generate an unique filename for the profile pic.
+                    $fname = md5(uniqid(rand(), true));
+                    $ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1); // Get file extension
+                    $fname .= $ext;
+                    $dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname;
+
+                    // Upload profile picture
+                    upload('picture', $dst);
+                } else {
+                    $fname = 'default-profile.png';
+                }
+                fillDatabase($db, $fname);
+
                 //Envoi du mail
                 //mail($to, $objet, $contenu, $headers);
                 echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';
                 exit;
             } else {
                 echo '<div class="alert alert-danger">';
-                echo "Vos 2 mots de passe ne sont pas similaires.";
+                echo "Vos 2 mots de passe ne sont pas identiques.";
                 echo '</div>';
                 echo $utile;
                 exit;
             }
+        } else {
+            "<div class='alert alert-danger'>Cette adresse est déjà utilisée</div>";
         }
     }
 }
@@ -90,8 +96,8 @@ function fillDatabase($connection, $profile_pic) {
 
     try {
         $stmt = $connection->prepare(
-            'INSERT INTO users (`email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connected`, `profile_pic`)
-            VALUES (:email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, FALSE,:filename)'
+            'INSERT INTO users (`email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `profile_pic`)
+            VALUES (:email, :password, :firstname, :lastname, :address, :zipcode, :town, :birth, :phone, :formation, :filename)'
             );
         $stmt->execute(array(
                     'email' => $_POST['email'],
@@ -106,6 +112,21 @@ function fillDatabase($connection, $profile_pic) {
                     'formation' => htmlspecialchars($_POST['formation'], ENT_QUOTES, 'UTF-8'),
                     'filename' => $profile_pic
                     ));
+
+        $stmt=$connection->prepare('SELECT id from users WHERE email=:email');
+        $stmt->execute(array(
+            'email'=>$_POST['email']));
+        $iduser=$stmt->fetch();
+
+        $stmt=$connection->prepare('SELECT id from groupe WHERE name=:name');
+        $stmt->execute(array(
+            'name'=>$_POST['formation']));
+        $idgroup=$stmt->fetch();
+
+        $stmt=$connection->prepare('INSERT INTO member(`iduser`, `idgroup`) VALUES(:iduser, :idgroup)');
+        $stmt->execute(array(
+            'iduser'=>$iduser['id'],
+            'idgroup'=> $idgroup['id']));
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">';
         die('Error:'.$e->getMessage());
@@ -114,43 +135,16 @@ function fillDatabase($connection, $profile_pic) {
 }
 
 /**
- * Upload a profile picture to the server.
- * @param  string  $index       Name of the input field : $_FILES[$index]
- * @param  string  $destination Destination path.
- * All profile pictures are stored in /ensisocial/data/avatars
+ * [get_include_contents description]
+ * @param  [type] $filename [description]
+ * @return [type]           [description]
  */
-function upload($index, $destination, $maxsize=FALSE, $extensions=FALSE){
-    if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0) return FALSE;
-    // Test max file size
-    if ($maxsize !== FALSE AND $_FILES[$index]['size'] > $maxsize) return FALSE;
-    // Check whether the file has a valid extension.
-    if ($extensions !== FALSE AND !in_array($ext,$extensions)) return FALSE;
-    $ret = move_uploaded_file($_FILES[$index]['tmp_name'], $destination);
-    print_errors($ret);
-    return $ret;
-}
-
-
-/**
- * Print error messages according to move_upload_file() return codes.
- * cf. http://www.php.net/manual/en/features.file-upload.errors.php
- * @param  int $retcode return code of move_upload_file().
- */
-function print_errors($retcode){
-    $phpFileUploadErrors = array(
-        0 => 'There is no error, the file uploaded with success',
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-        3 => 'The uploaded file was only partially uploaded',
-        4 => 'No file was uploaded',
-        6 => 'Missing a temporary folder',
-        7 => 'Failed to write file to disk.',
-        8 => 'A PHP extension stopped the file upload.',
-    );
-    if ($retcode > 0){
-        echo '<div class="alert alert-danger">';
-        echo $phpFileUploadErrors[$retcode];
-        echo '</div>';
+function get_include_contents($filename) {
+    if (is_file($filename)) {
+        ob_start();
+        include $filename;
+        return ob_get_clean();
     }
+    return false;
 }
 ?>

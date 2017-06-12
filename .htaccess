@@ -3,7 +3,8 @@
 #RewriteRule ^404/?$ /ensisocial/errors/404-not-found.php [NC]
 #RewriteRule ^403/?$ /ensisocial/errors/403-forbidden.php [NC]
 
-
+php_value upload_max_filesize 100M
+php_value post_max_size 100M
 
 # Enable Error Documents
 # (404,File Not Found) | (403,Forbidden)

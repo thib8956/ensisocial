@@ -7,7 +7,7 @@ try {
 	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$memberconnected = $db-> query('SELECT lastname, firstname, connected FROM users');
+	$memberconnected = $db-> query('SELECT lastname, firstname FROM users');
 } catch (PDOException $e) {
 	die('Error:'.$e->getMessage());
 }
@@ -18,7 +18,7 @@ $connectedid = $_SESSION['id'] ;
 $db->query("SELECT * FROM newsfeed");
 
 // Vérifier auteur
-$req=$db->prepare("SELECT authorid FROM authornews JOIN newsfeed ON newsfeed.id = authornews.newsfeedid WHERE newsfeed.id=:newsid");
+$req=$db->prepare('SELECT authorid FROM authornews JOIN newsfeed ON newsfeed.id = authornews.newsfeedid WHERE newsfeed.id=:newsid');
 $req->execute(array('newsid' => $newsfeedid));
 $nb1 = $req->fetch();
 
@@ -34,8 +34,6 @@ if ( $nb1['authorid'] == $connectedid ){
 		 FROM (`comments` LEFT JOIN `newscomment` ON `newscomment`.`commentid` = `comments`.`id`)
 		WHERE `newscomment`.`commentid` IS NULL
 		');
-
-	header('Location: page_membre.php');
 	exit();
 }
 
