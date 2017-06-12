@@ -48,7 +48,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 	while ($row=$stmt->fetch()){
 		$avatar = '/ensisocial/data/avatar/'.$row['img'];
 		?>
-		<div class="panel panel-default" id="group">
+		<div class="panel panel-default" >
 			<div class="panel-heading clearfix">
 					<a class="pull-left" href="#">
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
