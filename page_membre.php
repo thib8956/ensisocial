@@ -62,14 +62,19 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 	</form>
 </div>
 </div>
-<!-- check if you can see the news -->
+
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
 	<div class="col-sm-offset-3 col-md-8 newsfeed">
+
 		<?php
+
 		$commId=0;
 		while ($publication=$stmt->fetch()){
+             $vote=$db->prepare('SELECT * FROM vote where idnews=:idnews');
+            $vote->execute(array('idnews'=>$publication['newsfeedid']));
+            $vote=$vote->fetch();
 			$member=array();
 			if($publication['type']==1){
 				$right=$db->prepare('SELECT iduser FROM member WHERE idgroup=:id');
@@ -144,7 +149,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
             ?>
         </div> <!-- .panel-heading -->
-        <div class="panel-body">
+        <div class="panel-body" id=<?php echo 'post'.$publication['newsfeedid']?>>
         	<?php
         	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/checklink.php');
             checkLink($publication['content']);    
@@ -153,9 +158,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
         	} else {
         		echo '<span class="score" style="color:#DD0000">'.$score.'</span>&nbsp;&nbsp;';
         	}
-        	echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
-        	echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
-        	echo '<p class="text-right small">'.$publication['date'].'</p>';
+            if($vote['iduser']==$_SESSION['id'] and $vote['vote']==1){ // si c'est poce bleu c'est vert
+            	echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') style="color:#00DD00" ></button>&nbsp;&nbsp;';
+            	echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
+            	
+            }elseif($vote['iduser']==$_SESSION['id'] and $vote['vote']==0){// si c'est pas poce bleu c'est rouge
+                echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].')  ></button>&nbsp;&nbsp;';
+                echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') style="color:#DD0000" ></button>';
+
+            }else{ // si c'est rien c'est rien
+                echo '<button  class="glyphicon glyphicon-thumbs-up btn btn-link thumb" onclick=clicup('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>&nbsp;&nbsp;';
+                echo '<button  class="glyphicon glyphicon-thumbs-down btn btn-link thumb" onclick=clicdown('.$publication['newsfeedid'].','.$_SESSION['id'].') ></button>';
+               
+            }
+            echo '<p class="text-right small">'.$publication['date'].'</p>';
 			// Comment section
         	echo '<ul class="list-group">';
 					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
