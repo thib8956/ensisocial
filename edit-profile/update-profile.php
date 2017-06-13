@@ -48,28 +48,7 @@ if (isset($_FILES['picture'])){
 	   updateProfile($db, 'lastname', htmlentities($_POST['lastname']));
         $_SESSION['lastname'] = htmlentities($_POST['lastname']);
         header('Location: /ensisocial/edit-profile.php?ln=1');
-    }
-} elseif (isset($_POST['formation'])){
-	updateProfile($db, 'formation', htmlentities($_POST['formation']));
-    $_SESSION['formation']=htmlentities($_POST['formation']);
-
-	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
-	$idgroup->execute(array('name'=>$_POST["oldformation"]));
-	$idgroup=$idgroup->fetch(); // catch old formation
-	$stmt=$db->prepare('DELETE FROM `member` WHERE `member`.`iduser` = :iduser AND `member`.`idgroup`=:idgroup' );
-	$stmt->execute(array(
-	'iduser'=>$_SESSION['id'],
-	'idgroup' =>$idgroup['id']
-	));
-	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
-	$idgroup->execute(array('name'=>$_POST["formation"]));
-	$idnewgroup=$idgroup->fetch();
-	$stmt=$db->prepare('INSERT iNTO `member` (`iduser`, `idgroup`) VALUES(:iduser, :idgroup)');
-	$stmt->execute(array(
-		'iduser'=>$_SESSION['id'],
-		'idgroup' =>$idnewgroup['id']
-		));
-	header('Location: /ensisocial/edit-profile.php?fm=1');
+    } 
 } elseif (isset($_POST['address'])){
 	echo '<p>Changement d\'adresse';
 	echo '<p>'.$_POST['address'].'</p>';
