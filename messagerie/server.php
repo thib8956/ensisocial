@@ -22,7 +22,7 @@ $map = array();
 
 //base de donnée
 try {
-	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8mb4", "root", "");
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
@@ -33,7 +33,7 @@ try {
             VALUES (:type, :name, :message, :color, :lu)');
     $insert = $db->prepare('INSERT INTO message (`id_sender`, `id_recipient`, `type`, `name`, `lu`, `message`)
             VALUES (:id_sender, :id_recipient, :type, :name, :lu, :message)');
-    
+
     $reqall = $db->prepare('SELECT * FROM chatgeneral');
     $req = $db->prepare('SELECT * FROM message WHERE (id_sender = :id_sender AND id_recipient = :id_recipient) OR (id_sender = :id_recipient2 AND id_recipient = :id_sender2)');
 
@@ -101,7 +101,7 @@ while (true) {
                         } catch (Exception $e) {
                             die('Error:'.$e->getMessage());
                         }
-                        
+
                         $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'000000', 'from'=>$user_from)));
                         $socketById=$map[$user_to];
                         send_messageClient($response_text, $socketById);
@@ -134,8 +134,8 @@ while (true) {
                             $response_text = mask(json_encode(array('type'=>$row['type'], 'name'=>$row['name'], 'message'=>$row['message'], 'color'=>$ucolor, 'from'=>$user_to)));
                             $socketById=$map[$user_from];
                             send_messageClient($response_text, $socketById);
-                        }    
-                    
+                        }
+
                     }
                 }
             }
