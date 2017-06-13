@@ -165,18 +165,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
             echo '<p class="text-right small">'.$publication['date'].'</p>';
 			// Comment section
         	echo '<ul class="list-group">';
-					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment.php'); // include à répétition donc ne pas mettre include_once
+					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment/comment.php'); // include à répétition donc ne pas mettre include_once
 					echo '</ul>';
 					?>
 					<!-- Add a comment -->
 					<div class="input-group">
-						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
+						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment/comment_submit.php" method="post" accept-charset="utf-8">' ?>
 							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
 							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
 
-                        <?php echo '<form class="submitAjax formulaire" action="/ensisocial/php/commentUnfold.php?id='.$publication['newsfeedid'].'" method="post" accept-charset="utf-8">'; ?>
+                        <?php echo '<form class="submitAjax formulaire" action="/ensisocial/comment/commentUnfold.php?id='.$publication['newsfeedid'].'" method="post" accept-charset="utf-8">'; ?>
                             <input type="submit" value=<?php
                             	echo '"Voir plus de commentaires ('.$nbrDisplayComment.'/'.$nbrTotalComment.')"';
                              ?>
@@ -186,7 +186,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 							?>>
                         </form>
 
-                        <?php echo '<form class="submitAjax formulaire" action="/ensisocial/php/commentfold.php?id='.$publication['newsfeedid'].'" method="post" accept-charset="utf-8">'; ?>
+                        <?php echo '<form class="submitAjax formulaire" action="/ensisocial/comment/commentfold.php?id='.$publication['newsfeedid'].'" method="post" accept-charset="utf-8">'; ?>
                         	<input type="submit" value="Réduire les commentaires" class=<?php
 	                        	echo '"btn btn-default inputButton ';
 	                        	if ($_SESSION['commentUnfold'][$publication['newsfeedid']]==5) echo 'disabled';
