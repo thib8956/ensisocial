@@ -64,7 +64,7 @@ if(isset($_POST['signin'])) {
                     $fname = 'default-profile.png';
                 }
                 fillDatabase($db, $fname);
-                //sendMail($mail,$_POST['email']);
+                sendMail($mail,$_POST['email']);
                 echo '<p>Vous êtes bien inscrit. Vous pouvez maintenant vous connecter !</p>';
                 exit;
             } else {
