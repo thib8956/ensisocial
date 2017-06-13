@@ -85,6 +85,16 @@ while (true) {
                 //prepare data to be sent to client
                 if($user_type == 'usermsg') {
                     if($user_to == 'all') {
+                        try {
+                           $insertall->execute(array('type' => $user_type,
+                            'name' => $user_name,
+                            'message' => $user_message,
+                            'color' => $user_color,
+                            'lu' => FALSE
+                            ));
+                        } catch (Exception $e) {
+                            die('Error:'.$e->getMessage());
+                        }
                         $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>'all')));
                         send_message($response_text); //send data
                     }
