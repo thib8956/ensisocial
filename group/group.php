@@ -1,10 +1,10 @@
 <?php
 $title="Groupe";
 session_start();
-if (session_status() != 2){
-	echo '<p>Erreur : session non démarrée</p>';
-	header('/ensisocial/index.php');
+if (!isset($_SESSION['id'])){
+	header('Location: /ensisocial/index.php');
 }
+
 $id=(isset($_GET["id"])) ? $_GET["id"] : NULL;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
