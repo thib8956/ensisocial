@@ -20,8 +20,6 @@ $clients = array($socket);
 
 $map = array();
 
-$messages = new Messages;
-
 //base de donnée
 try {
 	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
@@ -31,9 +29,12 @@ try {
 	die('Error:'.$e->getMessage());
 }
 try {
+    $insertall = $db->prepare('INSERT INTO chatgeneral (`type`, `name`, `message`, `color`, `lu`)
+            VALUES (:type, :name, :message, :color, :lu)');
     $insert = $db->prepare('INSERT INTO message (`id_sender`, `id_recipient`, `type`, `name`, `lu`, `message`)
             VALUES (:id_sender, :id_recipient, :type, :name, :lu, :message)');
-
+    
+    $reqall = $db->prepare('SELECT * FROM chatgeneral');
     $req = $db->prepare('SELECT * FROM message WHERE (id_sender = :id_sender AND id_recipient = :id_recipient) OR (id_sender = :id_recipient2 AND id_recipient = :id_sender2)');
 
 } catch (PDOException $e) {
@@ -84,7 +85,6 @@ while (true) {
                 //prepare data to be sent to client
                 if($user_type == 'usermsg') {
                     if($user_to == 'all') {
-                        $messages->add($response_text);
                         $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>'all')));
                         send_message($response_text); //send data
                     }
@@ -115,9 +115,11 @@ while (true) {
                 }
                 elseif($user_type == 'loadmsg'){
                     if($user_to == 'all') {
-                        $messages_array = $messages->getMessages();  //send the 100 previous messages
-                        foreach ($messages_array as $message) {
-                            send_messageClient($message, $map[$user_from]);
+                        $reqall->execute();
+                        while($rowall = $reqall->fetch()) {
+                            $response_text = mask(json_encode(array('type'=>$rowall['type'], 'name'=>$rowall['name'], 'message'=>$rowall['message'], 'color'=>$rowall['color'], 'from'=>'all')));
+                            $socketById=$map[$user_from];
+                            send_messageClient($response_text, $socketById);
                         }
                     }
                     else {
@@ -234,29 +236,6 @@ function perform_handshaking($receved_header,$client_conn, $host, $port)
 	"WebSocket-Location: ws://$host:$port/demo/shout.php\r\n".
 	"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 	socket_write($client_conn,$upgrade,strlen($upgrade));
-}
-
-class Messages {
-
-    private $_storage;
-
-    public function __construct() {
-        $this->_storage = array();
-    }
-
-    public function getMessages() {
-        return $this->_storage;
-    }
-
-    public function add($message) {
-        if (count($this->_storage) == 100) {
-            array_shift($this->_storage);
-            $this->_storage[] = $message;
-        }
-        else {
-            $this->_storage[] = $message;
-        }
-    }
 }
 
 ?>
