@@ -40,11 +40,6 @@ while (true) {
 		socket_getpeername($socket_new, $ip); //get ip address of connected socket
 		$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
 		//send_message($response); //notify all users about new connection
-        
-        $messages_array = $messages->getMessages();  //send the 100 previous messages
-        foreach ($messages_array as $message) {
-            send_messageClient($message, $socket_new);
-        }
 		
 		//make room for new socket
 		$found_socket = array_search($socket, $changed);
@@ -69,21 +64,31 @@ while (true) {
 			
             if($user_message != null & $user_name != null) {
                 //prepare data to be sent to client
-                $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
                 if($user_type == 'usermsg') {
                     if($user_to == 'all') {
                         $messages->add($response_text);
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>'all')));
                         send_message($response_text); //send data
                     }
                     else {
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>$user_from)));
                         $socketById=$map[$user_to];
                         send_messageClient($response_text, $socketById);
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>$user_to)));
                         $socketById=$map[$user_from];
                         send_messageClient($response_text, $socketById);
                     }
                 }
                 elseif($user_type == 'logmsg'){
                     $map[$user_from] = $changed_socket;
+                }
+                elseif($user_type == 'loadmsg'){
+                    if($user_to == 'all') {
+                        $messages_array = $messages->getMessages();  //send the 100 previous messages
+                        foreach ($messages_array as $message) {
+                            send_messageClient($message, $map[$user_from]);
+                        }
+                    }
                 }
             }
 			break 2; //exist this loop

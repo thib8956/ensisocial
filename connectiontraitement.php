@@ -26,7 +26,8 @@ if (password_verify($_POST['pwd'], $row['password'])){
     $_SESSION['lastname'] = $row['lastname'];
     $_SESSION['birth']=$row['birth'];
     $_SESSION['commentUnfold']=array();  //sert pour les commentaire
-
+    $_SESSION['destinataire']='all';
+    
     setcookie("userid", $_SESSION['id'], 0);
     setcookie("prenom", $_SESSION['firstname'], 0);
     setcookie("nom", $_SESSION['lastname'], 0);

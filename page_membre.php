@@ -8,7 +8,6 @@ if (!isset($_SESSION['id'])){
 $title = $_SESSION['firstname'];
 $user = $_SESSION;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-
 try {
 	$stmt = $db->query('SELECT *
 		FROM newsfeed
