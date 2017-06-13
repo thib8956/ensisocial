@@ -10,26 +10,6 @@ $start = 0;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string, $start);
 
-// Envoi mail
-/*
-$objet = 'Confirmation de votre inscription EnsiSocial' ;
-$contenu = '
-<html>
-<head>
-   <title>Vous vous êtes inscrit(e) sur EnsiSocial</title>
-</head>
-<body>
-   <p>Bonjour '.$_POST['firstname'].' '.$_POST['lastname'].'</p>
-   <p>Vous venez de vous inscrire sur le site EnsiSocial avec les informations suivantes :<br>  -Adresse mail:'.$_POST['email'].'<br>
-   -Mot de passe'.$_POST['password'].'</p>
-</body>
-</html>';
-$to = ".$_POST['email'].";
-$headers = 'From: webmaster@example.com' . "\r\n" .
-'Reply-To: webmaster@example.com' . "\r\n" .
-'X-Mailer: PHP/' . phpversion();
-     */
-
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
         $mailUsed = false;
@@ -45,12 +25,27 @@ if(isset($_POST['signin'])) {
         }
         if (!$mailUsed){
             if($_POST["password"] == $_POST["repassword"]){
+                
+                if (!empty($_POST["zipcode"]) && !preg_match("#[0-9]{5}#",$_POST["zipcode"])) {
+                    echo '<div class="alert alert-danger"><p>Veuillez entrer un code postal de 5 chiffres</p></div>';
+                    echo $utile;
+                    exit;
+                }
+                if (!empty($_POST["phone"]) && !preg_match("#0[0-9]{9}#",$_POST["phone"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre un numéro de téléphone de 10 chiffres (pas de +XX)</p></div>';
+                    echo $utile;
+                    exit;
+                }
+                if (!empty($_POST["birth"]) && !preg_match("#[0-9]{2}/[0-9]{2}/[0-9]{4}#",$_POST["birth"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre une date de naissance de ce format JJ/MM/AAAA</p></div>';
+                    echo $utile;
+                    exit;
+                }
                 if (strlen($_POST["password"])<6){
                     echo '<div class="alert alert-danger"><p>Mot de passe trop court</p></div>';
                     echo $utile;
                     exit;
                 }
-
                 if (!empty($_FILES['picture']['name'])){
                     // Generate an unique filename for the profile pic.
                     $fname = md5(uniqid(rand(), true));
