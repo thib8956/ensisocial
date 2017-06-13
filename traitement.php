@@ -8,7 +8,6 @@ $answer = $db->query('SELECT email FROM users');
 $start = 0;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string, $start);
-$pray=$_SERVER['DOCUMENT_ROOT'].'/ensisocial/inscription.php'.getElementById('inscription').onsubmit();
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
         $mailUsed = false;

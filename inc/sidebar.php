@@ -3,7 +3,9 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
   'AS' =>'Automatique et Systèmes',
   'meca' => 'Mécanique',
   'textile' => 'Textile et fibres',
-  'FIP' => 'Filière par alternance');
+  'FIP' => 'Filière par alternance',
+  'enseignant' =>'enseignant',
+   'personnelUha' => 'personnel de l\'uha');
 ?>
 
 <div class="col-sm-3 col-md-3"  role="complementary">

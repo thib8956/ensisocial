@@ -12,7 +12,9 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
   'AS' =>'Automatique et Systèmes',
   'meca' => 'Mécanique',
   'textile' => 'Textile et fibres',
-  'FIP' => 'Filière par alternance');
+  'FIP' => 'Filière par alternance',
+  'enseignant' =>'enseignant',
+  'personnelUha' => 'personnel de l\'uha');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
