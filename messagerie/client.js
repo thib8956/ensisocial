@@ -144,10 +144,11 @@ function  getCookie(name){
 }
 
 function test(url){ //use clicks message send button
-    var a;
-    for(i=0; i<100000000; i++) {
-        a+=1;
-    }
+//    var a;
+//    for(i=0; i<100000000; i++) {
+//        a+=1;
+//    }
+    window.setTimeout(function(){
     var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
     var myid = getCookie('userid'); //get user id
     var mycolor = getCookie('color'); //get user color
@@ -168,4 +169,4 @@ function test(url){ //use clicks message send button
     //convert and send data to server
     websocket.send(JSON.stringify(msg));
     $('#message').val(''); //reset text
-};
+    }, 400)};
