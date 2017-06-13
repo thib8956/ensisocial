@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['id'])){
+	header('Location: /ensisocial/index.php');
+}
 $title=$_GET['id'];
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
