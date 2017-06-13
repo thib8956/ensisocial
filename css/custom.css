@@ -80,6 +80,7 @@ footer {
 
 .loadChat {
     color: black;
+    white-space:nowrap;
 }
 
 .loadChat:hover {
