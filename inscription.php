@@ -12,9 +12,9 @@ $form = new Form($_POST,"signin");
 <div class="container">
   <div class="row">
    <div class="col-md-8 col-md-offset-2">
-    <form onsubmit="return verifForm(this)" action="traitement.php" method="post" enctype="multipart/form-data">
+    <form id="inscription" onsubmit="return verifForm(this)" action="traitement.php" method="post" enctype="multipart/form-data">
         <?php
-        // MAX_FILE_SIZE (in bytes) for profile picture (4 MiB).
+        // MAX_FILE_SIZE (in bytes) for profile picture (4 MiB). 
         echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
         echo $form->inputfile('picture', 'Choisissez une image de profil');
         echo $form->inputfield('email',
@@ -23,17 +23,15 @@ $form = new Form($_POST,"signin");
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-envelope'
           );
         echo $form->inputfield(
           'password',
           'password',
-          'Mot de passe',
+          'Mot de passe <small>(6 caractères minimum)</small>',
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-lock'
           );
         echo $form->inputfield('repassword',
@@ -42,70 +40,62 @@ $form = new Form($_POST,"signin");
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-lock'
           );
         echo $form->inputfield('firstname',
-          'string',
+          'text',
           'Prénom',
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-user'
           );
         echo $form->inputfield('lastname',
-          'string',
+          'text',
           'Nom',
           $mandatory=TRUE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-user'
           );
         echo $form->inputfield('address',
-          'string',
+          'text',
           'Adresse',
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('zipcode',
-          'int',
+          'text',
           'Code Postal',
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('town',
-          'string',
+          'text',
           'Ville',
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-home'
           );
         echo $form->inputfield('birth',
-          'date',
+          'text',
           'Date de naissance',
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-calendar'
           );
         echo $form->inputfield('phone',
-          'string',
+          'text',
           'Téléphone',
           $mandatory=FALSE,
           $classlabel='control-label',
           $classselect='form-control',
-          $id='email',
           $glyphicon='glyphicon-earphone'
           );
         echo $form->inputsection('formation','string','formation',
@@ -113,7 +103,8 @@ $form = new Form($_POST,"signin");
               'AS' =>'Automatique et Systèmes',
               'meca' => 'Mécanique',
               'textile' => 'Textile',
-              'FIP' => 'Filière par alternance'));
+              'FIP' => 'Filière par alternance',
+	      'Enseignant' => 'Enseignant'));
         echo $form->submit('S\'inscrire !');
         ?>
     </form>

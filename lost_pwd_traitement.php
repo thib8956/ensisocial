@@ -1,23 +1,13 @@
 <?php
 $title="Requête traitée";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
-$form= new Form($_POST,"lostpwd")
+$form= new Form($_POST,"lostpwd");
+require 'phpmailer/PHPMailerAutoload.php';
 ?>
-
-<div>Votre mot de passe a été envoyé à l'adresse mail</div>
 <?php
-    $to = $_POST["email"]; //destinataire
-
-    if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $to))
-{
-	$passage_ligne = "\r\n";
-}
-else
-{
-	$passage_ligne = "\n";
-} //Pour assurer l'affichage chez tout le monde
-    $nouvelmdp=md5(rand());
-
+    include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/randomize.php');
+    $nouvelmdp=randomize(8);
+    $to=$_POST['email'];
     $options = [
           'cost' => 11
         ];
@@ -33,52 +23,18 @@ else
         echo $form->submit("Demander");
         echo '<br><br></form>'; //affichage à améliorer
     } else {
-        $subject = 'Mot de passe oublié - Ensisocial';
-        $fromName= "EnsiSocial";
-        $from = "ensisocial@gmail.com";
-        $separation = "-----=".md5(rand()); //Pour séparer les différents types
-        
-        $headers = 'From: '.$fromName.'<'.$from.'>' . $passage_ligne .
-        'Reply-To: '.$fromName.'<'.$from.'>' . $passage_ligne .
-        'MIME-Version: 1.0'. $passage_ligne .
-        'Content-Type: multipart/alternative;'. //Pour pouvoir mettre plusieurs types dans le message, genre un html et le texte alternatif
-        'boundary="'.$separation.'"'.$passage_ligne.
-        'X-Sender: localhost'.$passage_ligne.
-        'X-Mailer: PHP/'.phpversion();
-        
-        $message_txt = 'Votre mot de passe temporaire: '.$nouvelmdp;
-        $message_html = '<html style="margin:auto;text-align:center;background-color:grey;">
-            <div style="margin: auto;
-        height:70px;
-        width: 260px;
-        border: 2px solid blue;
-        border-radius: 20px;
-        background-color: yellow;
-        ">
-                <p style="
-                text-decoration: underline;
-                font-weight:bold;
-                ">Votre mot de passe temporaire:</p>
-                <p>'.$nouvelmdp.'</p>
-            </div></html>'; //Messages à modifier selon le mail
-        
-        $message =
-            $passage_ligne."--".$separation. $passage_ligne . //mettre avant chaque partie
-            'Content-Type:text/plain;charset="utf-8"'.$passage_ligne.
-            'Content-Transfer-Encoding: 8bit'.
-            $passage_ligne.$message_txt.$passage_ligne. //Message texte
-            
-            $passage_ligne."--".$separation.$passage_ligne.           
-            'Content-Type:text/html;charset="utf-8"'. $passage_ligne .
-            'Content-Transfer-Encoding: 8bit'. $passage_ligne . 
-            $passage_ligne.$message_html.$passage_ligne // Message html
-            ; 
         
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
-        $req2->execute();
-        mail($to, $subject, $message, $headers); //utiliser une adresse qui ne sera pas rejetée - décommenter pour tester
-        echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
-    }
+        include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/mail.php');
+        $mail = new PHPMailer;
+        newMail($mail,'Mot de passe oublié - Ensisocial','<html style="margin:auto;text-align:center;">
+            <div style="margin-left:20%;margin-top:20%">
+                <p style="text-decoration: underline; font-weight:bold;">Votre mot de passe temporaire:</p>
+                <p>'.$nouvelmdp.'</p>
+            </div></html>','Votre mot de passe temporaire:'.$nouvelmdp);
+        $test=sendMail($mail,$to);
+        if ($test == 1 || $test ==2) {$req2->execute();}
+    } 
  ?>
 
 <?php

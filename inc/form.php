@@ -3,7 +3,7 @@
 
 class form{
     private $data;
-    private $surround='div';
+    private $surround = 'div';
     private $button;
 
     /**
@@ -12,21 +12,21 @@ class form{
      *        $button donne le texte afficher sur le boutton
      */
     public function __construct($data,$button){
-        $this->data=$data;
-        $this->button=$button;
+        $this->data = $data;
+        $this->button = $button;
     }
 
     /**
      * @param $html
      */
-    private function surround($html, $class="form-group", $id=""){
-        return "<{$this->surround} class=".$class." id=".$id." >{$html}</{$this->surround}>";
+    private function surround($html, $class="form-group"){
+        return "<{$this->surround} class=".$class." >{$html}</{$this->surround}>";
     }
 
     /**
      * @param $index
      * @return string
-     *     */
+     */
     private function getValue($index){
         return isset($this->data[$index]) ? $this->data[$index]:null;
     }
@@ -38,27 +38,15 @@ class form{
      * @param $option
      * @return string
      */
-    public function inputsection($name, $type, $display, $option, $classlabel="control-label", $classselect="form-control",$id=""){
-        if ($id==NULL){
-            $section='<label for="'.$display.'" class="'.$classlabel.'"></label>
-            <select name="'.$name.'" class="'.$classselect.'" id="'.$id.'">';
-                foreach($option as $key =>$value){
-                    $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
-                }
-
-                $section=$section.'</select>';
-                return $this->surround($section);
+    public function inputsection($name, $type, $display, $option, $classlabel="control-label", $classselect="form-control"){
+        $section='<label for="'.$display.'" class="'.$classlabel.'"></label>
+        <select id="'.$display.'" name="'.$name.'" class="'.$classselect.'">';
+            foreach($option as $key =>$value){
+                $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
             }
 
-        $section='<label for="'.$display.'" class="control-label"></label>
-						<select name="'.$name.'" class="form-control">';
-        foreach($option as $key =>$value){
-            $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
-        }
-
-						$section=$section.'</select>';
-        return $this->surround($section);
-
+            $section=$section.'</select>';
+            return $this->surround($section);
     }
 
 
@@ -78,7 +66,7 @@ class form{
      * @param bool $mandatory
      * @return string
      */
-    public function inputfield($name, $type, $display, $mandatory=FALSE, $classlabel="control-label", $classselect="form-control", $id="", $glyphicon=FALSE){
+    public function inputfield($name, $type, $display, $mandatory=FALSE, $classlabel="control-label", $classselect="form-control", $glyphicon=FALSE){
         $label = '<label for="'.$name.'" class="'.$classlabel.'">'.$display;
         if ($mandatory) $label .= '<span class="asteriskField">*</span>';
         $label .= '</label>';
@@ -89,16 +77,16 @@ class form{
             $input .= '<span class="glyphicon '.$glyphicon.'"></span>';
             $input .= '</span>';
         }
-        $input .= '<input name="'.$name.'" type="'.$type.'" class="'.$classselect.'" id="'.$id.'">';
+        $input .= '<input id="'.$name.'" name="'.$name.'" type="'.$type.'" class="'.$classselect.'">';
 
         if ($glyphicon) $input = $this->surround($input, 'input-group');
         return $this->surround($label . $input);
     }
 
-    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control",$id=""){
+    public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control"){
         return $this->surround('
           <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
-          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'" id="'.$id.'"></textarea>');
+          <textarea id='.$name.' name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'"></textarea>');
 
    }
 
@@ -125,6 +113,6 @@ class form{
      * @return string retourn la commande html pour créer le bouton du formulaire
      */
     public function submit($display){
-        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-primary">');
+        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-default">');
     }
 }

@@ -8,9 +8,50 @@ $(document).ready(function() {
             url: $this.attr('action'), // Le nom du fichier indiqué dans le formulaire
             type: $this.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
             data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
-            success: function(){
+            success: setTimeout(function(){
                 $(".newsfeedwrap").load(location.href + " .newsfeed");
-            }
+            },100)
+        });
+    });
+
+    $('body').on('click', '.supprComment', function(e) {
+        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+        var $this = $(this); // L'objet jQuery du formulaire
+        // Envoi de la requête HTTP en mode asynchrone
+        $.ajax({
+            url: $this.attr('href'), // Le nom du fichier indiqué dans le formulaire
+            data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+            success: setTimeout(function(){
+                $(".newsfeedwrap").load(location.href + " .newsfeed");
+            },100)
+        });
+    });
+
+    $('body').on('click', '.supprNews', function(e) {
+        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+        var $this = $(this); // L'objet jQuery du formulaire
+        // Envoi de la requête HTTP en mode asynchrone
+        $.ajax({
+            url: $this.attr('href'), // Le nom du fichier indiqué dans le formulaire
+            data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+            success: setTimeout(function(){
+                $(".newsfeedwrap").load(location.href + " .newsfeed");
+            },100)
+        });
+    });
+
+    $('body').on('click', '.thumb', function(e) {
+        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+        var $this = $(this); // L'objet jQuery du formulaire
+        // Envoi de la requête HTTP en mode asynchrone
+        $.ajax({
+            url: $this.attr('href'), // Le nom du fichier indiqué dans le formulaire
+            data: $this.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+            success: setTimeout(function(){
+
+                $(".newsfeedwrap").load(location.href + " .newsfeed");
+               
+            },200)
         });
     });
 });

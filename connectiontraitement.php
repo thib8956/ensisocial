@@ -7,8 +7,8 @@ try {
     $req->execute(array('email'=> $_POST['email']));
     $row = $req->fetch();
 
-    $connected = $db->prepare("UPDATE `users` SET `connected` = 1 WHERE `users`.`id` = :id");
-    $connected->execute(array('id' => $row['id'] ));
+    $connected = $db->prepare("UPDATE `users` SET `connectedTime` = :time WHERE `users`.`id` = :id");
+    $connected->execute(array('time' => time(),'id' => $row['id'] ));
 } catch (PDOException $e) {
     echo '<div class="alert alert-danger">';
     die('Error:'.$e->getMessage());
@@ -19,22 +19,25 @@ try {
 if (password_verify($_POST['pwd'], $row['password'])){
 	session_start();
 	$_SESSION['formation']=$row['formation'];
-	$_SESSION['town']=$row['town'];
-	$_SESSION['id']=$row['id'];
+	$_SESSION['town'] = $row['town'];
+	$_SESSION['id'] = $row['id'];
 	$_SESSION['email'] = $row['email'];
     $_SESSION['firstname'] = $row['firstname'];
     $_SESSION['lastname'] = $row['lastname'];
     $_SESSION['birth']=$row['birth'];
+    $_SESSION['commentUnfold']=array();  //sert pour les commentaire
 
     setcookie("userid", $_SESSION['id'], 0);
     setcookie("prenom", $_SESSION['firstname'], 0);
     setcookie("nom", $_SESSION['lastname'], 0);
-    $colours = array('007AFF','FF7000','FF7000','15E25F','CFC700','CFC700','CF1100','CF00BE','F00');
+    $colours = array('5856D6','007AFF','5AC8FA','4CD964','FF2D55','FF9500','FFCC00','F00');
     $num_colour = array_rand($colours);
     setcookie("color", $colours[$num_colour], 0);
 
-	header ('Location: page_membre.php');
+    header ('Location: page_membre.php');
 } else {
+    echo '<div class="alert alert-danger">';
 	echo '<p>Bad email or password</p>';
+    echo '</div>';
 }
 ?>
