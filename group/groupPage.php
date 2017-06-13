@@ -56,7 +56,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-3 col-md-8">
+	<div class="col-sm-offset-3 col-md-6">
 
 		<form action="/ensisocial/publication.php" method="post">
 			<?php
@@ -74,7 +74,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 </div>
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-3 col-md-8 newsfeed">
+	<div class="col-sm-offset-3 col-md-6 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
@@ -179,11 +179,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				</p>
 			</div>
 		</div> <!-- /.panel-body -->
+		<
 	</div> <!-- /.panel -->
 
 	<?php
 		} // /while
+
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
+		
 		echo '</div>'; /* /.newsfeed */
+		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/group/groupemember.php');
+		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/messagerie/chatBox.php');
 		include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 		?>
