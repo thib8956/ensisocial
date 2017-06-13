@@ -78,6 +78,30 @@ footer {
   top: 50px;
 }
 
+.loadChat {
+    color: black;
+}
+
+.loadChat:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.loadChat:focus {
+    text-decoration: none;
+    color: black;
+}
+
+.chatlist {
+    background-color: rgb(245,245,245);
+}
+
+.chatlist:hover {
+    background-color: rgb(220,220,220);
+}
+
+/* /Commentaire CSS */
+
 .vignets {
     
     animation: fadein 2s;
