@@ -164,20 +164,30 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				?>
 				<!-- Add a comment -->
 				<div class="input-group">
-					<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
-					<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-					<?php echo '<input type="hidden" name="back" value="'.$_SERVER['REQUEST_URI'].'">' ?>
-					<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
-				</form>
-				<p>
-					<?php if($nbrDisplayComment != $nbrTotalComment) { ?>
-					<a class="btn btn-default showMore" href=<?php echo "/ensisocial/php/commentUnfold.php?id=".$publication['newsfeedid'].'>Voir plus de commentaires  ('.$nbrDisplayComment.'/'.$nbrTotalComment.') </a>' ?>
-					<?php } ?>
-					<?php if($_SESSION['commentUnfold'][$publication['newsfeedid']]!=5) { ?>
-					<a class="btn btn-default showLess" href=<?php echo "/ensisocial/php/commentfold.php?id=".$publication['newsfeedid']; ?>> Réduire les commentaires </a>
-					<?php } ?>
-				</p>
-			</div>
+						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
+							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
+							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
+						</form>
+
+                        <?php echo '<form class="submitAjax formulaire" action="/ensisocial/php/commentUnfold.php?id='.$publication['newsfeedid'].'" method="post" accept-charset="utf-8">'; ?>
+                            <input type="submit" value=<?php
+                            	echo '"Voir plus de commentaires ('.$nbrDisplayComment.'/'.$nbrTotalComment.')"';
+                             ?>
+							class=<?php echo '"btn btn-default inputButton ';
+								if($nbrDisplayComment == $nbrTotalComment) echo 'disabled ';
+								echo '"';
+							?>>
+                        </form>
+
+                        <?php echo '<form class="submitAjax formulaire" action="/ensisocial/php/commentfold.php?id='.$publication['newsfeedid'].'" method="post" accept-charset="utf-8">'; ?>
+                        	<input type="submit" value="Réduire les commentaires" class=<?php
+	                        	echo '"btn btn-default inputButton ';
+	                        	if ($_SESSION['commentUnfold'][$publication['newsfeedid']]==5) echo 'disabled';
+	                        	echo '"';
+                        	?>>
+                        </form>
+                    </div>
 		</div> <!-- /.panel-body -->
 		<
 	</div> <!-- /.panel -->
