@@ -29,12 +29,12 @@ if( isset($_POST['upload']) ) // si formulaire soumis
     $fname = md5(uniqid(rand(), true));
     $ext = '.'.substr(strrchr($_FILES['fichier']['name'], '.'), 1);
     $content_dir = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/media/'.$fname.$ext; // dossier où sera déplacé le fichier
-    
-    
+
+
     if( !is_uploaded_file($tmp_file) )
     {
         exit("Le fichier est introuvable");
-    } 
+    }
 
     // on vérifie maintenant l'extension
     $type_file = $_FILES['fichier']['type'];
@@ -42,7 +42,7 @@ if( isset($_POST['upload']) ) // si formulaire soumis
       && !strstr($type_file, 'mp4') && !strstr($type_file, 'mpeg') && !strstr($type_file, 'wav'))
     {
         exit("Le fichier n'est pas dans un format pris en charge");
-    } 
+    }
 
     // on copie le fichier dans le dossier de destination
     $name_file = $_FILES['fichier']['name'];

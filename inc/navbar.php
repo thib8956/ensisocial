@@ -61,7 +61,7 @@
 					</a></li>
 					<!-- Searchbar -->
 					<li>
-					<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
+					<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search" accept-charset="UTF-8">
 						<div class="input-group add-on">
 							<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
 							<div class="input-group-btn">

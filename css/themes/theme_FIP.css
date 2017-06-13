@@ -1,4 +1,4 @@
-/* IR Theme */
+/* FIP Theme */
 .btn.btn-default {
   background-color: #fadd17;
   border: none;
@@ -29,7 +29,7 @@ nav {
 
 #sidebar {
   background-color: whitesmoke;
-  top: 50;
+  top: 50px;
 }
 
 .chat-panel-heading {
