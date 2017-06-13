@@ -2,12 +2,19 @@
 $title="Inscription";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/upload.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/mail.php');
+require 'phpmailer/PHPMailerAutoload.php';
+
 $answer = $db->query('SELECT email FROM users');
+
+$mail = new PHPMailer;
+newMail($mail,"Confirmation Inscription EnsiSocial","Nous avons le plaisir de vous confirmer votre inscription sur la plateforme EnsiSocial.<br>Ce mail vous permet de stocker votre mot de passe et identifiant.<br>Identifiant : ".$_POST['email']."<br>Mot de passe : ".$_POST['password']);
 
 // Récupération d'inscription puis découpe avec substr
 $start = 0;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string, $start);
+
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
         $mailUsed = false;
@@ -34,8 +41,8 @@ if(isset($_POST['signin'])) {
                     echo $utile;
                     exit;
                 }
-                if (!empty($_POST["birth"]) && !preg_match("#[0-9]{2}/[0-9]{2}/[0-9]{4}#",$_POST["birth"])) {
-                    echo '<div class="alert alert-danger"><p>Merci de mettre une date de naissance de ce format JJ/MM/AAAA</p></div>';
+                if (!empty($_POST["birth"]) && !preg_match("#[0-9]{4}/[0-9]{2}/[0-9]{2}#",$_POST["birth"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre une date de naissance de ce format AAAA/MM/JJ</p></div>';
                     echo $utile;
                     exit;
                 }
@@ -57,10 +64,8 @@ if(isset($_POST['signin'])) {
                     $fname = 'default-profile.png';
                 }
                 fillDatabase($db, $fname);
-
-                //Envoi du mail
-                //mail($to, $objet, $contenu, $headers);
-                echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';
+                sendMail($mail,$_POST['email']);
+                echo '<p>Vous êtes bien inscrit. Vous pouvez maintenant vous connecter !</p>';
                 exit;
             } else {
                 echo '<div class="alert alert-danger">';

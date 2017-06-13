@@ -22,7 +22,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 ?>
 <div class="col-sm-offset-3 col-md-8">
-<form method="post" enctype="multipart/form-data" action="upload.php">
+<form method="post" enctype="multipart/form-data" action="upload.php" accept-charset="UTF-8">
     <p>
         <input type="file" name="fichier">
         <input type="submit" name="upload" value="Uploader">
