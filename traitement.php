@@ -8,7 +8,7 @@ require 'phpmailer/PHPMailerAutoload.php';
 $answer = $db->query('SELECT email FROM users');
 
 $mail = new PHPMailer;
-newMail($mail,"Confirmation Inscription EnsiSocial","Nous avons le plaisir de vous confirmer votre inscription sur la plateforme EnsiSocial.<br>Ce mail vous permet de stocker votre mot de passe et identifiant.<br>Identifiant : ".$_POST['email']."<br>Mot de passe : ".$_POST['password']);
+newMail($mail,"Confirmation Inscription EnsiSocial","Nous avons le plaisir de vous confirmer votre inscription sur la plateforme EnsiSocial.<br>Ce mail vous notifie de l'activation de votre compte.<br>Votre identifiant est : ".$_POST['email']);
 
 // Récupération d'inscription puis découpe avec substr
 $start = 0;

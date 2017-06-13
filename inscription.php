@@ -105,8 +105,8 @@ $form = new Form($_POST,"signin");
               'meca' => 'Mécanique',
               'textile' => 'Textile',
               'FIP' => 'Filière par alternance',
-              'enseignant' =>'enseignant',
-              'personnelUha' => 'personnel de l\'uha'));
+              'enseignant' =>'Enseignant',
+              'personnelUha' => 'Personnel de l\'UHA'));
         echo $form->submit('S\'inscrire !');
         ?>
     </form>
