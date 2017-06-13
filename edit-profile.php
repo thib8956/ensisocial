@@ -235,7 +235,12 @@ $form = new Form($_POST,"profile_page");
     <div class="panel">
         <?php
         if (isset($_GET['zip'])){
-            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre code postal a bien été changé</div></div>"; //vert
+            if (!empty($_POST["zip"]) && !preg_match("#[0-9]{5}#",$_POST["zip"])) {
+                    echo '<div class="alert alert-danger"><p>Veuillez entrer un code postal de 5 chiffres</p></div>';
+            }
+            else {
+                echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre code postal a bien été changé</div></div>"; //vert
+            }
         }
         ?>
         <div class="row panel-heading">
@@ -300,7 +305,12 @@ $form = new Form($_POST,"profile_page");
     <div class="panel">
         <?php
         if (isset($_GET['tel'])){
-            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre numéro de téléphone a bien été changé</div></div>"; //vert
+            if (!empty($_POST["phone"]) && !preg_match("#0[0-9]{9}#",$_POST["phone"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre un numéro de téléphone de 10 chiffres (pas de +XX)</p></div>';
+            }
+            else {
+                echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre numéro de téléphone a bien été changé</div></div>"; //vert
+            }
         }
         ?>
         <div class="row panel-heading">
@@ -339,7 +349,12 @@ $form = new Form($_POST,"profile_page");
     <div class="panel">
         <?php
         if (isset($_GET['birth'])){
-            echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre date de naissance a bien été changée</div></div>"; //vert
+            if (!empty($_POST["birth"]) && !preg_match("#[0-9]{4}/[0-9]{2}/[0-9]{2}#",$_POST["birth"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre une date de naissance de ce format AAAA/MM/JJ</p></div>';
+            }
+            else {
+                echo "<div class='alert alert-success row'><div class='col-md-8 text-center'>Votre date de naissance a bien été changée</div></div>"; //vert
+            }
         }
         ?>
         <div class="row panel-heading">
