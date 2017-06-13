@@ -165,7 +165,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
             echo '<p class="text-right small">'.$publication['date'].'</p>';
 			// Comment section
-        	echo '<ul class="list-group">';
+        	echo '<ul class="list-group vignets">';
 					include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/comment/comment.php'); // include à répétition donc ne pas mettre include_once
 					echo '</ul>';
 					?>
@@ -197,7 +197,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
                     </div>
 				</div> <!-- /.panel-body -->
 			</div> <!-- /.panel -->
-			
+
 		<?php
 	}
 		} // /while

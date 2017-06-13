@@ -34,7 +34,8 @@ try {
                         <div class="col-sm-5 chat-col-left">
                             <p class="small">
                             </p>
-                            <div class="list-group small">
+                            <div>
+                            <ul class="list-group small">
                                 <?php
                                  echo '<li class="list-group-item chatlist">';
                                 echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>';
@@ -57,6 +58,7 @@ try {
                                     }
                                 }
                                 ?>
+                                </ul>
                             </div>
                         </div>
 
