@@ -1,6 +1,6 @@
 <?php
 try {
-	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8mb4", "root", "");
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
@@ -12,7 +12,9 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
   'AS' =>'Automatique et Systèmes',
   'meca' => 'Mécanique',
   'textile' => 'Textile et fibres',
-  'FIP' => 'Filière par alternance');
+  'FIP' => 'Filière par alternance',
+  'enseignant' =>'enseignant',
+  'personnelUha' => 'personnel de l\'uha');
 ?>
 <!DOCTYPE html>
 <html lang="fr">

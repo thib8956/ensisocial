@@ -25,10 +25,11 @@ $(document).ready(function(){
 	$('#send-btn').click(function(){ //use clicks message send button
 		var mymessage = $('#message').val(); //get message text
 		var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
-        var myid = getCookie('userid'); //get user id
-        var mycolor = getCookie('color'); //get user color
-        var mydest = $('#message').attr("name"); //get user destinataire
-		if(mymessage == ""){ //emtpy message?
+    var myid = getCookie('userid'); //get user id
+    var mycolor = getCookie('color'); //get user color
+    var mydest = $('#message').attr("name"); //get user destinataire
+
+    if(mymessage == ""){ //emtpy message?
 			//alert("Enter Some message Please!");
 			return;
 		}

@@ -62,7 +62,7 @@ if($nbrDisplayComment > $nbrTotalComment) {
 }
 
 while($row) {
-  ?>
+  ?><div class="vignets">
 
   <?php
   if (!empty($row['profile_pic'])){
@@ -78,7 +78,7 @@ while($row) {
     </a>
 
     <?php if ($_SESSION['id'] == $row['authorid']): ?>
-      <a class="btn btn-default pull-right supprComment" href=<?php echo '"/ensisocial/deletecomment.php?id='.$row['id'].'"'; ?>>
+      <a class="btn btn-default pull-right supprComment" href=<?php echo '"/ensisocial/inc/deletecomment.php?id='.$row['id'].'"'; ?>>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         Supprimer
       </a>
@@ -88,6 +88,7 @@ while($row) {
     <h5 class="time"><?php echo $row['date']; ?></h5>
     <p><?php echo $row['content']; ?></p>
   </li>
+  </div>
   <?php
   $row=$comment->fetch();
 }

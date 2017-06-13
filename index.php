@@ -15,7 +15,7 @@ $form=new Form($_POST,"login");
           <a href="/ensisocial/lost_pwd.php" class="small pull-right">Mot de passe oublié ?</a>
         </div>
         <div class="panel-body" >
-          <form action="connectiontraitement.php" method="post">
+          <form action="connectiontraitement.php" method="post" accept-charset="UTF-8">
             <?php
             echo $form->inputfield(
               'email',

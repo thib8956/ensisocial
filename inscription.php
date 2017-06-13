@@ -12,12 +12,13 @@ $form = new Form($_POST,"signin");
 <div class="container">
   <div class="row">
    <div class="col-md-8 col-md-offset-2">
-    <form onsubmit="return verifForm(this)" action="traitement.php" method="post" enctype="multipart/form-data">
+    <form id="inscription" onsubmit="return verifForm(this)" action="traitement.php" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
         <?php
         // MAX_FILE_SIZE (in bytes) for profile picture (4 MiB).
         echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
         echo $form->inputfile('picture', 'Choisissez une image de profil');
-        echo $form->inputfield('email',
+        echo $form->inputfield(
+          'email',
           'email',
           'Votre email',
           $mandatory=TRUE,
@@ -103,7 +104,9 @@ $form = new Form($_POST,"signin");
               'AS' =>'Automatique et Systèmes',
               'meca' => 'Mécanique',
               'textile' => 'Textile',
-              'FIP' => 'Filière par alternance'));
+              'FIP' => 'Filière par alternance',
+              'enseignant' =>'Enseignant',
+              'personnelUha' => 'Personnel de l\'UHA'));
         echo $form->submit('S\'inscrire !');
         ?>
     </form>

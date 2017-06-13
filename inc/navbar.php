@@ -28,7 +28,7 @@
 
 		<div id="navbar" role="navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px">
 			<ul class="nav navbar-nav">
-				
+
 				<?php if (!isset($_SESSION['id'])): ?>
 					<li>
 						<a href="inscription.php" title="inscription">
@@ -61,7 +61,7 @@
 					</a></li>
 					<!-- Searchbar -->
 					<li>
-					<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search">
+					<form class="nav navbar-form navbar-right" method="post" action="/ensisocial/recherche/searchPage.php" role="search" accept-charset="UTF-8">
 						<div class="input-group add-on">
 							<input type="text" id="searchBar" class="form-control" name="searchBar" placeholder="Rechercher">
 							<div class="input-group-btn">
@@ -74,7 +74,7 @@
 					</form>
 					</li>
 				<?php endif ?>
-				
+
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div> <!-- /.container -->

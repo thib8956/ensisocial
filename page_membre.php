@@ -38,7 +38,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 <!-- Add a publication -->
 <div class="row">
 	<div class="col-sm-offset-3 col-md-6">
-		<form action="publication.php" method="post">
+		<form action="publication.php" method="post" accept-charset="UTF-8">
 			<?php
 			$form = new Form($_POST, 'post');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
@@ -113,7 +113,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
             			</small>
             		</h2>';
             		} else {
-		            	if(in_array($group['name'], $FORMATIONS)){
+		            	if(array_key_exists($group['name'], $FORMATIONS)){
 		            		echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
 		            		<small>
 		            			<span class="glyphicon glyphicon-chevron-right">

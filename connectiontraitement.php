@@ -37,6 +37,8 @@ if (password_verify($_POST['pwd'], $row['password'])){
 
     header ('Location: page_membre.php');
 } else {
+    echo '<div class="alert alert-danger">';
 	echo '<p>Bad email or password</p>';
+    echo '</div>';
 }
 ?>
