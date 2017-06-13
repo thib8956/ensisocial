@@ -87,8 +87,8 @@ function verifForm(f)
                     return true;
                 }
                 else 
-                {
-                    alert("Ce n'est pas une adresse mail UHA");
+                {	
+                    alert("N'étant pas une adresse UHA, veuillez attendre confirmation (par mail) ");
                     return false;
                 }
             }

@@ -5,17 +5,7 @@ $form= new Form($_POST,"lostpwd");
 require 'phpmailer/PHPMailerAutoload.php';
 ?>
 <?php
-    
-    function randomize($car) {
-        $string = "";
-        $chaine = "abcdefghijklmnpqrstuvwxy0123456789"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ/@()#~{[$*§]} si jamais on veut des caracs spéciaux
-        srand((double)microtime()*1000000);
-        for($i=0; $i<$car; $i++) {
-            $string .= $chaine[rand()%strlen($chaine)];
-        }
-        return $string;
-    }
-
+    include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/randomize.php');
     $nouvelmdp=randomize(8);
     $to=$_POST['email'];
     $options = [
