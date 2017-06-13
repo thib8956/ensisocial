@@ -39,7 +39,7 @@ if( isset($_POST['upload']) ) // si formulaire soumis
     // on vérifie maintenant l'extension
     $type_file = $_FILES['fichier']['type'];
     if(!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png')
-      && !strstr($type_file, 'mp4') && !strstr($type_file, 'mpeg') && !strstr($type_file, 'wav'))
+      && !strstr($type_file, 'mp4') && !strstr($type_file, 'mpeg') && !strstr($type_file, 'wav') && !strstr($type_file, 'pdf'))
     {
         exit("Le fichier n'est pas dans un format pris en charge");
     }

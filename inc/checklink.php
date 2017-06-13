@@ -70,6 +70,21 @@ function checkLink($test)
         echo '<p><video src='.$urlbien.' controls></video></p>';
         echo "</div>";
     }
+    else if (preg_match("#/media/.+\.pdf#i",$test))
+    {
+        $beginning = strpos($test, "/media/");
+        $end = 39;
+        $url1 = substr($test, $beginning, $end);
+        $exp = substr($test, $beginning, $end+5);
+        $expbien = preg_replace("# #","",$exp);
+        $ext = ".".preg_replace("#/media/.+\.#","",$expbien);
+        $test = preg_replace("#/media/.+\.pdf#i","",$test);
+        $urlbien = '/ensisocial/data'.$url1.$ext;
+        echo '<p>'.$test.'</p>';
+        echo '<div class="embed-responsive embed-responsive-16by9">';
+        echo '<p><embed src="'.$urlbien.'" type="application/pdf"'.$ext.'"></p>';
+        echo "</div>";
+    }
     else
     {
         echo '<p>'.$test.'</p>';
