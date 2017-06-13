@@ -39,8 +39,6 @@ try {
                             <div>
                             <ul class="list-group small">
                                 <?php
-                                 echo '<li class="list-group-item chatlist">';
-                                                                echo '</li>';
                                 while($data = $memberconnected->fetch()){
                                     $firstname = $data['firstname'];
                                     $lastname = $data['lastname'];
