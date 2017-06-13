@@ -26,7 +26,7 @@ function verifText(champ)
 }
 function antiInjec(champ)
 {
-    if (champ.value.includes("{") || champ.value.includes("/") || champ.value.includes("\\") || champ.value.includes("#") ||
+    if (champ.value.includes("{") || champ.value.includes("`") || champ.value.includes("\\") || champ.value.includes("#") ||
         champ.value.includes("(") || champ.value.includes("[") || champ.value.includes("$") || champ.value.includes(";") ||
         champ.value.includes(">") || champ.value.includes("<") || champ.value.includes("*") || champ.value.includes("%"))
     {

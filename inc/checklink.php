@@ -8,12 +8,12 @@ function checkLink($test)
         $url1 = substr($test, $beginning, $end);
         $test = preg_replace("#https?://www\.youtube\.com/watch\?v=.{11}#i", "", $test);
         $urlbien = substr_replace($url1,"embed/",24,8);
-        echo "<p>'.$test.'</p>";
+        echo "<p>.$test.</p>";
         echo '<div class="embed-responsive embed-responsive-16by9">';
         echo '<p><iframe src='.$urlbien.' allowfullscreen></iframe></p>';
         echo "</div>";
     }
-    if (preg_match("#https?://www\.dailymotion\.com/video/.{7}#i",$test))
+    else if (preg_match("#https?://www\.dailymotion\.com/video/.{7}#i",$test))
     {
         $beginning = strpos($test, "http://www.dailymotion.com/video/");
         $end = 40;
@@ -25,7 +25,7 @@ function checkLink($test)
         echo '<p><iframe src='.$urlbien.' allowfullscreen></iframe>';
         echo "</div>";
     }
-    if (preg_match("#/media/.+\.(jpe?g|gif|bmp|png)#i",$test))
+    else if (preg_match("#/media/.+\.(jpe?g|gif|bmp|png)#i",$test))
     {
         $beginning = strpos($test, "/media/");
         $end = 39;
@@ -40,7 +40,7 @@ function checkLink($test)
         echo '<p><img src="'.$urlbien.'" class="img-responsive" alt="'.$ext.'"></p>';
         echo "</div>";
     }
-    if (preg_match("#/media/.+\.mp3#i",$test))
+    else if (preg_match("#/media/.+\.mp3#i",$test))
     {
         $beginning = strpos($test, "/media/");
         $end = 39;
@@ -55,7 +55,7 @@ function checkLink($test)
         echo '<p><audio src="'.$urlbien.'" controls></audio></p>';
         echo "</div>";
     }
-    if (preg_match("#/media/.+\.(mp4|mped|wav)#i",$test))
+    else if (preg_match("#/media/.+\.(mp4|mped|wav)#i",$test))
     {
         $beginning = strpos($test, "/media/");
         $end = 39;

@@ -45,12 +45,27 @@ if(isset($_POST['signin'])) {
         }
         if (!$mailUsed){
             if($_POST["password"] == $_POST["repassword"]){
+                
+                if (!empty($_POST["zipcode"]) && !preg_match("#[0-9]{5}#",$_POST["zipcode"])) {
+                    echo '<div class="alert alert-danger"><p>Veuillez entrer un code postal de 5 chiffres</p></div>';
+                    echo $utile;
+                    exit;
+                }
+                if (!empty($_POST["phone"]) && !preg_match("#0[0-9]{9}#",$_POST["phone"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre un numéro de téléphone de 10 chiffres (pas de +XX)</p></div>';
+                    echo $utile;
+                    exit;
+                }
+                if (!empty($_POST["birth"]) && !preg_match("#[0-9]{2}/[0-9]{2}/[0-9]{4}#",$_POST["birth"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre une date de naissance de ce format JJ/MM/AAAA</p></div>';
+                    echo $utile;
+                    exit;
+                }
                 if (strlen($_POST["password"])<6){
                     echo '<div class="alert alert-danger"><p>Mot de passe trop court</p></div>';
                     echo $utile;
                     exit;
                 }
-
                 if (!empty($_FILES['picture']['name'])){
                     // Generate an unique filename for the profile pic.
                     $fname = md5(uniqid(rand(), true));
@@ -106,10 +121,10 @@ function fillDatabase($connection, $profile_pic) {
         $stmt->execute(array(
                     'email' => $_POST['email'],
                     'password' => $hash, // Mot de passe hashé avec bcrypt
-                    'firstname' => htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8'),
-                    'lastname' => htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8'),
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
                     'address' => htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8'),
-                    'zipcode' => intval($_POST['zipcode']),
+                    'zipcode' => htmlspecialchars($_POST['zipcode'], ENT_QUOTES, 'UTF-8'),
                     'town' => htmlspecialchars($_POST['town'], ENT_QUOTES, 'UTF-8'),
                     'birth' => date('Y-m-d', strtotime($_POST['birth'])),
                     'phone' => htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8'),

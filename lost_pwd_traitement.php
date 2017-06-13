@@ -5,7 +5,18 @@ $form= new Form($_POST,"lostpwd");
 require 'phpmailer/PHPMailerAutoload.php';
 ?>
 <?php
-    $nouvelmdp=md5(rand());
+    
+    function randomize($car) {
+        $string = "";
+        $chaine = "abcdefghijklmnpqrstuvwxy0123456789"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ/@()#~{[$*§]} si jamais on veut des caracs spéciaux
+        srand((double)microtime()*1000000);
+        for($i=0; $i<$car; $i++) {
+            $string .= $chaine[rand()%strlen($chaine)];
+        }
+        return $string;
+    }
+
+    $nouvelmdp=randomize(8);
     $to=$_POST['email'];
     $options = [
           'cost' => 11
@@ -26,10 +37,10 @@ require 'phpmailer/PHPMailerAutoload.php';
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
         $mail = new PHPMailer;
         $mail->isSMTP();
-        $mail->SMTPSecure = 'ssl';
+        $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
         $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 465;
+        $mail->Port = 587;
         $mail->Username = 'ensisocial@gmail.com';
         $mail->Password = 'motdepassedebg';
         $mail->setFrom('ensisocial@gmail.com');
@@ -50,11 +61,13 @@ require 'phpmailer/PHPMailerAutoload.php';
         //send the message, check for errors
         if (!$mail->send()) {
             //echo "ERROR: " . $mail->ErrorInfo;
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
             if($mail->send()){
                 echo "<div>Mot de passe envoyé via TLS</div>";
                 $req2->execute();
+            } else {
+                echo $mail->ErrorInfo;
             }
         } else {
             echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
