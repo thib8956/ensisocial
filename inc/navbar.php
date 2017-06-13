@@ -28,7 +28,7 @@
 
 		<div id="navbar" role="navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px">
 			<ul class="nav navbar-nav">
-				
+
 				<?php if (!isset($_SESSION['id'])): ?>
 					<li>
 						<a href="inscription.php" title="inscription">
@@ -74,7 +74,7 @@
 					</form>
 					</li>
 				<?php endif ?>
-				
+
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div> <!-- /.container -->

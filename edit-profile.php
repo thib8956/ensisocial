@@ -41,17 +41,17 @@ $form = new Form($_POST,"profile_page");
         <?php
         if (isset($_GET['pwd'])){
             if ($_GET['pwd']==0){
-                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Il faut remplir les champs</div></div>"; 
+                echo "<div class='row alert alert-danger'><div class='col-md-8 text-center'>Il faut remplir les champs</div></div>";
             } elseif ($_GET['pwd']==1){
                 echo "<div class='row alert alert-danger'>
                         <div class='col-md-8 text-center'>Mot de passe trop court</div>
-                      </div>"; 
+                      </div>";
             } elseif ($_GET['pwd']==2){
                 echo "<div class='alert alert-success row'>
                             <div class='col-md-8 text-center'>Votre mdp a bien été changé !</div>
-                      </div>"; 
+                      </div>";
             } else {
-                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>"; 
+                echo "<div class='alert alert-danger row'><div class='col-md-8 text-center'>Mauvais mot de passe ou mots de passes non identiques</div></div>";
             }
         }
         ?>
@@ -139,7 +139,7 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="lastName" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
 
                 <?php
                 echo $form->inputfield(
@@ -216,7 +216,7 @@ $form = new Form($_POST,"profile_page");
         </div>
 
         <div id="live" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
 
 
                 <?php
@@ -251,7 +251,7 @@ $form = new Form($_POST,"profile_page");
             </div>
         </div>
         <div id="code" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
                 <?php
                 echo $form->inputfield(
                     'zipcode',
@@ -354,7 +354,7 @@ $form = new Form($_POST,"profile_page");
         </div>
 
         <div id="birthday" class="panel-collapse collapse row">
-            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline"> 
+            <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4 d-inline">
                 <?php
                 echo $form->inputfield(
                     'birth',
