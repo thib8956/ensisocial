@@ -167,12 +167,12 @@ $form = new Form($_POST,"profile_page");
                     echo $FORMATIONS[$profile['formation']];
                 ?>
             </div>
-            <div class="col-md-2">
+            <!--<div class="col-md-2">
 
                 <a data-toggle="collapse" data-parent="#accordion" href="#status">Modifier</a>
-            </div>
+            </div>-->
         </div>
-        <div id="status" class="panel-collapse collapse row">
+        <!--<div id="status" class="panel-collapse collapse row">
 
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
                 <?php
@@ -182,7 +182,7 @@ $form = new Form($_POST,"profile_page");
                 ?>
                 <input type="hidden" name="oldformation" class="btn btn-primary-outline" value=<?php echo $profile['formation']?> />
             </form>
-        </div>
+        </div>-->
     </div>
 
     <!-- Display email -->
