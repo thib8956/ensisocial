@@ -20,7 +20,26 @@ $clients = array($socket);
 
 $map = array();
 
-$messages = new Messages;
+//base de donnée
+try {
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $e) {
+	die('Error:'.$e->getMessage());
+}
+try {
+    $insertall = $db->prepare('INSERT INTO chatgeneral (`type`, `name`, `message`, `color`, `lu`)
+            VALUES (:type, :name, :message, :color, :lu)');
+    $insert = $db->prepare('INSERT INTO message (`id_sender`, `id_recipient`, `type`, `name`, `lu`, `message`)
+            VALUES (:id_sender, :id_recipient, :type, :name, :lu, :message)');
+    
+    $reqall = $db->prepare('SELECT * FROM chatgeneral');
+    $req = $db->prepare('SELECT * FROM message WHERE (id_sender = :id_sender AND id_recipient = :id_recipient) OR (id_sender = :id_recipient2 AND id_recipient = :id_sender2)');
+
+} catch (PDOException $e) {
+    die('Error:'.$e->getMessage());
+}
 
 //start endless loop, so that our script doesn't stop
 while (true) {
@@ -40,11 +59,6 @@ while (true) {
 		socket_getpeername($socket_new, $ip); //get ip address of connected socket
 		$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
 		//send_message($response); //notify all users about new connection
-
-        $messages_array = $messages->getMessages();  //send the 100 previous messages
-        foreach ($messages_array as $message) {
-            send_messageClient($message, $socket_new);
-        }
 
 		//make room for new socket
 		$found_socket = array_search($socket, $changed);
@@ -69,21 +83,60 @@ while (true) {
 
             if($user_message != null & $user_name != null) {
                 //prepare data to be sent to client
-                $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
                 if($user_type == 'usermsg') {
                     if($user_to == 'all') {
-                        $messages->add($response_text);
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>'all')));
                         send_message($response_text); //send data
                     }
                     else {
+                        //base de donnée
+                        try {
+                           $insert->execute(array('id_sender' => $user_from,
+                            'id_recipient' => $user_to,
+                            'type' => $user_type,
+                            'name' => $user_name,
+                            'lu' => FALSE,
+                            'message' => $user_message
+                            ));
+                        } catch (Exception $e) {
+                            die('Error:'.$e->getMessage());
+                        }
+                        
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'000000', 'from'=>$user_from)));
                         $socketById=$map[$user_to];
                         send_messageClient($response_text, $socketById);
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'0000FF', 'from'=>$user_to)));
                         $socketById=$map[$user_from];
                         send_messageClient($response_text, $socketById);
                     }
                 }
                 elseif($user_type == 'logmsg'){
                     $map[$user_from] = $changed_socket;
+                }
+                elseif($user_type == 'loadmsg'){
+                    if($user_to == 'all') {
+                        $reqall->execute();
+                        while($rowall = $reqall->fetch()) {
+                            $response_text = mask(json_encode(array('type'=>$rowall['type'], 'name'=>$rowall['name'], 'message'=>$rowall['message'], 'color'=>$rowall['color'], 'from'=>'all')));
+                            $socketById=$map[$user_from];
+                            send_messageClient($response_text, $socketById);
+                        }
+                    }
+                    else {
+                        $req->execute(array('id_sender'=> $user_from, 'id_recipient' => $user_to, 'id_recipient2'=> $user_to, 'id_sender2' => $user_from));
+                        while($row = $req->fetch()) {
+                            if($user_from == $row['id_sender']) {
+                                $ucolor='0000FF';
+                            }
+                            else {
+                                $ucolor='000000';
+                            }
+                            $response_text = mask(json_encode(array('type'=>$row['type'], 'name'=>$row['name'], 'message'=>$row['message'], 'color'=>$ucolor, 'from'=>$user_to)));
+                            $socketById=$map[$user_from];
+                            send_messageClient($response_text, $socketById);
+                        }    
+                    
+                    }
                 }
             }
 			break 2; //exist this loop
@@ -184,30 +237,6 @@ function perform_handshaking($receved_header,$client_conn, $host, $port)
 	"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 	socket_write($client_conn,$upgrade,strlen($upgrade));
 }
-
-class Messages {
-
-    private $_storage;
-
-    public function __construct() {
-        $this->_storage = array();
-    }
-
-    public function getMessages() {
-        return $this->_storage;
-    }
-
-    public function add($message) {
-        if (count($this->_storage) == 100) {
-            array_shift($this->_storage);
-            $this->_storage[] = $message;
-        }
-        else {
-            $this->_storage[] = $message;
-        }
-    }
-}
-
 ?>
 
 
