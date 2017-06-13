@@ -36,7 +36,7 @@ try {
                             <ul class="list-group small">
                                 <?php
                                 echo '<li class="list-group-item chatlist">';
-                                echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>';
+                                echo '<a id="chatall" class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>';
                                 echo '</li>';
                                 while($data = $memberconnected->fetch()){
                                     $firstname = $data['firstname'];
@@ -45,12 +45,12 @@ try {
                                     if ($id != $_SESSION['id']){
                                         if (htmlentities($data['connectedTime']) > time() - 11){
                                             echo '<li class="list-group-item chatlist">';
-                                            echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
+                                            echo '<a id="chat'.$id.'" class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
                                             echo '</li>';
                                         }
                                         else {
                                             echo '<li class="list-group-item chatlist">';
-                                            echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
+                                            echo '<a id="chat'.$id.'" class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
                                             echo '</li>';
                                         }
                                     }

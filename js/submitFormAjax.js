@@ -66,7 +66,9 @@ $(document).ready(function() {
                 $(".refreshChatRoom").load(location.href + " .wrapRefreshChatRoom");
                 $(".refreshChat").load(location.href + " .wrapRefreshChat");
                 $(".refreshChatButton").load(location.href + " .wrapRefreshChatButton");
-                test($this.attr('href'));        
+                var liste = document.getElementById($this.attr("id"));
+                liste.style.color="black";
+                test($this.attr('href'));
             }
         });
     });
