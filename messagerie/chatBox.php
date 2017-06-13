@@ -31,34 +31,39 @@ try {
             <div id="collapse-chat" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-5 chat-col-left">
+                        <div class="col-sm-6 chat-col-left">
                             <p class="small">
-                                <?php echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>'; ?>
+                                <?php echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>';?>
+
                             </p>
-                            <div class="list-group small">
+                            <div>
+                            <ul class="list-group small">
                                 <?php
+                                 echo '<li class="list-group-item chatlist">';
+                                                                echo '</li>';
                                 while($data = $memberconnected->fetch()){
                                     $firstname = $data['firstname'];
                                     $lastname = $data['lastname'];
                                     $id = $data['id'];
                                     if ($id != $_SESSION['id']){
                                         if (htmlentities($data['connectedTime']) > time() - 11){
-                                            echo '<li class="list-group-item">';
+                                            echo '<li class="list-group-item chatlist">';
                                             echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
                                             echo '</li>';
                                         }
                                         else {
-                                            echo '<li class="list-group-item">';
+                                            echo '<li class="list-group-item chatlist">';
                                             echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
                                             echo '</li>';
                                         }
                                     }
                                 }
                                 ?>
+                                </ul>
                             </div>
                         </div>
 
-                        <div class="col-sm-7 chat-col-right">
+                        <div class="col-sm-6 chat-col-right">
                             <div class="chat_wrapper">
                                 <div class="wrapRefreshChat" >
                                 <div class="refreshChat" >

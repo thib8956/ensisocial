@@ -62,7 +62,7 @@ if($nbrDisplayComment > $nbrTotalComment) {
 }
 
 while($row) {
-  ?><div class="vignets">
+  ?>
 
   <?php
   if (!empty($row['profile_pic'])){
@@ -89,7 +89,6 @@ while($row) {
     <p class="text-right small"> <?php echo $row['date']; ?></p>
     <p><?php echo $row['content']; ?></p>
   </li>
-  </div>
   <?php
   $row=$comment->fetch();
 }
