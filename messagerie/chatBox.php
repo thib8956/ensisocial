@@ -1,79 +1,95 @@
-<style type="text/css">
-    .chat {
-        position: fixed;
-        line-height: 0;
-        bottom:0;
-        width: 25%;
-        z-index: 5;
+<?php
+if(session_status() != 2) {  //on verifie si la session n'est pas deja demarrée
+session_start();
+}
+try {
+    $db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8mb4", "root", "");
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $memberconnected = $db-> query('SELECT lastname, firstname, connectedTime, id FROM users');
+
+    if(isset($_SESSION['id'])) {
+        $connectionRefresh = $db->prepare('UPDATE users SET connectedTime = :time WHERE id = :id');
+        $connectionRefresh->execute(array('time' => time(),'id' => $_SESSION['id']));
     }
-    
-    input[type=text]{
-		width:100%;
-		margin-top:5px;
+} catch (PDOException $e) {
+    die('Error:'.$e->getMessage());
+}
 
-	}
+?>
 
+<div class="col-md-3 col-md-offset-9 col-sm-6 chat">
+    <div class="panel-group chat-panel">
+        <div class="panel panel-info">
+            <a data-toggle="collapse" href="#collapse-chat">
+                <div class="panel-heading chat-panel-heading">
+                    <h4 class="panel-title chattitre">
+                        <span class="glyphicon glyphicon-comment"></span>&nbsp;Chat
+                    </h4>
+                </div>
+            </a>
+            <div id="collapse-chat" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6 chat-col-left">
+                            <div>
+                            <ul class="list-group small">
+                                <?php
+                                echo '<li class="list-group-item chatlist">';
+                                echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>';
+                                echo '</li>';
+                                while($data = $memberconnected->fetch()){
+                                    $firstname = $data['firstname'];
+                                    $lastname = $data['lastname'];
+                                    $id = $data['id'];
+                                    if ($id != $_SESSION['id']){
+                                        if (htmlentities($data['connectedTime']) > time() - 11){
+                                            echo '<li class="list-group-item chatlist">';
+                                            echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
+                                            echo '</li>';
+                                        }
+                                        else {
+                                            echo '<li class="list-group-item chatlist">';
+                                            echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id='.$id.'" >'.$firstname.' '.$lastname.'</a>';
+                                            echo '</li>';
+                                        }
+                                    }
+                                }
+                                ?>
+                                </ul>
+                            </div>
+                        </div>
 
-    .chat_wrapper {
-/*
-        width: 70%;
-        height:472px;
-        background: #3B5998;
-        border: 1px solid #999999;
-        padding: 10px;
-*/
-        font: 12px 'lucida grande',tahoma,verdana,arial,sans-serif;
-    }
-    .chat_wrapper .message_box {
-/*        background: #F7F7F7;*/
-        height:300px;
-            overflow: auto;
-/*        padding: 10px 10px 20px 10px;*/
-/*        border: 1px solid #999999;*/
-    }
-    .chat_wrapper  input{
-        padding: 2px 2px 2px 5px;
-    }
-    .system_msg{color: #BDBDBD;font-style: italic;}
-    .user_name{font-weight:bold;}
-    .user_message{color: #88B6E0;}
-
-    @media only screen and (max-width: 720px) {
-    /* For mobile phones: */
-        .chat_wrapper {
-        width: 95%;
-        height: 40%;
-        }
-
-        .button { 
-        width:100%;
-        margin-right:auto;
-        margin-left:auto;
-        height:40px;
-        }
-    }
-
-</style>
-
-<div class="container chat">
-  <div class="panel-group">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse1">Chat</a>
-        </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse">
-          <div class="chat_wrapper">
-              <div class="panel-body message_box" id="message_box"></div>
+                        <div class="col-sm-6 chat-col-right">
+                            <div class="chat_wrapper">
+                                <div class="wrapRefreshChat" >
+                                <div class="refreshChat" >
+                                    <div>
+                                        <p class="chattitle"><?php echo $_SESSION['room']; ?></p>
+                                    </div>
+                                    <div class="message_box" id="message_box"></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer chat-panel-footer">
+                                <div class="input-group add-on">
+                                    <div class="wrapRefreshChatButton" >
+                                    <div class="refreshChatButton" >
+                                        <input type="text" name="<?php echo $_SESSION['destinataire']; ?>" id="message" placeholder="Message" maxlength="80" onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()" class="form-control ui-autocomplete-input" />
+                                    </div>
+                                    </div>
+                                    <div class="input-group-btn">
+                                        <button id="send-btn" class="btn btn-default">
+                                            <span class="sr-only">Envoyer le message</span>
+                                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                </div>
             </div>
-        <div class="panel-footer">
-            <div>
-                <input type="text" name="message" id="message" placeholder="Message" maxlength="80" onkeydown = "if (event.keyCode == 13)document.getElementById('send-btn').click()" class="form-control ui-autocomplete-input" />
-            </div>
-            <button id="send-btn" class="btn btn-primary">Send</button>
         </div>
-      </div>
     </div>
-  </div>
 </div>

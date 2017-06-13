@@ -1,10 +1,10 @@
 <?php
 $title="Groupe";
 session_start();
-if (session_status() != 2){
-	echo '<p>Erreur : session non démarrée</p>';
-	header('/ensisocial/index.php');
+if (!isset($_SESSION['id'])){
+	header('Location: /ensisocial/index.php');
 }
+
 $id=(isset($_GET["id"])) ? $_GET["id"] : NULL;
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
@@ -43,12 +43,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 
 <div class="groupswrap">
-	<div class="col-sm-offset-3 col-md-8 newsfeed">
+	<div class="col-md-6 newsfeed">
 	<?php
 	while ($row=$stmt->fetch()){
 		$avatar = '/ensisocial/data/avatar/'.$row['img'];
 		?>
-		<div class="panel panel-default" id="group">
+		<div class="panel panel-default" >
 			<div class="panel-heading clearfix">
 					<a class="pull-left" href="#">
 						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 100px;">
@@ -56,9 +56,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 					<h2>
 					<?php if($id!=NULL){?>
 						<a href= <?php if(array_key_exists($row['name'], $FORMATIONS)){
-							echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$FORMATIONS[$row['name']].'</a>';
+							echo '"/ensisocial/group/groupPage.php?id='.$row['id'].'">'.$FORMATIONS[$row['name']].'</a>';
 						}else{
-							echo "/ensisocial/group/groupPage.php?id=".$row['id'].">".$row['name'].'</a>';
+							echo '"/ensisocial/group/groupPage.php?id='.$row['id'].'"">'.$row['name'].'</a>';
 						}
 
 					}else{
@@ -89,5 +89,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 
 <?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/messagerie/chatBox.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

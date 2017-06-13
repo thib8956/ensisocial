@@ -1,5 +1,4 @@
 <?php
-	// TODO : suppression du cookie à la déconnexion ?
 	include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 	session_start();
 	//$connected=$db->prepare("UPDATE `users` SET `connected` = 0 WHERE `users`.`id` =:id ;");

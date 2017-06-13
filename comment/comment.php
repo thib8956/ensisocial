@@ -74,18 +74,19 @@ while($row) {
 
   <li class="list-group-item">
     <a class="pull-left" href="#">
-      <img class="avatar" src=<?php echo $pic; ?> alt="avatar" height="80px">
+      <img class="avatar" src=<?php echo $pic; ?> alt="avatar" height="80">
     </a>
 
     <?php if ($_SESSION['id'] == $row['authorid']): ?>
-      <a class="btn btn-default pull-right supprComment" href=<?php echo '"/ensisocial/deletecomment.php?id='.$row['id'].'"'; ?>>
+      <a class="btn btn-default pull-right supprComment" href=<?php echo '"/ensisocial/comment/deletecomment.php?id='.$row['id'].'"'; ?>>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        Supprimer
+        
       </a>
     <?php endif ?>
 
     <h4 class="user"><?php echo $row['firstname'].' '.$row['lastname']; ?></h4>
-    <h5 class="time"><?php echo $row['date']; ?></h5>
+    <!--<h5 class="time"><?php echo $row['date']; ?></h5>-->
+    <p class="text-right small"> <?php echo $row['date']; ?></p>
     <p><?php echo $row['content']; ?></p>
   </li>
   <?php

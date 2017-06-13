@@ -40,7 +40,7 @@ class form{
      */
     public function inputsection($name, $type, $display, $option, $classlabel="control-label", $classselect="form-control"){
         $section='<label for="'.$display.'" class="'.$classlabel.'"></label>
-        <select name="'.$name.'" class="'.$classselect.'">';
+        <select id="'.$display.'" name="'.$name.'" class="'.$classselect.'">';
             foreach($option as $key =>$value){
                 $section = $section . '<option value = ' . $key . '>' . $option[$key] . '</option >';
             }
@@ -77,7 +77,7 @@ class form{
             $input .= '<span class="glyphicon '.$glyphicon.'"></span>';
             $input .= '</span>';
         }
-        $input .= '<input name="'.$name.'" type="'.$type.'" class="'.$classselect.'">';
+        $input .= '<input id="'.$name.'" name="'.$name.'" type="'.$type.'" class="'.$classselect.'">';
 
         if ($glyphicon) $input = $this->surround($input, 'input-group');
         return $this->surround($label . $input);
@@ -86,7 +86,7 @@ class form{
     public function inputtextarea($name, $display, $rows, $cols, $classlabel="control-labe", $classarea="form-control"){
         return $this->surround('
           <label for="'.$name.'" class='.$classlabel.'>'.$display.'</label>
-          <textarea name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'"></textarea>');
+          <textarea id='.$name.' name='.$name.' class="'.$classarea.'" rows="'.$rows.'" cols="'.$cols.'"></textarea>');
 
    }
 
@@ -113,6 +113,6 @@ class form{
      * @return string retourn la commande html pour créer le bouton du formulaire
      */
     public function submit($display){
-        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-primary">');
+        return $this->surround('<input type="submit" value ="'.$display.'" name="'.$this->button.'" class="btn btn-default">');
     }
 }

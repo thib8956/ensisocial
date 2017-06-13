@@ -2,33 +2,18 @@
 $title="Inscription";
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/upload.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/mail.php');
+require 'phpmailer/PHPMailerAutoload.php';
 
 $answer = $db->query('SELECT email FROM users');
+
+$mail = new PHPMailer;
+newMail($mail,"Confirmation Inscription EnsiSocial","Nous avons le plaisir de vous confirmer votre inscription sur la plateforme EnsiSocial.<br>Ce mail vous notifie de l'activation de votre compte.<br>Votre identifiant est : ".$_POST['email']);
 
 // Récupération d'inscription puis découpe avec substr
 $start = 0;
 $string = get_include_contents('inscription.php');
 $utile = substr ($string, $start);
-
-// Envoi mail
-/*
-$objet = 'Confirmation de votre inscription EnsiSocial' ;
-$contenu = '
-<html>
-<head>
-   <title>Vous vous êtes inscrit(e) sur EnsiSocial</title>
-</head>
-<body>
-   <p>Bonjour '.$_POST['firstname'].' '.$_POST['lastname'].'</p>
-   <p>Vous venez de vous inscrire sur le site EnsiSocial avec les informations suivantes :<br>  -Adresse mail:'.$_POST['email'].'<br>
-   -Mot de passe'.$_POST['password'].'</p>
-</body>
-</html>';
-$to = ".$_POST['email'].";
-$headers = 'From: webmaster@example.com' . "\r\n" .
-'Reply-To: webmaster@example.com' . "\r\n" .
-'X-Mailer: PHP/' . phpversion();
-     */
 
 if(isset($_POST['signin'])) {
     if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])){
@@ -45,8 +30,27 @@ if(isset($_POST['signin'])) {
         }
         if (!$mailUsed){
             if($_POST["password"] == $_POST["repassword"]){
-                echo '<p>Mot de passe OK.</p>';
-
+                
+                if (!empty($_POST["zipcode"]) && !preg_match("#[0-9]{5}#",$_POST["zipcode"])) {
+                    echo '<div class="alert alert-danger"><p>Veuillez entrer un code postal de 5 chiffres</p></div>';
+                    echo $utile;
+                    exit;
+                }
+                if (!empty($_POST["phone"]) && !preg_match("#0[0-9]{9}#",$_POST["phone"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre un numéro de téléphone de 10 chiffres (pas de +XX)</p></div>';
+                    echo $utile;
+                    exit;
+                }
+                if (!empty($_POST["birth"]) && !preg_match("#[0-9]{4}/[0-9]{2}/[0-9]{2}#",$_POST["birth"])) {
+                    echo '<div class="alert alert-danger"><p>Merci de mettre une date de naissance de ce format AAAA/MM/JJ</p></div>';
+                    echo $utile;
+                    exit;
+                }
+                if (strlen($_POST["password"])<6){
+                    echo '<div class="alert alert-danger"><p>Mot de passe trop court</p></div>';
+                    echo $utile;
+                    exit;
+                }
                 if (!empty($_FILES['picture']['name'])){
                     // Generate an unique filename for the profile pic.
                     $fname = md5(uniqid(rand(), true));
@@ -60,10 +64,8 @@ if(isset($_POST['signin'])) {
                     $fname = 'default-profile.png';
                 }
                 fillDatabase($db, $fname);
-
-                //Envoi du mail
-                //mail($to, $objet, $contenu, $headers);
-                echo '<p>Vous êtes bien inscrit. Allez voir vos mails ;)</p>';
+                sendMail($mail,$_POST['email']);
+                echo '<p>Vous êtes bien inscrit. Vous pouvez maintenant vous connecter !</p>';
                 exit;
             } else {
                 echo '<div class="alert alert-danger">';
@@ -102,10 +104,10 @@ function fillDatabase($connection, $profile_pic) {
         $stmt->execute(array(
                     'email' => $_POST['email'],
                     'password' => $hash, // Mot de passe hashé avec bcrypt
-                    'firstname' => htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8'),
-                    'lastname' => htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8'),
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
                     'address' => htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8'),
-                    'zipcode' => intval($_POST['zipcode']),
+                    'zipcode' => htmlspecialchars($_POST['zipcode'], ENT_QUOTES, 'UTF-8'),
                     'town' => htmlspecialchars($_POST['town'], ENT_QUOTES, 'UTF-8'),
                     'birth' => date('Y-m-d', strtotime($_POST['birth'])),
                     'phone' => htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8'),

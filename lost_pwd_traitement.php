@@ -5,7 +5,8 @@ $form= new Form($_POST,"lostpwd");
 require 'phpmailer/PHPMailerAutoload.php';
 ?>
 <?php
-    $nouvelmdp=md5(rand());
+    include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/randomize.php');
+    $nouvelmdp=randomize(8);
     $to=$_POST['email'];
     $options = [
           'cost' => 11
@@ -24,36 +25,16 @@ require 'phpmailer/PHPMailerAutoload.php';
     } else {
         
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
-        $req2->execute();
+        include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/mail.php');
         $mail = new PHPMailer;
-        $mail->isSMTP();
-        $mail->SMTPSecure = 'ssl';
-        $mail->SMTPAuth = true;
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 465;
-        $mail->Username = 'ensisocial@gmail.com';
-        $mail->Password = 'motdepassedebg';
-        $mail->setFrom('ensisocial@gmail.com');
-        $mail->addAddress($to);
-        $mail->isHTML(true);
-        $mail->Subject = 'Mot de passe oublié - Ensisocial';
-        $mail->Body = '<html style="margin:auto;text-align:center;">
-            <div style="margin-left:20%;margin-top:20%">
-                <p style="
-                text-decoration: underline;
-                font-weight:bold;
-                ">Votre mot de passe temporaire:</p>
+        newMail($mail,'Mot de passe oublié - Ensisocial','<html style="margin:auto">
+            <div style="margin-left:20%;text-align:center;">
+                <p style="text-decoration: underline; font-weight:bold;">Votre mot de passe temporaire:</p>
                 <p>'.$nouvelmdp.'</p>
-            </div></html>';
-        $mail->AltBody = 'Votre mot de passe temporaire:'.$nouvelmdp;
-        $mail->CharSet = 'UTF-8';
-        //send the message, check for errors
-        if (!$mail->send()) {
-            echo "ERROR: " . $mail->ErrorInfo;
-        } else {
-            echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
-        }
-    }
+            </div></html>','Votre mot de passe temporaire:'.$nouvelmdp);
+        $test=sendMail($mail,$to);
+        if ($test == 1 || $test ==2) {$req2->execute();}
+    } 
  ?>
 
 <?php

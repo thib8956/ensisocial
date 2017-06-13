@@ -1,0 +1,43 @@
+/* meca Theme */
+.btn.btn-default {
+  background-color: #ff0000;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn.btn-default:hover {
+  background-color: #b30000;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+ .btn.btn-default.disabled:hover {
+  background-color: #b30000;
+  border: none;
+  color: white;
+  opacity: 0.65;
+}
+
+nav {
+  box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),
+  0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+}
+
+#sidebar {
+  background-color: whitesmoke;
+  top: 50px;
+}
+
+.chat-panel-heading {
+  background-color: #ff0000;
+  color: white;
+}
+
+.chat-panel-heading:hover {
+  background-color: #b30000;
+  color: white;
+}

@@ -6,7 +6,7 @@ session_start();
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/header.php');
 
 try{
-	$bdd = new PDO('mysql:host=localhost;dbname=ensisocial;charset=utf8','root','');
+	$bdd = new PDO('mysql:host=localhost;dbname=ensisocial;charset=utf8mb4','root','');
 } catch (Exception $e) {
 	die('Erreur : ' . $e->getMessage());
 }

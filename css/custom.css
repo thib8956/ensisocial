@@ -1,0 +1,151 @@
+footer {
+	color: white;
+	width: 100%;
+	text-shadow: 2px 2px 4px #000000;
+	height: 50px;
+  	padding-top: 150px;
+}
+
+.ui-autocomplete {
+	z-index: 1051 !important;
+}
+
+.sidebar {
+	z-index: 1;
+	background: white;
+	left: 0;
+	padding: 10px;
+}
+
+.btn.btn-link:hover {
+  text-decoration: none;
+}
+
+
+/* Chatbox CSS */
+.chat {
+	position: fixed;
+	line-height: 0;
+	bottom: 0;
+	z-index: 8;
+}
+
+.chat_wrapper {
+	font: 12px 'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+.chat_wrapper .message_box {
+	height: 300px;
+	overflow: auto;
+}
+
+.system_msg{
+	color: #BDBDBD;
+	font-style: italic;
+}
+
+.user_name{
+	font-weight:bold;
+}
+
+.user_message{
+	color: #88B6E0;
+}
+
+.chat-col-left {
+    margin-right: 0;
+    padding-right: 5px;
+}
+
+.chat-col-right {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+/* /Chatbox CSS */
+
+/* Style des boutton afficher/reduire les commentaires */
+.formulaire {
+    display: inline-flex;
+    margin-top: 3px;
+}
+
+.inputButton:hover {
+    cursor: pointer;
+}
+
+#rightbar{
+  top: 50px;
+}
+
+.loadChat {
+    color: black;
+    white-space:nowrap;
+}
+
+.loadChat:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.loadChat:focus {
+    text-decoration: none;
+    color: black;
+}
+
+.chatlist {
+    background-color: rgb(245,245,245);
+    overflow: hidden;
+}
+
+.chatlist:hover {
+    background-color: rgb(220,220,220);
+}
+
+.chattitle {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* /Commentaire CSS pas valide W3C*/
+
+/* .vignets {
+    
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; Firefox
+    -webkit-animation: fadein 2s; Safari et Chrome
+    -o-animation: fadein 2s; Opera
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { sur Firefox
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { sur Safari et Chrome
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { sur Opera
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+ */

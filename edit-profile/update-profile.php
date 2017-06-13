@@ -15,24 +15,25 @@ include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/upload.php');
 if (isset($_FILES['picture'])){
 	echo '<p>Update profile picture</p>';
 	updateProfilePicture($db, 'picture');
+    header('Location: /ensisocial/edit-profile.php');
 
 // Change password
 } elseif (isset($_POST['newpassword'])){
 	if (empty($_POST['oldpassword']) or empty($_POST['newpassword']) or empty($_POST['repassword'])){
 		// TODO : error messages
-        header('Location: /ensisocial/edit-profile.php?pwd=0');
-	} else {
-		if (updatePassword($db,
+        header('Location: /ensisocial/edit-profile.php?pwd=0'); //si pas de valeurs
+	} elseif (strlen($_POST['newpassword'])<6){
+        header('Location: /ensisocial/edit-profile.php?pwd=1'); //si mdp trop court
+    } elseif (updatePassword($db,
 			htmlentities($_POST['oldpassword']),
 			htmlentities($_POST['newpassword']),
 			htmlentities($_POST['repassword'])
 			)) // teste si ca change bien
         {
-            header('Location: /ensisocial/edit-profile.php?pwd=1');
-        } else {
             header('Location: /ensisocial/edit-profile.php?pwd=2');
+        } else {
+            header('Location: /ensisocial/edit-profile.php?pwd=3');
         }
-	}
 } elseif (isset($_POST['firstname'])){
     if (empty($_POST['firstname'])){
         header('Location: /ensisocial/edit-profile.php?fn=0');
@@ -48,28 +49,7 @@ if (isset($_FILES['picture'])){
 	   updateProfile($db, 'lastname', htmlentities($_POST['lastname']));
         $_SESSION['lastname'] = htmlentities($_POST['lastname']);
         header('Location: /ensisocial/edit-profile.php?ln=1');
-    }
-} elseif (isset($_POST['formation'])){
-	updateProfile($db, 'formation', htmlentities($_POST['formation']));
-    $_SESSION['formation']=htmlentities($_POST['formation']);
-
-	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
-	$idgroup->execute(array('name'=>$_POST["oldformation"]));
-	$idgroup=$idgroup->fetch(); // catch old formation
-	$stmt=$db->prepare('DELETE FROM `member` WHERE `member`.`iduser` = :iduser AND `member`.`idgroup`=:idgroup' );
-	$stmt->execute(array(
-	'iduser'=>$_SESSION['id'],
-	'idgroup' =>$idgroup['id']
-	));
-	$idgroup=$db->prepare('SELECT id from groupe where name=:name');
-	$idgroup->execute(array('name'=>$_POST["formation"]));
-	$idnewgroup=$idgroup->fetch();
-	$stmt=$db->prepare('INSERT iNTO `member` (`iduser`, `idgroup`) VALUES(:iduser, :idgroup)');
-	$stmt->execute(array(
-		'iduser'=>$_SESSION['id'],
-		'idgroup' =>$idnewgroup['id']
-		));
-	header('Location: /ensisocial/edit-profile.php?fm=1');
+    } 
 } elseif (isset($_POST['address'])){
 	echo '<p>Changement d\'adresse';
 	echo '<p>'.$_POST['address'].'</p>';
@@ -89,7 +69,7 @@ if (isset($_FILES['picture'])){
     if (empty($_POST['birth'])){
         header('Location: /ensisocial/edit-profile.php?birth=0');
     } else {
-        updateProfile($db, 'birth', htmlentities($_POST['birth']));
+        updateProfile($db, 'birth', date('Y-m-d', strtotime($_POST['birth'])));
         $_SESSION['birth']=htmlentities($_POST['birth']);
         header('Location: /ensisocial/edit-profile.php?birth=1');
     }
@@ -130,8 +110,8 @@ function updateProfilePicture($pdo, $index){
 	$ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1);
 	$dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname.$ext;
 
-	echo '<p>'.$fname.'</p>';
-	echo '<p>'.$dst.'</p>';
+	//echo '<p>'.$fname.'</p>';
+	//echo '<p>'.$dst.'</p>';
 	// Upload profile picture
 	upload($index, $dst);
 

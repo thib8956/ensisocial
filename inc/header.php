@@ -1,14 +1,24 @@
 <?php
 try {
-	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8mb4", "root", "");
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
 	die('Error:'.$e->getMessage());
 }
 
+//$_SESSION['destinataire']='null';
+//$_SESSION['room']='';
+
 require_once 'form.php';
 $FORMATIONS = array('IR' => 'Informatique et Réseaux',
+  'AS' =>'Automatique et Systèmes',
+  'meca' => 'Mécanique',
+  'textile' => 'Textile et fibres',
+  'FIP' => 'Filière par alternance',
+  'enseignant' =>'Enseignant',
+  'personnelUha' => 'personnel de l\'uha');
+$FORMATIONS_BASE = array('IR' => 'Informatique et Réseaux',
   'AS' =>'Automatique et Systèmes',
   'meca' => 'Mécanique',
   'textile' => 'Textile et fibres',
@@ -17,6 +27,7 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 	<title><?php echo $title; ?> - EnsiSocial</title>
 	<meta name="charset" content="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,10 +35,19 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	<link rel="icon" type="image/png" href="/ensisocial/favicon.png" />
     <link rel="stylesheet" href="/ensisocial/css/jquery-ui.css"/>
 	<link rel="stylesheet" href="/ensisocial/css/bootstrap.min.css"/>
-	<!-- <link rel="stylesheet" href="css/styleindex.css" /> -->
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="/ensisocial/css/custom.css">
+	<!-- CSS Themes -->
+	<?php
+		if(session_status() == 2){
+			if (isset($_SESSION['formation']) and array_key_exists($_SESSION['formation'], $FORMATIONS_BASE)){
+				echo '<link rel="stylesheet" href="/ensisocial/css/themes/theme_'.$_SESSION['formation'].'.css" />';
+			}
+		}
+	 ?>
 </head>
 
-<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');" style="<?php echo $background?>">
+<body onload="javascript:refresh('memberconnected'); javascript:refresh('page_membre');">
 	<?php
 	include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/navbar.php');
 	?>

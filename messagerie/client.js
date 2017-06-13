@@ -5,20 +5,32 @@ $(document).ready(function(){
 
 	websocket.onopen = function(ev) { // connection is open
 		//$('#message_box').append("<div class=\"system_msg\">Connected!</div>"); //notify user
+        var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
+        var mycolor = getCookie('color'); //get user color
+        var myid = getCookie('userid'); //get user id
+
+		//prepare json data
+		var msg = {
+		message: "log",
+		name: myname,
+		color: mycolor,
+        type: "logmsg",
+        to: "all",
+        from: myid
+		};
+		//convert and send data to server
+		websocket.send(JSON.stringify(msg));
 	}
 
 	$('#send-btn').click(function(){ //use clicks message send button
 		var mymessage = $('#message').val(); //get message text
 		var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
-        var mycolor = getCookie('color'); //get user color
+    var myid = getCookie('userid'); //get user id
+    var mycolor = getCookie('color'); //get user color
+    var mydest = $('#message').attr("name"); //get user destinataire
 
-
-		if(myname == ""){ //empty name?
-			alert("Enter your Name please!");
-			return;
-		}
-		if(mymessage == ""){ //emtpy message?
-			alert("Enter Some message Please!");
+    if(mymessage == ""){ //emtpy message?
+			//alert("Enter Some message Please!");
 			return;
 		}
 		//document.getElementById("name").style.visibility = "hidden";
@@ -29,12 +41,39 @@ $(document).ready(function(){
 		var msg = {
 		message: mymessage,
 		name: myname,
-		color : mycolor
+		color: mycolor,
+        type: "usermsg",
+        to: mydest,
+        from: myid
 		};
 		//convert and send data to server
 		websocket.send(JSON.stringify(msg));
         $('#message').val(''); //reset text
 	});
+
+//    $('body').on('click', '.loadChat', function(){ //use clicks message send button
+//		var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
+//        var myid = getCookie('userid'); //get user id
+//        var mycolor = getCookie('color'); //get user color
+//        var url = $(this).attr("href"); //get user destinataire
+//        var re = /.*?id=(.*)/;
+//        var mydest = url.replace(re, '$1');
+//
+//		//var objDiv = document.getElementById("message_box");
+//		//objDiv.scrollTop = objDiv.scrollHeight;
+//		//prepare json data
+//		var msg = {
+//		message: "load",
+//		name: myname,
+//		color: mycolor,
+//        type: "loadmsg",
+//        to: mydest,
+//        from: myid
+//		};
+//		//convert and send data to server
+//		websocket.send(JSON.stringify(msg));
+//        $('#message').val(''); //reset text
+//	});
 
 	//#### Message received from server?
 	websocket.onmessage = function(ev) {
@@ -42,9 +81,11 @@ $(document).ready(function(){
 		var type = msg.type; //message type
 		var umsg = msg.message; //message text
 		var uname = msg.name; //user name
+        uname = uname.replace(/\+/g, " ");
 		var ucolor = msg.color; //color
+        var ufrom = msg.from; //from
 
-		if(type == 'usermsg')
+		if(type == 'usermsg' && ufrom == $('#message').attr("name"))
 		{
 			$('#message_box').append("<div><span class=\"user_name\" style=\"color:#"+ucolor+"\">"+uname+"</span> : <span class=\"user_message\">"+umsg+"</span></div>");
 		}
@@ -76,4 +117,31 @@ function  getCookie(name){
        }
      }
      return null;
-   }
+}
+
+function test(url){ //use clicks message send button
+    var a;
+    for(i=0; i<100000000; i++) {
+        a+=1;
+    }
+    var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
+    var myid = getCookie('userid'); //get user id
+    var mycolor = getCookie('color'); //get user color
+    var re = /.*?id=(.*)/;
+    var mydest = url.replace(re, '$1');
+
+    //var objDiv = document.getElementById("message_box");
+    //objDiv.scrollTop = objDiv.scrollHeight;
+    //prepare json data
+    var msg = {
+    message: "load",
+    name: myname,
+    color: mycolor,
+    type: "loadmsg",
+    to: mydest,
+    from: myid
+    };
+    //convert and send data to server
+    websocket.send(JSON.stringify(msg));
+    $('#message').val(''); //reset text
+};

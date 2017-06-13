@@ -26,7 +26,7 @@ function verifText(champ)
 }
 function antiInjec(champ)
 {
-    if (champ.value.includes("{") || champ.value.includes("/") || champ.value.includes("\\") || champ.value.includes("#") ||
+    if (champ.value.includes("{") || champ.value.includes("`") || champ.value.includes("\\") || champ.value.includes("#") ||
         champ.value.includes("(") || champ.value.includes("[") || champ.value.includes("$") || champ.value.includes(";") ||
         champ.value.includes(">") || champ.value.includes("<") || champ.value.includes("*") || champ.value.includes("%"))
     {
@@ -84,13 +84,12 @@ function verifForm(f)
             {
                 if (verifMail(f.email))
                 {
-                    alert("Adresse UHA");
                     return true;
                 }
                 else 
-                {
-                    alert("Non UHA détectée");
-                    return true;
+                {	
+                    alert("N'étant pas une adresse UHA, veuillez attendre confirmation (par mail) ");
+                    return false;
                 }
             }
             else
@@ -109,7 +108,7 @@ function verifForm(f)
     }
     else
     {
-        alert("Vous êtes vraiment quelqu'un de méchant");
+        alert("Caractères non autorisés utilisés");
         return false;
     }
 }
