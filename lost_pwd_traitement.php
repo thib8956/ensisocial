@@ -35,46 +35,16 @@ require 'phpmailer/PHPMailerAutoload.php';
     } else {
         
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
+        include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/mail.php');
         $mail = new PHPMailer;
-        $mail->isSMTP();
-        $mail->SMTPSecure = 'tls';
-        $mail->SMTPAuth = true;
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->Username = 'ensisocial@gmail.com';
-        $mail->Password = 'motdepassedebg';
-        $mail->setFrom('ensisocial@gmail.com');
-        $mail->addAddress($to);
-        $mail->isHTML(true);
-        //$mail->SMTPDebug=3; //Messages d'erreur
-        $mail->Subject = 'Mot de passe oublié - Ensisocial';
-        $mail->Body = '<html style="margin:auto;text-align:center;">
+        newMail($mail,'Mot de passe oublié - Ensisocial','<html style="margin:auto;text-align:center;">
             <div style="margin-left:20%;margin-top:20%">
-                <p style="
-                text-decoration: underline;
-                font-weight:bold;
-                ">Votre mot de passe temporaire:</p>
+                <p style="text-decoration: underline; font-weight:bold;">Votre mot de passe temporaire:</p>
                 <p>'.$nouvelmdp.'</p>
-            </div></html>';
-        $mail->AltBody = 'Votre mot de passe temporaire:'.$nouvelmdp;
-        $mail->CharSet = 'UTF-8';
-        //send the message, check for errors
-        if (!$mail->send()) {
-            //echo "ERROR: " . $mail->ErrorInfo;
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
-            if($mail->send()){
-                echo "<div>Mot de passe envoyé via TLS</div>";
-                $req2->execute();
-            } else {
-                echo $mail->ErrorInfo;
-            }
-        } else {
-            echo "<div>Votre mot de passe a été envoyé à l'adresse ".$to."</div>";
-            $req2->execute();
-            //echo $mail->ErrorInfo; //affichage des infos de connexion
-        }
-    }
+            </div></html>','Votre mot de passe temporaire:'.$nouvelmdp);
+        $test=sendMail($mail,$to);
+        if ($test == 1 || $test ==2) {$req2->execute();}
+    } 
  ?>
 
 <?php
