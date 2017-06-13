@@ -1,7 +1,7 @@
 <?php
 
 
-$groupmember=$db->prepare('SELECT `users`.`id`,`firstname`,`lastname`,`users`.`profile_pic` FROM `users` join `member` on `member`.`iduser`=`users`.`id` join `groupe` on `member`.`idgroup`=`groupe`.`id` where `groupe`.`id`=:groupid');
+$groupmember=$db->prepare('SELECT `users`.`id`,`firstname`,`lastname`,`users`.`profile_pic` FROM `users` join `member` on `member`.`iduser`=`users`.`id` join `groupe` on `member`.`idgroup`=`groupe`.`id` where `groupe`.`id`=:groupid ORDER BY `lastname`');
 $groupmember->execute (array(
 	'groupid'=>$id))
 ?>
