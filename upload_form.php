@@ -32,5 +32,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 <br> Pour pouvoir utiliser votre image marquez le chemin qui vous sera écrit dans la zone de texte de votre publication =D</p>
 </div>
 <?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/messagerie/chatBox.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>

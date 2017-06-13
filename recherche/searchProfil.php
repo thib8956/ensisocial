@@ -31,7 +31,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 <!-- Add a publication -->
 <div class="row">
-	<div class="col-sm-offset-3 col-md-8">
+	<div class="col-sm-offset-3 col-md-6">
 
 		<form action="/ensisocial/publication.php" method="post">
 			<?php
@@ -50,7 +50,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 <!-- Display newsfeed -->
 <div class="newsfeedwrap">
-	<div class="col-sm-offset-3 col-md-8 newsfeed">
+	<div class="col-sm-offset-3 col-md-6 newsfeed">
 		<?php
 		$commId=0;
 		while ($publication=$stmt->fetch()){
@@ -98,10 +98,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			</div> <!-- .panel-heading -->
 
 			<div class="panel-body">
-				<?php 
+				<?php
                 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/checklink.php');
-                checkLink($publication['content']);                        
-				
+                checkLink($publication['content']);
+
 				if($score >= 0){
 					echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
 				} else {

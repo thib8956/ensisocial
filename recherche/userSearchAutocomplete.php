@@ -1,7 +1,7 @@
 <?php
 //ne pas mettre le header ni le footer ici, cette page ne s'affiche pas, c'est juste un script php
 try {
-	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8mb4", "root", "");
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
