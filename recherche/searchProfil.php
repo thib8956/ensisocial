@@ -132,6 +132,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				echo '</ul>';
 				?>
 				<!-- Add a comment -->
+				
 				<div class="input-group">
 						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment_submit.php" method="post" accept-charset="utf-8">' ?>
 							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
@@ -157,6 +158,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
                         	?>>
                         </form>
                     </div>
+                </div>
 		</div> <!-- /.panel-body -->
 	</div> <!-- /.panel -->
 	<?php
