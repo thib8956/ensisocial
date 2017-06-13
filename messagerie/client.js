@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	//create a new WebSocket object.
-	var wsUri = "ws://10.57.110.20:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
+	var wsUri = "ws://localhost:9000/ensisocial/messagerie/server.php"; 	//path du serveur!!!!!
 	websocket = new WebSocket(wsUri);
 
 	websocket.onopen = function(ev) { // connection is open
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		websocket.send(JSON.stringify(msg));
         $('#message').val(''); //reset text
 	});
-    
+
 //    $('body').on('click', '.loadChat', function(){ //use clicks message send button
 //		var myname = getCookie('prenom')+" "+getCookie('nom'); //get user name
 //        var myid = getCookie('userid'); //get user id
