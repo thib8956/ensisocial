@@ -15,6 +15,7 @@ include($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/upload.php');
 if (isset($_FILES['picture'])){
 	echo '<p>Update profile picture</p>';
 	updateProfilePicture($db, 'picture');
+    header('Location: /ensisocial/edit-profile.php');
 
 // Change password
 } elseif (isset($_POST['newpassword'])){
@@ -109,8 +110,8 @@ function updateProfilePicture($pdo, $index){
 	$ext = '.'.substr(strrchr($_FILES['picture']['name'], '.'), 1);
 	$dst = $_SERVER['DOCUMENT_ROOT'].'/ensisocial/data/avatar/'.$fname.$ext;
 
-	echo '<p>'.$fname.'</p>';
-	echo '<p>'.$dst.'</p>';
+	//echo '<p>'.$fname.'</p>';
+	//echo '<p>'.$dst.'</p>';
 	// Upload profile picture
 	upload($index, $dst);
 

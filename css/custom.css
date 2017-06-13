@@ -80,6 +80,7 @@ footer {
 
 .loadChat {
     color: black;
+    white-space:nowrap;
 }
 
 .loadChat:hover {
@@ -98,6 +99,11 @@ footer {
 
 .chatlist:hover {
     background-color: rgb(220,220,220);
+}
+
+.chattitle {
+    font-weight: bold;
+    font-size: 13px;
 }
 
 /* /Commentaire CSS */

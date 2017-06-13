@@ -112,7 +112,7 @@ while (true) {
                             die('Error:'.$e->getMessage());
                         }
 
-                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'000000', 'from'=>$user_from)));
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'00FF00', 'from'=>$user_from)));
                         $socketById=$map[$user_to];
                         send_messageClient($response_text, $socketById);
                         $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'0000FF', 'from'=>$user_to)));
@@ -139,7 +139,7 @@ while (true) {
                                 $ucolor='0000FF';
                             }
                             else {
-                                $ucolor='000000';
+                                $ucolor='00FF00';
                             }
                             $response_text = mask(json_encode(array('type'=>$row['type'], 'name'=>$row['name'], 'message'=>$row['message'], 'color'=>$ucolor, 'from'=>$user_to)));
                             $socketById=$map[$user_from];

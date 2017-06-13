@@ -7,6 +7,9 @@ try {
 	die('Error:'.$e->getMessage());
 }
 
+//$_SESSION['destinataire']='null';
+//$_SESSION['room']='';
+
 require_once 'form.php';
 $FORMATIONS = array('IR' => 'Informatique et Réseaux',
   'AS' =>'Automatique et Systèmes',
