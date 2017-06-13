@@ -22,6 +22,24 @@ $map = array();
 
 $messages = new Messages;
 
+//base de donnée
+try {
+	$db = new PDO("mysql:host=localhost;dbname=ensisocial;charset=utf8", "root", "");
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $e) {
+	die('Error:'.$e->getMessage());
+}
+try {
+    $insert = $db->prepare('INSERT INTO message (`id_sender`, `id_recipient`, `type`, `name`, `lu`, `message`)
+            VALUES (:id_sender, :id_recipient, :type, :name, :lu, :message)');
+
+    $req = $db->prepare('SELECT * FROM message WHERE (id_sender = :id_sender AND id_recipient = :id_recipient) OR (id_sender = :id_recipient2 AND id_recipient = :id_sender2)');
+
+} catch (PDOException $e) {
+    die('Error:'.$e->getMessage());
+}
+
 //start endless loop, so that our script doesn't stop
 while (true) {
 	//manage multipal connections
@@ -71,10 +89,23 @@ while (true) {
                         send_message($response_text); //send data
                     }
                     else {
-                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>$user_from)));
+                        //base de donnée
+                        try {
+                           $insert->execute(array('id_sender' => $user_from,
+                            'id_recipient' => $user_to,
+                            'type' => $user_type,
+                            'name' => $user_name,
+                            'lu' => FALSE,
+                            'message' => $user_message
+                            ));
+                        } catch (Exception $e) {
+                            die('Error:'.$e->getMessage());
+                        }
+                        
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'000000', 'from'=>$user_from)));
                         $socketById=$map[$user_to];
                         send_messageClient($response_text, $socketById);
-                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color, 'from'=>$user_to)));
+                        $response_text = mask(json_encode(array('type'=>'usermsg', 'name'=>$user_name, 'message'=>$user_message, 'color'=>'0000FF', 'from'=>$user_to)));
                         $socketById=$map[$user_from];
                         send_messageClient($response_text, $socketById);
                     }
@@ -88,6 +119,21 @@ while (true) {
                         foreach ($messages_array as $message) {
                             send_messageClient($message, $map[$user_from]);
                         }
+                    }
+                    else {
+                        $req->execute(array('id_sender'=> $user_from, 'id_recipient' => $user_to, 'id_recipient2'=> $user_to, 'id_sender2' => $user_from));
+                        while($row = $req->fetch()) {
+                            if($user_from == $row['id_sender']) {
+                                $ucolor='0000FF';
+                            }
+                            else {
+                                $ucolor='000000';
+                            }
+                            $response_text = mask(json_encode(array('type'=>$row['type'], 'name'=>$row['name'], 'message'=>$row['message'], 'color'=>$ucolor, 'from'=>$user_to)));
+                            $socketById=$map[$user_from];
+                            send_messageClient($response_text, $socketById);
+                        }    
+                    
                     }
                 }
             }

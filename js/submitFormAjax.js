@@ -65,11 +65,8 @@ $(document).ready(function() {
             success: function(){
                 $(".refreshChatRoom").load(location.href + " .wrapRefreshChatRoom");
                 $(".refreshChat").load(location.href + " .wrapRefreshChat");
-                test($this.attr('href'));
-                //$(".refreshChatButton").load(location.href + " .wrapRefreshChatButton");
-                
-                
-                
+                $(".refreshChatButton").load(location.href + " .wrapRefreshChatButton");
+                test($this.attr('href'));        
             }
         });
     });
