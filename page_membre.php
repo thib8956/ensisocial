@@ -114,7 +114,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
             			</small>
             		</h2>';
             		} else {
-		            	if(in_array($group['name'], $FORMATIONS)){
+		            	if(array_key_exists($group['name'], $FORMATIONS)){
 		            		echo '<h2>'.$publication['firstname'].' '.$publication['lastname'].'
 		            		<small>
 		            			<span class="glyphicon glyphicon-chevron-right">

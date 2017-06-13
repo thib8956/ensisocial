@@ -14,9 +14,9 @@ $groupmember->execute (array(
 	?>
 		<li class="list-group-item">
 				<a class="pull-left" href=<?php echo ' "/ensisocial/recherche/searchProfil.php?id='.$member['id'].'"'?>>
-						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 60px;">
+						<img class="img-thumbnail" src=<?php echo '"'.$avatar.'"'; ?> alt="avatar" style="max-height: 50px;">
 				</a>
-				<?php echo '<h2><strong>'.$member['firstname'].' '.$member['lastname'].'</strong></h2>';?>
+				<?php echo '<h3><strong>'.$member['firstname'].' '.$member['lastname'].'</strong></h3>';?>
 		</li>
 		
 	<?php	

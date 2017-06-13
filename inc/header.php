@@ -13,8 +13,13 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
   'meca' => 'Mécanique',
   'textile' => 'Textile et fibres',
   'FIP' => 'Filière par alternance',
-  'enseignant' =>'enseignant',
+  'enseignant' =>'Enseignant',
   'personnelUha' => 'personnel de l\'uha');
+$FORMATIONS_BASE = array('IR' => 'Informatique et Réseaux',
+  'AS' =>'Automatique et Systèmes',
+  'meca' => 'Mécanique',
+  'textile' => 'Textile et fibres',
+  'FIP' => 'Filière par alternance');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,7 +36,7 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
 	<!-- CSS Themes -->
 	<?php
 		if(session_status() == 2){
-			if (isset($_SESSION['formation'])){
+			if (isset($_SESSION['formation']) and array_key_exists($_SESSION['formation'], $FORMATIONS_BASE)){
 				echo '<link rel="stylesheet" href="/ensisocial/css/themes/theme_'.$_SESSION['formation'].'.css" />';
 			}
 		}

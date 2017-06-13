@@ -4,8 +4,13 @@ $FORMATIONS = array('IR' => 'Informatique et Réseaux',
   'meca' => 'Mécanique',
   'textile' => 'Textile et fibres',
   'FIP' => 'Filière par alternance',
-  'enseignant' =>'enseignant',
+  'enseignant' =>'Enseignant',
    'personnelUha' => 'personnel de l\'uha');
+$FORMATIONS_BASE = array('IR' => 'Informatique et Réseaux',
+  'AS' =>'Automatique et Systèmes',
+  'meca' => 'Mécanique',
+  'textile' => 'Textile et fibres',
+  'FIP' => 'Filière par alternance');
 ?>
 
 <div class="col-sm-3 col-md-3"  role="complementary">
