@@ -112,6 +112,7 @@ $(document).ready(function(){
         else {
             var liste = document.getElementById("chat"+ufrom);
             liste.style.color="orange";
+            createCookie("chat"+ufrom,"true","");
         }
 		if(type == 'system')
 		{
@@ -141,6 +142,16 @@ function  getCookie(name){
        }
      }
      return null;
+}
+
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
 }
 
 function test(url){ //use clicks message send button

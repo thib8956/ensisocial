@@ -67,6 +67,7 @@ $(document).ready(function() {
                 $(".refreshChat").load(location.href + " .wrapRefreshChat");
                 $(".refreshChatButton").load(location.href + " .wrapRefreshChatButton");
                 var liste = document.getElementById($this.attr("id"));
+                eraseCookie("chat"+$this.attr("id"));
                 liste.style.color="black";
                 test($this.attr('href'));
             }
@@ -83,4 +84,8 @@ function sleep(functionName, param, timeInMS) {
 		
 	setTimeout(s, timeInMS);
 
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
 }
