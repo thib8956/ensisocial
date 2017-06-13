@@ -32,13 +32,12 @@ try {
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6 chat-col-left">
-                            <p class="small">
-                                <?php echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>';?>
-
-                            </p>
                             <div>
                             <ul class="list-group small">
                                 <?php
+                                echo '<li class="list-group-item chatlist">';
+                                echo '<a class="loadChat chatAjax" href="/ensisocial/messagerie/chatDestinataire.php?id=all" >Parler à tout le monde</a>';
+                                echo '</li>';
                                 while($data = $memberconnected->fetch()){
                                     $firstname = $data['firstname'];
                                     $lastname = $data['lastname'];
@@ -66,7 +65,7 @@ try {
                                 <div class="wrapRefreshChat" >
                                 <div class="refreshChat" >
                                     <div>
-                                        <p><?php echo $_SESSION['room']; ?></p>
+                                        <p class="chattitle"><?php echo $_SESSION['room']; ?></p>
                                     </div>
                                     <div class="message_box" id="message_box"></div>
                                 </div>
