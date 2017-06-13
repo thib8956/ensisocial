@@ -158,7 +158,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
                         	?>>
                         </form>
                     </div>
-                </div>
 		</div> <!-- /.panel-body -->
 	</div> <!-- /.panel -->
 	<?php
