@@ -39,12 +39,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 			$form = new Form($_POST, 'post');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
 			echo $form->inputtextarea('content', 'Contenu', 5, 16);
-			if ($connectedid == $searchedprofile){
-				echo $form->submit('Publier sur mon profil');
-			}	
-			else {
-				echo $form->submit('Publier');
-			}
+			echo $form->submit('Publier');
+			
 
 			
 			echo '<input type="hidden" name="idplace" class="btn btn-primary-outline" value="'.$_GET['id'].'" />
@@ -144,7 +140,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 				<div class="input-group">
 						<?php echo '<form id="comm'.$commId.'" class="submitAjax" action="/ensisocial/comment/comment_submit.php" method="post" accept-charset="utf-8">' ?>
 							<input class="form-control" placeholder="Ajouter votre commentaire" type="text" name="add" autocomplete="off">
-							<?php echo '<input type="hidden" name="back" value='.$_SERVER['REQUEST_URI'].'>' ?>
+							<?php echo '<input type="hidden" name="back" value="'.$_SERVER['REQUEST_URI'].'">' ?>
 							<?php echo '<input name="post_id" type="hidden" value='.$publication['newsfeedid'].'>' ?>
 						</form>
 
@@ -168,6 +164,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
                     </div>
 		</div> <!-- /.panel-body -->
 	</div> <!-- /.panel -->
+
 	<?php
 		} // /while
 		echo '</div>'; /* /.col-sm-offset-2 .col-md-9 */
