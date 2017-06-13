@@ -361,7 +361,11 @@ $form = new Form($_POST,"profile_page");
             <div class="col-md-2">Date de naissance</div>
             <div class="col-md-4 text-center">
                 <?php
-                    echo $profile["birth"];
+                    $birthday=$profile["birth"];
+                    $day = substr($birthday,8,2);
+                    $month = substr($birthday,5,2);
+                    $year = substr($birthday,0,4);
+                    echo $day.'-'.$month.'-'.$year;
                 ?>
             </div>
 

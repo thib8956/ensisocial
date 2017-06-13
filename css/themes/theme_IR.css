@@ -41,3 +41,8 @@ nav {
   background-color: #367c39;
   color: white;
 }
+
+#rightbar {
+  background-color: whitesmoke;
+  top: 50px;
+}

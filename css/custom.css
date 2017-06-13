@@ -63,3 +63,9 @@ footer {
 .inputButton:hover {
     cursor: pointer;
 }
+
+#rightbar{
+  top: 50px;
+}
+
+
