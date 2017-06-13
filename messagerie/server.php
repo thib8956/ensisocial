@@ -29,8 +29,8 @@ try {
 	die('Error:'.$e->getMessage());
 }
 try {
-    $insertall = $db->prepare('INSERT INTO chatgeneral (`type`, `name`, `message`, `color`, `lu`)
-            VALUES (:type, :name, :message, :color, :lu)');
+    $insertall = $db->prepare('INSERT INTO chatgeneral (`type`, `name`, `message`, `color`)
+            VALUES (:type, :name, :message, :color)');
     $insert = $db->prepare('INSERT INTO message (`id_sender`, `id_recipient`, `type`, `name`, `lu`, `message`)
             VALUES (:id_sender, :id_recipient, :type, :name, :lu, :message)');
 
@@ -89,8 +89,7 @@ while (true) {
                            $insertall->execute(array('type' => $user_type,
                             'name' => $user_name,
                             'message' => $user_message,
-                            'color' => $user_color,
-                            'lu' => FALSE
+                            'color' => $user_color
                             ));
                         } catch (Exception $e) {
                             die('Error:'.$e->getMessage());
