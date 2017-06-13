@@ -106,10 +106,10 @@ function fillDatabase($connection, $profile_pic) {
         $stmt->execute(array(
                     'email' => $_POST['email'],
                     'password' => $hash, // Mot de passe hashé avec bcrypt
-                    'firstname' => htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8'),
-                    'lastname' => htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8'),
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
                     'address' => htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8'),
-                    'zipcode' => intval($_POST['zipcode']),
+                    'zipcode' => htmlspecialchars($_POST['zipcode'], ENT_QUOTES, 'UTF-8'),
                     'town' => htmlspecialchars($_POST['town'], ENT_QUOTES, 'UTF-8'),
                     'birth' => date('Y-m-d', strtotime($_POST['birth'])),
                     'phone' => htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8'),
