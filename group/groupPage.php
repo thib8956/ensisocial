@@ -58,7 +58,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 <div class="row">
 	<div class="col-sm-offset-3 col-md-8">
 
-		<form action="/ensisocial/publication.php" method="post">
+		<form action="/ensisocial/publication.php" method="post" accept-charset="UTF-8">
 			<?php
 			$form = new Form($_POST, 'post');
 			echo $form->inputfield('title', 'text', 'Titre de la publication');
@@ -137,7 +137,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 		<div class="panel-body">
 			<?php
 			include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/checklink.php');
-			checkLink($publication['content']);    
+			checkLink($publication['content']);
 			if($score >= 0){
 				echo '<span class="score" style="color:#00DD00">'.$score.'</span>&nbsp;&nbsp;';
 			} else {
