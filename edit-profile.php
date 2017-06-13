@@ -367,9 +367,10 @@ $form = new Form($_POST,"profile_page");
                     'text',
                     'Date de naissance'
                 );
+		
                 echo $form->submit("Valider");
                 ?>
-            </form>
+	    </form>
         </div>
     </div>
 </div>

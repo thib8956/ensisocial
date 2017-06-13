@@ -80,12 +80,13 @@ while($row) {
     <?php if ($_SESSION['id'] == $row['authorid']): ?>
       <a class="btn btn-default pull-right supprComment" href=<?php echo '"/ensisocial/inc/deletecomment.php?id='.$row['id'].'"'; ?>>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        Supprimer
+        
       </a>
     <?php endif ?>
 
     <h4 class="user"><?php echo $row['firstname'].' '.$row['lastname']; ?></h4>
-    <h5 class="time"><?php echo $row['date']; ?></h5>
+    <!--<h5 class="time"><?php echo $row['date']; ?></h5>-->
+    <p class="text-right small"> <?php echo $row['date']; ?></p>
     <p><?php echo $row['content']; ?></p>
   </li>
   </div>
