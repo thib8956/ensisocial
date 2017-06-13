@@ -176,11 +176,11 @@ $form = new Form($_POST,"profile_page");
 
             <form action="edit-profile/update-profile.php" method="post" accept-charset="utf-8" class="col-md-4">
                 <?php
-                echo $form->inputsection('formation','string','formation',
+                /*echo $form->inputsection('formation','string','formation',
                     $FORMATIONS);
-                echo $form->submit("Valider");
+                echo $form->submit("Valider"); */
                 ?>
-                <input type="hidden" name="oldformation" class="btn btn-primary-outline" value=<?php echo $profile['formation']?> />
+                <input type="hidden" name="oldformation" class="btn btn-primary-outline" value=<?php /*echo $profile['formation']*/?> />
             </form>
         </div>-->
     </div>
