@@ -1,5 +1,9 @@
 ﻿Pour avoir un écran d'accueil coloré n'oubliez pas d'importer la base de données.
 Pour cela créer une base de données ayant pour interclassement utf8mb4_unicode_520_ci 
+Divers compte (dans divers filières les mots de passes sont "azerty") : gabin.michalet@uha.fr persouha@uha.fr
+antoine.benard@uha.fr as1@uha.fr myriam.invetion@uha.fr ptitvictor@uha.fr bastien.geldreich@uha.fr alternant@uha.fr
+
+
 Pour s'inscrire :
 (sur le site)
 
