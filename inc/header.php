@@ -24,6 +24,7 @@ $FORMATIONS_BASE = array('IR' => 'Informatique et Réseaux',
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 	<title><?php echo $title; ?> - EnsiSocial</title>
 	<meta name="charset" content="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

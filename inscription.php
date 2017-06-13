@@ -14,7 +14,7 @@ $form = new Form($_POST,"signin");
    <div class="col-md-8 col-md-offset-2">
     <form id="inscription" onsubmit="return verifForm(this)" action="traitement.php" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
         <?php
-        // MAX_FILE_SIZE (in bytes) for profile picture (4 MiB).
+        // MAX_FILE_SIZE (in bytes) for profile picture (4 MiB). 
         echo '<input type="hidden" name="MAX_FILE_SIZE" value="4194304" />';
         echo $form->inputfile('picture', 'Choisissez une image de profil');
         echo $form->inputfield(
