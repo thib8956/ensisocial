@@ -23,7 +23,7 @@ try {
         <div class="panel panel-info">
             <a data-toggle="collapse" href="#collapse-chat">
                 <div class="panel-heading chat-panel-heading">
-                    <h4 class="panel-title">
+                    <h4 class="panel-title chattitre">
                         <span class="glyphicon glyphicon-comment"></span>&nbsp;Chat
                     </h4>
                 </div>
@@ -64,6 +64,9 @@ try {
                             <div class="chat_wrapper">
                                 <div class="wrapRefreshChat" >
                                 <div class="refreshChat" >
+                                    <div>
+                                        <p><?php echo $_SESSION['room']; ?></p>
+                                    </div>
                                     <div class="message_box" id="message_box"></div>
                                 </div>
                                 </div>
