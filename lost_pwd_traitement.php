@@ -27,8 +27,8 @@ require 'phpmailer/PHPMailerAutoload.php';
         $req2= $db->prepare('UPDATE users SET password="'.$hashmdp.'" WHERE email = "'.$to.'"');
         include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/mail.php');
         $mail = new PHPMailer;
-        newMail($mail,'Mot de passe oublié - Ensisocial','<html style="margin:auto;text-align:center;">
-            <div style="margin-left:20%;margin-top:20%">
+        newMail($mail,'Mot de passe oublié - Ensisocial','<html style="margin:auto">
+            <div style="margin-left:20%;text-align:center;">
                 <p style="text-decoration: underline; font-weight:bold;">Votre mot de passe temporaire:</p>
                 <p>'.$nouvelmdp.'</p>
             </div></html>','Votre mot de passe temporaire:'.$nouvelmdp);
