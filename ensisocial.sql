@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.5.1
+-- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 12 Juin 2017 à 22:45
--- Version du serveur :  10.1.21-MariaDB
--- Version de PHP :  5.6.30
+-- Généré le :  Mar 13 Juin 2017 à 10:33
+-- Version du serveur :  5.7.11
+-- Version de PHP :  5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,17 +30,7 @@ CREATE TABLE `authorcomment` (
   `authorid` int(11) NOT NULL,
   `commentid` int(11) NOT NULL,
   `pk_authorcomment` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `authorcomment`
---
-
-INSERT INTO `authorcomment` (`authorid`, `commentid`, `pk_authorcomment`) VALUES
-(9, 1, 1),
-(9, 2, 2),
-(9, 3, 3),
-(9, 4, 4);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -52,17 +42,7 @@ CREATE TABLE `authornews` (
   `authorid` int(11) NOT NULL,
   `newsfeedid` int(11) NOT NULL,
   `pk_authornews` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `authornews`
---
-
-INSERT INTO `authornews` (`authorid`, `newsfeedid`, `pk_authornews`) VALUES
-(9, 190, 179),
-(9, 191, 180),
-(9, 192, 181),
-(9, 193, 182);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -72,21 +52,11 @@ INSERT INTO `authornews` (`authorid`, `newsfeedid`, `pk_authornews`) VALUES
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
-  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `date` datetime NOT NULL,
   `upvote` int(11) DEFAULT NULL,
   `downvote` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `comments`
---
-
-INSERT INTO `comments` (`id`, `content`, `date`, `upvote`, `downvote`) VALUES
-(1, 'qsdsqdqsd', '2017-06-12 20:44:05', NULL, NULL),
-(2, 'sqdsqdsq', '2017-06-12 21:12:21', NULL, NULL),
-(3, 'sqdqsd', '2017-06-12 21:12:23', NULL, NULL),
-(4, 'sqdsq', '2017-06-12 21:16:31', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -96,10 +66,10 @@ INSERT INTO `comments` (`id`, `content`, `date`, `upvote`, `downvote`) VALUES
 
 CREATE TABLE `groupe` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci,
-  `img` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'default-group.png'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_520_ci,
+  `img` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT 'default-group.png'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 --
 -- Contenu de la table `groupe`
@@ -123,24 +93,23 @@ CREATE TABLE `member` (
   `iduser` int(11) NOT NULL,
   `idgroup` int(11) NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
 
 --
--- Contenu de la table `member`
+-- Structure de la table `message`
 --
 
-INSERT INTO `member` (`id`, `iduser`, `idgroup`, `admin`) VALUES
-(1, 2, 1, 1),
-(3, 4, 1, 1),
-(5, 5, 1, 1),
-(6, 8, 1, 1),
-(17, 31, 5, 1),
-(18, 30, 2, 1),
-(21, 23, 1, 1),
-(28, 32, 1, 1),
-(29, 9, 1, 1),
-(30, 33, 1, 1),
-(31, 34, 1, 1);
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `id_sender` int(11) NOT NULL,
+  `id_recipient` int(11) NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `lu` tinyint(1) DEFAULT '0',
+  `message` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -152,17 +121,7 @@ CREATE TABLE `newscomment` (
   `newsfeedid` int(11) NOT NULL,
   `commentid` int(11) NOT NULL,
   `pk_newscomment` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `newscomment`
---
-
-INSERT INTO `newscomment` (`newsfeedid`, `commentid`, `pk_newscomment`) VALUES
-(191, 1, 1),
-(192, 2, 2),
-(192, 3, 3),
-(193, 4, 4);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -172,23 +131,13 @@ INSERT INTO `newscomment` (`newsfeedid`, `commentid`, `pk_newscomment`) VALUES
 
 CREATE TABLE `newsfeed` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `date` datetime NOT NULL,
-  `content` text COLLATE utf8_unicode_ci NOT NULL,
-  `place` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `place` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `type` tinyint(1) DEFAULT '0',
   `score` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `newsfeed`
---
-
-INSERT INTO `newsfeed` (`id`, `title`, `date`, `content`, `place`, `type`, `score`) VALUES
-(190, 'fdsfsdfq', '2017-06-12 16:25:23', 'sdqfdsfq', '0', 0, 0),
-(191, 'fdsds', '2017-06-12 19:49:02', 'dsfsd', '0', 0, 0),
-(192, 'sqdds', '2017-06-12 21:12:15', 'qsdqs', '0', 0, 1),
-(193, 'sqdds', '2017-06-12 21:15:00', 'sqdsqdsq', '9', 0, 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -198,40 +147,19 @@ INSERT INTO `newsfeed` (`id`, `title`, `date`, `content`, `place`, `type`, `scor
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `firstname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `lastname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `addresse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `zipcode` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `town` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `firstname` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `lastname` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `addresse` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `zipcode` varchar(5) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `town` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `birth` date NOT NULL,
-  `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `formation` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(10) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `formation` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `connectedTime` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `profile_pic` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'default-profile.png'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `users`
---
-
-INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `addresse`, `zipcode`, `town`, `birth`, `phone`, `formation`, `connectedTime`, `profile_pic`) VALUES
-(2, 'a@uha.fr', '$2y$11$1TCxXMN5QGPc7nRrWkr1aeRxmxkE9Y2VccDFJF52gimpRZpsf0C7.', 'François', 'Straebler', '51 rue de chorey', '21200', 'beaune', '1970-01-01', '0771068564', 'IR', 1497258872, '3c5ea46acaebe1c136639b7a88d2aa87.jpg'),
-(3, 'b@uha.fr', '$2y$11$fDFOYpFrqCX5uBWWN8566eNwMhnUPJemmGHfNQT4HFZH.lr0mJ/dq', 'Thibaud le BG du 69', 'Gasser', '69 rue de la voiture sa m&egrave;re', '69690', 'KEKEVILLE', '1969-01-01', '0669696969', 'IR', 0, '418a50b5cb341772afc204570dce374c.jpg'),
-(4, 'c@uha.fr', '$2y$11$x5hZP/nOJfLJ5agVWsnCVu78yezij.kfMBO1sqyaGeDI96ai0JLu2', 'Florian', 'Jaby', '', '0', '', '1970-01-01', '', 'IR', 1497283515, 'default-profile.png'),
-(5, 'd@uha', '$2y$11$ttG2EeeAA5D0hxahu3oMI.awUhQLs10YED4pr.uhUAue/DPhCWyN2', 'Gabin', 'Michalet', '', '0', '', '1970-01-01', '', 'IR', 0, '29e43cb78e85afd7985b1ee164e6eced.jpg'),
-(7, 'test@uha.fr', '$2y$11$8oPRz6yLjREgzu4FEmQfT.Upw.OfLRAjqUyNSRIsp/1.J.9jl4UJC', 'test', 'test', '', '0', '', '2017-06-10', '', 'textile', 0, '3126f911561df8a0d23ef727810c0b0c.jpg'),
-(8, 'putin@uha.fr', '$2y$11$cVw4K.YHZPtm6InGnUhfgOCVfStkJYgHELMk0aGlRd.agz/wGWewy', 'poutine', 'vladimir', '', '0', '', '1970-01-01', '', 'IR', 0, 'a283a5e2dc2471950c36ed202b27e9b1.jpg'),
-(9, 'queen@uha.fr', '$2y$11$MOd012GX9KyZik9W8flRcevOHsvPQzPgowZ/LGa1dKfyJpG2w7FQC', 'elisabeth', 'd&#039;angleterre', 'buckinguegamPALAS', '1234', 'njkndfjknfdsjkq', '0001-01-01', 'bonjour', 'IR', 1497300304, '21c57cd7e706f9b9ea88715f5d8313b2.gif'),
-(13, 'florian.jaby@uha.fr', '$2y$11$H7btDMQ/7.vDhx3ZsjAyWO5rhkiUMjSKrVJGLT66w/0pNXeBbTUye', 'florian', 'jaby', '', '0', '', '1970-01-01', '', 'IR', 0, '6559967f2918ba24abbf4b93ea9305a7.'),
-(22, 'p@uha.fr', '$2y$11$rNjuioRdE.IZgjxpPPODl.fX/gEefgCdcWEaIOLVKC7vJFXsSJi6G', 'paul', 'paul', '', '0', '', '1970-01-01', '', 'meca', 1, '06a0129f05f593b4c3a9513fd021301d.'),
-(23, 'textil@uha.fr', '$2y$11$JhAdhMHuDXQa3UddKD34yOthbVH/8ChhHIOxUj9yszltO/vxuyhVu', 'test', 'test', '', '0', '', '1970-01-01', '', 'IR', 0, 'ce44922373727b5c903de52d39de54fa.'),
-(30, 'meca@uha.fr', '$2y$11$3dlblbgM2oICL2IyHWTj7uUaiq7s4YRJ/wkXlVPbLWFHilWZ1w6T.', 'meca', 'meca', '', '0', '', '1970-01-01', '', 'meca', 0, '1f6879995ed4e00199b33a6357abca42.'),
-(31, 'fip@ufa.fr', '$2y$11$zhx1lU0wYWH.tUQbnryudu9vFp82O8NkKtANBi7t54C7u1VaQQA1m', 'fip', 'fip', '', '0', '', '1970-01-01', '', 'FIP', 0, '64b7f517f2de5779195e87ed7cb0f282.'),
-(32, 'as@uha.fr', '$2y$11$pW8..jMSFpS5uRsZ54ayb.GHNMD87POPMPV/EI7vQLObqEz.DtFdW', 'as', 'as', '', '0', '', '1970-01-01', '', 'IR', 1497298381, 'f327a564e5035b030d855e405723bae4.'),
-(33, 'fbqhjbdsq@undsqj.fr', '$2y$11$ZqhNJsL2t7jswCSTOmBML.mNMleJ3XWEkTlp1GZkqGTzQB0tvlap2', 'sqdqs', 'qdsqsq', '', '0', '', '1970-01-01', '', 'IR', 0, 'default-profile.png'),
-(34, 'qdsdsq@uha.fr', '$2y$11$siWmT2wmGu1xRxGb91GaBOD9J.XN9AaWP9Y9mqizZyX4uo4XoRud2', 'dsdsq', 'sdqdsq', '', '0', '', '1970-01-01', '', 'IR', 0, 'default-profile.png');
+  `profile_pic` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT 'default-profile.png'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -244,14 +172,7 @@ CREATE TABLE `vote` (
   `idnews` int(11) NOT NULL,
   `pk_vote` int(11) NOT NULL,
   `vote` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `vote`
---
-
-INSERT INTO `vote` (`iduser`, `idnews`, `pk_vote`, `vote`) VALUES
-(9, 192, 14, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
 
 --
 -- Index pour les tables exportées
@@ -294,6 +215,14 @@ ALTER TABLE `member`
   ADD KEY `idgroup` (`idgroup`);
 
 --
+-- Index pour la table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_sender` (`id_sender`),
+  ADD KEY `id_recipient` (`id_recipient`);
+
+--
 -- Index pour la table `newscomment`
 --
 ALTER TABLE `newscomment`
@@ -329,17 +258,17 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `authorcomment`
 --
 ALTER TABLE `authorcomment`
-  MODIFY `pk_authorcomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pk_authorcomment` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `authornews`
 --
 ALTER TABLE `authornews`
-  MODIFY `pk_authornews` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `pk_authornews` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `groupe`
 --
@@ -349,17 +278,22 @@ ALTER TABLE `groupe`
 -- AUTO_INCREMENT pour la table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `newscomment`
 --
 ALTER TABLE `newscomment`
-  MODIFY `pk_newscomment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pk_newscomment` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `newsfeed`
 --
 ALTER TABLE `newsfeed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
@@ -369,7 +303,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `pk_vote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `pk_vote` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --
@@ -394,6 +328,13 @@ ALTER TABLE `authornews`
 ALTER TABLE `member`
   ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `member_ibfk_2` FOREIGN KEY (`idgroup`) REFERENCES `groupe` (`id`);
+
+--
+-- Contraintes pour la table `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id_sender`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`id_recipient`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `newscomment`

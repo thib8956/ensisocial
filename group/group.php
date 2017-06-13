@@ -43,7 +43,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 ?>
 
 <div class="groupswrap">
-	<div class="col-sm-offset-3 col-md-8 newsfeed">
+	<div class="col-md-6 newsfeed">
 	<?php
 	while ($row=$stmt->fetch()){
 		$avatar = '/ensisocial/data/avatar/'.$row['img'];
@@ -89,5 +89,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/sidebar.php');
 
 
 <?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/messagerie/chatBox.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/ensisocial/inc/footer.php');
 ?>
